@@ -1070,6 +1070,865 @@
   .filter-chip i { font-size: 10px; }
   .filter-bar .spacer { flex: 1; }
 
+  /* =================================================== */
+  /* SHARED · cluster sub-tab pattern (used in all clusters) */
+  /* =================================================== */
+  .cluster-tabs {
+    display: flex; align-items: center;
+    border-bottom: 1px solid var(--line);
+    padding: 0 24px;
+    height: var(--tab-h);
+    background: var(--bg);
+    position: sticky; top: 0; z-index: 10;
+    gap: 6px;
+  }
+  .ctab {
+    height: var(--tab-h); padding: 0 4px; margin-right: 16px;
+    display: flex; align-items: center;
+    color: var(--fg-dim);
+    font-family: var(--f-mono);
+    font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase;
+    border-bottom: 2px solid transparent; margin-bottom: -1px;
+    transition: color 0.12s, border-color 0.12s;
+  }
+  .ctab:hover { color: var(--fg); }
+  .ctab.active { color: var(--accent); border-bottom-color: var(--accent); }
+  .ctab-meta {
+    margin-left: auto; color: var(--fg-dim);
+    font-family: var(--f-mono);
+    font-size: 10px; letter-spacing: 0.06em; text-transform: uppercase;
+  }
+  .csurface { display: none; padding: 18px 24px 32px; }
+  .csurface.active { display: block; }
+
+  /* =================================================== */
+  /* SHARED · page header (used in module surfaces)         */
+  /* =================================================== */
+  .page-head {
+    display: flex; align-items: flex-start; justify-content: space-between;
+    gap: 16px;
+    padding-bottom: 14px;
+    margin-bottom: 16px;
+    border-bottom: 1px solid var(--line);
+  }
+  .page-head .left { display: flex; flex-direction: column; gap: 4px; min-width: 0; }
+  .page-head h1 {
+    font-family: var(--f-display);
+    font-weight: 500; font-size: 20px; color: var(--fg);
+    letter-spacing: -0.01em;
+  }
+  .page-head .sub {
+    font-size: 12.5px; color: var(--fg-dim); line-height: 1.45;
+  }
+  .page-head .meta {
+    display: flex; align-items: center; gap: 14px;
+    color: var(--fg-dim);
+    font-family: var(--f-mono); font-size: 10px;
+    letter-spacing: 0.06em; text-transform: uppercase;
+  }
+  .page-head .right {
+    display: flex; align-items: center; gap: 8px;
+    flex-shrink: 0;
+  }
+
+  /* =================================================== */
+  /* MEMORY surface (BRAIN cluster)                          */
+  /* =================================================== */
+  .memory-drop {
+    border: 1.5px dashed var(--line-strong);
+    border-radius: 10px;
+    padding: 20px 24px;
+    display: flex; align-items: center; gap: 14px;
+    background: var(--bg-elev-1);
+    transition: border-color 0.15s, background 0.15s;
+    cursor: pointer;
+    margin-bottom: 18px;
+  }
+  .memory-drop:hover { border-color: var(--accent-line); background: var(--bg-elev-2); }
+  .memory-drop i { font-size: 20px; color: var(--fg-mid); }
+  .memory-drop .ttl {
+    font-family: var(--f-display); font-size: 14px;
+    color: var(--fg); font-weight: 500;
+  }
+  .memory-drop .sub {
+    font-size: 11.5px; color: var(--fg-dim);
+  }
+  .file-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 12px;
+  }
+  .file-card {
+    background: var(--bg-elev-1);
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    padding: 14px;
+    display: flex; flex-direction: column;
+    gap: 8px;
+    cursor: pointer;
+    transition: border-color 0.12s;
+  }
+  .file-card:hover { border-color: var(--line-strong); }
+  .file-card .ftype {
+    width: 36px; height: 36px;
+    border-radius: 6px;
+    background: var(--bg-elev-3);
+    display: flex; align-items: center; justify-content: center;
+    color: var(--fg-mid);
+  }
+  .file-card .ftype i { font-size: 18px; }
+  .file-card .nm {
+    font-size: 12.5px; color: var(--fg);
+    line-height: 1.35;
+    overflow: hidden; text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+  }
+  .file-card .meta {
+    font-family: var(--f-mono); font-size: 10px;
+    color: var(--fg-dim); letter-spacing: 0.04em;
+  }
+
+  /* =================================================== */
+  /* SUBSTRATE MAP surface                                  */
+  /* =================================================== */
+  .substrate-stats {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1px;
+    background: var(--line);
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    overflow: hidden;
+    margin-bottom: 18px;
+  }
+  .sub-stat {
+    background: var(--bg-elev-1);
+    padding: 14px 18px;
+  }
+  .sub-stat .num {
+    font-family: var(--f-display);
+    font-weight: 500; font-size: 26px;
+    color: var(--fg); line-height: 1;
+    letter-spacing: -0.02em;
+  }
+  .sub-stat .num.attention { color: var(--accent); }
+  .sub-stat .label {
+    font-family: var(--f-mono);
+    font-size: 9.5px; letter-spacing: 0.1em; text-transform: uppercase;
+    color: var(--fg-dim);
+    margin-top: 4px;
+  }
+  .sub-stat .delta {
+    font-family: var(--f-mono);
+    font-size: 10px; color: var(--accent);
+    margin-top: 2px;
+  }
+  .substrate-grid {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: 14px;
+  }
+  .topic-list {
+    display: flex; flex-direction: column;
+    gap: 0;
+  }
+  .topic-row {
+    display: grid;
+    grid-template-columns: 1fr 80px 60px;
+    align-items: center;
+    gap: 14px;
+    padding: 10px 4px;
+    border-bottom: 1px solid var(--bg-elev-2);
+    cursor: pointer;
+    transition: background 0.12s;
+  }
+  .topic-row:hover { background: var(--bg-elev-1); }
+  .topic-row .nm {
+    font-size: 13px; color: var(--fg);
+  }
+  .topic-row .bar-wrap {
+    height: 5px; background: var(--bg-elev-3); border-radius: 2.5px; overflow: hidden;
+  }
+  .topic-row .bar { height: 100%; background: var(--accent); border-radius: 2.5px; }
+  .topic-row .ct {
+    font-family: var(--f-mono);
+    font-size: 11px; color: var(--fg-mid);
+    text-align: right;
+  }
+
+  /* =================================================== */
+  /* SIGNAL FEED surface                                    */
+  /* =================================================== */
+  .signal-list { display: flex; flex-direction: column; gap: 12px; }
+  .signal-card {
+    background: var(--bg-elev-1);
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    padding: 14px 16px;
+    display: grid;
+    grid-template-columns: auto 1fr auto;
+    align-items: center;
+    column-gap: 14px;
+    cursor: pointer;
+    transition: border-color 0.12s;
+  }
+  .signal-card:hover { border-color: var(--line-strong); }
+  .signal-card .src {
+    font-family: var(--f-mono);
+    font-size: 9.5px; letter-spacing: 0.08em; text-transform: uppercase;
+    color: var(--fg-dim);
+    padding: 4px 8px;
+    border: 1px solid var(--line);
+    border-radius: 3px;
+    align-self: start;
+  }
+  .signal-card .body {
+    display: flex; flex-direction: column; gap: 4px; min-width: 0;
+  }
+  .signal-card .nm {
+    font-size: 13px; color: var(--fg);
+    line-height: 1.4;
+  }
+  .signal-card .meta {
+    font-family: var(--f-mono); font-size: 10px;
+    color: var(--fg-dim); letter-spacing: 0.04em;
+  }
+  .signal-card .actions {
+    display: flex; flex-direction: column; gap: 6px;
+    align-items: flex-end;
+  }
+
+  /* =================================================== */
+  /* RSN surface (substrate generator runs)                  */
+  /* =================================================== */
+  .rsn-list { display: flex; flex-direction: column; gap: 10px; }
+  .rsn-row {
+    background: var(--bg-elev-1);
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    padding: 14px 18px;
+    display: grid;
+    grid-template-columns: auto 1fr auto auto;
+    column-gap: 14px;
+    align-items: center;
+  }
+  .rsn-row .icon {
+    width: 32px; height: 32px;
+    border-radius: 6px;
+    background: var(--bg-elev-3);
+    display: flex; align-items: center; justify-content: center;
+    color: var(--fg-mid);
+  }
+  .rsn-row .icon i { font-size: 16px; }
+  .rsn-row .body { display: flex; flex-direction: column; gap: 2px; min-width: 0; }
+  .rsn-row .nm { font-size: 13px; color: var(--fg); }
+  .rsn-row .meta { font-family: var(--f-mono); font-size: 10px; color: var(--fg-dim); letter-spacing: 0.04em; }
+  .rsn-row .ct { font-family: var(--f-mono); font-size: 11px; color: var(--fg-mid); }
+
+  /* =================================================== */
+  /* MIND · NICHOLAS chat (full-height)                     */
+  /* =================================================== */
+  .nicholas {
+    display: grid;
+    grid-template-columns: 240px 1fr;
+    height: 100%;
+    min-height: 0;
+  }
+  .nich-history {
+    border-right: 1px solid var(--line);
+    background: var(--bg);
+    padding: 18px 14px;
+    display: flex; flex-direction: column; gap: 14px;
+    overflow-y: auto;
+  }
+  .nich-history-head {
+    display: flex; justify-content: space-between; align-items: center;
+    padding-bottom: 6px;
+    border-bottom: 1px solid var(--line);
+  }
+  .nich-history-head .ttl {
+    font-family: var(--f-mono);
+    font-size: 10px; letter-spacing: 0.1em; text-transform: uppercase;
+    color: var(--fg);
+  }
+  .nich-history-list { display: flex; flex-direction: column; gap: 2px; }
+  .nich-history-item {
+    padding: 9px 10px;
+    border-radius: 6px;
+    cursor: pointer;
+    display: flex; flex-direction: column; gap: 2px;
+    transition: background 0.12s;
+  }
+  .nich-history-item:hover { background: var(--bg-elev-1); }
+  .nich-history-item.active { background: var(--accent-soft); }
+  .nich-history-item .h-nm {
+    font-size: 12px; color: var(--fg);
+    overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+  }
+  .nich-history-item .h-meta {
+    font-family: var(--f-mono); font-size: 9.5px;
+    color: var(--fg-dim); letter-spacing: 0.04em;
+  }
+  .nich-main {
+    display: grid;
+    grid-template-rows: auto 1fr auto;
+    min-height: 0;
+  }
+  .nich-head {
+    padding: 14px 24px;
+    border-bottom: 1px solid var(--line);
+    display: flex; align-items: center; justify-content: space-between;
+  }
+  .nich-head .nm {
+    font-family: var(--f-display); font-size: 15px; font-weight: 500; color: var(--fg);
+  }
+  .nich-head .meta {
+    font-family: var(--f-mono); font-size: 10px;
+    color: var(--fg-dim); letter-spacing: 0.06em; text-transform: uppercase;
+  }
+  .nich-body {
+    padding: 24px;
+    overflow-y: auto;
+    display: flex; flex-direction: column; gap: 22px;
+  }
+  .nich-msg { display: flex; flex-direction: column; gap: 8px; max-width: 720px; }
+  .nich-msg .author {
+    font-family: var(--f-mono);
+    font-size: 9.5px; letter-spacing: 0.08em; text-transform: uppercase;
+    color: var(--fg-dim);
+  }
+  .nich-msg.user .author { color: var(--fg-mid); }
+  .nich-msg .body {
+    font-family: var(--f-editorial);
+    font-size: 14.5px; line-height: 1.6; color: var(--fg);
+  }
+  .nich-msg.user .body { font-family: var(--f-body); font-size: 13.5px; line-height: 1.55; }
+  .nich-msg.deep .engine {
+    display: inline-flex; align-items: center; gap: 6px;
+    align-self: flex-start;
+    padding: 4px 10px;
+    background: var(--accent-fill);
+    color: var(--accent);
+    font-family: var(--f-mono);
+    font-size: 10px; letter-spacing: 0.08em; text-transform: uppercase;
+    border-radius: 3px; font-weight: 500;
+  }
+  .nich-routing {
+    background: var(--bg-elev-1);
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    padding: 16px 18px;
+    display: flex; flex-direction: column; gap: 12px;
+    max-width: 720px;
+  }
+  .nich-routing .head {
+    font-family: var(--f-mono);
+    font-size: 10px; letter-spacing: 0.08em; text-transform: uppercase;
+    color: var(--fg-dim);
+  }
+  .nich-routing .opt {
+    display: flex; flex-direction: column; gap: 4px;
+    padding: 10px 12px;
+    border: 1px solid var(--line);
+    border-radius: 6px;
+    cursor: pointer;
+  }
+  .nich-routing .opt.recommended { border-color: var(--accent-line); background: var(--accent-soft); }
+  .nich-routing .opt .top {
+    display: flex; align-items: center; gap: 10px;
+  }
+  .nich-routing .opt .name {
+    font-family: var(--f-mono);
+    font-size: 11px; letter-spacing: 0.06em; text-transform: uppercase;
+    color: var(--fg);
+  }
+  .nich-routing .opt.recommended .name { color: var(--accent); }
+  .nich-routing .opt .badge {
+    font-family: var(--f-mono); font-size: 9px;
+    color: var(--accent);
+  }
+  .nich-routing .opt .desc { font-size: 11.5px; color: var(--fg-dim); }
+  .nich-routing .opt .eta { font-family: var(--f-mono); font-size: 10px; color: var(--fg-mid); margin-left: auto; }
+  .nich-input {
+    border-top: 1px solid var(--line);
+    padding: 16px 24px;
+    background: var(--bg);
+  }
+  .nich-input-box {
+    display: flex; align-items: flex-end; gap: 10px;
+    background: var(--bg-elev-1);
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    padding: 12px 14px;
+    transition: border-color 0.15s;
+    max-width: 760px;
+    margin: 0 auto;
+  }
+  .nich-input-box:focus-within { border-color: var(--accent-line); }
+  .nich-input-box textarea {
+    resize: none; min-height: 24px; max-height: 140px;
+    font-size: 14px; line-height: 1.5;
+    color: var(--fg);
+  }
+  .nich-input-box textarea::placeholder { color: var(--fg-faint); }
+  .nich-send {
+    width: 30px; height: 30px;
+    background: var(--accent); color: var(--bg);
+    border-radius: 5px;
+    display: inline-flex; align-items: center; justify-content: center;
+    flex-shrink: 0;
+  }
+  .nich-send i { font-size: 15px; }
+
+  /* =================================================== */
+  /* INSIGHTS surface (Mercury metrics dashboard)            */
+  /* =================================================== */
+  .insights-grid {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr;
+    gap: 12px;
+    margin-bottom: 18px;
+  }
+  .metric-card {
+    background: var(--bg-elev-1);
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    padding: 16px 18px;
+    display: flex; flex-direction: column;
+    gap: 10px;
+  }
+  .metric-card.hero { grid-row: span 2; }
+  .metric-card .label {
+    font-family: var(--f-mono);
+    font-size: 10px; letter-spacing: 0.1em; text-transform: uppercase;
+    color: var(--fg-dim);
+  }
+  .metric-card .num-big {
+    font-family: var(--f-display);
+    font-weight: 500; font-size: 36px;
+    color: var(--fg); line-height: 1;
+    letter-spacing: -0.02em;
+  }
+  .metric-card .num-mid {
+    font-family: var(--f-display);
+    font-weight: 500; font-size: 24px;
+    color: var(--fg); line-height: 1;
+  }
+  .metric-card .delta {
+    font-family: var(--f-mono);
+    font-size: 11px; color: var(--accent);
+    display: inline-flex; align-items: center; gap: 4px;
+  }
+  .metric-card .delta.down { color: var(--warn); }
+  .metric-card .sub {
+    font-family: var(--f-mono); font-size: 10px;
+    color: var(--fg-dim); letter-spacing: 0.04em;
+  }
+  .metric-card .spark { width: 100%; height: 50px; margin-top: auto; }
+  .metric-card.hero .spark { height: 110px; }
+
+  /* =================================================== */
+  /* MACHINES · cluster overview cards                      */
+  /* =================================================== */
+  .machines-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 14px;
+  }
+  .machine-card {
+    background: var(--bg-elev-1);
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    padding: 18px 22px;
+    display: flex; flex-direction: column;
+    gap: 12px;
+    cursor: pointer;
+    transition: border-color 0.12s, background 0.12s;
+  }
+  .machine-card:hover { border-color: var(--line-strong); background: var(--bg-elev-2); }
+  .machine-card.locked { opacity: 0.65; }
+  .machine-card .top {
+    display: flex; align-items: center; gap: 12px;
+  }
+  .machine-card .top .sigil { width: 28px; height: 28px; }
+  .machine-card .top .nm {
+    font-family: var(--f-display);
+    font-weight: 500; font-size: 16px;
+    color: var(--fg);
+  }
+  .machine-card .pills {
+    display: flex; gap: 6px; align-items: center;
+    margin-left: auto;
+  }
+  .machine-card .body {
+    font-size: 12.5px; color: var(--fg-mid); line-height: 1.5;
+  }
+  .machine-card .stats {
+    display: flex; gap: 18px;
+    font-family: var(--f-mono);
+    font-size: 10px; color: var(--fg-dim);
+    letter-spacing: 0.04em;
+  }
+  .machine-card .stats strong { color: var(--fg); font-weight: 500; }
+
+  /* =================================================== */
+  /* MACHINE DETAIL · queue surface                         */
+  /* =================================================== */
+  .machine-detail {
+    display: flex; flex-direction: column;
+    gap: 16px;
+  }
+  .machine-section { display: flex; flex-direction: column; gap: 10px; }
+  .machine-section-head {
+    display: flex; align-items: baseline; justify-content: space-between;
+    padding-bottom: 6px;
+    border-bottom: 1px solid var(--line);
+  }
+  .machine-section-head .ttl {
+    font-family: var(--f-mono);
+    font-size: 10px; letter-spacing: 0.1em; text-transform: uppercase;
+    color: var(--fg);
+  }
+  .machine-section-head .ct {
+    font-family: var(--f-mono);
+    font-size: 10px; color: var(--fg-dim);
+  }
+  .work-row {
+    background: var(--bg-elev-1);
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    padding: 12px 16px;
+    display: grid;
+    grid-template-columns: auto 1fr auto auto;
+    column-gap: 14px;
+    align-items: center;
+    cursor: pointer;
+    transition: border-color 0.12s;
+  }
+  .work-row:hover { border-color: var(--line-strong); }
+  .work-row .marker { width: 18px; height: 18px; }
+  .work-row .marker i { font-size: 16px; }
+  .work-row .body { display: flex; flex-direction: column; gap: 3px; min-width: 0; }
+  .work-row .nm {
+    font-size: 13px; color: var(--fg);
+    overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+  }
+  .work-row .meta {
+    font-family: var(--f-mono); font-size: 10px; color: var(--fg-dim);
+    letter-spacing: 0.04em;
+  }
+  .work-row .actions { display: flex; gap: 6px; }
+  .work-row .actions .btn-secondary { font-size: 9px; padding: 6px 10px; }
+  .work-row.locked { opacity: 0.55; }
+
+  /* =================================================== */
+  /* FOUNDER cluster surfaces                               */
+  /* =================================================== */
+  .founder-section { display: flex; flex-direction: column; gap: 14px; }
+  .editorial-list { display: flex; flex-direction: column; gap: 14px; }
+  .editorial-item {
+    display: grid;
+    grid-template-columns: auto 1fr auto;
+    column-gap: 16px;
+    padding: 14px 0;
+    border-bottom: 1px solid var(--line);
+    align-items: flex-start;
+  }
+  .editorial-item:last-child { border-bottom: 0; }
+  .editorial-item .when {
+    font-family: var(--f-mono);
+    font-size: 10px; color: var(--fg-dim);
+    letter-spacing: 0.04em; text-transform: uppercase;
+    width: 80px;
+    padding-top: 4px;
+  }
+  .editorial-item .meat { display: flex; flex-direction: column; gap: 6px; min-width: 0; }
+  .editorial-item .nm {
+    font-family: var(--f-editorial);
+    font-size: 16px; line-height: 1.4; color: var(--fg);
+    font-weight: 500;
+  }
+  .editorial-item .meta {
+    font-family: var(--f-mono); font-size: 10px;
+    color: var(--fg-dim); letter-spacing: 0.04em;
+  }
+  .editorial-item .body-text {
+    font-size: 12.5px; color: var(--fg-mid); line-height: 1.55;
+    margin-top: 2px;
+  }
+  .editorial-item .mentor-pull {
+    background: linear-gradient(180deg, rgba(223,255,0,0.04), transparent);
+    border-left: 2px solid var(--accent);
+    padding: 10px 14px;
+    margin-top: 8px;
+    font-family: var(--f-editorial);
+    font-size: 13px; color: var(--fg);
+    line-height: 1.55;
+  }
+  .editorial-item .right {
+    display: flex; flex-direction: column; gap: 6px;
+    align-items: flex-end;
+  }
+
+  /* Voice — channel performance cards */
+  .voice-cards {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 12px;
+    margin-bottom: 22px;
+  }
+  .channel-card {
+    background: var(--bg-elev-1);
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    padding: 14px 16px;
+  }
+  .channel-card .top {
+    display: flex; align-items: center; justify-content: space-between;
+    margin-bottom: 8px;
+  }
+  .channel-card .ch {
+    font-family: var(--f-mono);
+    font-size: 10px; letter-spacing: 0.1em; text-transform: uppercase;
+    color: var(--fg-dim);
+  }
+  .channel-card .delta {
+    font-family: var(--f-mono);
+    font-size: 10px; color: var(--accent);
+  }
+  .channel-card .num {
+    font-family: var(--f-display);
+    font-weight: 500; font-size: 22px;
+    color: var(--fg); line-height: 1;
+    letter-spacing: -0.01em;
+  }
+  .channel-card .label {
+    font-size: 10.5px; color: var(--fg-dim); margin-top: 4px;
+  }
+
+  /* Voice — soundbite library */
+  .soundbite-tier { margin-top: 18px; display: flex; flex-direction: column; gap: 8px; }
+  .soundbite-tier .tier-head {
+    display: flex; align-items: baseline; gap: 12px;
+    padding-bottom: 4px;
+    border-bottom: 1px solid var(--line);
+  }
+  .soundbite-tier .tier-head .star { color: var(--accent); }
+  .soundbite-tier .tier-head .ttl {
+    font-family: var(--f-mono);
+    font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase;
+    color: var(--fg);
+  }
+  .soundbite-tier .tier-head .ct {
+    font-family: var(--f-mono); font-size: 10px;
+    color: var(--fg-dim);
+  }
+  .soundbite-card {
+    background: var(--bg-elev-1);
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    padding: 14px 18px;
+    display: flex; flex-direction: column; gap: 8px;
+  }
+  .soundbite-card .quote {
+    font-family: var(--f-editorial);
+    font-size: 14.5px; line-height: 1.5; color: var(--fg);
+  }
+  .soundbite-card .meta {
+    display: flex; gap: 16px;
+    font-family: var(--f-mono);
+    font-size: 10px; color: var(--fg-dim);
+    letter-spacing: 0.04em;
+  }
+  .soundbite-card .meta strong { color: var(--accent); font-weight: 500; }
+
+  /* Territory — typographic emphasis (no custom viz per spec) */
+  .territory-section { display: flex; flex-direction: column; gap: 24px; }
+  .terr-group .terr-head {
+    display: flex; align-items: baseline; gap: 12px;
+    margin-bottom: 10px;
+  }
+  .terr-group .terr-head .ttl {
+    font-family: var(--f-display);
+    font-weight: 500; font-size: 14px;
+    color: var(--fg);
+  }
+  .terr-group.owned .terr-head .ttl { color: var(--accent); }
+  .terr-group.aspired .terr-head .ttl { color: var(--fg); }
+  .terr-group.whitespace .terr-head .ttl { color: var(--warm); }
+  .terr-group .terr-meta {
+    font-family: var(--f-mono);
+    font-size: 10px; color: var(--fg-dim);
+    letter-spacing: 0.06em; text-transform: uppercase;
+  }
+  .terr-list {
+    display: flex; flex-wrap: wrap; gap: 8px;
+  }
+  .terr-chip {
+    padding: 8px 14px;
+    border-radius: 4px;
+    font-size: 12.5px;
+    background: var(--bg-elev-1);
+    border: 1px solid var(--line);
+    color: var(--fg);
+    cursor: pointer;
+    transition: border-color 0.12s, background 0.12s;
+  }
+  .terr-chip:hover { border-color: var(--line-strong); background: var(--bg-elev-2); }
+  .terr-group.owned .terr-chip { color: var(--accent); border-color: var(--accent-line); background: var(--accent-soft); }
+  .terr-group.whitespace .terr-chip { color: var(--warm); border-color: rgba(212,168,87,0.30); border-style: dashed; }
+
+  /* =================================================== */
+  /* MODAL · slide-over panel (Avatar profile + WorkItem)    */
+  /* =================================================== */
+  .modal-backdrop {
+    position: fixed; inset: 0;
+    background: rgba(0,0,0,0.55);
+    display: none;
+    z-index: 200;
+    backdrop-filter: blur(2px);
+  }
+  .modal-backdrop.open { display: block; }
+  .modal-panel {
+    position: fixed; top: 0; right: 0; bottom: 0;
+    width: 540px; max-width: 95vw;
+    background: var(--bg);
+    border-left: 1px solid var(--line);
+    box-shadow: -8px 0 32px rgba(0,0,0,0.5);
+    z-index: 201;
+    transform: translateX(100%);
+    transition: transform 0.2s ease;
+    display: none;
+    flex-direction: column;
+  }
+  .modal-panel.open { display: flex; transform: translateX(0); }
+  .modal-head {
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 14px 22px;
+    border-bottom: 1px solid var(--line);
+  }
+  .modal-head .ttl {
+    font-family: var(--f-mono);
+    font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase;
+    color: var(--fg-mid);
+  }
+  .modal-close {
+    width: 28px; height: 28px;
+    display: inline-flex; align-items: center; justify-content: center;
+    color: var(--fg-mid); border-radius: 4px;
+    transition: background 0.12s;
+  }
+  .modal-close:hover { background: var(--bg-elev-1); color: var(--fg); }
+  .modal-body { padding: 24px; overflow-y: auto; flex: 1; }
+
+  /* Avatar profile */
+  .avatar-profile-head {
+    display: flex; align-items: center; gap: 16px;
+    padding-bottom: 18px;
+    border-bottom: 1px solid var(--line);
+    margin-bottom: 22px;
+  }
+  .avatar-profile-head .sigil { width: 56px; height: 56px; }
+  .avatar-profile-head .sigil .stroke { stroke-width: 1.4; }
+  .avatar-profile-head .nm {
+    font-family: var(--f-display);
+    font-weight: 500; font-size: 22px; color: var(--fg);
+  }
+  .avatar-profile-head .role {
+    font-family: var(--f-editorial);
+    font-style: italic; font-size: 13.5px; color: var(--fg-mid);
+    margin-top: 2px;
+  }
+  .ap-section { margin-bottom: 22px; display: flex; flex-direction: column; gap: 10px; }
+  .ap-section .head {
+    font-family: var(--f-mono);
+    font-size: 10px; letter-spacing: 0.1em; text-transform: uppercase;
+    color: var(--fg-dim);
+  }
+  .ap-section .now {
+    background: var(--bg-elev-1);
+    border: 1px solid var(--accent-line);
+    border-radius: 8px;
+    padding: 14px;
+    display: flex; flex-direction: column; gap: 8px;
+  }
+  .ap-section .now .task {
+    font-family: var(--f-editorial); font-size: 14px; color: var(--fg);
+    line-height: 1.45;
+  }
+  .ap-section .now .meta {
+    font-family: var(--f-mono); font-size: 10px;
+    color: var(--fg-dim); letter-spacing: 0.04em;
+  }
+  .ap-section .body-text {
+    font-size: 13px; color: var(--fg); line-height: 1.55;
+  }
+  .ap-section .meta-line {
+    display: flex; gap: 18px;
+    font-family: var(--f-mono); font-size: 10.5px;
+    color: var(--fg-dim); letter-spacing: 0.04em;
+  }
+  .ap-section .meta-line strong { color: var(--fg); font-weight: 500; }
+
+  /* WorkItem detail */
+  .wi-head {
+    padding-bottom: 16px;
+    border-bottom: 1px solid var(--line);
+    margin-bottom: 18px;
+    display: flex; flex-direction: column; gap: 8px;
+  }
+  .wi-head .pills { display: flex; gap: 8px; }
+  .wi-head h2 {
+    font-family: var(--f-display);
+    font-weight: 500; font-size: 18px; color: var(--fg);
+    line-height: 1.3;
+  }
+  .wi-head .desc {
+    font-size: 13px; color: var(--fg-mid); line-height: 1.55;
+  }
+  .wi-section { margin-bottom: 18px; display: flex; flex-direction: column; gap: 8px; }
+  .wi-section .head {
+    font-family: var(--f-mono);
+    font-size: 10px; letter-spacing: 0.1em; text-transform: uppercase;
+    color: var(--fg-dim);
+    padding-bottom: 4px;
+    border-bottom: 1px solid var(--line);
+  }
+  .wi-link-row {
+    display: flex; align-items: center; gap: 10px;
+    padding: 8px 0;
+    font-size: 12.5px; color: var(--fg);
+  }
+  .wi-link-row .marker { width: 14px; height: 14px; flex-shrink: 0; }
+  .wi-link-row .marker i { font-size: 14px; }
+  .wi-link-row.dim { color: var(--fg-mid); }
+  .wi-link-row .meta { color: var(--fg-dim); font-family: var(--f-mono); font-size: 10px; margin-left: auto; letter-spacing: 0.04em; }
+  .wi-trail {
+    display: flex; flex-direction: column; gap: 4px;
+    padding: 4px 0;
+  }
+  .wi-trail-step {
+    display: flex; align-items: center; gap: 10px;
+    padding: 6px 0;
+  }
+  .wi-trail-step .sigil { width: 18px; height: 18px; }
+  .wi-trail-step .nm {
+    font-size: 12.5px; color: var(--fg);
+  }
+  .wi-trail-step .meta {
+    font-family: var(--f-mono); font-size: 10px;
+    color: var(--fg-dim); letter-spacing: 0.04em;
+    margin-left: auto;
+  }
+  .wi-action-row {
+    display: flex; gap: 8px;
+    margin-top: 18px;
+    padding-top: 16px;
+    border-top: 1px solid var(--line);
+  }
+
   /* ---------- Stub surfaces ---------- */
   .stub {
     padding: 64px 24px;
@@ -1758,32 +2617,1631 @@
 
       <!-- ===== STUB SURFACES ===== -->
       <section class="surface" id="surface-brain">
-        <div class="stub">
-          <h2>BRAIN</h2>
-          <p>Memory · RSN · Listening · Substrate Map · Signal Feed.</p>
-          <span class="next-up">Next iteration</span>
+
+        <div class="cluster-tabs">
+          <button class="ctab active" data-csub="brain" data-target="substrate-map">Substrate Map</button>
+          <button class="ctab" data-csub="brain" data-target="memory">Memory</button>
+          <button class="ctab" data-csub="brain" data-target="signal-feed">Signal Feed</button>
+          <button class="ctab" data-csub="brain" data-target="rsn">RSN</button>
+          <button class="ctab" data-csub="brain" data-target="listening">Listening</button>
+          <span class="ctab-meta">Substrate · Layer 2</span>
         </div>
+
+        <!-- Substrate Map -->
+        <div class="csurface active" data-cs="brain-substrate-map">
+          <div class="page-head">
+            <div class="left">
+              <h1>Substrate Map</h1>
+              <div class="sub">The company brain — daily snapshot · refresh on demand</div>
+            </div>
+            <div class="right">
+              <button class="btn-secondary">REFRESH</button>
+            </div>
+          </div>
+
+          <div class="substrate-stats">
+            <div class="sub-stat">
+              <div class="num">247</div>
+              <div class="label">Total claims</div>
+              <div class="delta">+12 · 7d</div>
+            </div>
+            <div class="sub-stat">
+              <div class="num">412</div>
+              <div class="label">Typed edges</div>
+              <div class="delta">+8 · 7d</div>
+            </div>
+            <div class="sub-stat">
+              <div class="num attention">3</div>
+              <div class="label">Contradictions</div>
+              <div class="delta" style="color:var(--warn);">+1 · 7d</div>
+            </div>
+            <div class="sub-stat">
+              <div class="num">18</div>
+              <div class="label">Sources active</div>
+              <div class="delta">2 new this month</div>
+            </div>
+          </div>
+
+          <div class="substrate-grid">
+
+            <div>
+              <div class="commit-section-head">
+                <span class="ttl">Top topics this month</span>
+                <span class="meta">by claim density</span>
+              </div>
+
+              <div class="topic-list">
+                <div class="topic-row">
+                  <span class="nm">Founder time scarcity</span>
+                  <div class="bar-wrap"><div class="bar" style="width: 92%;"></div></div>
+                  <span class="ct">47</span>
+                </div>
+                <div class="topic-row">
+                  <span class="nm">Compounding intelligence</span>
+                  <div class="bar-wrap"><div class="bar" style="width: 78%;"></div></div>
+                  <span class="ct">38</span>
+                </div>
+                <div class="topic-row">
+                  <span class="nm">Avatars vs agents distinction</span>
+                  <div class="bar-wrap"><div class="bar" style="width: 64%;"></div></div>
+                  <span class="ct">31</span>
+                </div>
+                <div class="topic-row">
+                  <span class="nm">AI-native company building</span>
+                  <div class="bar-wrap"><div class="bar" style="width: 55%;"></div></div>
+                  <span class="ct">26</span>
+                </div>
+                <div class="topic-row">
+                  <span class="nm">Substrate-first architecture</span>
+                  <div class="bar-wrap"><div class="bar" style="width: 48%;"></div></div>
+                  <span class="ct">23</span>
+                </div>
+                <div class="topic-row">
+                  <span class="nm">Founder Interface (Layer 6)</span>
+                  <div class="bar-wrap"><div class="bar" style="width: 42%;"></div></div>
+                  <span class="ct">20</span>
+                </div>
+                <div class="topic-row">
+                  <span class="nm">Editorial Page format</span>
+                  <div class="bar-wrap"><div class="bar" style="width: 35%;"></div></div>
+                  <span class="ct">17</span>
+                </div>
+                <div class="topic-row">
+                  <span class="nm">Founder Machines (canon)</span>
+                  <div class="bar-wrap"><div class="bar" style="width: 30%;"></div></div>
+                  <span class="ct">14</span>
+                </div>
+              </div>
+            </div>
+
+            <div style="display:flex;flex-direction:column;gap:14px;">
+
+              <div class="block">
+                <div class="block-header">
+                  <span class="eyebrow">Recent additions · 7d</span>
+                  <span class="count">+12</span>
+                </div>
+                <div class="block-body">
+                  <div class="row">
+                    <div class="row-content">
+                      <div class="row-title">Avatar = role wearing soul</div>
+                      <div class="row-sub">Source · Bruno Canon · Section 1</div>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="row-content">
+                      <div class="row-title">Editorial Page = HTML deck</div>
+                      <div class="row-sub">Source · Q2 brief synthesis</div>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="row-content">
+                      <div class="row-title">RATIFY → APPROVE in UI</div>
+                      <div class="row-sub">Source · founder feedback</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="block mentor tertiary">
+                <div class="block-header">
+                  <span class="mentor-marker"><span class="star">★</span> KILONOVA</span>
+                </div>
+                <div class="block-body">
+                  <div class="body-prose">
+                    <span class="accent">Compounding signal:</span> 3 weeks ago this cluster was 8 claims. Now 38. Voice library is hardening around it — worth a Founder Authority push.
+                  </div>
+                </div>
+              </div>
+
+            </div>
+
+          </div>
+        </div>
+
+        <!-- Memory -->
+        <div class="csurface" data-cs="brain-memory">
+          <div class="page-head">
+            <div class="left">
+              <h1>Memory</h1>
+              <div class="sub">Raw preserves · what's been seen, said, decided</div>
+            </div>
+            <div class="right">
+              <button class="btn-secondary">FILTER</button>
+              <button class="btn-primary">UPLOAD <i class="ph ph-upload-simple"></i></button>
+            </div>
+          </div>
+
+          <div class="memory-drop">
+            <i class="ph ph-upload-simple"></i>
+            <div>
+              <div class="ttl">Drop files to ingest into substrate</div>
+              <div class="sub">PDF · DOCX · audio · video · transcripts · markdown · screenshots</div>
+            </div>
+          </div>
+
+          <div class="file-grid">
+            <div class="file-card">
+              <div class="ftype"><i class="ph ph-file-pdf"></i></div>
+              <div class="nm">Bruno · Kilonova OS v1.4 Canon</div>
+              <div class="meta">PDF · 2 days ago · 47 claims extracted</div>
+            </div>
+            <div class="file-card">
+              <div class="ftype"><i class="ph ph-microphone"></i></div>
+              <div class="nm">Discovery call · MVH-04 transcript</div>
+              <div class="meta">Audio · 4m ago · processing...</div>
+            </div>
+            <div class="file-card">
+              <div class="ftype"><i class="ph ph-file-text"></i></div>
+              <div class="nm">Architecture v0.6 reframe notes</div>
+              <div class="meta">Markdown · 3 days ago · 12 claims</div>
+            </div>
+            <div class="file-card">
+              <div class="ftype"><i class="ph ph-image"></i></div>
+              <div class="nm">Cofounder app reference screenshots</div>
+              <div class="meta">PNG · 1 week ago · 8 patterns extracted</div>
+            </div>
+            <div class="file-card">
+              <div class="ftype"><i class="ph ph-file-doc"></i></div>
+              <div class="nm">Y Combinator demo script v3</div>
+              <div class="meta">Doc · 2 weeks ago · 23 soundbites</div>
+            </div>
+            <div class="file-card">
+              <div class="ftype"><i class="ph ph-link"></i></div>
+              <div class="nm">Linear redesign blog post</div>
+              <div class="meta">URL · 1 week ago · 6 patterns</div>
+            </div>
+            <div class="file-card">
+              <div class="ftype"><i class="ph ph-microphone"></i></div>
+              <div class="nm">Bruno + Gus weekly sync · May 7</div>
+              <div class="meta">Audio · 1 week ago · 34 claims</div>
+            </div>
+            <div class="file-card">
+              <div class="ftype"><i class="ph ph-file-text"></i></div>
+              <div class="nm">RSN-X output · positioning v3</div>
+              <div class="meta">Markdown · 2 weeks ago · 18 claims</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Signal Feed -->
+        <div class="csurface" data-cs="brain-signal-feed">
+          <div class="page-head">
+            <div class="left">
+              <h1>Signal Feed</h1>
+              <div class="sub">Curated inbound from reality · interpret to update substrate</div>
+            </div>
+            <div class="right">
+              <button class="btn-secondary">FILTER</button>
+            </div>
+          </div>
+
+          <div class="signal-list">
+
+            <div class="signal-card">
+              <span class="src">Listening</span>
+              <div class="body">
+                <div class="nm">"AI-native" search interest +18% · weekly Google Trends</div>
+                <div class="meta">Captured today · raw · interpretation pending</div>
+              </div>
+              <div class="actions">
+                <span class="pill ratify">INTERPRET</span>
+              </div>
+            </div>
+
+            <div class="signal-card">
+              <span class="src">Customer Truth</span>
+              <div class="body">
+                <div class="nm">Founder objection: "agents vs avatars — what's the difference?"</div>
+                <div class="meta">Captured today · pitch call MVH-04 · 02:14 mark</div>
+              </div>
+              <div class="actions">
+                <span class="pill ratify">INTERPRET</span>
+              </div>
+            </div>
+
+            <div class="signal-card">
+              <span class="src">Channels</span>
+              <div class="body">
+                <div class="nm">"Other tools answer questions" post · 3.4× normal engagement</div>
+                <div class="meta">Captured yesterday · LinkedIn · interpreted → signature soundbite</div>
+              </div>
+              <div class="actions">
+                <span class="pill ready">INTERPRETED</span>
+              </div>
+            </div>
+
+            <div class="signal-card">
+              <span class="src">Listening</span>
+              <div class="body">
+                <div class="nm">Competitor Lindy launched "persistent agents" framing</div>
+                <div class="meta">Captured 2d ago · Twitter thread · interpretation pending</div>
+              </div>
+              <div class="actions">
+                <span class="pill ratify">INTERPRET</span>
+              </div>
+            </div>
+
+            <div class="signal-card">
+              <span class="src">Customer Truth</span>
+              <div class="body">
+                <div class="nm">"Founder time scarcity" surfaced 4× in last 5 calls</div>
+                <div class="meta">Captured 3d ago · pattern flagged · → substrate cluster</div>
+              </div>
+              <div class="actions">
+                <span class="pill" style="color:var(--fg-dim);background:transparent;border:1px solid var(--line);">RATIFIED</span>
+              </div>
+            </div>
+
+            <div class="signal-card">
+              <span class="src">Insights</span>
+              <div class="body">
+                <div class="nm">Substrate growth velocity up 32% week-over-week</div>
+                <div class="meta">Captured 3d ago · positive · informs operating cadence</div>
+              </div>
+              <div class="actions">
+                <span class="pill" style="color:var(--fg-dim);background:transparent;border:1px solid var(--line);">RATIFIED</span>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+        <!-- RSN -->
+        <div class="csurface" data-cs="brain-rsn">
+          <div class="page-head">
+            <div class="left">
+              <h1>RSN</h1>
+              <div class="sub">Strategic substrate generator · Research / Strategy / Narrative compiler</div>
+            </div>
+            <div class="right">
+              <button class="btn-primary">RUN A LENS</button>
+            </div>
+          </div>
+
+          <div class="commit-section-head">
+            <span class="ttl">Recent runs</span>
+            <span class="meta">last 30 days · 7 runs</span>
+          </div>
+
+          <div class="rsn-list">
+            <div class="rsn-row">
+              <div class="icon"><i class="ph ph-graph"></i></div>
+              <div class="body">
+                <div class="nm">N5 · Narrative refresh · Q2 positioning</div>
+                <div class="meta">Today · 18 claims generated · 3 contradictions surfaced</div>
+              </div>
+              <span class="pill ratify">APPROVE</span>
+              <span class="ct">12 min</span>
+            </div>
+            <div class="rsn-row">
+              <div class="icon"><i class="ph ph-graph"></i></div>
+              <div class="body">
+                <div class="nm">S6 · Value proposition refresh</div>
+                <div class="meta">2d ago · 24 claims · canonicalized into substrate</div>
+              </div>
+              <span class="pill" style="color:var(--fg-dim);background:transparent;border:1px solid var(--line);">DELIVERED</span>
+              <span class="ct">42 min</span>
+            </div>
+            <div class="rsn-row">
+              <div class="icon"><i class="ph ph-graph"></i></div>
+              <div class="body">
+                <div class="nm">R2 · Competitive landscape scan</div>
+                <div class="meta">3d ago · 31 claims · 2 contradictions resolved</div>
+              </div>
+              <span class="pill" style="color:var(--fg-dim);background:transparent;border:1px solid var(--line);">DELIVERED</span>
+              <span class="ct">1h 8m</span>
+            </div>
+            <div class="rsn-row">
+              <div class="icon"><i class="ph ph-graph"></i></div>
+              <div class="body">
+                <div class="nm">N3 · Brand platform · Avatar concept positioning</div>
+                <div class="meta">1w ago · 18 claims · narrative anchor updated</div>
+              </div>
+              <span class="pill" style="color:var(--fg-dim);background:transparent;border:1px solid var(--line);">DELIVERED</span>
+              <span class="ct">38 min</span>
+            </div>
+            <div class="rsn-row">
+              <div class="icon"><i class="ph ph-graph"></i></div>
+              <div class="body">
+                <div class="nm">S1 · Lean canvas refresh · founder-OS positioning</div>
+                <div class="meta">2w ago · 22 claims · 4 assumptions tested</div>
+              </div>
+              <span class="pill" style="color:var(--fg-dim);background:transparent;border:1px solid var(--line);">DELIVERED</span>
+              <span class="ct">52 min</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Listening -->
+        <div class="csurface" data-cs="brain-listening">
+          <div class="page-head">
+            <div class="left">
+              <h1>Listening</h1>
+              <div class="sub">Continuous social, sentiment, user research · feeds Signal Feed</div>
+            </div>
+            <div class="right">
+              <button class="btn-secondary">SOURCES</button>
+            </div>
+          </div>
+
+          <div class="band band-secondary">
+
+            <div class="block">
+              <div class="block-header">
+                <span class="eyebrow">LinkedIn · territory</span>
+                <span class="count">live</span>
+              </div>
+              <div class="block-body">
+                <div style="display:flex;flex-direction:column;gap:6px;">
+                  <div style="font-family:var(--f-display);font-size:24px;font-weight:500;color:var(--fg);">+18%</div>
+                  <div style="font-size:11px;color:var(--fg-dim);">"AI-native company" search · 7d trend</div>
+                </div>
+                <svg class="sparkline" viewBox="0 0 200 38" preserveAspectRatio="none" style="height:30px;margin-top:8px;">
+                  <path d="M0,32 L33,30 L66,28 L99,24 L132,18 L165,10 L200,6" fill="none" stroke="var(--accent)" stroke-width="1.5"/>
+                </svg>
+              </div>
+            </div>
+
+            <div class="block">
+              <div class="block-header">
+                <span class="eyebrow">Twitter · adjacent voices</span>
+                <span class="count">14 tracked</span>
+              </div>
+              <div class="block-body">
+                <div class="row">
+                  <div class="row-content">
+                    <div class="row-title">Lindy · "persistent agents" framing</div>
+                    <div class="row-sub">2d ago · adjacent territory</div>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="row-content">
+                    <div class="row-title">Cursor · agent-mode redesign</div>
+                    <div class="row-sub">5d ago · interface adjacency</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="block">
+              <div class="block-header">
+                <span class="eyebrow">Customer calls · sentiment</span>
+                <span class="count">last 5</span>
+              </div>
+              <div class="block-body">
+                <div style="display:flex;align-items:baseline;gap:8px;">
+                  <span style="font-family:var(--f-display);font-size:24px;font-weight:500;color:var(--accent);">0.78</span>
+                  <span style="font-family:var(--f-mono);font-size:10px;color:var(--fg-dim);">positive engagement</span>
+                </div>
+                <div style="font-size:11px;color:var(--fg-mid);margin-top:6px;line-height:1.5;">
+                  Top phrases: "this is what we needed" · "feels different" · "where do I sign up"
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
       </section>
       <section class="surface" id="surface-mind">
-        <div class="stub">
-          <h2>MIND</h2>
-          <p>NICHOLAS · Insights. Where you reason · where you ask.</p>
-          <span class="next-up">Next iteration</span>
+
+        <div class="cluster-tabs">
+          <button class="ctab active" data-csub="mind" data-target="nicholas">NICHOLAS</button>
+          <button class="ctab" data-csub="mind" data-target="insights">Insights</button>
+          <span class="ctab-meta">Reasoning kernel · metrics</span>
         </div>
+
+        <!-- NICHOLAS · chat-first deep mode -->
+        <div class="csurface active" data-cs="mind-nicholas" style="padding: 0; height: calc(100vh - var(--header-h) - var(--tab-h)); min-height: 0;">
+
+          <div class="nicholas">
+
+            <div class="nich-history">
+              <div class="nich-history-head">
+                <span class="ttl">Conversations</span>
+                <button class="rail-action" aria-label="New"><i class="ph ph-plus"></i></button>
+              </div>
+
+              <div class="nich-history-list">
+                <div class="nich-history-item active">
+                  <div class="h-nm">GTM motion · Q3 trade-offs</div>
+                  <div class="h-meta">Today · ★ COUNCIL · 4 souls</div>
+                </div>
+                <div class="nich-history-item">
+                  <div class="h-nm">Should we collapse Avatar/Agent?</div>
+                  <div class="h-meta">Yest · ★ NICHOLAS</div>
+                </div>
+                <div class="nich-history-item">
+                  <div class="h-nm">ICP narrowing analysis</div>
+                  <div class="h-meta">Mon · ★ SWARM · 3 prisms</div>
+                </div>
+                <div class="nich-history-item">
+                  <div class="h-nm">Editorial Page synthesis pattern</div>
+                  <div class="h-meta">Last week · ★ HELENA</div>
+                </div>
+                <div class="nich-history-item">
+                  <div class="h-nm">Founder authority cadence design</div>
+                  <div class="h-meta">2w ago · ★ NICHOLAS</div>
+                </div>
+              </div>
+            </div>
+
+            <div class="nich-main">
+
+              <div class="nich-head">
+                <div>
+                  <div class="nm">GTM motion · Q3 trade-offs</div>
+                  <div class="meta">★ COUNCIL · 4 souls deliberating · ETA ~12 min from start</div>
+                </div>
+                <button class="btn-secondary">SHARE</button>
+              </div>
+
+              <div class="nich-body">
+
+                <div class="nich-msg user">
+                  <div class="author">You · 13:42</div>
+                  <div class="body">Should we lead Q3 with founder-OS adoption or with the Authority Machine product wedge? Both have signal — feels like a real trade-off, not just sequencing.</div>
+                </div>
+
+                <div class="nich-msg deep">
+                  <div class="engine"><span class="star">★</span> COUNCIL · 4 souls deliberating · ETA ~12 min</div>
+                  <div class="author">Routing · 13:42</div>
+                </div>
+
+                <div class="nich-routing">
+                  <div class="head">Decision-shaped query · here's how we'd handle it</div>
+
+                  <div class="opt recommended">
+                    <div class="top">
+                      <span class="name">★ COUNCIL</span>
+                      <span class="badge">recommended</span>
+                      <span class="eta">ETA ~12 min · 4 souls</span>
+                    </div>
+                    <div class="desc">Multi-soul deliberation — Christensen on jobs-to-be-done, Wardley on positioning evolution, Munger on inversion, Minto on argument structure</div>
+                  </div>
+
+                  <div class="opt">
+                    <div class="top">
+                      <span class="name">★ SWARM</span>
+                      <span class="eta">ETA ~8 min · 3 prisms</span>
+                    </div>
+                    <div class="desc">Parallel comparative — MINTO + WARDLEY + CHRISTENSEN run independently, surface where they diverge</div>
+                  </div>
+
+                  <div class="opt">
+                    <div class="top">
+                      <span class="name">★ NICHOLAS</span>
+                      <span class="eta">ETA ~3 min · single engine</span>
+                    </div>
+                    <div class="desc">Master consultant — fastest, but for a real Q3 trade-off the council perspectives compound. Use this if you want a quick first read.</div>
+                  </div>
+
+                  <div style="display:flex;gap:8px;margin-top:4px;">
+                    <button class="btn-primary" style="font-size:10px;padding:9px 14px;">CONTINUE WITH COUNCIL</button>
+                    <button class="btn-secondary">CHOOSE SWARM</button>
+                    <button class="btn-secondary">CHOOSE NICHOLAS</button>
+                  </div>
+                </div>
+
+                <div class="nich-msg deep">
+                  <div class="engine"><span class="star">★</span> COUNCIL · in flight</div>
+                  <div class="author">Kilonova · 13:42</div>
+                  <div class="body">
+                    Reading substrate · 247 claims · 412 edges · 18 sources active · 8 standing commitments... <br><br>
+                    Loading souls (Christensen · Wardley · Munger · Minto)... <br><br>
+                    Souls deliberating · synthesis will land in this thread when ready. You'll get a notification.
+                  </div>
+                </div>
+
+              </div>
+
+              <div class="nich-input">
+                <div class="nich-input-box">
+                  <textarea placeholder="Ask anything · decision-shaped questions trigger deep mode..." rows="1"></textarea>
+                  <button class="nich-send" aria-label="Send"><i class="ph ph-arrow-up"></i></button>
+                </div>
+              </div>
+
+            </div>
+
+          </div>
+        </div>
+
+        <!-- Insights -->
+        <div class="csurface" data-cs="mind-insights">
+          <div class="page-head">
+            <div class="left">
+              <h1>Insights</h1>
+              <div class="sub">Operating metrics · what changed this week</div>
+            </div>
+            <div class="right">
+              <button class="btn-secondary">7D</button>
+              <button class="btn-secondary">30D</button>
+              <button class="btn-secondary">90D</button>
+            </div>
+          </div>
+
+          <div class="insights-grid">
+
+            <!-- Hero metric -->
+            <div class="metric-card hero">
+              <div class="label">Substrate growth · 30d</div>
+              <div style="display:flex;align-items:baseline;gap:14px;">
+                <div class="num-big">+47</div>
+                <div class="delta"><i class="ph ph-arrow-up"></i> +32% w/w</div>
+              </div>
+              <div class="sub">claims canonicalized · 12 contradictions resolved</div>
+              <svg class="spark" viewBox="0 0 400 110" preserveAspectRatio="none">
+                <defs>
+                  <linearGradient id="hero-grad" x1="0" y1="0" x2="0" y2="1">
+                    <stop offset="0%" stop-color="#DFFF00" stop-opacity="0.20"/>
+                    <stop offset="100%" stop-color="#DFFF00" stop-opacity="0"/>
+                  </linearGradient>
+                </defs>
+                <path d="M0,80 L40,75 L80,72 L120,65 L160,60 L200,55 L240,42 L280,38 L320,28 L360,18 L400,10 L400,110 L0,110 Z" fill="url(#hero-grad)"/>
+                <path d="M0,80 L40,75 L80,72 L120,65 L160,60 L200,55 L240,42 L280,38 L320,28 L360,18 L400,10" fill="none" stroke="var(--accent)" stroke-width="1.6"/>
+              </svg>
+            </div>
+
+            <!-- Approve rate -->
+            <div class="metric-card">
+              <div class="label">Approve rate · 7d</div>
+              <div class="num-mid">94%</div>
+              <div class="delta"><i class="ph ph-arrow-up"></i> +6%</div>
+              <div class="sub">17 of 18 ratified · 1 reshape</div>
+            </div>
+
+            <!-- Avatar utilization -->
+            <div class="metric-card">
+              <div class="label">Avatars · running 7d</div>
+              <div class="num-mid">42</div>
+              <div class="delta"><i class="ph ph-arrow-up"></i> +8</div>
+              <div class="sub">Authority 16 · Customer Truth 12 · Reviewer 14</div>
+            </div>
+
+            <!-- Engagement -->
+            <div class="metric-card">
+              <div class="label">Voice · LinkedIn · 7d</div>
+              <div class="num-mid">3.4×</div>
+              <div class="delta"><i class="ph ph-arrow-up"></i> normal baseline</div>
+              <div class="sub">"Other tools answer questions" hit signature</div>
+            </div>
+
+            <!-- Cycle time -->
+            <div class="metric-card">
+              <div class="label">Decision cycle · avg</div>
+              <div class="num-mid">2.1d</div>
+              <div class="delta down"><i class="ph ph-arrow-down"></i> +0.4d</div>
+              <div class="sub">Q3 GTM brief contributing to drift</div>
+            </div>
+
+          </div>
+
+          <div class="block mentor" style="background:linear-gradient(180deg,rgba(223,255,0,0.025),var(--bg-elev-1) 80%);">
+            <div class="block-header">
+              <span class="mentor-marker"><span class="star">★</span> KILONOVA</span>
+            </div>
+            <div class="block-body">
+              <div class="body-prose">
+                <span class="accent">Velocity is up across the board</span> — except cycle time. The GTM brief is the single drag on Decision Cycle. Approving it would shave ~0.6d off the average and unblock 3 downstream items.
+              </div>
+            </div>
+          </div>
+
+        </div>
+
       </section>
       <section class="surface" id="surface-machines">
-        <div class="stub">
-          <h2>MACHINES</h2>
-          <p>Six Founder Machines: Authority · Growth · Customer Truth · IR · Weekly Review · Narrative Ratchet.</p>
-          <span class="next-up">Founder Authority Machine ships next</span>
+
+        <div class="cluster-tabs">
+          <button class="ctab active" data-csub="machines" data-target="overview">Overview</button>
+          <button class="ctab" data-csub="machines" data-target="authority">Authority</button>
+          <button class="ctab" data-csub="machines" data-target="growth">Growth Campaign</button>
+          <button class="ctab" data-csub="machines" data-target="customer-truth">Customer Truth</button>
+          <button class="ctab" data-csub="machines" data-target="ir">IR</button>
+          <button class="ctab" data-csub="machines" data-target="cadence">Weekly Review</button>
+          <button class="ctab" data-csub="machines" data-target="narrative">Narrative</button>
+          <span class="ctab-meta">Founder Machines · Avatars run</span>
         </div>
+
+        <!-- Overview -->
+        <div class="csurface active" data-cs="machines-overview">
+          <div class="page-head">
+            <div class="left">
+              <h1>Machines</h1>
+              <div class="sub">Six use-case-bundled execution machines · each runs a primary Avatar</div>
+            </div>
+            <div class="right">
+              <div class="meta">5 active · 1 locked</div>
+            </div>
+          </div>
+
+          <div class="machines-grid">
+
+            <div class="machine-card" onclick="openMachineTab('authority')">
+              <div class="top">
+                <span class="sigil"><svg viewBox="0 0 24 24"><polygon class="stroke" points="12,3 21,20 3,20"/></svg></span>
+                <span class="nm">Founder Authority Machine</span>
+                <div class="pills">
+                  <span class="pill in-flight">RUNNING</span>
+                  <span class="pill family world">→ WORLD</span>
+                </div>
+              </div>
+              <div class="body">
+                Turns founder insight + strategic substrate into public authority — posts, essays, talks. <strong style="color:var(--accent);">First proof Machine</strong> per Bruno's Canon.
+              </div>
+              <div class="stats">
+                <span><strong>Authority Avatar</strong> active · 64%</span>
+                <span><strong>3</strong> approve</span>
+                <span><strong>9</strong> shipped 30d</span>
+              </div>
+            </div>
+
+            <div class="machine-card" onclick="openMachineTab('growth')">
+              <div class="top">
+                <span class="sigil"><svg viewBox="0 0 24 24"><polygon class="stroke" points="12,3 21,9 18,20 6,20 3,9"/></svg></span>
+                <span class="nm">Growth Campaign Machine</span>
+                <div class="pills">
+                  <span class="pill ready">READY</span>
+                  <span class="pill family world">→ WORLD</span>
+                </div>
+              </div>
+              <div class="body">
+                Turns growth objectives into governed campaigns · assets · experiments · signal review.
+              </div>
+              <div class="stats">
+                <span><strong>Growth Avatar</strong> standby</span>
+                <span><strong>2</strong> campaigns active</span>
+                <span><strong>14</strong> experiments 30d</span>
+              </div>
+            </div>
+
+            <div class="machine-card" onclick="openMachineTab('customer-truth')">
+              <div class="top">
+                <span class="sigil"><svg viewBox="0 0 24 24"><polygon class="stroke" points="6,3 18,3 22,12 18,21 6,21 2,12"/></svg></span>
+                <span class="nm">Customer Truth Machine</span>
+                <div class="pills">
+                  <span class="pill in-flight">RUNNING</span>
+                  <span class="pill family substrate">→ SUBSTRATE</span>
+                </div>
+              </div>
+              <div class="body">
+                Turns calls, objections, support, market feedback into substrate claims · standing pattern detection.
+              </div>
+              <div class="stats">
+                <span><strong>Customer Truth Avatar</strong> · 28%</span>
+                <span><strong>1</strong> processing</span>
+                <span><strong>34</strong> claims 30d</span>
+              </div>
+            </div>
+
+            <div class="machine-card" onclick="openMachineTab('ir')">
+              <div class="top">
+                <span class="sigil"><svg viewBox="0 0 24 24"><rect x="4" y="4" width="16" height="16" class="stroke"/></svg></span>
+                <span class="nm">Investor Relations Machine</span>
+                <div class="pills">
+                  <span class="pill ready">READY</span>
+                  <span class="pill family world">→ WORLD</span>
+                </div>
+              </div>
+              <div class="body">
+                Turns fundraising into structured narrative · outreach · objection capture · update memos.
+              </div>
+              <div class="stats">
+                <span><strong>IR Avatar</strong> standby</span>
+                <span><strong>0</strong> in flight</span>
+                <span><strong>cycle-paced</strong></span>
+              </div>
+            </div>
+
+            <div class="machine-card" onclick="openMachineTab('cadence')">
+              <div class="top">
+                <span class="sigil"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9" class="stroke"/></svg></span>
+                <span class="nm">Weekly Founder Review Machine</span>
+                <div class="pills">
+                  <span class="pill ready">READY</span>
+                  <span class="pill family commitment">→ COMMITMENT</span>
+                </div>
+              </div>
+              <div class="body">
+                Turns signal · commitments · slippage · decisions into operating rhythm. Wakes weekly.
+              </div>
+              <div class="stats">
+                <span><strong>Cadence Avatar</strong> · next 17:00</span>
+                <span><strong>4-week</strong> streak</span>
+                <span><strong>weekly heartbeat</strong></span>
+              </div>
+            </div>
+
+            <div class="machine-card locked" onclick="openMachineTab('narrative')">
+              <div class="top">
+                <span class="sigil"><svg viewBox="0 0 24 24"><polygon class="stroke" points="12,3 21,12 12,21 3,12"/></svg></span>
+                <span class="nm">Narrative Ratchet Machine</span>
+                <div class="pills">
+                  <span class="pill locked">LOCKED · CHAIN</span>
+                  <span class="pill family world">→ WORLD</span>
+                </div>
+              </div>
+              <div class="body">
+                Continuously improves messaging · narrative · deck · homepage · founder story. Locked until GTM Decision Brief approves.
+              </div>
+              <div class="stats">
+                <span><strong>Narrative Avatar</strong> · 5d drift</span>
+                <span style="color:var(--warn);"><strong>blocked</strong></span>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+        <!-- Founder Authority Machine · deep dive -->
+        <div class="csurface" data-cs="machines-authority">
+          <div class="page-head">
+            <div class="left">
+              <h1>Founder Authority Machine</h1>
+              <div class="sub">First proof Machine per Bruno's Canon · Authority Avatar produces public-facing thought leadership</div>
+              <div class="meta" style="margin-top:6px;">
+                <span style="display:inline-flex;align-items:center;gap:6px;">
+                  <span class="sigil sigil-16"><svg viewBox="0 0 24 24"><polygon class="stroke" points="12,3 21,20 3,20"/></svg></span>
+                  Authority Avatar · primary
+                </span>
+                <span class="pill family world">→ WORLD</span>
+                <span class="pill in-flight">RUNNING</span>
+              </div>
+            </div>
+            <div class="right">
+              <button class="btn-secondary">+ NEW</button>
+              <button class="btn-secondary">CONFIGURE</button>
+            </div>
+          </div>
+
+          <div class="machine-detail">
+
+            <div class="machine-section">
+              <div class="machine-section-head">
+                <span class="ttl">Approve · 3</span>
+                <span class="ct">your call</span>
+              </div>
+              <div style="display:flex;flex-direction:column;gap:8px;">
+
+                <div class="work-row" onclick="openWorkItem()">
+                  <span class="marker pending"><i class="ph ph-circle"></i></span>
+                  <div class="body">
+                    <div class="nm">"Compounding intelligence" LinkedIn long-form draft</div>
+                    <div class="meta">Authority Avatar · drafted 12m ago · 720 words · Reviewer Avatar passed</div>
+                  </div>
+                  <span class="pill ratify">APPROVE</span>
+                  <div class="actions">
+                    <button class="btn-secondary">PREVIEW</button>
+                  </div>
+                </div>
+
+                <div class="work-row" onclick="openWorkItem()">
+                  <span class="marker pending"><i class="ph ph-circle"></i></span>
+                  <div class="body">
+                    <div class="nm">"Other tools answer questions" → newsletter expansion</div>
+                    <div class="meta">Authority Avatar · drafted 2h ago · 1,200 words · 3 soundbites embedded</div>
+                  </div>
+                  <span class="pill ratify">APPROVE</span>
+                  <div class="actions">
+                    <button class="btn-secondary">PREVIEW</button>
+                  </div>
+                </div>
+
+                <div class="work-row" onclick="openWorkItem()">
+                  <span class="marker pending"><i class="ph ph-circle"></i></span>
+                  <div class="body">
+                    <div class="nm">Talk pitch · "Avatars vs Agents" for AI Engineer Summit</div>
+                    <div class="meta">Authority Avatar · 1d ago · 200-word abstract · Speaking Avatar collaborating</div>
+                  </div>
+                  <span class="pill your-call">YOUR CALL</span>
+                  <div class="actions">
+                    <button class="btn-secondary">REVIEW</button>
+                  </div>
+                </div>
+
+              </div>
+            </div>
+
+            <div class="machine-section">
+              <div class="machine-section-head">
+                <span class="ttl">In flight · 2</span>
+                <span class="ct">Avatars working</span>
+              </div>
+              <div style="display:flex;flex-direction:column;gap:8px;">
+
+                <div class="work-row">
+                  <span class="sigil sigil-20"><svg viewBox="0 0 24 24"><polygon class="stroke" points="12,3 21,20 3,20"/></svg></span>
+                  <div class="body">
+                    <div class="nm">Drafting "ICP shift signals" · LinkedIn long-form</div>
+                    <div class="meta">Authority Avatar · started 12m ago · ETA ~8m · 64% complete</div>
+                  </div>
+                  <span class="pill in-flight">RUNNING</span>
+                  <div class="actions"></div>
+                </div>
+
+                <div class="work-row">
+                  <span class="sigil sigil-20"><svg viewBox="0 0 24 24"><polygon class="stroke-system" points="6,3 18,3 22,12 18,21 6,21 2,12"/></svg></span>
+                  <div class="body">
+                    <div class="nm">Gating Authority Avatar's draft before queue</div>
+                    <div class="meta">Reviewer Avatar · started 2m ago · ETA &lt;1m · 90% complete</div>
+                  </div>
+                  <span class="pill in-flight">RUNNING</span>
+                  <div class="actions"></div>
+                </div>
+
+              </div>
+            </div>
+
+            <div class="machine-section">
+              <div class="machine-section-head">
+                <span class="ttl">Recently shipped · last 7d</span>
+                <span class="ct">9</span>
+              </div>
+              <div style="display:flex;flex-direction:column;gap:8px;">
+
+                <div class="work-row">
+                  <span class="marker done"><i class="ph ph-check-circle-fill"></i></span>
+                  <div class="body">
+                    <div class="nm">"Watch your decision get built" LinkedIn post</div>
+                    <div class="meta">Shipped Mon · 3.4× normal engagement · soundbite promoted</div>
+                  </div>
+                  <span class="pill" style="background:transparent;color:var(--fg-dim);border:1px solid var(--line);">SHIPPED</span>
+                  <div class="actions"></div>
+                </div>
+
+                <div class="work-row">
+                  <span class="marker done"><i class="ph ph-check-circle-fill"></i></span>
+                  <div class="body">
+                    <div class="nm">Newsletter · "Why we don't say agents"</div>
+                    <div class="meta">Shipped Mon · 1,400 words · 24% open · 8% click</div>
+                  </div>
+                  <span class="pill" style="background:transparent;color:var(--fg-dim);border:1px solid var(--line);">SHIPPED</span>
+                  <div class="actions"></div>
+                </div>
+
+                <div class="work-row">
+                  <span class="marker done"><i class="ph ph-check-circle-fill"></i></span>
+                  <div class="body">
+                    <div class="nm">Twitter thread · founder time scarcity (5 tweets)</div>
+                    <div class="meta">Shipped Sun · 87 retweets · 4 inbound DMs</div>
+                  </div>
+                  <span class="pill" style="background:transparent;color:var(--fg-dim);border:1px solid var(--line);">SHIPPED</span>
+                  <div class="actions"></div>
+                </div>
+
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+        <!-- Other machine stubs (lighter content) -->
+        <div class="csurface" data-cs="machines-growth">
+          <div class="page-head">
+            <div class="left">
+              <h1>Growth Campaign Machine</h1>
+              <div class="sub">Governed campaigns · assets · experiments · signal review</div>
+              <div class="meta" style="margin-top:6px;">
+                <span style="display:inline-flex;align-items:center;gap:6px;">
+                  <span class="sigil sigil-16"><svg viewBox="0 0 24 24"><polygon class="stroke" points="12,3 21,9 18,20 6,20 3,9"/></svg></span>
+                  Growth Avatar · primary
+                </span>
+                <span class="pill family world">→ WORLD</span>
+                <span class="pill ready">READY</span>
+              </div>
+            </div>
+            <div class="right">
+              <button class="btn-primary">+ NEW CAMPAIGN</button>
+            </div>
+          </div>
+
+          <div class="machine-detail">
+            <div class="machine-section">
+              <div class="machine-section-head">
+                <span class="ttl">Active campaigns · 2</span>
+              </div>
+              <div style="display:flex;flex-direction:column;gap:8px;">
+                <div class="work-row">
+                  <span class="marker pending"><i class="ph ph-circle-half-tilt"></i></span>
+                  <div class="body">
+                    <div class="nm">Founder-OS waitlist · Q2 push</div>
+                    <div class="meta">Started 3w ago · 247 signups · CR 3.2% · ★ on track</div>
+                  </div>
+                  <span class="pill in-flight">RUNNING</span>
+                  <div class="actions"><button class="btn-secondary">REVIEW</button></div>
+                </div>
+                <div class="work-row">
+                  <span class="marker pending"><i class="ph ph-circle-half-tilt"></i></span>
+                  <div class="body">
+                    <div class="nm">"Avatars" positioning experiment · paid LinkedIn</div>
+                    <div class="meta">Started 1w ago · A/B testing 3 angles · early signal favors angle 2</div>
+                  </div>
+                  <span class="pill in-flight">RUNNING</span>
+                  <div class="actions"><button class="btn-secondary">REVIEW</button></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="csurface" data-cs="machines-customer-truth">
+          <div class="page-head">
+            <div class="left">
+              <h1>Customer Truth Machine</h1>
+              <div class="sub">Calls, objections, support, market feedback metabolized into substrate</div>
+              <div class="meta" style="margin-top:6px;">
+                <span style="display:inline-flex;align-items:center;gap:6px;">
+                  <span class="sigil sigil-16"><svg viewBox="0 0 24 24"><polygon class="stroke" points="6,3 18,3 22,12 18,21 6,21 2,12"/></svg></span>
+                  Customer Truth Avatar · primary
+                </span>
+                <span class="pill family substrate">→ SUBSTRATE</span>
+                <span class="pill in-flight">RUNNING</span>
+              </div>
+            </div>
+            <div class="right">
+              <button class="btn-secondary">+ INGEST CALL</button>
+            </div>
+          </div>
+
+          <div class="machine-detail">
+            <div class="machine-section">
+              <div class="machine-section-head">
+                <span class="ttl">Processing · 1</span>
+              </div>
+              <div style="display:flex;flex-direction:column;gap:8px;">
+                <div class="work-row">
+                  <span class="sigil sigil-20"><svg viewBox="0 0 24 24"><polygon class="stroke" points="6,3 18,3 22,12 18,21 6,21 2,12"/></svg></span>
+                  <div class="body">
+                    <div class="nm">MVH-04 transcript · 32 min</div>
+                    <div class="meta">28% complete · ETA ~14m · 6 candidate claims surfaced so far</div>
+                  </div>
+                  <span class="pill in-flight">RUNNING</span>
+                  <div class="actions"></div>
+                </div>
+              </div>
+            </div>
+
+            <div class="machine-section">
+              <div class="machine-section-head">
+                <span class="ttl">Recent claims surfaced · last 7d</span>
+                <span class="ct">12</span>
+              </div>
+              <div style="display:flex;flex-direction:column;gap:8px;">
+                <div class="work-row">
+                  <span class="marker done"><i class="ph ph-check-circle-fill"></i></span>
+                  <div class="body">
+                    <div class="nm">Founder objection: "agents vs avatars — what's the difference?" (×4)</div>
+                    <div class="meta">Pattern across 4 calls last 5d · ★ KILONOVA: positioning needs sharpening</div>
+                  </div>
+                  <span class="pill ratify">APPROVE</span>
+                  <div class="actions"></div>
+                </div>
+                <div class="work-row">
+                  <span class="marker done"><i class="ph ph-check-circle-fill"></i></span>
+                  <div class="body">
+                    <div class="nm">"Founder time scarcity" framing resonates (×3)</div>
+                    <div class="meta">Top phrase across recent positive calls · adds to signature soundbite</div>
+                  </div>
+                  <span class="pill" style="background:transparent;color:var(--fg-dim);border:1px solid var(--line);">RATIFIED</span>
+                  <div class="actions"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="csurface" data-cs="machines-ir">
+          <div class="page-head">
+            <div class="left">
+              <h1>Investor Relations Machine</h1>
+              <div class="sub">Structured narrative · outreach · objection capture · follow-up · update memos</div>
+              <div class="meta" style="margin-top:6px;">
+                <span style="display:inline-flex;align-items:center;gap:6px;">
+                  <span class="sigil sigil-16"><svg viewBox="0 0 24 24"><rect x="4" y="4" width="16" height="16" class="stroke"/></svg></span>
+                  IR Avatar · primary
+                </span>
+                <span class="pill family world">→ WORLD</span>
+                <span class="pill ready">READY</span>
+              </div>
+            </div>
+            <div class="right">
+              <button class="btn-primary">+ NEW UPDATE</button>
+            </div>
+          </div>
+
+          <div class="machine-detail">
+            <div class="machine-section">
+              <div class="machine-section-head">
+                <span class="ttl">No active work · cycle-paced</span>
+              </div>
+              <div class="body" style="padding:24px;background:var(--bg-elev-1);border:1px solid var(--line);border-radius:8px;color:var(--fg-mid);font-size:13px;line-height:1.55;">
+                Next investor update memo scheduled for end of month. IR Avatar wakes when:
+                <br>· Decision Brief outcome materially affects positioning
+                <br>· Quarter-end deliverables come due
+                <br>· Founder schedules an outreach push
+              </div>
+            </div>
+
+            <div class="machine-section">
+              <div class="machine-section-head">
+                <span class="ttl">Recently shipped · 30d</span>
+                <span class="ct">2</span>
+              </div>
+              <div style="display:flex;flex-direction:column;gap:8px;">
+                <div class="work-row">
+                  <span class="marker done"><i class="ph ph-check-circle-fill"></i></span>
+                  <div class="body">
+                    <div class="nm">Q1 investor update · 8 LPs notified</div>
+                    <div class="meta">Shipped 3w ago · 6 of 8 acknowledged · 2 follow-up calls booked</div>
+                  </div>
+                  <span class="pill" style="background:transparent;color:var(--fg-dim);border:1px solid var(--line);">SHIPPED</span>
+                  <div class="actions"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="csurface" data-cs="machines-cadence">
+          <div class="page-head">
+            <div class="left">
+              <h1>Weekly Founder Review Machine</h1>
+              <div class="sub">Operating rhythm · signal · commitments · slippage · decisions per cycle</div>
+              <div class="meta" style="margin-top:6px;">
+                <span style="display:inline-flex;align-items:center;gap:6px;">
+                  <span class="sigil sigil-16"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9" class="stroke"/></svg></span>
+                  Operating Cadence Avatar · primary
+                </span>
+                <span class="pill family commitment">→ COMMITMENT</span>
+                <span class="pill ready">READY</span>
+              </div>
+            </div>
+            <div class="right">
+              <button class="btn-secondary">RUN NOW</button>
+            </div>
+          </div>
+
+          <div class="machine-detail">
+            <div class="machine-section">
+              <div class="machine-section-head">
+                <span class="ttl">Next wake · today 17:00</span>
+                <span class="ct">in 2h 48m</span>
+              </div>
+              <div class="body" style="padding:18px;background:var(--bg-elev-1);border:1px solid var(--line);border-radius:8px;color:var(--fg);font-size:13px;line-height:1.55;">
+                <div style="font-family:var(--f-mono);font-size:10px;letter-spacing:0.1em;text-transform:uppercase;color:var(--fg-dim);margin-bottom:8px;">Weekly review will cover</div>
+                <ul style="list-style:none;padding:0;display:flex;flex-direction:column;gap:6px;">
+                  <li>· Active commitments · slippage check · 1 at risk</li>
+                  <li>· Substrate growth this week · 12 new claims · 1 contradiction</li>
+                  <li>· Avatars utilization · 42 runs · 0 misses</li>
+                  <li>· Founder ratify rate · 94% (up from 88%)</li>
+                  <li>· Signal interpretation backlog · 4 pending</li>
+                </ul>
+              </div>
+            </div>
+
+            <div class="machine-section">
+              <div class="machine-section-head">
+                <span class="ttl">Recent reviews</span>
+                <span class="ct">4-week streak</span>
+              </div>
+              <div style="display:flex;flex-direction:column;gap:8px;">
+                <div class="work-row">
+                  <span class="marker done"><i class="ph ph-check-circle-fill"></i></span>
+                  <div class="body">
+                    <div class="nm">Week of May 6 · review delivered</div>
+                    <div class="meta">3 commitments delivered · 1 missed (Narrative drift) · 28 substrate claims added</div>
+                  </div>
+                  <span class="pill" style="background:transparent;color:var(--fg-dim);border:1px solid var(--line);">DELIVERED</span>
+                  <div class="actions"><button class="btn-secondary">VIEW</button></div>
+                </div>
+                <div class="work-row">
+                  <span class="marker done"><i class="ph ph-check-circle-fill"></i></span>
+                  <div class="body">
+                    <div class="nm">Week of Apr 29 · review delivered</div>
+                    <div class="meta">5 commitments delivered · 0 missed · 34 substrate claims added</div>
+                  </div>
+                  <span class="pill" style="background:transparent;color:var(--fg-dim);border:1px solid var(--line);">DELIVERED</span>
+                  <div class="actions"><button class="btn-secondary">VIEW</button></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="csurface" data-cs="machines-narrative">
+          <div class="page-head">
+            <div class="left">
+              <h1>Narrative Ratchet Machine</h1>
+              <div class="sub">Continuously improves messaging · narrative · deck · homepage · founder story</div>
+              <div class="meta" style="margin-top:6px;">
+                <span style="display:inline-flex;align-items:center;gap:6px;">
+                  <span class="sigil sigil-16"><svg viewBox="0 0 24 24"><polygon class="stroke" points="12,3 21,12 12,21 3,12"/></svg></span>
+                  Narrative Avatar · primary
+                </span>
+                <span class="pill family world">→ WORLD</span>
+                <span class="pill locked">LOCKED · CHAIN</span>
+              </div>
+            </div>
+            <div class="right">
+              <button class="btn-secondary" disabled style="opacity:0.5;cursor:not-allowed;">+ NEW</button>
+            </div>
+          </div>
+
+          <div style="background:linear-gradient(135deg,rgba(232,156,74,0.06),var(--bg-elev-1) 60%);border:1px solid rgba(232,156,74,0.30);border-radius:10px;padding:22px 26px;display:flex;flex-direction:column;gap:14px;">
+            <div style="font-family:var(--f-mono);font-size:10px;letter-spacing:0.1em;text-transform:uppercase;color:var(--warn);">Locked · prerequisite chain</div>
+            <div style="font-family:var(--f-display);font-weight:500;font-size:18px;color:var(--fg);">
+              Narrative Ratchet is locked until the GTM Decision Brief approves.
+            </div>
+            <div style="font-family:var(--f-editorial);font-size:13.5px;line-height:1.55;color:var(--fg);">
+              <span class="mentor-marker"><span class="star">★</span> KILONOVA</span> &middot; The narrative refresh depends on the Q3 positioning anchor. Without that ratified, the Narrative Avatar would draft against stale ground. Once you approve the brief, this machine wakes automatically and absorbs the new positioning into the messaging house, deck, and homepage.
+            </div>
+            <div style="display:flex;gap:8px;">
+              <button class="btn-primary" style="font-size:10px;padding:9px 14px;" onclick="document.querySelector('.tab[data-tab=control-panel]')?.click(); document.querySelector('[data-surface=command]')?.click();">REVIEW THE BRIEF</button>
+            </div>
+          </div>
+
+          <div style="margin-top:18px;">
+            <div class="commit-section-head">
+              <span class="ttl">Required first</span>
+            </div>
+            <div class="wi-link-row" style="background:var(--bg-elev-1);border:1px solid var(--line);border-radius:6px;padding:12px 16px;">
+              <span class="marker pending"><i class="ph ph-circle"></i></span>
+              <div style="flex:1;">
+                <div style="font-size:13px;color:var(--fg);">GTM Decision Brief · Q3 motion</div>
+                <div style="font-family:var(--f-mono);font-size:10px;color:var(--fg-dim);letter-spacing:0.04em;margin-top:2px;">Decision · ★ COUNCIL · 4 souls · pending re-review</div>
+              </div>
+              <span class="pill ratify">APPROVE</span>
+            </div>
+          </div>
+        </div>
+
       </section>
       <section class="surface" id="surface-founder">
-        <div class="stub">
-          <h2>FOUNDER</h2>
-          <p>Voice · Events · Speaking · Territory · Radar.</p>
-          <span class="next-up">Next iteration</span>
+
+        <div class="cluster-tabs">
+          <button class="ctab active" data-csub="founder" data-target="voice">Voice</button>
+          <button class="ctab" data-csub="founder" data-target="events">Events</button>
+          <button class="ctab" data-csub="founder" data-target="speaking">Speaking</button>
+          <button class="ctab" data-csub="founder" data-target="territory">Territory</button>
+          <button class="ctab" data-csub="founder" data-target="radar">Radar</button>
+          <span class="ctab-meta">Thought leadership · v1</span>
         </div>
+
+        <!-- Voice -->
+        <div class="csurface active" data-cs="founder-voice">
+          <div class="page-head">
+            <div class="left">
+              <h1>Voice</h1>
+              <div class="sub">Personal channel performance + soundbite library · invoked by Authority + Growth + IR + Narrative Machines</div>
+            </div>
+          </div>
+
+          <div class="voice-cards">
+            <div class="channel-card">
+              <div class="top"><span class="ch">LinkedIn</span><span class="delta">+18%</span></div>
+              <div class="num">14.2k</div>
+              <div class="label">followers · 7d engagement up</div>
+            </div>
+            <div class="channel-card">
+              <div class="top"><span class="ch">X / Twitter</span><span class="delta">+6%</span></div>
+              <div class="num">3.8k</div>
+              <div class="label">followers · steady cadence</div>
+            </div>
+            <div class="channel-card">
+              <div class="top"><span class="ch">Newsletter</span><span class="delta">+24%</span></div>
+              <div class="num">2.4k</div>
+              <div class="label">subscribers · open 31%</div>
+            </div>
+            <div class="channel-card">
+              <div class="top"><span class="ch">Podcast guesting</span><span class="delta">2 booked</span></div>
+              <div class="num">8</div>
+              <div class="label">appearances · last 90d</div>
+            </div>
+          </div>
+
+          <!-- Mentor pull -->
+          <div class="commit-mentor" style="margin-bottom:18px;">
+            <span class="mentor-marker"><span class="star">★</span> KILONOVA</span>
+            <div class="body-prose">
+              <span class="accent">Signature pool is hardening</span> — 4 lines tier-promoted in last month, all driven by the Avatars-vs-Agents distinction. The "Other tools answer questions" anchor is doing the most work · 23 uses · 0.84 average engagement.
+            </div>
+          </div>
+
+          <!-- Soundbite library -->
+          <div class="soundbite-tier">
+            <div class="tier-head">
+              <span class="star">★</span>
+              <span class="ttl">Signature · 4</span>
+              <span class="ct">core IP · use freely</span>
+            </div>
+
+            <div class="soundbite-card">
+              <div class="quote">"Other tools answer questions. Kilonova lets you watch your decision get built."</div>
+              <div class="meta">
+                <span><strong>23 uses</strong></span>
+                <span>last · LinkedIn 3d ago</span>
+                <span>engagement 0.84</span>
+                <span>topics: positioning · core_pitch</span>
+              </div>
+            </div>
+
+            <div class="soundbite-card">
+              <div class="quote">"An Avatar is the perfect context-built entity for the work — not an agent on a leash."</div>
+              <div class="meta">
+                <span><strong>11 uses</strong></span>
+                <span>last · newsletter 1w ago</span>
+                <span>engagement 0.78</span>
+                <span>topics: avatars · positioning</span>
+              </div>
+            </div>
+
+            <div class="soundbite-card">
+              <div class="quote">"Belief lives in substrate. Promise lives in commitment. Kilonova refuses the collapse."</div>
+              <div class="meta">
+                <span><strong>8 uses</strong></span>
+                <span>last · talk 2w ago</span>
+                <span>engagement 0.71</span>
+                <span>topics: architecture · positioning</span>
+              </div>
+            </div>
+
+            <div class="soundbite-card">
+              <div class="quote">"Compounding intelligence beats incremental answers. The substrate is the moat."</div>
+              <div class="meta">
+                <span><strong>6 uses</strong></span>
+                <span>last · LinkedIn 5d ago</span>
+                <span>engagement 0.69</span>
+                <span>topics: substrate · positioning</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="soundbite-tier">
+            <div class="tier-head">
+              <span class="ttl">Supporting · 12</span>
+              <span class="ct">use contextually</span>
+            </div>
+            <div class="block tertiary" style="background:var(--bg-elev-1);">
+              <div class="block-body">
+                <div class="row"><div class="row-content"><div class="row-title">"Founder time scarcity is the real tax."</div><div class="row-sub">topics: founder_attention · 5 uses</div></div></div>
+                <div class="row"><div class="row-content"><div class="row-title">"Reshape with a normal sentence — that's the verb."</div><div class="row-sub">topics: interface · reshape · 4 uses</div></div></div>
+                <div class="row"><div class="row-content"><div class="row-title">"Markdown canonizes. Sidecars project."</div><div class="row-sub">topics: architecture · markdown · 3 uses</div></div></div>
+              </div>
+            </div>
+          </div>
+
+          <div class="soundbite-tier">
+            <div class="tier-head">
+              <span class="ttl">Experimental · 7</span>
+              <span class="ct">testing engagement</span>
+            </div>
+            <div class="block tertiary" style="background:var(--bg-elev-1);">
+              <div class="block-body">
+                <div class="row"><div class="row-content"><div class="row-title">"The harness is what makes execution lawful."</div><div class="row-sub">topics: execution · 1 use · early signal</div></div></div>
+                <div class="row"><div class="row-content"><div class="row-title">"You don't manage Kilonova. You ratify it."</div><div class="row-sub">topics: founder_role · 0 uses · candidate</div></div></div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- Events -->
+        <div class="csurface" data-cs="founder-events">
+          <div class="page-head">
+            <div class="left">
+              <h1>Events</h1>
+              <div class="sub">Conferences · podcasts · panels · curated for your trajectory</div>
+            </div>
+            <div class="right">
+              <button class="btn-secondary">FILTER</button>
+            </div>
+          </div>
+
+          <div class="editorial-list">
+
+            <div class="editorial-item">
+              <div class="when">Jun 18-20</div>
+              <div class="meat">
+                <div class="nm">AI Engineer Summit · San Francisco</div>
+                <div class="meta">In-person · 2,500 attendees · sponsor + speaking opportunities</div>
+                <div class="body-text">Bruno's stage angle (Avatars vs Agents) hits a clear gap in the program. Two of your competitors will be there.</div>
+                <div class="mentor-pull">
+                  <span class="mentor-marker"><span class="star">★</span> KILONOVA</span> &middot; This is the one. The audience is the buyer (technical founders building AI-native), the moment is right (your positioning just sharpened), and the alternative speakers won't have your distinction. Worth the trip even without speaking — networking alone justifies it.
+                </div>
+              </div>
+              <div class="right">
+                <span class="pill ratify">★ MENTOR PICK</span>
+                <button class="btn-secondary">DETAILS</button>
+              </div>
+            </div>
+
+            <div class="editorial-item">
+              <div class="when">Jul 9</div>
+              <div class="meat">
+                <div class="nm">Latent Space podcast · Swyx + Alessio</div>
+                <div class="meta">Remote · 30 min · 28k weekly listeners</div>
+                <div class="body-text">Inbound invite from Swyx after the LinkedIn thread on Avatars. Audience overlap is high.</div>
+              </div>
+              <div class="right">
+                <span class="pill your-call">YOUR CALL</span>
+                <button class="btn-secondary">CONFIRM</button>
+              </div>
+            </div>
+
+            <div class="editorial-item">
+              <div class="when">Aug 14-16</div>
+              <div class="meat">
+                <div class="nm">SaaStr Annual · San Mateo</div>
+                <div class="meta">In-person · 12,000 attendees · vendor-heavy</div>
+                <div class="body-text">Bigger reach but the audience is sales-led, not technical. Your positioning won't land cleanly.</div>
+              </div>
+              <div class="right">
+                <span class="pill" style="background:transparent;color:var(--fg-dim);border:1px solid var(--line);">SKIP</span>
+              </div>
+            </div>
+
+            <div class="editorial-item">
+              <div class="when">Sep 24</div>
+              <div class="meat">
+                <div class="nm">All-In Summit · LA</div>
+                <div class="meta">In-person · invite-only · founders + LPs</div>
+                <div class="body-text">Networking event. No speaking but high LP density.</div>
+              </div>
+              <div class="right">
+                <span class="pill ready">EVALUATE</span>
+              </div>
+            </div>
+
+            <div class="editorial-item">
+              <div class="when">Oct 7-9</div>
+              <div class="meat">
+                <div class="nm">Founders Camp · Sonoma</div>
+                <div class="meta">Retreat · 80 founders · curated peer group</div>
+                <div class="body-text">Adjacent founder territory — the kind of room where your positioning crystallizes through conversation.</div>
+                <div class="mentor-pull">
+                  <span class="mentor-marker"><span class="star">★</span> KILONOVA</span> &middot; This room is where late-stage validation happens. You don't need to pitch — you need to compare notes with peers who are 2-3 years ahead. Worth the time-cost.
+                </div>
+              </div>
+              <div class="right">
+                <span class="pill ratify">★ MENTOR PICK</span>
+                <button class="btn-secondary">APPLY</button>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+        <!-- Speaking -->
+        <div class="csurface" data-cs="founder-speaking">
+          <div class="page-head">
+            <div class="left">
+              <h1>Speaking</h1>
+              <div class="sub">CFPs · podcast invites · panel requests · curated by fit</div>
+            </div>
+          </div>
+
+          <div class="editorial-list">
+
+            <div class="editorial-item">
+              <div class="when">Jul 9</div>
+              <div class="meat">
+                <div class="nm">Latent Space podcast</div>
+                <div class="meta">Inbound · Swyx + Alessio · 28k listeners</div>
+                <div class="body-text">Pitched angle: the Avatars-vs-Agents distinction · how persistence changes everything.</div>
+                <div class="mentor-pull">
+                  <span class="mentor-marker"><span class="star">★</span> KILONOVA</span> &middot; Lead with the framing they haven't heard: "an agent is a runtime callable; an Avatar is a persistent context-built worker." Frame the rest of the conversation around persistence as the design principle.
+                </div>
+              </div>
+              <div class="right">
+                <span class="pill ratify">CONFIRM</span>
+                <button class="btn-secondary">PITCH ANGLE</button>
+              </div>
+            </div>
+
+            <div class="editorial-item">
+              <div class="when">Aug 22</div>
+              <div class="meat">
+                <div class="nm">AI Engineer Summit · CFP · Avatars track</div>
+                <div class="meta">CFP open · deadline Jul 1 · 30-min talk slot</div>
+                <div class="body-text">Drafted pitch: "The Avatar is the unit your founder sees — building a company you can ratify."</div>
+              </div>
+              <div class="right">
+                <span class="pill your-call">YOUR CALL</span>
+                <button class="btn-secondary">REVIEW DRAFT</button>
+              </div>
+            </div>
+
+            <div class="editorial-item">
+              <div class="when">Sep 18</div>
+              <div class="meat">
+                <div class="nm">a16z Builders Summit · invited panel</div>
+                <div class="meta">Invite-only · 4-person panel · "Persistent AI in production"</div>
+                <div class="body-text">Inbound from a16z's enterprise team after the newsletter post.</div>
+                <div class="mentor-pull">
+                  <span class="mentor-marker"><span class="star">★</span> KILONOVA</span> &middot; The other panelists are infrastructure (LangChain, Anthropic, OpenAI). You'd be the only product/founder voice. Don't talk infra — talk what persistence does to the founder relationship with their company.
+                </div>
+              </div>
+              <div class="right">
+                <span class="pill ratify">★ MENTOR PICK</span>
+                <button class="btn-secondary">CONFIRM</button>
+              </div>
+            </div>
+
+            <div class="editorial-item">
+              <div class="when">Sep 30</div>
+              <div class="meat">
+                <div class="nm">Lenny's Newsletter · podcast inbound</div>
+                <div class="meta">Inbound · Lenny Rachitsky · large product audience</div>
+                <div class="body-text">Audience is product-led but founder-adjacent. Pitch angle: "The interface for company building."</div>
+              </div>
+              <div class="right">
+                <span class="pill your-call">YOUR CALL</span>
+                <button class="btn-secondary">PITCH ANGLE</button>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+        <!-- Territory -->
+        <div class="csurface" data-cs="founder-territory">
+          <div class="page-head">
+            <div class="left">
+              <h1>Territory</h1>
+              <div class="sub">Topics owned · aspired · white-space · per current positioning</div>
+            </div>
+            <div class="right">
+              <button class="btn-secondary">REFRESH</button>
+            </div>
+          </div>
+
+          <!-- Mentor pull -->
+          <div class="commit-mentor" style="margin-bottom:22px;">
+            <span class="mentor-marker"><span class="star">★</span> KILONOVA</span>
+            <div class="body-prose">
+              You're <span class="accent">winning on substrate + compounding intelligence</span> — those are uncontested in your weight class. The white space is on <span style="color:var(--warm);">"founder time scarcity as institutional design problem"</span> — adjacent voices are still framing it as productivity.
+            </div>
+          </div>
+
+          <div class="territory-section">
+
+            <div class="terr-group owned">
+              <div class="terr-head">
+                <span class="ttl">Owned · 6 territories</span>
+                <span class="terr-meta">strong signal · uncontested</span>
+              </div>
+              <div class="terr-list">
+                <span class="terr-chip">Substrate-first architecture</span>
+                <span class="terr-chip">Compounding intelligence</span>
+                <span class="terr-chip">Avatars vs Agents distinction</span>
+                <span class="terr-chip">Belief vs Promise (commitment layer)</span>
+                <span class="terr-chip">Markdown-canonical OS</span>
+                <span class="terr-chip">Reshape-with-a-sentence verb</span>
+              </div>
+            </div>
+
+            <div class="terr-group aspired">
+              <div class="terr-head">
+                <span class="ttl">Aspired · 4 territories</span>
+                <span class="terr-meta">building toward · partial signal</span>
+              </div>
+              <div class="terr-list">
+                <span class="terr-chip">AI-native company building (genre)</span>
+                <span class="terr-chip">Founder-as-ratifier interface paradigm</span>
+                <span class="terr-chip">The harness layer (lawful execution)</span>
+                <span class="terr-chip">Founder Machines as canonical decomposition</span>
+              </div>
+            </div>
+
+            <div class="terr-group whitespace">
+              <div class="terr-head">
+                <span class="ttl">White space · 3 openings</span>
+                <span class="terr-meta">unclaimed · adjacent voices framing differently</span>
+              </div>
+              <div class="terr-list">
+                <span class="terr-chip">Founder time scarcity as institutional design problem</span>
+                <span class="terr-chip">Persistence as the design principle (not capability)</span>
+                <span class="terr-chip">The chronicle (vs roadmap) for company building</span>
+              </div>
+            </div>
+
+          </div>
+
+        </div>
+
+        <!-- Radar -->
+        <div class="csurface" data-cs="founder-radar">
+          <div class="page-head">
+            <div class="left">
+              <h1>Radar</h1>
+              <div class="sub">Adjacent voices on similar topics · what's breaking out</div>
+            </div>
+            <div class="right">
+              <button class="btn-secondary">SOURCES</button>
+            </div>
+          </div>
+
+          <div class="editorial-list">
+
+            <div class="editorial-item">
+              <div class="when">Today</div>
+              <div class="meat">
+                <div class="nm">Lindy launched "persistent agents" framing</div>
+                <div class="meta">Twitter thread · 12k impressions · adjacent positioning</div>
+                <div class="body-text">Their framing: agents that maintain state. Different from your Avatar concept (no soul, no craft letter, no authority bounds) but adjacent enough that buyer might confuse.</div>
+                <div class="mentor-pull">
+                  <span class="mentor-marker"><span class="star">★</span> KILONOVA</span> &middot; Don't react. Let the distinction sharpen on its own — your "context-built worker, not runtime callable" line is doing the differentiation work. If anything, this validates the territory exists.
+                </div>
+              </div>
+              <div class="right">
+                <button class="btn-secondary">VIEW</button>
+              </div>
+            </div>
+
+            <div class="editorial-item">
+              <div class="when">5d ago</div>
+              <div class="meat">
+                <div class="nm">Cursor · agent-mode redesign</div>
+                <div class="meta">Product update · interface adjacency</div>
+                <div class="body-text">They moved chat to right-rail, kept main editor as primary. Same pattern we just adopted.</div>
+              </div>
+              <div class="right">
+                <button class="btn-secondary">VIEW</button>
+              </div>
+            </div>
+
+            <div class="editorial-item">
+              <div class="when">1w ago</div>
+              <div class="meat">
+                <div class="nm">Reid Hoffman · "AI as cofounder" essay</div>
+                <div class="meta">LinkedIn long-form · 87k impressions · territory-adjacent</div>
+                <div class="body-text">Frames AI as cofounder. Different intent (peer relationship) but overlaps the founder-relationship-with-AI conversation you're shaping.</div>
+                <div class="mentor-pull">
+                  <span class="mentor-marker"><span class="star">★</span> KILONOVA</span> &middot; Worth a thoughtful response post. Not a takedown — an extension. Your angle: cofounder framing is too peer-equal; the founder-as-ratifier model honors authority better.
+                </div>
+              </div>
+              <div class="right">
+                <button class="btn-secondary">DRAFT REPLY</button>
+              </div>
+            </div>
+
+            <div class="editorial-item">
+              <div class="when">2w ago</div>
+              <div class="meat">
+                <div class="nm">Patrick Collison · "operator-grade tooling" framing</div>
+                <div class="meta">Stripe Atlas blog · 24k impressions · positioning-adjacent</div>
+                <div class="body-text">Frames operator-grade tooling as the next wave for founders. Resonant with your interface-grade-for-founder thesis.</div>
+              </div>
+              <div class="right">
+                <button class="btn-secondary">VIEW</button>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
       </section>
 
     </main>
@@ -1831,8 +4289,201 @@
   </div>
 </div>
 
+<!-- ============ MODALS · Avatar profile + WorkItem detail ============ -->
+<div class="modal-backdrop" id="modal-backdrop"></div>
+
+<aside class="modal-panel" id="modal-avatar">
+  <div class="modal-head">
+    <span class="ttl">Avatar profile</span>
+    <button class="modal-close" data-modal-close><i class="ph ph-x"></i></button>
+  </div>
+  <div class="modal-body">
+
+    <div class="avatar-profile-head">
+      <span class="sigil"><svg viewBox="0 0 24 24"><polygon class="stroke" points="12,3 21,20 3,20"/></svg></span>
+      <div>
+        <div class="nm">Authority Avatar</div>
+        <div class="role">Your persistent thought leadership operator</div>
+      </div>
+    </div>
+
+    <div class="ap-section">
+      <div class="head">Right now</div>
+      <div class="now">
+        <div class="task">Drafting "ICP shift signals" · LinkedIn long-form</div>
+        <div class="meta">Started 12m ago · ETA ~8m · 64% complete</div>
+        <div class="progress" style="height:5px;"><div class="fill" style="width: 64%;"></div></div>
+        <div class="meta" style="margin-top:4px;">Reviewer Avatar will gate before queue · auto-pass if quality &gt; 0.7</div>
+      </div>
+    </div>
+
+    <div class="ap-section">
+      <div class="head">Heartbeat</div>
+      <div class="body-text">
+        Wakes <strong>daily at 09:00</strong> · also wakes on substrate signal (positioning shift, soundbite tier promotion).<br>
+        Last 7 days: <strong>9 runs · 0 misses · 0 escalations</strong> · 3-week streak.
+      </div>
+    </div>
+
+    <div class="ap-section">
+      <div class="head">Authority</div>
+      <div class="body-text">
+        Can <strong>draft posts and propose substrate updates.</strong><br>
+        Cannot publish without your <strong style="color:var(--accent);">APPROVAL</strong>.<br>
+        Cannot change positioning claims without ratify through the membrane.
+      </div>
+    </div>
+
+    <div class="ap-section">
+      <div class="head">What they know</div>
+      <div class="body-text">
+        Your voice library (4 signature soundbites · 12 supporting · 7 experimental) · positioning substrate (38 active claims) · 18 source-tracked industry signals · 47 past posts with engagement data · soundbite tier preferences (signature first, never experimental in opening hooks).
+      </div>
+    </div>
+
+    <div class="ap-section">
+      <div class="head">Recent work · last 7 days</div>
+      <div style="display:flex;flex-direction:column;gap:8px;">
+        <div class="wi-link-row">
+          <span class="marker done"><i class="ph ph-check-circle-fill"></i></span>
+          <span>"Watch your decision get built" LinkedIn post</span>
+          <span class="meta">Mon · 3.4× engagement</span>
+        </div>
+        <div class="wi-link-row">
+          <span class="marker done"><i class="ph ph-check-circle-fill"></i></span>
+          <span>"Why we don't say agents" newsletter</span>
+          <span class="meta">Mon · 24% open</span>
+        </div>
+        <div class="wi-link-row">
+          <span class="marker done"><i class="ph ph-check-circle-fill"></i></span>
+          <span>Twitter thread · founder time scarcity</span>
+          <span class="meta">Sun · 87 RTs</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="commit-mentor" style="margin-top:14px;">
+      <span class="mentor-marker"><span class="star">★</span> KILONOVA</span>
+      <div class="body-prose">
+        The Authority Avatar built its model of your voice over <span class="accent">47 ratifications</span>. The signature pool is hardening — drafts feel more like you each cycle.
+      </div>
+    </div>
+
+    <div style="display:flex;gap:8px;margin-top:18px;padding-top:18px;border-top:1px solid var(--line);">
+      <button class="btn-secondary">PAUSE AVATAR</button>
+      <button class="btn-secondary">ASK ABOUT WORK</button>
+      <button class="btn-secondary">CONFIGURATION</button>
+    </div>
+
+  </div>
+</aside>
+
+<aside class="modal-panel" id="modal-workitem">
+  <div class="modal-head">
+    <span class="ttl">Work item detail</span>
+    <button class="modal-close" data-modal-close><i class="ph ph-x"></i></button>
+  </div>
+  <div class="modal-body">
+
+    <div class="wi-head">
+      <div class="pills">
+        <span class="pill ratify">APPROVE</span>
+        <span class="pill family world">→ WORLD</span>
+      </div>
+      <h2>"Compounding intelligence" · LinkedIn long-form draft</h2>
+      <div class="desc">Authority Avatar drafted a 720-word post extending the signature soundbite into a full argument · positioning territory → substrate-first design.</div>
+    </div>
+
+    <div class="wi-section">
+      <div class="head">To complete</div>
+      <div class="wi-link-row">
+        <span class="marker pending"><i class="ph ph-circle"></i></span>
+        <span>Approve draft as-is</span>
+        <span class="meta">primary action</span>
+      </div>
+      <div class="wi-link-row">
+        <span class="marker pending"><i class="ph ph-circle"></i></span>
+        <span>Reshape with a sentence</span>
+        <span class="meta">substrate update</span>
+      </div>
+      <div class="wi-link-row">
+        <span class="marker pending"><i class="ph ph-circle"></i></span>
+        <span>Send back with note</span>
+        <span class="meta">to Authority Avatar</span>
+      </div>
+    </div>
+
+    <div class="wi-section">
+      <div class="head">Required first</div>
+      <div class="wi-link-row">
+        <span class="marker done"><i class="ph ph-check-circle-fill"></i></span>
+        <span>Brand Voice Doc · ratified</span>
+        <span class="meta">Mon 09:20 · standing</span>
+      </div>
+      <div class="wi-link-row">
+        <span class="marker done"><i class="ph ph-check-circle-fill"></i></span>
+        <span>Reviewer Avatar gate · passed</span>
+        <span class="meta">12m ago · auto-pass</span>
+      </div>
+      <div class="wi-link-row">
+        <span class="marker done"><i class="ph ph-check-circle-fill"></i></span>
+        <span>Substrate threshold · 50+ claims on positioning</span>
+        <span class="meta">247 active</span>
+      </div>
+    </div>
+
+    <div class="wi-section">
+      <div class="head">Completing this unlocks</div>
+      <div class="wi-link-row">
+        <span class="marker pending"><i class="ph ph-circle"></i></span>
+        <span>"Compounding intelligence" → newsletter expansion</span>
+        <span class="meta">Authority Machine · queued</span>
+      </div>
+      <div class="wi-link-row">
+        <span class="marker pending"><i class="ph ph-circle"></i></span>
+        <span>Soundbite tier review · 2 candidates from this draft</span>
+        <span class="meta">Voice library</span>
+      </div>
+    </div>
+
+    <div class="wi-section">
+      <div class="head">Avatar trail</div>
+      <div class="wi-trail">
+        <div class="wi-trail-step">
+          <span class="sigil"><svg viewBox="0 0 24 24"><polygon class="stroke" points="12,3 21,20 3,20"/></svg></span>
+          <span class="nm">Authority Avatar · drafted</span>
+          <span class="meta">12m ago · 720 words</span>
+        </div>
+        <div class="wi-trail-step">
+          <span class="sigil"><svg viewBox="0 0 24 24"><polygon class="stroke-system" points="6,3 18,3 22,12 18,21 6,21 2,12"/></svg></span>
+          <span class="nm">Reviewer Avatar · gated · passed</span>
+          <span class="meta">8m ago · quality 0.81</span>
+        </div>
+        <div class="wi-trail-step">
+          <span class="marker pending"><i class="ph ph-circle"></i></span>
+          <span class="nm">Awaiting your approval</span>
+          <span class="meta">now</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="wi-section">
+      <div class="head">Comments · 0</div>
+      <div style="font-size:12px;color:var(--fg-dim);font-style:italic;padding:8px 0;">No comments yet · drop a directive on any line of the draft</div>
+    </div>
+
+    <div class="wi-action-row">
+      <button class="btn-primary">APPROVE</button>
+      <button class="btn-secondary">RESHAPE</button>
+      <button class="btn-secondary">SEND BACK</button>
+      <button class="btn-secondary" style="margin-left:auto;">PREVIEW DRAFT</button>
+    </div>
+
+  </div>
+</aside>
+
 <script>
-  // Surface switching
+  // Cluster surface switching (left nav)
   const navItems = document.querySelectorAll('.nav-item[data-surface]');
   const surfaces = document.querySelectorAll('.surface');
   navItems.forEach(item => {
@@ -1843,7 +4494,7 @@
     });
   });
 
-  // Tab switching
+  // COMMAND tabs (Control Panel · Activity · Commitments)
   const tabs = document.querySelectorAll('.tab[data-tab]');
   const tabContents = document.querySelectorAll('.tab-content');
   tabs.forEach(tab => {
@@ -1854,6 +4505,29 @@
     });
   });
 
+  // Cluster sub-tabs (within BRAIN, MIND, MACHINES, FOUNDER)
+  document.querySelectorAll('.ctab').forEach(tab => {
+    tab.addEventListener('click', () => {
+      const csub = tab.dataset.csub;
+      const target = tab.dataset.target;
+      // Toggle active tab within its cluster
+      document.querySelectorAll(`.ctab[data-csub="${csub}"]`).forEach(t => {
+        t.classList.toggle('active', t === tab);
+      });
+      // Toggle active csurface within its cluster
+      document.querySelectorAll(`.csurface[data-cs^="${csub}-"]`).forEach(c => {
+        c.classList.toggle('active', c.dataset.cs === `${csub}-${target}`);
+      });
+    });
+  });
+
+  // Helper for inline machine card → open machine tab
+  function openMachineTab(target) {
+    const tab = document.querySelector(`.ctab[data-csub="machines"][data-target="${target}"]`);
+    if (tab) tab.click();
+  }
+
+  // Cross-tab jump links (e.g., "Open Heartbeat →")
   document.querySelectorAll('[data-tab-jump]').forEach(link => {
     link.addEventListener('click', e => {
       e.preventDefault();
@@ -1863,7 +4537,40 @@
     });
   });
 
-  // K shortcut focuses Ask textarea
+  // ----- Modal pattern (Avatar profile + WorkItem detail) -----
+  const backdrop = document.getElementById('modal-backdrop');
+  const avatarModal = document.getElementById('modal-avatar');
+  const workitemModal = document.getElementById('modal-workitem');
+
+  function openModal(modal) {
+    backdrop.classList.add('open');
+    modal.classList.add('open');
+  }
+  function closeAllModals() {
+    backdrop.classList.remove('open');
+    document.querySelectorAll('.modal-panel').forEach(m => m.classList.remove('open'));
+  }
+  function openAvatarProfile() { openModal(avatarModal); }
+  function openWorkItem() { openModal(workitemModal); }
+
+  backdrop.addEventListener('click', closeAllModals);
+  document.querySelectorAll('[data-modal-close]').forEach(b => b.addEventListener('click', closeAllModals));
+  document.addEventListener('keydown', e => { if (e.key === 'Escape') closeAllModals(); });
+
+  // Click any Avatar sigil → open Avatar profile (anywhere in app)
+  document.addEventListener('click', e => {
+    const sigil = e.target.closest('.sigil');
+    if (sigil && !sigil.closest('.avatar-profile-head') && !sigil.closest('.modal-panel')) {
+      // Ignore tiny inline sigils inside chat history avatars etc.
+      // Only trigger from Control Panel / Heartbeat / Avatar overview cards / Machine surfaces
+      const inProfile = sigil.closest('.avatar-card-head, .machine-card .top, .timeline-row, .row');
+      if (inProfile || sigil.classList.contains('sigil-20') || sigil.classList.contains('sigil-24')) {
+        openAvatarProfile();
+      }
+    }
+  });
+
+  // K shortcut focuses Ask textarea (right rail)
   document.addEventListener('keydown', e => {
     if (e.key.toLowerCase() === 'k' && !e.metaKey && !e.ctrlKey) {
       const target = document.activeElement;
@@ -1874,14 +4581,13 @@
     }
   });
 
-  // Auto-resize textarea
-  const ta = document.querySelector('.rail-input-box textarea');
-  if (ta) {
+  // Auto-resize textareas (right-rail Ask + NICHOLAS deep input)
+  document.querySelectorAll('.rail-input-box textarea, .nich-input-box textarea').forEach(ta => {
     ta.addEventListener('input', () => {
       ta.style.height = 'auto';
-      ta.style.height = Math.min(ta.scrollHeight, 96) + 'px';
+      ta.style.height = Math.min(ta.scrollHeight, 140) + 'px';
     });
-  }
+  });
 </script>
 
 </body>
