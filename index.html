@@ -836,7 +836,164 @@
     color: var(--fg-dim);
   }
 
-  /* Chronicle (vertical timeline) */
+  /* Section header (for commitments sub-sections) */
+  .commit-section-head {
+    display: flex; align-items: baseline; justify-content: space-between;
+    padding-bottom: 6px;
+    border-bottom: 1px solid var(--line);
+    margin-bottom: 10px;
+  }
+  .commit-section-head .ttl {
+    font-family: var(--f-mono);
+    font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase;
+    color: var(--fg);
+    font-weight: 500;
+  }
+  .commit-section-head .meta {
+    font-family: var(--f-mono);
+    font-size: 10px; color: var(--fg-dim);
+    letter-spacing: 0.06em; text-transform: uppercase;
+  }
+
+  /* Active commitments grid */
+  .commit-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px;
+  }
+  .commit-card {
+    background: var(--bg-elev-1);
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    padding: 14px 16px;
+    display: flex; flex-direction: column;
+    gap: 8px;
+    min-height: 124px;
+    transition: border-color 0.12s;
+  }
+  .commit-card:hover { border-color: var(--line-strong); }
+  .commit-card .top {
+    display: flex; align-items: center; justify-content: space-between;
+    gap: 8px;
+  }
+  .commit-card .type-label {
+    font-family: var(--f-mono);
+    font-size: 9px; letter-spacing: 0.1em; text-transform: uppercase;
+    color: var(--fg-dim);
+  }
+  .commit-card .due {
+    font-family: var(--f-mono);
+    font-size: 10px; color: var(--fg-mid);
+    letter-spacing: 0.04em;
+  }
+  .commit-card .due strong { color: var(--accent); font-weight: 500; }
+  .commit-card .nm {
+    font-size: 13.5px; line-height: 1.4; color: var(--fg);
+    font-weight: 500;
+  }
+  .commit-card .body {
+    font-size: 11px; color: var(--fg-dim);
+    line-height: 1.4;
+    margin-top: -2px;
+  }
+  .commit-card .progress {
+    margin-top: auto; height: 4px;
+  }
+  .commit-card .pct-row {
+    display: flex; justify-content: space-between; align-items: center;
+    font-family: var(--f-mono);
+    font-size: 10px; color: var(--fg-mid);
+    letter-spacing: 0.04em;
+    margin-top: 2px;
+  }
+  .commit-card.standing {
+    background: transparent;
+  }
+  .commit-card.standing .nm { color: var(--fg-mid); font-weight: 400; }
+  .commit-card.cadence .body strong { color: var(--accent); font-weight: 500; }
+
+  /* AT RISK card */
+  .at-risk-card {
+    background: linear-gradient(135deg, rgba(232,156,74,0.06), var(--bg-elev-1) 60%);
+    border: 1px solid rgba(232,156,74,0.30);
+    border-radius: 10px;
+    padding: 18px 22px;
+    display: flex; flex-direction: column; gap: 10px;
+  }
+  .at-risk-card .label-row {
+    display: flex; align-items: center; gap: 10px;
+  }
+  .at-risk-card .label {
+    font-family: var(--f-mono);
+    font-size: 10px; letter-spacing: 0.1em; text-transform: uppercase;
+    color: var(--warn);
+    padding: 3px 8px;
+    border: 1px solid rgba(232,156,74,0.30);
+    border-radius: 3px;
+    font-weight: 500;
+  }
+  .at-risk-card .slip {
+    font-family: var(--f-mono);
+    font-size: 10.5px; color: var(--fg-dim);
+    letter-spacing: 0.04em;
+  }
+  .at-risk-card .nm {
+    font-family: var(--f-display);
+    font-weight: 500; font-size: 17px; color: var(--fg);
+    line-height: 1.3;
+  }
+  .at-risk-card .meta {
+    font-family: var(--f-mono);
+    font-size: 10.5px; color: var(--fg-dim);
+    letter-spacing: 0.04em;
+  }
+  .at-risk-card .body {
+    font-family: var(--f-editorial);
+    font-size: 13.5px; line-height: 1.55; color: var(--fg);
+    margin-top: 2px;
+  }
+  .at-risk-card .actions {
+    display: flex; gap: 8px;
+    margin-top: 4px;
+  }
+  .at-risk-card .actions .btn-secondary { font-size: 10px; padding: 7px 12px; }
+
+  /* Recent activity (compact) */
+  .recent-activity {
+    display: flex; flex-direction: column; gap: 0;
+  }
+  .activity-row {
+    display: grid;
+    grid-template-columns: 110px 1fr auto;
+    gap: 14px;
+    align-items: center;
+    padding: 9px 4px;
+    border-bottom: 1px solid var(--bg-elev-2);
+    font-size: 12px;
+  }
+  .activity-row:last-child { border-bottom: 0; }
+  .activity-row .ts {
+    font-family: var(--f-mono);
+    font-size: 10.5px; color: var(--fg-dim);
+    letter-spacing: 0.04em;
+  }
+  .activity-row .nm {
+    color: var(--fg-mid);
+    overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+  }
+  .activity-row .pill { font-size: 9px; padding: 2px 7px; }
+
+  .view-all {
+    margin-top: 6px;
+    display: inline-flex; align-items: center; gap: 4px;
+    color: var(--fg-mid);
+    font-family: var(--f-mono);
+    font-size: 10px; letter-spacing: 0.06em; text-transform: uppercase;
+    transition: color 0.12s;
+  }
+  .view-all:hover { color: var(--accent); }
+
+  /* Chronicle (legacy — kept for any other use) */
   .chronicle {
     display: flex; flex-direction: column;
     gap: 18px;
@@ -1378,7 +1535,7 @@
             <div class="commit-mentor">
               <span class="mentor-marker"><span class="star">★</span> KILONOVA</span>
               <div class="body-prose">
-                You ratified <span class="accent">3 things</span> this week. Biggest impact: the cluster naming finalized — Authority Avatar's voice model now drafts against a stable taxonomy. The substrate hardened a notch.
+                <span class="accent">8 promises standing.</span> The biggest one is due Friday — the founder-OS UI mockup. The cluster naming reshape this week unblocked the longest chain in the OS; Authority Avatar can draft against a stable taxonomy now.
               </div>
             </div>
 
@@ -1394,21 +1551,22 @@
               </div>
               <div class="stat-cell">
                 <span class="num">47</span>
-                <span class="label">Ratified · all-time</span>
+                <span class="label">Delivered · all-time</span>
               </div>
               <div class="stat-cell dim">
-                <span class="num">23</span>
-                <span class="label">Delivered</span>
+                <span class="num">3</span>
+                <span class="label">Missed · all-time</span>
               </div>
             </div>
 
             <!-- Filter bar -->
             <div class="filter-bar">
               <button class="filter-chip active">All</button>
+              <button class="filter-chip">Deliverables</button>
+              <button class="filter-chip">Cadence</button>
+              <button class="filter-chip">Standing</button>
+              <button class="filter-chip">Calls</button>
               <button class="filter-chip">Decisions</button>
-              <button class="filter-chip">Schedule</button>
-              <button class="filter-chip">Positioning</button>
-              <button class="filter-chip">Pilot agreements</button>
               <span class="spacer"></span>
               <button class="filter-chip">
                 <i class="ph ph-funnel"></i>
@@ -1416,128 +1574,181 @@
               </button>
             </div>
 
-            <!-- Chronicle -->
-            <div class="chronicle">
-
-              <div class="chronicle-group">
-                <div class="chronicle-group-head">
-                  <span class="ttl">Today · Wed 14 May</span>
-                  <span class="ct">2</span>
-                </div>
-
-                <div class="chronicle-row">
-                  <span class="ts">14:08</span>
-                  <div class="item">
-                    <span class="nm">Cluster naming finalized · BRAIN / MIND / MACHINES / FOUNDER</span>
-                    <span class="meta">Decision · architectural · interface-strategy doc</span>
-                  </div>
-                  <span class="pill ratify">RATIFIED</span>
-                </div>
-
-                <div class="chronicle-row">
-                  <span class="ts">11:42</span>
-                  <div class="item">
-                    <span class="nm">Tuesday 14:00 · weekly sync with Johnny</span>
-                    <span class="meta">Schedule · pilot · 30 min</span>
-                  </div>
-                  <span class="pill ready">BOOKED</span>
-                </div>
+            <!-- ACTIVE COMMITMENTS · the hero -->
+            <div>
+              <div class="commit-section-head">
+                <span class="ttl">Standing now · 8</span>
+                <span class="meta">forward-facing · what you're holding to</span>
               </div>
 
-              <div class="chronicle-group">
-                <div class="chronicle-group-head">
-                  <span class="ttl">Yesterday · Tue 13 May</span>
-                  <span class="ct">3</span>
+              <div class="commit-grid">
+
+                <!-- Deliverable with progress -->
+                <div class="commit-card">
+                  <div class="top">
+                    <span class="type-label">Deliverable</span>
+                    <span class="due"><strong>Due Fri</strong> · 23:59</span>
+                  </div>
+                  <div class="nm">Ship founder-OS UI mockup</div>
+                  <div class="body">Self-imposed · architecture applied to UI</div>
+                  <div class="progress"><div class="fill" style="width: 70%;"></div></div>
+                  <div class="pct-row">
+                    <span>v0.5 shipped · v0.6 in flight</span>
+                    <span>70%</span>
+                  </div>
                 </div>
 
-                <div class="chronicle-row">
-                  <span class="ts">17:21</span>
-                  <div class="item">
-                    <span class="nm">Editorial Page = canonical Kilonova output format</span>
-                    <span class="meta">Decision · Q2 brief synthesis · ★ COUNCIL · 4 souls</span>
+                <!-- Cadence -->
+                <div class="commit-card cadence">
+                  <div class="top">
+                    <span class="type-label">Cadence</span>
+                    <span class="due">Mon 09:00</span>
                   </div>
-                  <span class="pill ratify">RATIFIED</span>
+                  <div class="nm">Weekly authority push</div>
+                  <div class="body">Authority Avatar · 9 of 12 done · <strong>3-week streak</strong></div>
+                  <div class="progress"><div class="fill" style="width: 75%;"></div></div>
+                  <div class="pct-row">
+                    <span>quarter cadence</span>
+                    <span>9 / 12</span>
+                  </div>
                 </div>
 
-                <div class="chronicle-row">
-                  <span class="ts">15:08</span>
-                  <div class="item">
-                    <span class="nm">Avatar System v0.1 spec ratified</span>
-                    <span class="meta">Decision · Founder Interface Layer 6</span>
+                <!-- Booked call -->
+                <div class="commit-card">
+                  <div class="top">
+                    <span class="type-label">Booked call</span>
+                    <span class="due"><strong>Tue · 14:00</strong></span>
                   </div>
-                  <span class="pill ratify">RATIFIED</span>
+                  <div class="nm">Weekly sync with Johnny</div>
+                  <div class="body">Pilot · 30 min · agenda auto-prep 24h ahead</div>
                 </div>
 
-                <div class="chronicle-row">
-                  <span class="ts">10:14</span>
-                  <div class="item">
-                    <span class="nm">"Compounding intelligence" promoted to signature soundbite</span>
-                    <span class="meta">Positioning · Voice library · tier upgrade</span>
+                <!-- Standing architectural -->
+                <div class="commit-card standing">
+                  <div class="top">
+                    <span class="type-label">Standing</span>
+                    <span class="due">since 2 days</span>
                   </div>
-                  <span class="pill ratify">RATIFIED</span>
+                  <div class="nm">Cluster naming · BRAIN / MIND / MACHINES / FOUNDER</div>
+                  <div class="body">Architectural · ratified Wed 14:08 · informs all naming downstream</div>
                 </div>
+
+                <!-- Standing -->
+                <div class="commit-card standing">
+                  <div class="top">
+                    <span class="type-label">Standing</span>
+                    <span class="due">since 1 week</span>
+                  </div>
+                  <div class="nm">Editorial Page · canonical Kilonova output format</div>
+                  <div class="body">Architectural · governs Authority + IR + FIRST READ outputs</div>
+                </div>
+
+                <!-- Standing -->
+                <div class="commit-card standing">
+                  <div class="top">
+                    <span class="type-label">Standing</span>
+                    <span class="due">since 3 weeks</span>
+                  </div>
+                  <div class="nm">FIRST READ · canonical onboarding flow</div>
+                  <div class="body">Architectural · gates new-client OS unlock</div>
+                </div>
+
+                <!-- Agreement -->
+                <div class="commit-card">
+                  <div class="top">
+                    <span class="type-label">Agreement · pilot</span>
+                    <span class="due">Friday EOW</span>
+                  </div>
+                  <div class="nm">Bring UI applied to architecture</div>
+                  <div class="body">Promise to team · share by end of week</div>
+                  <div class="progress"><div class="fill" style="width: 70%;"></div></div>
+                </div>
+
+                <!-- Standing -->
+                <div class="commit-card standing">
+                  <div class="top">
+                    <span class="type-label">Standing · principle</span>
+                    <span class="due">since founding</span>
+                  </div>
+                  <div class="nm">Bruno's Canon · source of truth for primitives</div>
+                  <div class="body">Founder Interface = Layer 6 · we surface, never define</div>
+                </div>
+
+              </div>
+            </div>
+
+            <!-- AT RISK · prominent treatment -->
+            <div>
+              <div class="commit-section-head">
+                <span class="ttl">At risk · 1</span>
+                <span class="meta">slipping · needs your call</span>
               </div>
 
-              <div class="chronicle-group">
-                <div class="chronicle-group-head">
-                  <span class="ttl">Earlier this week</span>
-                  <span class="ct">3</span>
+              <div class="at-risk-card">
+                <div class="label-row">
+                  <span class="label">At risk</span>
+                  <span class="slip">5 days slipped · was due Fri 09 May</span>
                 </div>
-
-                <div class="chronicle-row dim">
-                  <span class="ts">Mon · 16:55</span>
-                  <div class="item">
-                    <span class="nm">FIRST READ ratify gates onboarding unlock</span>
-                    <span class="meta">Decision · interface-strategy Q5</span>
-                  </div>
-                  <span class="pill ratify">RATIFIED</span>
+                <div class="nm">GTM Decision Brief · Q3 motion</div>
+                <div class="meta">Decision · ★ COUNCIL · 4 souls · pending re-review · blocks Channels capability</div>
+                <div class="body">
+                  <span class="mentor-marker"><span class="star">★</span> KILONOVA</span> &middot; This is the longest-slipping commitment standing — and it's also the one blocking the most downstream work. Channels can't ship without the GTM positioning anchor. Worth a 30-min review with the council to either ratify the current synthesis or renegotiate the timeline.
                 </div>
-
-                <div class="chronicle-row dim">
-                  <span class="ts">Mon · 14:02</span>
-                  <div class="item">
-                    <span class="nm">UI references + format language v0.2</span>
-                    <span class="meta">Decision · 25 surfaces mapped to references</span>
-                  </div>
-                  <span class="pill ratify">RATIFIED</span>
-                </div>
-
-                <div class="chronicle-row dim">
-                  <span class="ts">Sun · 21:30</span>
-                  <div class="item">
-                    <span class="nm">Founder Interface Layer v0.6 spec</span>
-                    <span class="meta">Decision · Bruno Canon-aligned reframe</span>
-                  </div>
-                  <span class="pill ratify">RATIFIED</span>
+                <div class="actions">
+                  <button class="btn-primary" style="font-size:10px;padding:9px 14px;">REVIEW SYNTHESIS</button>
+                  <button class="btn-secondary">RENEGOTIATE</button>
+                  <button class="btn-secondary">DELIVER AS-IS</button>
                 </div>
               </div>
+            </div>
 
-              <div class="chronicle-group">
-                <div class="chronicle-group-head">
-                  <span class="ttl">Last week</span>
-                  <span class="ct">4</span>
+            <!-- RECENT ACTIVITY · compact -->
+            <div>
+              <div class="commit-section-head">
+                <span class="ttl">Recent activity · 30d</span>
+                <span class="meta">state changes · approvals · deliveries</span>
+              </div>
+
+              <div class="recent-activity">
+
+                <div class="activity-row">
+                  <span class="ts">Today · 14:08</span>
+                  <span class="nm">Cluster naming finalized</span>
+                  <span class="pill ratify">→ ACTIVE</span>
                 </div>
 
-                <div class="chronicle-row dim">
-                  <span class="ts">Fri · 11:08</span>
-                  <div class="item">
-                    <span class="nm">GTM Decision Brief commitment to Q3 motion</span>
-                    <span class="meta">Decision · ★ COUNCIL · pending re-review</span>
-                  </div>
-                  <span class="pill warn" style="background:rgba(232,156,74,0.10);color:var(--warn);border:1px solid rgba(232,156,74,0.25);">AT RISK</span>
+                <div class="activity-row">
+                  <span class="ts">Today · 11:42</span>
+                  <span class="nm">Tuesday sync with Johnny booked</span>
+                  <span class="pill ratify">→ ACTIVE</span>
                 </div>
 
-                <div class="chronicle-row dim">
-                  <span class="ts">Fri · 09:20</span>
-                  <div class="item">
-                    <span class="nm">Brand Voice Doc · ratified for Authority Avatar</span>
-                    <span class="meta">Positioning · enables Channels capability</span>
-                  </div>
+                <div class="activity-row">
+                  <span class="ts">Yest · 17:21</span>
+                  <span class="nm">Editorial Page = canonical output format</span>
+                  <span class="pill ratify">→ ACTIVE</span>
+                </div>
+
+                <div class="activity-row">
+                  <span class="ts">Yest · 15:08</span>
+                  <span class="nm">Avatar System v0.1 spec</span>
+                  <span class="pill ratify">→ ACTIVE</span>
+                </div>
+
+                <div class="activity-row">
+                  <span class="ts">Yest · 10:14</span>
+                  <span class="nm">"Compounding intelligence" → signature</span>
+                  <span class="pill ratify">→ ACTIVE</span>
+                </div>
+
+                <div class="activity-row">
+                  <span class="ts">Mon · 09:20</span>
+                  <span class="nm">Brand Voice Doc · Authority Avatar</span>
                   <span class="pill" style="color:var(--fg-dim);background:transparent;border:1px solid var(--line);">DELIVERED</span>
                 </div>
 
               </div>
-
+              <a href="#" class="view-all">View all 30-day history →</a>
             </div>
 
           </div>
