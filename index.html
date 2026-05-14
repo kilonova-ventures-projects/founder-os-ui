@@ -300,7 +300,7 @@
     color: var(--fg-dim);
   }
 
-  /* ---------- HERO BAND with dependency chain ---------- */
+  /* ---------- HERO BAND ---------- */
   .hero {
     background: linear-gradient(135deg, rgba(223,255,0,0.04), var(--bg-elev-1) 60%);
     border: 1px solid var(--accent-line);
@@ -324,6 +324,12 @@
   }
   .hero-headline .accent { color: var(--accent); }
   .hero-headline .em { font-style: italic; }
+  .hero-meta {
+    display: flex; align-items: center; gap: 18px;
+    color: var(--fg-dim);
+    font-family: var(--f-mono);
+    font-size: 10px; letter-spacing: 0.06em; text-transform: uppercase;
+  }
   .hero-action { display: flex; flex-direction: column; gap: 8px; align-items: flex-end; flex-shrink: 0; }
   .btn-primary {
     display: inline-flex; align-items: center; gap: 8px;
@@ -349,57 +355,6 @@
     white-space: nowrap;
   }
   .btn-secondary:hover { color: var(--fg); background: var(--bg-elev-2); border-color: var(--line-strong); }
-
-  /* Dependency chain visual */
-  .chain {
-    display: grid;
-    grid-template-columns: auto 1fr auto 1fr auto;
-    align-items: center;
-    margin-top: 4px;
-  }
-  .chain-node {
-    display: flex; flex-direction: column; align-items: center;
-    gap: 6px;
-    text-align: center;
-  }
-  .chain-dot {
-    width: 36px; height: 36px;
-    border-radius: 50%;
-    display: flex; align-items: center; justify-content: center;
-    font-family: var(--f-mono); font-size: 10px; font-weight: 700;
-    flex-shrink: 0;
-  }
-  .chain-dot.now {
-    background: var(--accent);
-    color: var(--bg);
-    box-shadow: 0 0 0 6px rgba(223,255,0,0.10);
-  }
-  .chain-dot.next {
-    background: transparent;
-    border: 1.5px solid var(--accent-line);
-    color: var(--accent);
-  }
-  .chain-dot.future {
-    background: transparent;
-    border: 1.5px solid var(--line);
-    color: var(--fg-faint);
-  }
-  .chain-label {
-    font-family: var(--f-mono);
-    font-size: 9.5px; letter-spacing: 0.06em; text-transform: uppercase;
-    color: var(--fg-mid);
-    max-width: 110px;
-    line-height: 1.3;
-  }
-  .chain-node.future .chain-label { color: var(--fg-dim); }
-  .chain-line {
-    height: 1.5px;
-    background: linear-gradient(90deg, var(--accent-line), var(--line));
-    border-radius: 1px;
-  }
-  .chain-line.dim {
-    background: var(--line);
-  }
 
   /* ---------- Bands ---------- */
   .band {
@@ -760,7 +715,7 @@
 
         <div class="tabs">
           <button class="tab active" data-tab="control-panel">Control Panel</button>
-          <button class="tab" data-tab="heartbeat">Heartbeat</button>
+          <button class="tab" data-tab="activity">Activity</button>
           <button class="tab" data-tab="commitments">Commitments</button>
           <span class="tab-meta">Refreshed 14:12</span>
         </div>
@@ -784,30 +739,17 @@
                     <span class="pill family commitment">→ COMMITMENT</span>
                   </div>
                   <div class="hero-headline">
-                    The <span class="accent">GTM Decision Brief</span> is one ratify away from unlocking Channels capability for the <span class="em">Authority Avatar</span>.
+                    The <span class="accent">GTM Decision Brief</span> is one approval away from unlocking Channels capability for the <span class="em">Authority Avatar</span>.
+                  </div>
+                  <div class="hero-meta">
+                    <span>Synthesis ready · 18 min ago</span>
+                    <span>·</span>
+                    <span>Unblocks 3 downstream items</span>
                   </div>
                 </div>
                 <div class="hero-action">
-                  <button class="btn-primary">RATIFY THE BRIEF <i class="ph ph-arrow-right"></i></button>
+                  <button class="btn-primary">APPROVE THE BRIEF <i class="ph ph-arrow-right"></i></button>
                   <button class="btn-secondary">PREVIEW</button>
-                </div>
-              </div>
-
-              <!-- Dependency chain visual -->
-              <div class="chain" style="margin-top: 22px;">
-                <div class="chain-node">
-                  <div class="chain-dot now">G2</div>
-                  <div class="chain-label">GTM Decision Brief<br><span style="color:var(--accent);">RATIFY NOW</span></div>
-                </div>
-                <div class="chain-line"></div>
-                <div class="chain-node">
-                  <div class="chain-dot next">2</div>
-                  <div class="chain-label">Channels<br>capability unlocks</div>
-                </div>
-                <div class="chain-line dim"></div>
-                <div class="chain-node future">
-                  <div class="chain-dot future">3</div>
-                  <div class="chain-label">Authority Avatar<br>publishes</div>
                 </div>
               </div>
             </div>
@@ -828,7 +770,7 @@
                       <div class="row-title">"Compounding intelligence" draft</div>
                       <div class="row-sub">Authority · 12m ago</div>
                     </div>
-                    <span class="pill ratify row-pill">RATIFY</span>
+                    <span class="pill ratify row-pill">APPROVE</span>
                   </div>
                   <div class="row">
                     <span class="marker pending"><i class="ph ph-circle"></i></span>
@@ -844,7 +786,7 @@
                       <div class="row-title">Voice tier promotion · 2 candidates</div>
                       <div class="row-sub">Soundbite library</div>
                     </div>
-                    <span class="pill ratify row-pill">RATIFY</span>
+                    <span class="pill ratify row-pill">APPROVE</span>
                   </div>
                 </div>
               </div>
@@ -884,7 +826,7 @@
                   </div>
                 </div>
                 <div class="block-foot">
-                  <a href="#" data-tab-jump="heartbeat">Open Heartbeat →</a>
+                  <a href="#" data-tab-jump="activity">Open Activity →</a>
                 </div>
               </div>
 
@@ -981,10 +923,10 @@
         </div>
 
         <!-- ===== STUB TABS ===== -->
-        <div class="tab-content" id="tab-heartbeat" style="display:none;">
+        <div class="tab-content" id="tab-activity" style="display:none;">
           <div class="stub">
-            <h2>Heartbeat Dashboard</h2>
-            <p>Operational live state · Avatars awake right now · cadence schedule · drift detection. Per <code>spec-ui-references.md</code> Deliberation §1.</p>
+            <h2>Activity</h2>
+            <p>Live operational state · Avatars currently working · cadence schedule · drift. Internally this is the <code>heartbeat</code> primitive (per Bruno's Canon); UI label is <code>Activity</code> for founder clarity (V&amp;T v0.6).</p>
             <span class="next-up">Next iteration</span>
           </div>
         </div>
@@ -1048,11 +990,10 @@
         </div>
 
         <div class="msg kilonova">
-          <div class="engine-pill"><span class="star">★</span> NICHOLAS</div>
           <div class="author">Kilonova · 13:58</div>
           <div class="body">
-            Channels is locked because the <strong style="color:var(--accent);">GTM Decision Brief</strong> hasn't ratified yet. The Authority Avatar can't publish without a positioning anchor it can ground in.<br><br>
-            Two upstream prerequisites cleared this week (Brand Voice Doc · LinkedIn auth). The brief is the last gate. Synthesis landed 18 minutes ago — ratifying it unlocks Channels and the Authority Avatar can resume the weekly push.
+            Channels is locked because the <strong style="color:var(--accent);">GTM Decision Brief</strong> hasn't been approved yet. The Authority Avatar can't publish without a positioning anchor it can ground in.<br><br>
+            Two upstream prerequisites cleared this week (Brand Voice Doc · LinkedIn auth). The brief is the last gate. Synthesis landed 18 minutes ago — approving it unlocks Channels and the Authority Avatar can resume the weekly push.
           </div>
         </div>
 
@@ -1064,7 +1005,7 @@
           <button class="rail-send" aria-label="Send"><i class="ph ph-arrow-up"></i></button>
         </div>
         <div class="rail-foot">
-          <span>Routes to the right engine</span>
+          <span>Decision-shaped questions route to a deep engine</span>
           <span class="shortcut">K</span>
         </div>
       </div>
