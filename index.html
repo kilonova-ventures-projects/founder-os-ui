@@ -15,20 +15,14 @@
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,400;8..60,500;8..60,600;8..60,700&family=Space+Mono:wght@400;700&display=swap" />
 
 <style>
-  /* ------------------------------------------------------------- */
-  /* Helvetica Neue — locally licensed                              */
-  /* ------------------------------------------------------------- */
+  /* Helvetica Neue — locally licensed */
   @font-face { font-family: 'Helvetica Neue'; src: url('images/fonts/HelveticaNeue-Roman.otf') format('opentype'); font-weight: 400; font-style: normal; }
   @font-face { font-family: 'Helvetica Neue'; src: url('images/fonts/HelveticaNeueItalic.ttf') format('truetype'); font-weight: 400; font-style: italic; }
   @font-face { font-family: 'Helvetica Neue'; src: url('images/fonts/HelveticaNeue-Medium.otf') format('opentype'); font-weight: 500; font-style: normal; }
   @font-face { font-family: 'Helvetica Neue'; src: url('images/fonts/HelveticaNeueBold.ttf') format('truetype'); font-weight: 700; font-style: normal; }
   @font-face { font-family: 'Helvetica Neue'; src: url('images/fonts/HelveticaNeueBoldItalic.ttf') format('truetype'); font-weight: 700; font-style: italic; }
 
-  /* ------------------------------------------------------------- */
-  /* Design tokens                                                  */
-  /* ------------------------------------------------------------- */
   :root {
-    /* Color */
     --bg:           #0a0a0a;
     --bg-elev-1:   #111111;
     --bg-elev-2:   #161616;
@@ -39,7 +33,6 @@
     --fg-mid:      #b0b0b0;
     --fg-dim:      #7a7a7a;
     --fg-faint:    #4a4a4a;
-
     --accent:        #DFFF00;
     --accent-dark:   #b3cc00;
     --accent-soft:   rgba(223,255,0,0.08);
@@ -49,23 +42,17 @@
     --warn:          #e89c4a;
     --system-avatar: #9ab800;
 
-    /* Typography */
     --f-display:   'Helvetica Neue','Inter',ui-sans-serif,system-ui,sans-serif;
     --f-body:      'Helvetica Neue','Inter',ui-sans-serif,system-ui,sans-serif;
     --f-editorial: 'Source Serif 4',Georgia,serif;
     --f-mono:      'Space Mono',ui-monospace,Menlo,monospace;
 
-    /* Layout (per spec-cockpit-references) */
-    --u: 8px;
     --nav-w: 64px;
-    --nav-w-expanded: 240px;
     --header-h: 56px;
     --tab-h: 44px;
+    --rail-w: 380px;
   }
 
-  /* ------------------------------------------------------------- */
-  /* Reset + base                                                   */
-  /* ------------------------------------------------------------- */
   * { box-sizing: border-box; margin: 0; padding: 0; }
   html, body { height: 100%; }
   body {
@@ -79,123 +66,100 @@
   }
   button { font: inherit; color: inherit; background: none; border: 0; cursor: pointer; }
   a { color: inherit; text-decoration: none; }
-
-  /* Phosphor icon sizing (default inline behavior) */
+  input, textarea {
+    background: none; border: 0; color: inherit; font: inherit; outline: none;
+    width: 100%;
+  }
   i[class^="ph-"], i[class*=" ph-"] {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    line-height: 1;
-    font-size: 16px;
+    display: inline-flex; align-items: center; justify-content: center;
+    line-height: 1; font-size: 16px;
   }
 
-  /* ------------------------------------------------------------- */
-  /* Shell                                                          */
-  /* ------------------------------------------------------------- */
+  /* ---------- Shell (header + nav + main + right-rail) ---------- */
   .shell { display: grid; grid-template-rows: var(--header-h) 1fr; height: 100vh; }
-  .shell-body { display: grid; grid-template-columns: var(--nav-w) 1fr; min-height: 0; }
+  .shell-body {
+    display: grid;
+    grid-template-columns: var(--nav-w) 1fr var(--rail-w);
+    min-height: 0;
+  }
 
-  /* ------------------------------------------------------------- */
-  /* Header                                                         */
-  /* ------------------------------------------------------------- */
+  /* ---------- Header ---------- */
   .header {
     display: grid;
-    grid-template-columns: var(--nav-w) auto 1fr auto;
+    grid-template-columns: auto 1fr auto;
     align-items: center;
     border-bottom: 1px solid var(--line);
     background: var(--bg);
+    padding: 0;
   }
   .header-logo {
-    display: flex; align-items: center; justify-content: center;
-    width: var(--nav-w); height: var(--header-h);
-    color: var(--accent);
-  }
-  .header-logo svg { width: 24px; height: 24px; fill: currentColor; }
-
-  .header-tenant {
-    display: flex; align-items: center; gap: 8px;
-    padding: 0 16px;
-    color: var(--fg-mid);
+    display: flex; align-items: center;
+    height: var(--header-h);
+    padding: 0 20px;
     border-right: 1px solid var(--line);
+  }
+  .header-logo img { height: 22px; width: auto; }
+  .header-tenant {
+    display: flex; align-items: center; gap: 10px;
+    padding: 0 18px;
+    color: var(--fg);
     height: 100%;
     cursor: pointer;
     transition: background 0.12s ease;
   }
   .header-tenant:hover { background: var(--bg-elev-1); }
-  .header-tenant .tenant-avatar {
-    width: 22px; height: 22px; border-radius: 4px;
-    background: var(--accent); color: var(--bg);
-    display: flex; align-items: center; justify-content: center;
-    font-family: var(--f-mono); font-weight: 700; font-size: 11px;
+  .header-tenant img.tenant-photo {
+    width: 26px; height: 26px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 1px solid var(--line-strong);
   }
-  .header-tenant .tenant-name { font-weight: 500; color: var(--fg); font-size: 13px; }
-  .header-tenant i { font-size: 12px; color: var(--fg-dim); }
-
-  .header-ask {
-    display: flex; align-items: center; gap: 10px;
-    padding: 0 20px;
-    color: var(--fg-dim);
-    cursor: text;
+  .header-tenant .tenant-name {
+    font-weight: 500; font-size: 13px;
   }
-  .header-ask i { font-size: 14px; opacity: 0.7; }
-  .header-ask .ask-label { font-size: 13px; }
-  .header-ask .ask-shortcut {
-    margin-left: auto;
-    font-family: var(--f-mono); font-size: 10px;
-    padding: 2px 6px;
-    border: 1px solid var(--line); border-radius: 3px;
-    color: var(--fg-faint);
+  .header-tenant .tenant-org {
+    color: var(--fg-dim); font-size: 13px;
   }
-
+  .header-tenant i.ph-caret-down {
+    font-size: 11px; color: var(--fg-dim);
+  }
   .header-actions {
     display: flex; align-items: center; gap: 4px;
-    padding-right: 16px;
+    padding-right: 18px;
+    margin-left: auto;
   }
   .header-action-btn {
     width: 32px; height: 32px;
     display: inline-flex; align-items: center; justify-content: center;
-    color: var(--fg-mid);
-    border-radius: 6px;
-    transition: background 0.12s ease, color 0.12s ease;
+    color: var(--fg-mid); border-radius: 6px;
+    transition: background 0.12s, color 0.12s;
   }
   .header-action-btn i { font-size: 16px; }
   .header-action-btn:hover { background: var(--bg-elev-1); color: var(--fg); }
 
-  /* ------------------------------------------------------------- */
-  /* Left nav (Phosphor icons, no emoji)                            */
-  /* ------------------------------------------------------------- */
+  /* ---------- Left nav ---------- */
   .nav {
     border-right: 1px solid var(--line);
     background: var(--bg);
     display: flex; flex-direction: column;
     align-items: center;
-    padding-top: 12px;
-    padding-bottom: 12px;
+    padding: 12px 0;
     gap: 2px;
   }
   .nav-item {
     width: 40px; height: 40px;
     display: flex; align-items: center; justify-content: center;
-    border-radius: 8px;
-    position: relative;
+    border-radius: 8px; position: relative;
     color: var(--fg-mid);
-    transition: background 0.12s ease, color 0.12s ease;
+    transition: background 0.12s, color 0.12s;
   }
   .nav-item i { font-size: 20px; }
   .nav-item:hover { background: var(--bg-elev-1); color: var(--fg); }
-  .nav-item.active {
-    background: var(--accent-soft);
-    color: var(--accent);
-  }
+  .nav-item.active { background: var(--accent-soft); color: var(--accent); }
   .nav-item.active::before {
-    content: '';
-    position: absolute;
-    left: -12px;
-    top: 8px;
-    bottom: 8px;
-    width: 2px;
-    background: var(--accent);
-    border-radius: 0 2px 2px 0;
+    content: ''; position: absolute;
+    left: -12px; top: 8px; bottom: 8px; width: 2px;
+    background: var(--accent); border-radius: 0 2px 2px 0;
   }
   .nav-item .lock {
     position: absolute; bottom: 4px; right: 4px;
@@ -203,34 +167,28 @@
     background: var(--bg);
     border-radius: 50%;
     padding: 1px;
+    width: 12px; height: 12px;
+    display: flex; align-items: center; justify-content: center;
   }
-  .nav-item .lock i { font-size: 9px; }
+  .nav-item .lock i { font-size: 8px; }
   .nav-divider { width: 22px; height: 1px; background: var(--line); margin: 8px 0; }
   .nav-bottom { margin-top: auto; }
-
   .nav-item .tip {
     position: absolute; left: calc(100% + 10px);
     background: var(--bg-elev-3); border: 1px solid var(--line);
-    color: var(--fg); font-size: 11px; padding: 4px 8px;
-    border-radius: 4px; white-space: nowrap;
-    opacity: 0; pointer-events: none; transition: opacity 0.12s ease;
-    z-index: 100;
-    font-family: var(--f-mono);
-    text-transform: uppercase;
-    letter-spacing: 0.06em;
+    color: var(--fg); font-size: 10px; padding: 4px 8px; border-radius: 4px;
+    white-space: nowrap; opacity: 0; pointer-events: none;
+    transition: opacity 0.12s; z-index: 100;
+    font-family: var(--f-mono); text-transform: uppercase; letter-spacing: 0.06em;
   }
   .nav-item:hover .tip { opacity: 1; }
 
-  /* ------------------------------------------------------------- */
-  /* Main + surfaces                                                */
-  /* ------------------------------------------------------------- */
-  .main { overflow: auto; min-height: 0; }
+  /* ---------- Main + surfaces ---------- */
+  .main { overflow: auto; min-height: 0; background: var(--bg); }
   .surface { display: none; }
   .surface.active { display: block; }
 
-  /* ------------------------------------------------------------- */
-  /* Tabs (within COMMAND)                                          */
-  /* ------------------------------------------------------------- */
+  /* ---------- Tabs ---------- */
   .tabs {
     display: flex; align-items: center;
     border-bottom: 1px solid var(--line);
@@ -238,121 +196,68 @@
     height: var(--tab-h);
     background: var(--bg);
     position: sticky; top: 0; z-index: 10;
-    gap: 2px;
+    gap: 6px;
   }
   .tab {
-    height: var(--tab-h);
-    padding: 0 14px;
-    display: flex; align-items: center; gap: 6px;
+    height: var(--tab-h); padding: 0 4px; margin-right: 16px;
+    display: flex; align-items: center;
     color: var(--fg-dim);
     font-family: var(--f-mono);
-    font-size: 11px;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-    border-bottom: 2px solid transparent;
-    margin-bottom: -1px;
-    transition: color 0.12s ease, border-color 0.12s ease;
+    font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase;
+    border-bottom: 2px solid transparent; margin-bottom: -1px;
+    transition: color 0.12s, border-color 0.12s;
   }
-  .tab i { font-size: 13px; }
   .tab:hover { color: var(--fg); }
   .tab.active { color: var(--accent); border-bottom-color: var(--accent); }
   .tab-meta {
-    margin-left: auto;
-    color: var(--fg-dim);
+    margin-left: auto; color: var(--fg-dim);
     font-family: var(--f-mono);
-    font-size: 10px;
-    letter-spacing: 0.06em;
-    text-transform: uppercase;
-    display: flex; align-items: center; gap: 6px;
+    font-size: 10px; letter-spacing: 0.06em; text-transform: uppercase;
   }
-  .tab-meta i { font-size: 11px; }
 
-  /* ------------------------------------------------------------- */
-  /* Common patterns                                                */
-  /* ------------------------------------------------------------- */
+  /* ---------- Common patterns ---------- */
   .eyebrow {
     font-family: var(--f-mono);
-    font-size: 10px;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
+    font-size: 10px; letter-spacing: 0.1em; text-transform: uppercase;
     color: var(--fg-dim);
   }
   .star { color: var(--accent); }
-
-  /* ------------------------------------------------------------- */
-  /* Status pills — RICHER (color + icon + label)                   */
-  /* ------------------------------------------------------------- */
-  .pill {
-    display: inline-flex; align-items: center; gap: 5px;
+  .mentor-marker {
     font-family: var(--f-mono);
-    font-size: 10px;
-    letter-spacing: 0.06em;
-    text-transform: uppercase;
-    padding: 3px 8px;
-    border-radius: 3px;
-    line-height: 1.4;
-    font-weight: 500;
-  }
-  .pill i { font-size: 11px; }
-  /* Action-required: chartreuse FILL */
-  .pill.ratify, .pill.your-call {
-    background: var(--accent-fill);
+    font-size: 10px; letter-spacing: 0.1em; text-transform: uppercase;
     color: var(--accent);
   }
-  /* Pilot handling: neutral */
-  .pill.pilot {
-    background: var(--bg-elev-3);
-    color: var(--fg-mid);
-    border: 1px solid var(--line);
+
+  /* ---------- Status pills (color-only, no icons) ---------- */
+  .pill {
+    display: inline-flex; align-items: center;
+    font-family: var(--f-mono);
+    font-size: 10px; letter-spacing: 0.06em; text-transform: uppercase;
+    padding: 3px 9px;
+    border-radius: 3px; line-height: 1.4;
+    font-weight: 500;
   }
-  /* In-flight: neutral with subtle treatment */
-  .pill.in-flight {
-    background: var(--bg-elev-3);
-    color: var(--fg);
-    border: 1px solid var(--line);
+  .pill.ratify, .pill.your-call {
+    background: var(--accent-fill); color: var(--accent);
   }
-  .pill.in-flight i { animation: spin 1.6s linear infinite; }
-  /* Locked: dimmed */
+  .pill.pilot, .pill.in-flight {
+    background: var(--bg-elev-3); color: var(--fg-mid); border: 1px solid var(--line);
+  }
   .pill.locked {
-    background: transparent;
-    color: var(--fg-faint);
-    border: 1px solid var(--line);
+    background: transparent; color: var(--fg-faint); border: 1px solid var(--line);
   }
-  /* Ready: subtle */
   .pill.ready {
-    background: transparent;
-    color: var(--fg-mid);
-    border: 1px solid var(--line);
+    background: transparent; color: var(--fg-mid); border: 1px solid var(--line);
   }
-  /* Family destination — orthogonal context */
   .pill.family {
-    background: transparent;
-    color: var(--fg-dim);
+    background: transparent; color: var(--fg-dim);
+    font-size: 9px; padding: 2px 7px;
     border: 1px dashed var(--line);
-    font-size: 9px;
-    padding: 2px 6px;
   }
-  .pill.family.substrate { color: var(--fg-dim); }
   .pill.family.world     { color: var(--warm); border-color: rgba(212,168,87,0.30); }
   .pill.family.commitment{ color: var(--accent-dark); border-color: rgba(179,204,0,0.30); }
 
-  @keyframes spin { from { transform: rotate(0); } to { transform: rotate(360deg); } }
-
-  /* ------------------------------------------------------------- */
-  /* Mentor signature                                               */
-  /* ------------------------------------------------------------- */
-  .mentor-marker {
-    display: inline-flex; align-items: center; gap: 6px;
-    font-family: var(--f-mono);
-    font-size: 10px;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    color: var(--accent);
-  }
-
-  /* ------------------------------------------------------------- */
-  /* Avatar sigils (custom SVG, per spec-avatar-system)             */
-  /* ------------------------------------------------------------- */
+  /* ---------- Avatar sigils (custom SVG) ---------- */
   .sigil {
     display: inline-flex; align-items: center; justify-content: center;
     flex-shrink: 0;
@@ -360,62 +265,49 @@
   .sigil svg { width: 100%; height: 100%; }
   .sigil-16 { width: 16px; height: 16px; }
   .sigil-20 { width: 20px; height: 20px; }
-  .sigil-24 { width: 24px; height: 24px; }
-  .sigil-32 { width: 32px; height: 32px; }
   .sigil .stroke { stroke: var(--accent); fill: none; stroke-width: 1.6; }
   .sigil .stroke-system { stroke: var(--system-avatar); fill: none; stroke-width: 1.6; }
 
-  /* ------------------------------------------------------------- */
-  /* Item completion markers (in lists)                             */
-  /* ------------------------------------------------------------- */
+  /* ---------- Item completion markers ---------- */
   .marker {
     display: inline-flex; align-items: center; justify-content: center;
-    width: 16px; height: 16px;
+    width: 14px; height: 14px;
     flex-shrink: 0;
   }
   .marker.done    { color: var(--accent); }
-  .marker.flight  { color: var(--fg); }
   .marker.pending { color: var(--fg-dim); }
   .marker.blocked { color: var(--fg-faint); }
+  .marker i { font-size: 14px; }
 
-  /* ------------------------------------------------------------- */
-  /* Control Panel — HIERARCHY (1 hero + 3 secondary + 3 tertiary)  */
-  /* ------------------------------------------------------------- */
+  /* ---------- Control Panel ---------- */
   .cp {
-    padding: 20px 24px;
+    padding: 18px 24px;
     display: grid;
     grid-template-rows: auto auto auto auto;
-    gap: 16px;
-    height: 100%;
+    gap: 14px;
   }
-
-  /* Greeting strip — minimal */
   .cp-greeting {
     display: flex; align-items: baseline; justify-content: space-between;
   }
   .cp-greeting h1 {
     font-family: var(--f-display);
-    font-weight: 500;
-    font-size: 18px;
-    color: var(--fg-mid);
+    font-weight: 500; font-size: 16px; color: var(--fg-mid);
   }
   .cp-greeting h1 .accent { color: var(--fg); font-weight: 600; }
   .cp-greeting .timestamp {
     font-family: var(--f-mono);
-    font-size: 10px;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
+    font-size: 10px; letter-spacing: 0.08em; text-transform: uppercase;
     color: var(--fg-dim);
-    display: flex; align-items: center; gap: 6px;
   }
-  .cp-greeting .timestamp i { font-size: 11px; }
 
-  /* HERO band — single dominant element */
+  /* ---------- HERO BAND with dependency chain ---------- */
   .hero {
     background: linear-gradient(135deg, rgba(223,255,0,0.04), var(--bg-elev-1) 60%);
     border: 1px solid var(--accent-line);
     border-radius: 10px;
-    padding: 24px 28px;
+    padding: 22px 26px;
+  }
+  .hero-row {
     display: grid;
     grid-template-columns: 1fr auto;
     gap: 24px;
@@ -423,43 +315,25 @@
   }
   .hero-content { display: flex; flex-direction: column; gap: 12px; min-width: 0; }
   .hero-eyebrow {
-    display: flex; align-items: center; gap: 12px;
+    display: flex; align-items: center; gap: 14px;
   }
-  .hero-eyebrow .pill { font-size: 9px; padding: 2px 6px; }
   .hero-headline {
     font-family: var(--f-editorial);
-    font-weight: 400;
-    font-size: 22px;
-    line-height: 1.35;
-    color: var(--fg);
-    letter-spacing: -0.005em;
+    font-weight: 400; font-size: 21px; line-height: 1.35;
+    color: var(--fg); letter-spacing: -0.005em;
   }
   .hero-headline .accent { color: var(--accent); }
   .hero-headline .em { font-style: italic; }
-  .hero-meta {
-    display: flex; align-items: center; gap: 14px;
-    color: var(--fg-dim);
-    font-size: 12px;
-  }
-  .hero-meta .meta-item { display: flex; align-items: center; gap: 5px; }
-  .hero-meta i { font-size: 13px; }
-
-  .hero-action {
-    display: flex; flex-direction: column; gap: 10px;
-    align-items: flex-end;
-  }
+  .hero-action { display: flex; flex-direction: column; gap: 8px; align-items: flex-end; flex-shrink: 0; }
   .btn-primary {
     display: inline-flex; align-items: center; gap: 8px;
     padding: 11px 18px;
-    background: var(--accent);
-    color: var(--bg);
+    background: var(--accent); color: var(--bg);
     font-family: var(--f-mono);
-    font-size: 11px;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    font-weight: 700;
-    border-radius: 5px;
-    transition: background 0.12s ease;
+    font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase;
+    font-weight: 700; border-radius: 5px;
+    transition: background 0.12s;
+    white-space: nowrap;
   }
   .btn-primary:hover { background: #f0ff66; }
   .btn-primary i { font-size: 13px; }
@@ -468,186 +342,351 @@
     padding: 8px 14px;
     color: var(--fg-mid);
     font-family: var(--f-mono);
-    font-size: 10px;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-    border: 1px solid var(--line);
-    border-radius: 4px;
+    font-size: 10px; letter-spacing: 0.08em; text-transform: uppercase;
+    border: 1px solid var(--line); border-radius: 4px;
     background: var(--bg-elev-1);
     transition: color 0.12s, background 0.12s, border-color 0.12s;
+    white-space: nowrap;
   }
   .btn-secondary:hover { color: var(--fg); background: var(--bg-elev-2); border-color: var(--line-strong); }
-  .btn-secondary i { font-size: 11px; }
 
-  /* SECONDARY band — 3 equal blocks */
-  .secondary-band {
+  /* Dependency chain visual */
+  .chain {
+    display: grid;
+    grid-template-columns: auto 1fr auto 1fr auto;
+    align-items: center;
+    margin-top: 4px;
+  }
+  .chain-node {
+    display: flex; flex-direction: column; align-items: center;
+    gap: 6px;
+    text-align: center;
+  }
+  .chain-dot {
+    width: 36px; height: 36px;
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-family: var(--f-mono); font-size: 10px; font-weight: 700;
+    flex-shrink: 0;
+  }
+  .chain-dot.now {
+    background: var(--accent);
+    color: var(--bg);
+    box-shadow: 0 0 0 6px rgba(223,255,0,0.10);
+  }
+  .chain-dot.next {
+    background: transparent;
+    border: 1.5px solid var(--accent-line);
+    color: var(--accent);
+  }
+  .chain-dot.future {
+    background: transparent;
+    border: 1.5px solid var(--line);
+    color: var(--fg-faint);
+  }
+  .chain-label {
+    font-family: var(--f-mono);
+    font-size: 9.5px; letter-spacing: 0.06em; text-transform: uppercase;
+    color: var(--fg-mid);
+    max-width: 110px;
+    line-height: 1.3;
+  }
+  .chain-node.future .chain-label { color: var(--fg-dim); }
+  .chain-line {
+    height: 1.5px;
+    background: linear-gradient(90deg, var(--accent-line), var(--line));
+    border-radius: 1px;
+  }
+  .chain-line.dim {
+    background: var(--line);
+  }
+
+  /* ---------- Bands ---------- */
+  .band {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     gap: 12px;
   }
+  .band-secondary { /* nothing extra */ }
+  .band-tertiary { grid-template-columns: repeat(3, 1fr); }
 
-  /* TERTIARY band — 3 equal blocks (lower visual weight) */
-  .tertiary-band {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 12px;
-  }
-
-  /* Block (used for secondary + tertiary) */
+  /* ---------- Block ---------- */
   .block {
     background: var(--bg-elev-1);
     border: 1px solid var(--line);
     border-radius: 8px;
-    padding: 14px 16px;
+    padding: 16px 18px;
     display: flex; flex-direction: column;
-    gap: 10px;
+    gap: 12px;
     min-height: 0;
   }
   .block.tertiary {
     background: transparent;
-    border-color: var(--line);
-    padding: 12px 14px;
+    padding: 14px 16px;
   }
-
   .block-header {
-    display: flex; align-items: center; justify-content: space-between;
+    display: flex; align-items: baseline; justify-content: space-between;
     gap: 8px;
   }
-  .block-header .meta { display: flex; align-items: center; gap: 6px; }
-  .block-header .meta i { font-size: 12px; color: var(--fg-dim); }
   .block-header .count {
     font-family: var(--f-mono);
-    font-size: 10px;
-    color: var(--fg-dim);
-    letter-spacing: 0.04em;
+    font-size: 10px; color: var(--fg-dim); letter-spacing: 0.04em;
   }
-
   .block-body {
     display: flex; flex-direction: column;
-    gap: 8px;
-    flex: 1;
-    min-height: 0;
-    overflow: hidden;
+    gap: 6px; flex: 1; min-height: 0;
   }
-  .block.tertiary .block-body { gap: 6px; }
 
+  /* List rows (in things-waiting block) */
   .row {
     display: flex; align-items: center; gap: 10px;
-    padding: 6px 0;
+    padding: 7px 0;
     border-bottom: 1px solid var(--line);
     min-width: 0;
   }
   .row:last-child { border-bottom: 0; padding-bottom: 0; }
-  .row:first-child { padding-top: 0; }
+  .row:first-child { padding-top: 2px; }
   .row-content {
     flex: 1; min-width: 0;
     display: flex; flex-direction: column;
     gap: 2px;
   }
   .row-title {
-    font-size: 12.5px;
-    line-height: 1.35;
-    color: var(--fg);
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
+    font-size: 12.5px; line-height: 1.35; color: var(--fg);
+    overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
   }
   .row-sub {
-    font-size: 10.5px;
-    color: var(--fg-dim);
-    display: flex; align-items: center; gap: 6px;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
+    font-size: 10.5px; color: var(--fg-dim);
+    overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
   }
-  .row-sub i { font-size: 11px; }
   .row-pill { flex-shrink: 0; }
 
   .block-foot {
-    color: var(--fg-dim);
-    font-size: 10px;
-    font-family: var(--f-mono);
-    letter-spacing: 0.06em;
-    text-transform: uppercase;
+    color: var(--fg-dim); font-size: 10px;
+    font-family: var(--f-mono); letter-spacing: 0.06em; text-transform: uppercase;
   }
   .block-foot a {
     display: inline-flex; align-items: center; gap: 4px;
-    color: var(--fg-mid);
-    transition: color 0.12s ease;
+    color: var(--fg-mid); transition: color 0.12s;
   }
   .block-foot a:hover { color: var(--accent); }
-  .block-foot i { font-size: 10px; }
 
-  /* Items in lists with state-dependent visual weight */
   .row.locked { opacity: 0.55; }
   .row.locked .row-title { color: var(--fg-dim); }
 
-  /* Tertiary block typography slightly different */
-  .block.tertiary .row-title { font-size: 12px; }
-  .block.tertiary .row-sub { font-size: 10px; }
-
-  /* Mentor block — editorial register */
-  .block.mentor {
-    background: linear-gradient(180deg, rgba(223,255,0,0.025), var(--bg-elev-1) 80%);
-    border-color: var(--line);
+  /* ---------- Big number metric (substrate block) ---------- */
+  .metric-big {
+    display: flex; align-items: baseline; gap: 10px;
+    margin-top: 2px;
   }
-  .block.mentor .body-prose {
-    font-family: var(--f-editorial);
-    font-size: 13px;
-    line-height: 1.55;
-    color: var(--fg);
-  }
-  .block.mentor .body-prose .accent { color: var(--accent); font-weight: 500; }
-
-  /* ------------------------------------------------------------- */
-  /* Stub surfaces                                                  */
-  /* ------------------------------------------------------------- */
-  .stub {
-    padding: 64px 24px;
-    display: flex; flex-direction: column; align-items: center; gap: 14px;
-    text-align: center;
-    color: var(--fg-dim);
-  }
-  .stub i { font-size: 32px; color: var(--fg-faint); }
-  .stub h2 {
+  .metric-big .num {
     font-family: var(--f-display);
-    font-weight: 500;
-    font-size: 20px;
-    color: var(--fg);
+    font-weight: 500; font-size: 38px;
+    color: var(--fg); line-height: 1;
+    letter-spacing: -0.02em;
   }
-  .stub p {
-    max-width: 480px;
-    font-size: 13px;
-    line-height: 1.55;
-  }
-  .stub p code {
+  .metric-big .delta {
     font-family: var(--f-mono);
-    font-size: 11px;
-    background: var(--bg-elev-2);
-    padding: 1px 5px;
-    border-radius: 3px;
+    font-size: 11px; color: var(--accent);
+    display: inline-flex; align-items: center; gap: 3px;
   }
-  .stub .next-up {
-    display: inline-flex; align-items: center; gap: 6px;
-    padding: 5px 10px;
-    background: var(--bg-elev-1);
-    border: 1px solid var(--line);
-    border-radius: 4px;
-    font-family: var(--f-mono);
-    font-size: 10px;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-    color: var(--fg-mid);
+  .metric-big .delta i { font-size: 11px; }
+  .metric-sub {
+    font-size: 10.5px; color: var(--fg-dim);
+    font-family: var(--f-mono); letter-spacing: 0.04em; text-transform: uppercase;
     margin-top: 4px;
   }
 
-  /* Scrollbar */
-  .main::-webkit-scrollbar, .main *::-webkit-scrollbar { width: 8px; height: 8px; }
-  .main::-webkit-scrollbar-track, .main *::-webkit-scrollbar-track { background: var(--bg); }
-  .main::-webkit-scrollbar-thumb, .main *::-webkit-scrollbar-thumb {
-    background: var(--bg-elev-3); border-radius: 4px;
+  /* Sparkline */
+  .sparkline { width: 100%; height: 38px; margin-top: 6px; }
+
+  /* ---------- Avatar progress block ---------- */
+  .avatar-row {
+    display: flex; flex-direction: column; gap: 6px;
+    padding: 8px 0;
+    border-bottom: 1px solid var(--line);
   }
-  .main::-webkit-scrollbar-thumb:hover, .main *::-webkit-scrollbar-thumb:hover { background: var(--line-strong); }
+  .avatar-row:first-child { padding-top: 2px; }
+  .avatar-row:last-child { border-bottom: 0; padding-bottom: 0; }
+  .avatar-row-head {
+    display: flex; align-items: center; gap: 10px;
+  }
+  .avatar-row-head .meta {
+    flex: 1; min-width: 0;
+    display: flex; flex-direction: column; gap: 1px;
+  }
+  .avatar-row-head .meta .nm {
+    font-size: 12.5px; color: var(--fg);
+    overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+  }
+  .avatar-row-head .meta .task {
+    font-size: 10.5px; color: var(--fg-dim);
+    overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+  }
+  .avatar-row-head .pct {
+    font-family: var(--f-mono); font-size: 10.5px; color: var(--fg-mid);
+    flex-shrink: 0;
+  }
+
+  .progress {
+    width: 100%; height: 4px;
+    background: var(--bg-elev-3);
+    border-radius: 2px;
+    overflow: hidden;
+  }
+  .progress > .fill {
+    height: 100%;
+    background: var(--accent);
+    border-radius: 2px;
+    box-shadow: 0 0 8px rgba(223,255,0,0.30);
+    transition: width 0.4s ease;
+  }
+  .progress > .fill.system { background: var(--system-avatar); box-shadow: 0 0 6px rgba(154,184,0,0.30); }
+
+  /* ---------- Mentor block ---------- */
+  .block.mentor {
+    background: linear-gradient(180deg, rgba(223,255,0,0.025), var(--bg-elev-1) 80%);
+  }
+  .block.mentor .body-prose {
+    font-family: var(--f-editorial);
+    font-size: 13px; line-height: 1.55; color: var(--fg);
+  }
+  .block.mentor .body-prose .accent { color: var(--accent); font-weight: 500; }
+
+  /* ---------- Right rail · Ask Layer ---------- */
+  .rail {
+    border-left: 1px solid var(--line);
+    background: var(--bg);
+    display: grid;
+    grid-template-rows: auto 1fr auto;
+    min-height: 0;
+  }
+  .rail-head {
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 14px 18px;
+    border-bottom: 1px solid var(--line);
+  }
+  .rail-head .ttl {
+    font-family: var(--f-mono);
+    font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase;
+    color: var(--fg);
+    font-weight: 500;
+  }
+  .rail-head .actions {
+    display: flex; gap: 4px;
+  }
+  .rail-action {
+    width: 28px; height: 28px;
+    display: inline-flex; align-items: center; justify-content: center;
+    color: var(--fg-mid); border-radius: 4px;
+    transition: background 0.12s, color 0.12s;
+  }
+  .rail-action:hover { background: var(--bg-elev-1); color: var(--fg); }
+  .rail-action i { font-size: 14px; }
+
+  .rail-body {
+    padding: 16px 18px;
+    overflow-y: auto;
+    display: flex; flex-direction: column; gap: 18px;
+  }
+  .msg { display: flex; flex-direction: column; gap: 6px; }
+  .msg .author {
+    font-family: var(--f-mono);
+    font-size: 9.5px; letter-spacing: 0.08em; text-transform: uppercase;
+    color: var(--fg-dim);
+  }
+  .msg.user .author { color: var(--fg-mid); }
+  .msg .body {
+    font-size: 13px; line-height: 1.55; color: var(--fg);
+  }
+  .msg.kilonova .engine-pill {
+    display: inline-flex; align-items: center; gap: 5px;
+    align-self: flex-start;
+    padding: 3px 8px;
+    background: var(--accent-fill);
+    color: var(--accent);
+    font-family: var(--f-mono);
+    font-size: 9.5px; letter-spacing: 0.08em; text-transform: uppercase;
+    border-radius: 3px; font-weight: 500;
+    margin-bottom: 4px;
+  }
+
+  .rail-input {
+    border-top: 1px solid var(--line);
+    padding: 14px 18px;
+    background: var(--bg);
+    display: flex; flex-direction: column; gap: 8px;
+  }
+  .rail-input-box {
+    display: flex; align-items: flex-end; gap: 10px;
+    background: var(--bg-elev-1);
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    padding: 10px 12px;
+    transition: border-color 0.15s;
+  }
+  .rail-input-box:focus-within {
+    border-color: var(--accent-line);
+  }
+  .rail-input-box textarea {
+    resize: none; min-height: 22px; max-height: 96px;
+    font-size: 13px; line-height: 1.5; color: var(--fg);
+  }
+  .rail-input-box textarea::placeholder { color: var(--fg-faint); }
+  .rail-send {
+    width: 28px; height: 28px;
+    background: var(--accent); color: var(--bg);
+    border-radius: 5px;
+    display: inline-flex; align-items: center; justify-content: center;
+    flex-shrink: 0;
+    transition: background 0.12s;
+  }
+  .rail-send:hover { background: #f0ff66; }
+  .rail-send i { font-size: 14px; }
+  .rail-foot {
+    display: flex; align-items: center; justify-content: space-between;
+    color: var(--fg-faint); font-family: var(--f-mono);
+    font-size: 9px; letter-spacing: 0.06em; text-transform: uppercase;
+  }
+  .rail-foot .shortcut {
+    padding: 1px 6px;
+    border: 1px solid var(--line);
+    border-radius: 3px;
+    color: var(--fg-dim);
+  }
+
+  /* ---------- Stub surfaces ---------- */
+  .stub {
+    padding: 64px 24px;
+    display: flex; flex-direction: column; align-items: center; gap: 14px;
+    text-align: center; color: var(--fg-dim);
+  }
+  .stub h2 {
+    font-family: var(--f-display);
+    font-weight: 500; font-size: 20px; color: var(--fg);
+  }
+  .stub p { max-width: 460px; font-size: 13px; line-height: 1.55; }
+  .stub p code {
+    font-family: var(--f-mono);
+    font-size: 11px; background: var(--bg-elev-2);
+    padding: 1px 5px; border-radius: 3px;
+  }
+  .stub .next-up {
+    display: inline-flex; align-items: center; padding: 5px 10px;
+    background: var(--bg-elev-1); border: 1px solid var(--line);
+    border-radius: 4px;
+    font-family: var(--f-mono);
+    font-size: 10px; letter-spacing: 0.08em; text-transform: uppercase;
+    color: var(--fg-mid);
+  }
+
+  /* Scrollbar */
+  .main::-webkit-scrollbar, .rail-body::-webkit-scrollbar { width: 6px; height: 6px; }
+  .main::-webkit-scrollbar-track, .rail-body::-webkit-scrollbar-track { background: var(--bg); }
+  .main::-webkit-scrollbar-thumb, .rail-body::-webkit-scrollbar-thumb {
+    background: var(--bg-elev-3); border-radius: 3px;
+  }
+  .main::-webkit-scrollbar-thumb:hover, .rail-body::-webkit-scrollbar-thumb:hover { background: var(--line-strong); }
 </style>
 </head>
 
@@ -658,23 +697,15 @@
   <!-- ============ HEADER ============ -->
   <header class="header">
 
-    <a class="header-logo" href="#" aria-label="Kilonova">
-      <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-        <circle cx="12" cy="12" r="10" fill="none" stroke="currentColor" stroke-width="1.5"/>
-        <circle cx="12" cy="12" r="3" fill="currentColor"/>
-      </svg>
-    </a>
-
-    <div class="header-tenant" role="button" tabindex="0">
-      <div class="tenant-avatar">B</div>
-      <div class="tenant-name">Bruno · Kilonova</div>
-      <i class="ph ph-caret-down"></i>
+    <div class="header-logo">
+      <img src="images/logo.svg" alt="Kilonova" />
     </div>
 
-    <div class="header-ask">
-      <i class="ph ph-magnifying-glass"></i>
-      <span class="ask-label">Ask Kilonova...</span>
-      <span class="ask-shortcut">K</span>
+    <div class="header-tenant" role="button" tabindex="0">
+      <img src="images/avatar.jpg" alt="Bruno" class="tenant-photo" />
+      <span class="tenant-name">Bruno Ahualli</span>
+      <span class="tenant-org">· Kilonova</span>
+      <i class="ph ph-caret-down"></i>
     </div>
 
     <div class="header-actions">
@@ -683,9 +714,6 @@
       </button>
       <button class="header-action-btn" aria-label="Theme">
         <i class="ph ph-moon"></i>
-      </button>
-      <button class="header-action-btn" aria-label="Search">
-        <i class="ph ph-magnifying-glass"></i>
       </button>
     </div>
 
@@ -709,7 +737,7 @@
       </button>
       <button class="nav-item" data-surface="machines" aria-label="Machines">
         <i class="ph ph-gear-six"></i>
-        <span class="lock"><i class="ph ph-lock"></i></span>
+        <span class="lock"><i class="ph ph-lock-fill"></i></span>
         <span class="tip">MACHINES · 1 LOCKED</span>
       </button>
       <div class="nav-divider"></div>
@@ -731,277 +759,239 @@
       <section class="surface active" id="surface-command">
 
         <div class="tabs">
-          <button class="tab active" data-tab="control-panel">
-            <i class="ph ph-squares-four"></i>
-            Control Panel
-          </button>
-          <button class="tab" data-tab="heartbeat">
-            <i class="ph ph-pulse"></i>
-            Heartbeat
-          </button>
-          <button class="tab" data-tab="commitments">
-            <i class="ph ph-bookmark-simple"></i>
-            Commitments
-          </button>
-          <span class="tab-meta">
-            <i class="ph ph-arrow-clockwise"></i>
-            Refreshed 14:12
-          </span>
+          <button class="tab active" data-tab="control-panel">Control Panel</button>
+          <button class="tab" data-tab="heartbeat">Heartbeat</button>
+          <button class="tab" data-tab="commitments">Commitments</button>
+          <span class="tab-meta">Refreshed 14:12</span>
         </div>
 
         <!-- ===== TAB · CONTROL PANEL ===== -->
         <div class="tab-content" id="tab-control-panel">
           <div class="cp">
 
-            <!-- Greeting strip -->
+            <!-- Greeting -->
             <div class="cp-greeting">
               <h1>Good afternoon, <span class="accent">Bruno</span>.</h1>
-              <span class="timestamp">
-                <i class="ph ph-clock"></i>
-                Wed · 14 May · 14:12
-              </span>
+              <span class="timestamp">Wed · 14 May · 14:12</span>
             </div>
 
-            <!-- HERO BAND · single dominant element -->
+            <!-- HERO BAND -->
             <div class="hero">
-              <div class="hero-content">
-                <div class="hero-eyebrow">
-                  <span class="mentor-marker"><span class="star">★</span> KILONOVA · WHAT'S NEXT</span>
-                  <span class="pill family commitment">→ COMMITMENT</span>
+              <div class="hero-row">
+                <div class="hero-content">
+                  <div class="hero-eyebrow">
+                    <span class="mentor-marker"><span class="star">★</span> KILONOVA · WHAT'S NEXT</span>
+                    <span class="pill family commitment">→ COMMITMENT</span>
+                  </div>
+                  <div class="hero-headline">
+                    The <span class="accent">GTM Decision Brief</span> is one ratify away from unlocking Channels capability for the <span class="em">Authority Avatar</span>.
+                  </div>
                 </div>
-                <div class="hero-headline">
-                  The <span class="accent">GTM Decision Brief</span> is one ratify away from unlocking Channels capability for the <span class="em">Authority Avatar</span>. That single move clears the deepest chain in the OS today.
-                </div>
-                <div class="hero-meta">
-                  <span class="meta-item"><i class="ph ph-link"></i> Unblocks 3 downstream items</span>
-                  <span class="meta-item"><i class="ph ph-flag"></i> ★ COUNCIL · 4 souls</span>
-                  <span class="meta-item"><i class="ph ph-clock-counter-clockwise"></i> Synthesis ready 18 min ago</span>
+                <div class="hero-action">
+                  <button class="btn-primary">RATIFY THE BRIEF <i class="ph ph-arrow-right"></i></button>
+                  <button class="btn-secondary">PREVIEW</button>
                 </div>
               </div>
-              <div class="hero-action">
-                <button class="btn-primary">
-                  RATIFY THE BRIEF
-                  <i class="ph ph-arrow-right"></i>
-                </button>
-                <button class="btn-secondary">
-                  <i class="ph ph-eye"></i>
-                  PREVIEW
-                </button>
+
+              <!-- Dependency chain visual -->
+              <div class="chain" style="margin-top: 22px;">
+                <div class="chain-node">
+                  <div class="chain-dot now">G2</div>
+                  <div class="chain-label">GTM Decision Brief<br><span style="color:var(--accent);">RATIFY NOW</span></div>
+                </div>
+                <div class="chain-line"></div>
+                <div class="chain-node">
+                  <div class="chain-dot next">2</div>
+                  <div class="chain-label">Channels<br>capability unlocks</div>
+                </div>
+                <div class="chain-line dim"></div>
+                <div class="chain-node future">
+                  <div class="chain-dot future">3</div>
+                  <div class="chain-label">Authority Avatar<br>publishes</div>
+                </div>
               </div>
             </div>
 
-            <!-- SECONDARY BAND · 3 equal blocks -->
-            <div class="secondary-band">
+            <!-- SECONDARY BAND -->
+            <div class="band band-secondary">
 
               <!-- things-waiting -->
               <div class="block">
                 <div class="block-header">
-                  <div class="meta">
-                    <i class="ph ph-tray"></i>
-                    <span class="eyebrow">Waiting on you</span>
-                  </div>
+                  <span class="eyebrow">Waiting on you</span>
                   <span class="count">3</span>
                 </div>
                 <div class="block-body">
                   <div class="row">
                     <span class="marker pending"><i class="ph ph-circle"></i></span>
                     <div class="row-content">
-                      <div class="row-title">"Compounding intelligence" LinkedIn draft</div>
-                      <div class="row-sub">
-                        <span class="sigil sigil-16">
-                          <svg viewBox="0 0 24 24"><polygon class="stroke" points="12,3 21,20 3,20"/></svg>
-                        </span>
-                        Authority · 12m ago
-                      </div>
+                      <div class="row-title">"Compounding intelligence" draft</div>
+                      <div class="row-sub">Authority · 12m ago</div>
                     </div>
-                    <span class="pill ratify row-pill"><i class="ph ph-check-circle-fill"></i> RATIFY</span>
+                    <span class="pill ratify row-pill">RATIFY</span>
                   </div>
                   <div class="row">
                     <span class="marker pending"><i class="ph ph-circle"></i></span>
                     <div class="row-content">
-                      <div class="row-title">FIRST READ · 3 claims awaiting verification</div>
-                      <div class="row-sub"><i class="ph ph-graph"></i> Onboarding substrate</div>
+                      <div class="row-title">FIRST READ · 3 claims</div>
+                      <div class="row-sub">Onboarding substrate</div>
                     </div>
-                    <span class="pill your-call row-pill"><i class="ph ph-cursor-click"></i> YOUR CALL</span>
+                    <span class="pill your-call row-pill">YOUR CALL</span>
                   </div>
                   <div class="row">
                     <span class="marker pending"><i class="ph ph-circle"></i></span>
                     <div class="row-content">
                       <div class="row-title">Voice tier promotion · 2 candidates</div>
-                      <div class="row-sub"><i class="ph ph-quotes"></i> Soundbite library</div>
+                      <div class="row-sub">Soundbite library</div>
                     </div>
-                    <span class="pill ratify row-pill"><i class="ph ph-check-circle-fill"></i> RATIFY</span>
+                    <span class="pill ratify row-pill">RATIFY</span>
                   </div>
                 </div>
               </div>
 
-              <!-- in-flight (Avatars) -->
+              <!-- Avatars in flight (with progress bars) -->
               <div class="block">
                 <div class="block-header">
-                  <div class="meta">
-                    <i class="ph ph-pulse"></i>
-                    <span class="eyebrow">Avatars in flight</span>
-                  </div>
+                  <span class="eyebrow">Avatars in flight</span>
                   <span class="count">2</span>
                 </div>
                 <div class="block-body">
-                  <div class="row">
-                    <span class="sigil sigil-20">
-                      <svg viewBox="0 0 24 24"><polygon class="stroke" points="12,3 21,20 3,20"/></svg>
-                    </span>
-                    <div class="row-content">
-                      <div class="row-title">Authority Avatar</div>
-                      <div class="row-sub">Drafting "ICP shift signals" · ETA ~8m</div>
+                  <div class="avatar-row">
+                    <div class="avatar-row-head">
+                      <span class="sigil sigil-20">
+                        <svg viewBox="0 0 24 24"><polygon class="stroke" points="12,3 21,20 3,20"/></svg>
+                      </span>
+                      <div class="meta">
+                        <div class="nm">Authority Avatar</div>
+                        <div class="task">Drafting "ICP shift signals"</div>
+                      </div>
+                      <span class="pct">64%</span>
                     </div>
-                    <span class="pill in-flight row-pill"><i class="ph ph-circle-notch"></i> RUNNING</span>
+                    <div class="progress"><div class="fill" style="width: 64%;"></div></div>
                   </div>
-                  <div class="row">
-                    <span class="sigil sigil-20">
-                      <svg viewBox="0 0 24 24"><polygon class="stroke-system" points="6,3 18,3 22,12 18,21 6,21 2,12"/></svg>
-                    </span>
-                    <div class="row-content">
-                      <div class="row-title">Reviewer Avatar</div>
-                      <div class="row-sub">Gating 1 item · ETA ~2m</div>
+                  <div class="avatar-row">
+                    <div class="avatar-row-head">
+                      <span class="sigil sigil-20">
+                        <svg viewBox="0 0 24 24"><polygon class="stroke-system" points="6,3 18,3 22,12 18,21 6,21 2,12"/></svg>
+                      </span>
+                      <div class="meta">
+                        <div class="nm">Reviewer Avatar</div>
+                        <div class="task">Gating 1 item · ETA ~2m</div>
+                      </div>
+                      <span class="pct">90%</span>
                     </div>
-                    <span class="pill in-flight row-pill"><i class="ph ph-circle-notch"></i> RUNNING</span>
+                    <div class="progress"><div class="fill system" style="width: 90%;"></div></div>
                   </div>
                 </div>
                 <div class="block-foot">
-                  <a href="#" data-tab-jump="heartbeat">
-                    Open Heartbeat
-                    <i class="ph ph-arrow-right"></i>
-                  </a>
+                  <a href="#" data-tab-jump="heartbeat">Open Heartbeat →</a>
                 </div>
               </div>
 
-              <!-- mentor-nudge -->
-              <div class="block mentor">
+              <!-- Substrate growth (big number + sparkline) -->
+              <div class="block">
                 <div class="block-header">
-                  <div class="meta">
-                    <span class="mentor-marker"><span class="star">★</span> KILONOVA</span>
+                  <span class="eyebrow">Substrate · 7d</span>
+                </div>
+                <div class="block-body">
+                  <div class="metric-big">
+                    <span class="num">247</span>
+                    <span class="delta"><i class="ph ph-arrow-up"></i> +12</span>
                   </div>
+                  <div class="metric-sub">claims · 3 new edges · 1 contradiction</div>
+                  <svg class="sparkline" viewBox="0 0 200 38" preserveAspectRatio="none">
+                    <defs>
+                      <linearGradient id="sparkfill" x1="0" y1="0" x2="0" y2="1">
+                        <stop offset="0%" stop-color="#DFFF00" stop-opacity="0.20"/>
+                        <stop offset="100%" stop-color="#DFFF00" stop-opacity="0"/>
+                      </linearGradient>
+                    </defs>
+                    <path d="M0,30 L33,28 L66,24 L99,22 L132,18 L165,12 L200,6 L200,38 L0,38 Z" fill="url(#sparkfill)"/>
+                    <path d="M0,30 L33,28 L66,24 L99,22 L132,18 L165,12 L200,6" fill="none" stroke="#DFFF00" stroke-width="1.5" stroke-linejoin="round"/>
+                    <circle cx="200" cy="6" r="2.5" fill="#DFFF00"/>
+                  </svg>
+                </div>
+                <div class="block-foot">
+                  <a href="#">Open Substrate Map →</a>
+                </div>
+              </div>
+
+            </div><!-- /band -->
+
+            <!-- TERTIARY BAND -->
+            <div class="band band-tertiary">
+
+              <!-- Mentor nudge -->
+              <div class="block tertiary mentor">
+                <div class="block-header">
+                  <span class="mentor-marker"><span class="star">★</span> KILONOVA</span>
                 </div>
                 <div class="block-body">
                   <div class="body-prose">
-                    You ratified <span class="accent">3 things</span> this week. Biggest impact: cluster naming finalized — the Authority Avatar's voice model now has a stable taxonomy to draft against. The substrate hardened a notch.
+                    You ratified <span class="accent">3 things</span> this week. The Authority Avatar's voice model has a stable taxonomy to draft against — substrate hardened a notch.
                   </div>
                 </div>
               </div>
 
-            </div><!-- /secondary-band -->
-
-            <!-- TERTIARY BAND · 3 lower-weight blocks -->
-            <div class="tertiary-band">
-
-              <!-- recently-shipped -->
+              <!-- Recently shipped -->
               <div class="block tertiary">
                 <div class="block-header">
-                  <div class="meta">
-                    <i class="ph ph-check-circle"></i>
-                    <span class="eyebrow">Recently shipped · 7d</span>
-                  </div>
+                  <span class="eyebrow">Recently shipped · 7d</span>
                   <span class="count">5</span>
                 </div>
                 <div class="block-body">
                   <div class="row">
-                    <span class="marker done"><i class="ph ph-check-circle-fill"></i></span>
+                    <span class="marker done"><i class="ph ph-check"></i></span>
                     <div class="row-content">
                       <div class="row-title">Founder Interface v0.6 spec</div>
                     </div>
-                    <span class="pill family substrate row-pill">→ SUBSTRATE</span>
                   </div>
                   <div class="row">
-                    <span class="marker done"><i class="ph ph-check-circle-fill"></i></span>
+                    <span class="marker done"><i class="ph ph-check"></i></span>
                     <div class="row-content">
                       <div class="row-title">Avatar System v0.1</div>
                     </div>
-                    <span class="pill family substrate row-pill">→ SUBSTRATE</span>
                   </div>
                   <div class="row">
-                    <span class="marker done"><i class="ph ph-check-circle-fill"></i></span>
+                    <span class="marker done"><i class="ph ph-check"></i></span>
                     <div class="row-content">
-                      <div class="row-title">UI References + Format Lang v0.2</div>
+                      <div class="row-title">UI References v0.2</div>
                     </div>
-                    <span class="pill family substrate row-pill">→ SUBSTRATE</span>
                   </div>
                 </div>
               </div>
 
-              <!-- next-with-pilot -->
+              <!-- Next with pilot -->
               <div class="block tertiary">
                 <div class="block-header">
-                  <div class="meta">
-                    <i class="ph ph-calendar-check"></i>
-                    <span class="eyebrow">Next with your pilot</span>
-                  </div>
+                  <span class="eyebrow">Next with your pilot</span>
                 </div>
-                <div class="block-body">
-                  <div style="display:flex;flex-direction:column;gap:4px;padding:4px 0;">
-                    <div style="font-family:var(--f-display);font-size:16px;font-weight:500;color:var(--fg);">Tue · 14:00</div>
-                    <div class="row-sub" style="color:var(--fg-dim);">Johnny · 30 min · weekly sync</div>
-                  </div>
+                <div class="block-body" style="gap: 4px;">
+                  <div style="font-family:var(--f-display);font-size:18px;font-weight:500;color:var(--fg);">Tue · 14:00</div>
+                  <div style="color:var(--fg-dim);font-size:11.5px;">Johnny · 30 min · weekly sync</div>
                 </div>
                 <div class="block-foot">
-                  <a href="#">
-                    <i class="ph ph-pencil-simple"></i>
-                    Reshape
-                  </a>
+                  <a href="#">Reshape</a>
                 </div>
               </div>
 
-              <!-- substrate-signals -->
-              <div class="block tertiary">
-                <div class="block-header">
-                  <div class="meta">
-                    <i class="ph ph-graph"></i>
-                    <span class="eyebrow">Substrate signals · 7d</span>
-                  </div>
-                  <span class="count">+12</span>
-                </div>
-                <div class="block-body">
-                  <div class="row">
-                    <span class="marker done"><i class="ph ph-arrow-up"></i></span>
-                    <div class="row-content">
-                      <div class="row-title">"Founder time scarcity" cluster</div>
-                      <div class="row-sub">5 new claims</div>
-                    </div>
-                  </div>
-                  <div class="row">
-                    <span class="marker done"><i class="ph ph-arrow-up"></i></span>
-                    <div class="row-content">
-                      <div class="row-title">Avatars vs agents distinction</div>
-                      <div class="row-sub">3 new edges</div>
-                    </div>
-                  </div>
-                </div>
-                <div class="block-foot">
-                  <a href="#">
-                    Open Substrate Map
-                    <i class="ph ph-arrow-right"></i>
-                  </a>
-                </div>
-              </div>
+            </div><!-- /band -->
 
-            </div><!-- /tertiary-band -->
           </div>
         </div>
 
-        <!-- ===== TAB · HEARTBEAT (stub) ===== -->
+        <!-- ===== STUB TABS ===== -->
         <div class="tab-content" id="tab-heartbeat" style="display:none;">
           <div class="stub">
-            <i class="ph ph-pulse"></i>
             <h2>Heartbeat Dashboard</h2>
-            <p>Operational live state. Avatars awake right now · cadence schedule · drift detection. Per <code>spec-ui-references.md</code> Deliberation §1: Linear Avatar list + Mercury cadence schedule + Avatar drill-down for run history.</p>
+            <p>Operational live state · Avatars awake right now · cadence schedule · drift detection. Per <code>spec-ui-references.md</code> Deliberation §1.</p>
             <span class="next-up">Next iteration</span>
           </div>
         </div>
-
-        <!-- ===== TAB · COMMITMENTS (stub) ===== -->
         <div class="tab-content" id="tab-commitments" style="display:none;">
           <div class="stub">
-            <i class="ph ph-bookmark-simple"></i>
             <h2>Commitments Tape</h2>
-            <p>Temporal axis view of crystallized stance. Per <code>spec-ui-references.md</code> Deliberation §2: Linear data model + custom Kilonova presentation.</p>
+            <p>Temporal axis view of crystallized stance. Per <code>spec-ui-references.md</code> Deliberation §2.</p>
             <span class="next-up">Next iteration</span>
           </div>
         </div>
@@ -1011,41 +1001,76 @@
       <!-- ===== STUB SURFACES ===== -->
       <section class="surface" id="surface-brain">
         <div class="stub">
-          <i class="ph ph-brain"></i>
           <h2>BRAIN</h2>
-          <p>Memory · RSN · Listening · Substrate Map · Signal Feed.<br>Surfaces over Bruno's substrate (Layer 2).</p>
+          <p>Memory · RSN · Listening · Substrate Map · Signal Feed.</p>
           <span class="next-up">Next iteration</span>
         </div>
       </section>
-
       <section class="surface" id="surface-mind">
         <div class="stub">
-          <i class="ph ph-lightbulb"></i>
           <h2>MIND</h2>
-          <p>NICHOLAS · Insights.<br>Where you reason · where you ask. Chat is central here.</p>
+          <p>NICHOLAS · Insights. Where you reason · where you ask.</p>
           <span class="next-up">Next iteration</span>
         </div>
       </section>
-
       <section class="surface" id="surface-machines">
         <div class="stub">
-          <i class="ph ph-gear-six"></i>
           <h2>MACHINES</h2>
-          <p>Six Founder Machines: Authority · Growth Campaign · Customer Truth · IR · Weekly Review · Narrative Ratchet. Each runs a primary Avatar.</p>
-          <span class="next-up">Founder Authority Machine ships next iteration</span>
+          <p>Six Founder Machines: Authority · Growth · Customer Truth · IR · Weekly Review · Narrative Ratchet.</p>
+          <span class="next-up">Founder Authority Machine ships next</span>
         </div>
       </section>
-
       <section class="surface" id="surface-founder">
         <div class="stub">
-          <i class="ph ph-user"></i>
           <h2>FOUNDER</h2>
-          <p>Voice · Events · Speaking · Territory · Radar.<br>Thought-leadership v1. Where the mentor stance lives inline.</p>
+          <p>Voice · Events · Speaking · Territory · Radar.</p>
           <span class="next-up">Next iteration</span>
         </div>
       </section>
 
     </main>
+
+    <!-- ============ RIGHT RAIL · ASK LAYER ============ -->
+    <aside class="rail">
+      <div class="rail-head">
+        <div class="ttl">Ask Kilonova</div>
+        <div class="actions">
+          <button class="rail-action" aria-label="History"><i class="ph ph-clock-counter-clockwise"></i></button>
+          <button class="rail-action" aria-label="New conversation"><i class="ph ph-plus"></i></button>
+        </div>
+      </div>
+
+      <div class="rail-body">
+
+        <div class="msg user">
+          <div class="author">You · 13:58</div>
+          <div class="body">Why is Channels capability locked right now?</div>
+        </div>
+
+        <div class="msg kilonova">
+          <div class="engine-pill"><span class="star">★</span> NICHOLAS</div>
+          <div class="author">Kilonova · 13:58</div>
+          <div class="body">
+            Channels is locked because the <strong style="color:var(--accent);">GTM Decision Brief</strong> hasn't ratified yet. The Authority Avatar can't publish without a positioning anchor it can ground in.<br><br>
+            Two upstream prerequisites cleared this week (Brand Voice Doc · LinkedIn auth). The brief is the last gate. Synthesis landed 18 minutes ago — ratifying it unlocks Channels and the Authority Avatar can resume the weekly push.
+          </div>
+        </div>
+
+      </div>
+
+      <div class="rail-input">
+        <div class="rail-input-box">
+          <textarea placeholder="Ask anything..." rows="1"></textarea>
+          <button class="rail-send" aria-label="Send"><i class="ph ph-arrow-up"></i></button>
+        </div>
+        <div class="rail-foot">
+          <span>Routes to the right engine</span>
+          <span class="shortcut">K</span>
+        </div>
+      </div>
+
+    </aside>
+
   </div>
 </div>
 
@@ -1081,18 +1106,25 @@
     });
   });
 
-  // K shortcut flash
+  // K shortcut focuses Ask textarea
   document.addEventListener('keydown', e => {
     if (e.key.toLowerCase() === 'k' && !e.metaKey && !e.ctrlKey) {
       const target = document.activeElement;
       if (target && (target.tagName === 'INPUT' || target.tagName === 'TEXTAREA' || target.isContentEditable)) return;
-      const ask = document.querySelector('.header-ask');
-      if (ask) {
-        ask.style.background = 'var(--accent-soft)';
-        setTimeout(() => { ask.style.background = ''; }, 250);
-      }
+      e.preventDefault();
+      const ta = document.querySelector('.rail-input-box textarea');
+      if (ta) ta.focus();
     }
   });
+
+  // Auto-resize textarea
+  const ta = document.querySelector('.rail-input-box textarea');
+  if (ta) {
+    ta.addEventListener('input', () => {
+      ta.style.height = 'auto';
+      ta.style.height = Math.min(ta.scrollHeight, 96) + 'px';
+    });
+  }
 </script>
 
 </body>
