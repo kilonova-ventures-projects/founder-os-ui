@@ -610,6 +610,309 @@
     color: var(--fg-dim);
   }
 
+  /* =================================================== */
+  /* ACTIVITY surface                                       */
+  /* =================================================== */
+  .activity {
+    padding: 18px 24px 32px;
+    display: flex; flex-direction: column;
+    gap: 18px;
+  }
+  .activity-section {
+    display: flex; flex-direction: column;
+    gap: 12px;
+  }
+  .activity-section-head {
+    display: flex; align-items: baseline; justify-content: space-between;
+    padding-bottom: 6px;
+    border-bottom: 1px solid var(--line);
+  }
+  .activity-section-head .ttl {
+    font-family: var(--f-mono);
+    font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase;
+    color: var(--fg);
+    font-weight: 500;
+  }
+  .activity-section-head .meta {
+    font-family: var(--f-mono);
+    font-size: 10px; color: var(--fg-dim);
+    letter-spacing: 0.06em; text-transform: uppercase;
+  }
+
+  /* Avatar working card (richer than Control Panel version) */
+  .avatar-card {
+    display: flex; flex-direction: column;
+    gap: 10px;
+    padding: 16px 18px;
+    background: var(--bg-elev-1);
+    border: 1px solid var(--line);
+    border-radius: 8px;
+  }
+  .avatar-card.system { border-color: rgba(154,184,0,0.20); }
+  .avatar-card-head {
+    display: flex; align-items: center; gap: 12px;
+  }
+  .avatar-card-head .sigil { width: 24px; height: 24px; }
+  .avatar-card-head .nm {
+    font-size: 14px; font-weight: 500; color: var(--fg);
+  }
+  .avatar-card-head .pct {
+    margin-left: auto;
+    font-family: var(--f-mono); font-size: 12px;
+    color: var(--fg);
+  }
+  .avatar-card .task {
+    font-family: var(--f-editorial);
+    font-size: 13.5px; line-height: 1.4;
+    color: var(--fg);
+  }
+  .avatar-card .progress {
+    height: 5px;
+  }
+  .avatar-card .meta-row {
+    display: flex; align-items: center; gap: 18px;
+    font-family: var(--f-mono);
+    font-size: 10px; letter-spacing: 0.06em; text-transform: uppercase;
+    color: var(--fg-dim);
+  }
+  .avatar-card .meta-row strong { color: var(--fg-mid); font-weight: 500; }
+
+  /* Avatars grid */
+  .avatars-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px;
+  }
+
+  /* Today timeline */
+  .timeline {
+    display: grid;
+    grid-template-columns: 64px 1fr;
+    column-gap: 16px;
+    row-gap: 8px;
+    padding: 8px 4px;
+  }
+  .timeline-time {
+    font-family: var(--f-mono);
+    font-size: 11px; color: var(--fg-dim);
+    letter-spacing: 0.04em;
+    padding-top: 1px;
+    text-align: right;
+  }
+  .timeline-row {
+    display: flex; align-items: center; gap: 12px;
+    padding: 6px 0;
+    border-left: 1px solid var(--line);
+    padding-left: 16px;
+    margin-left: -1px;
+    position: relative;
+  }
+  .timeline-dot {
+    position: absolute;
+    left: -5px; top: 50%; transform: translateY(-50%);
+    width: 9px; height: 9px;
+    border-radius: 50%;
+    background: var(--bg);
+    border: 1.5px solid var(--line-strong);
+  }
+  .timeline-row.done .timeline-dot {
+    background: var(--accent); border-color: var(--accent);
+  }
+  .timeline-row.now .timeline-dot {
+    background: var(--accent);
+    border-color: var(--accent);
+    box-shadow: 0 0 0 5px rgba(223,255,0,0.16);
+  }
+  .timeline-row.scheduled .timeline-dot {
+    background: var(--bg);
+  }
+  .timeline-row .what {
+    flex: 1; min-width: 0;
+    display: flex; align-items: center; gap: 8px;
+  }
+  .timeline-row .what .nm {
+    font-size: 13px; color: var(--fg);
+  }
+  .timeline-row.scheduled .what .nm { color: var(--fg-mid); }
+  .timeline-row.done .what .nm { color: var(--fg-dim); }
+  .timeline-row .what .desc {
+    font-family: var(--f-mono); font-size: 10px;
+    color: var(--fg-dim);
+    letter-spacing: 0.04em;
+    padding-left: 4px;
+  }
+  .timeline-row .what .sigil { width: 16px; height: 16px; }
+  .timeline-row .pill { font-size: 9px; }
+  .timeline-row.now .what .nm {
+    color: var(--accent);
+    font-family: var(--f-mono);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    font-size: 10px;
+    font-weight: 500;
+  }
+
+  /* Drift / mentor block */
+  .drift {
+    background: linear-gradient(180deg, rgba(232,156,74,0.04), var(--bg-elev-1) 80%);
+    border: 1px solid rgba(232,156,74,0.20);
+    border-radius: 8px;
+    padding: 16px 18px;
+    display: flex; flex-direction: column; gap: 8px;
+  }
+  .drift .head {
+    display: flex; align-items: center; gap: 10px;
+  }
+  .drift .head .sigil { width: 18px; height: 18px; }
+  .drift .head .sigil .stroke { stroke: var(--warn); }
+  .drift .head .nm {
+    font-size: 12.5px; color: var(--fg);
+  }
+  .drift .head .badge {
+    margin-left: auto;
+    font-family: var(--f-mono);
+    font-size: 9px; letter-spacing: 0.08em; text-transform: uppercase;
+    color: var(--warn);
+    border: 1px solid rgba(232,156,74,0.30);
+    padding: 2px 7px; border-radius: 3px;
+  }
+  .drift .body {
+    font-family: var(--f-editorial);
+    font-size: 13px; line-height: 1.55;
+    color: var(--fg);
+  }
+  .drift .body .accent { color: var(--accent); }
+
+  /* =================================================== */
+  /* COMMITMENTS surface                                    */
+  /* =================================================== */
+  .commitments {
+    padding: 18px 24px 32px;
+    display: flex; flex-direction: column;
+    gap: 18px;
+  }
+
+  .commit-mentor {
+    background: linear-gradient(180deg, rgba(223,255,0,0.025), var(--bg-elev-1) 80%);
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    padding: 16px 20px;
+    display: flex; flex-direction: column; gap: 6px;
+  }
+  .commit-mentor .body-prose {
+    font-family: var(--f-editorial);
+    font-size: 14px; line-height: 1.55;
+    color: var(--fg);
+  }
+  .commit-mentor .body-prose .accent { color: var(--accent); font-weight: 500; }
+
+  /* Stats strip */
+  .stats-strip {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1px;
+    background: var(--line);
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    overflow: hidden;
+  }
+  .stat-cell {
+    background: var(--bg-elev-1);
+    padding: 14px 18px;
+    display: flex; flex-direction: column; gap: 4px;
+  }
+  .stat-cell .num {
+    font-family: var(--f-display);
+    font-weight: 500; font-size: 28px;
+    color: var(--fg); line-height: 1;
+    letter-spacing: -0.02em;
+  }
+  .stat-cell.attention .num { color: var(--accent); }
+  .stat-cell.warn .num { color: var(--warn); }
+  .stat-cell.dim .num { color: var(--fg-dim); }
+  .stat-cell .label {
+    font-family: var(--f-mono);
+    font-size: 9.5px; letter-spacing: 0.1em; text-transform: uppercase;
+    color: var(--fg-dim);
+  }
+
+  /* Chronicle (vertical timeline) */
+  .chronicle {
+    display: flex; flex-direction: column;
+    gap: 18px;
+  }
+  .chronicle-group {
+    display: flex; flex-direction: column;
+    gap: 8px;
+  }
+  .chronicle-group-head {
+    display: flex; align-items: baseline; justify-content: space-between;
+    padding-bottom: 6px;
+    border-bottom: 1px solid var(--line);
+  }
+  .chronicle-group-head .ttl {
+    font-family: var(--f-mono);
+    font-size: 10px; letter-spacing: 0.1em; text-transform: uppercase;
+    color: var(--fg-dim);
+  }
+  .chronicle-group-head .ct {
+    font-family: var(--f-mono);
+    font-size: 10px; color: var(--fg-faint);
+    letter-spacing: 0.04em;
+  }
+  .chronicle-row {
+    display: grid;
+    grid-template-columns: 70px 1fr auto;
+    align-items: center;
+    column-gap: 16px;
+    padding: 9px 4px;
+    border-bottom: 1px solid var(--bg-elev-2);
+    cursor: pointer;
+    transition: background 0.12s;
+  }
+  .chronicle-row:hover { background: var(--bg-elev-1); }
+  .chronicle-row:last-child { border-bottom: 0; }
+  .chronicle-row .ts {
+    font-family: var(--f-mono);
+    font-size: 10.5px;
+    color: var(--fg-dim);
+    letter-spacing: 0.04em;
+  }
+  .chronicle-row .item {
+    display: flex; flex-direction: column; gap: 2px;
+    min-width: 0;
+  }
+  .chronicle-row .item .nm {
+    font-size: 13px; color: var(--fg);
+    overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+  }
+  .chronicle-row .item .meta {
+    font-size: 10.5px; color: var(--fg-dim);
+    overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+  }
+  .chronicle-row.dim .item .nm { color: var(--fg-mid); }
+
+  /* Filter bar */
+  .filter-bar {
+    display: flex; align-items: center; gap: 8px;
+    padding-bottom: 4px;
+  }
+  .filter-chip {
+    display: inline-flex; align-items: center; gap: 6px;
+    padding: 5px 10px;
+    background: var(--bg-elev-1);
+    border: 1px solid var(--line);
+    border-radius: 4px;
+    color: var(--fg-mid);
+    font-family: var(--f-mono);
+    font-size: 10px; letter-spacing: 0.06em; text-transform: uppercase;
+    transition: color 0.12s, border-color 0.12s;
+  }
+  .filter-chip:hover { color: var(--fg); border-color: var(--line-strong); }
+  .filter-chip.active { color: var(--accent); border-color: var(--accent-line); }
+  .filter-chip i { font-size: 10px; }
+  .filter-bar .spacer { flex: 1; }
+
   /* ---------- Stub surfaces ---------- */
   .stub {
     padding: 64px 24px;
@@ -924,17 +1227,319 @@
 
         <!-- ===== STUB TABS ===== -->
         <div class="tab-content" id="tab-activity" style="display:none;">
-          <div class="stub">
-            <h2>Activity</h2>
-            <p>Live operational state · Avatars currently working · cadence schedule · drift. Internally this is the <code>heartbeat</code> primitive (per Bruno's Canon); UI label is <code>Activity</code> for founder clarity (V&amp;T v0.6).</p>
-            <span class="next-up">Next iteration</span>
+          <div class="activity">
+
+            <!-- AVATARS WORKING NOW -->
+            <div class="activity-section">
+              <div class="activity-section-head">
+                <span class="ttl">Avatars working now · 3</span>
+                <span class="meta">live · refreshes every 30s</span>
+              </div>
+
+              <div class="avatars-grid">
+
+                <div class="avatar-card">
+                  <div class="avatar-card-head">
+                    <span class="sigil">
+                      <svg viewBox="0 0 24 24"><polygon class="stroke" points="12,3 21,20 3,20"/></svg>
+                    </span>
+                    <span class="nm">Authority Avatar</span>
+                    <span class="pct">64%</span>
+                  </div>
+                  <div class="task">Drafting "ICP shift signals" · LinkedIn long-form</div>
+                  <div class="progress"><div class="fill" style="width: 64%;"></div></div>
+                  <div class="meta-row">
+                    <span><strong>Started</strong> 12m ago</span>
+                    <span><strong>ETA</strong> ~8m</span>
+                    <span><strong>Authority</strong> drafts → approve</span>
+                  </div>
+                </div>
+
+                <div class="avatar-card system">
+                  <div class="avatar-card-head">
+                    <span class="sigil">
+                      <svg viewBox="0 0 24 24"><polygon class="stroke-system" points="6,3 18,3 22,12 18,21 6,21 2,12"/></svg>
+                    </span>
+                    <span class="nm">Reviewer Avatar</span>
+                    <span class="pct">90%</span>
+                  </div>
+                  <div class="task">Gating Authority Avatar's draft before queue</div>
+                  <div class="progress"><div class="fill system" style="width: 90%;"></div></div>
+                  <div class="meta-row">
+                    <span><strong>Started</strong> 2m ago</span>
+                    <span><strong>ETA</strong> &lt;1m</span>
+                    <span><strong>Authority</strong> auto-pass · escalate-on-fail</span>
+                  </div>
+                </div>
+
+                <div class="avatar-card">
+                  <div class="avatar-card-head">
+                    <span class="sigil">
+                      <svg viewBox="0 0 24 24"><polygon class="stroke" points="6,3 18,3 22,12 18,21 6,21 2,12"/></svg>
+                    </span>
+                    <span class="nm">Customer Truth Avatar</span>
+                    <span class="pct">28%</span>
+                  </div>
+                  <div class="task">Processing call transcript · MVH-04 (32 min)</div>
+                  <div class="progress"><div class="fill" style="width: 28%;"></div></div>
+                  <div class="meta-row">
+                    <span><strong>Started</strong> 4m ago</span>
+                    <span><strong>ETA</strong> ~14m</span>
+                    <span><strong>Authority</strong> claim candidates</span>
+                  </div>
+                </div>
+
+              </div>
+            </div>
+
+            <!-- TODAY'S SCHEDULE -->
+            <div class="activity-section">
+              <div class="activity-section-head">
+                <span class="ttl">Today · Wed 14 May</span>
+                <span class="meta">5 wakes scheduled · 2 done · 1 active</span>
+              </div>
+              <div class="timeline">
+
+                <div class="timeline-time">09:00</div>
+                <div class="timeline-row done">
+                  <span class="timeline-dot"></span>
+                  <div class="what">
+                    <span class="sigil"><svg viewBox="0 0 24 24"><polygon class="stroke" points="12,3 21,20 3,20"/></svg></span>
+                    <span class="nm">Authority Avatar · daily push</span>
+                    <span class="desc">shipped 1 draft</span>
+                  </div>
+                </div>
+
+                <div class="timeline-time">10:30</div>
+                <div class="timeline-row done">
+                  <span class="timeline-dot"></span>
+                  <div class="what">
+                    <span class="sigil"><svg viewBox="0 0 24 24"><polygon class="stroke" points="6,3 18,3 22,12 18,21 6,21 2,12"/></svg></span>
+                    <span class="nm">Customer Truth Avatar · process MVH-03</span>
+                    <span class="desc">2 claim candidates</span>
+                  </div>
+                </div>
+
+                <div class="timeline-time">14:12</div>
+                <div class="timeline-row now">
+                  <span class="timeline-dot"></span>
+                  <div class="what">
+                    <span class="nm">Now</span>
+                  </div>
+                </div>
+
+                <div class="timeline-time">17:00</div>
+                <div class="timeline-row scheduled">
+                  <span class="timeline-dot"></span>
+                  <div class="what">
+                    <span class="sigil"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9" fill="none" stroke="var(--fg-dim)" stroke-width="1.6"/></svg></span>
+                    <span class="nm">Operating Cadence Avatar · weekly review</span>
+                    <span class="desc">est. 25 min</span>
+                  </div>
+                </div>
+
+                <div class="timeline-time">Tue 09:00</div>
+                <div class="timeline-row scheduled">
+                  <span class="timeline-dot"></span>
+                  <div class="what">
+                    <span class="sigil"><svg viewBox="0 0 24 24"><polygon points="12,3 21,20 3,20" fill="none" stroke="var(--fg-dim)" stroke-width="1.6"/></svg></span>
+                    <span class="nm">Authority Avatar · daily push</span>
+                  </div>
+                </div>
+
+              </div>
+            </div>
+
+            <!-- DRIFT -->
+            <div class="activity-section">
+              <div class="activity-section-head">
+                <span class="ttl">Drift · 1 to watch</span>
+              </div>
+
+              <div class="drift">
+                <div class="head">
+                  <span class="sigil"><svg viewBox="0 0 24 24"><polygon points="12,3 21,12 12,21 3,12" fill="none" stroke="var(--warn)" stroke-width="1.6"/></svg></span>
+                  <span class="nm">Narrative Avatar</span>
+                  <span class="badge">5 days late</span>
+                </div>
+                <div class="body">
+                  <span class="mentor-marker"><span class="star">★</span> KILONOVA</span> &middot; Last ran <strong>5 days ago</strong>, expected weekly. The voice signal is quietly aging — your last public anchor is from before the cluster naming finalized. Worth scheduling a session?
+                </div>
+              </div>
+
+            </div>
+
           </div>
         </div>
         <div class="tab-content" id="tab-commitments" style="display:none;">
-          <div class="stub">
-            <h2>Commitments Tape</h2>
-            <p>Temporal axis view of crystallized stance. Per <code>spec-ui-references.md</code> Deliberation §2.</p>
-            <span class="next-up">Next iteration</span>
+          <div class="commitments">
+
+            <!-- Mentor pull -->
+            <div class="commit-mentor">
+              <span class="mentor-marker"><span class="star">★</span> KILONOVA</span>
+              <div class="body-prose">
+                You ratified <span class="accent">3 things</span> this week. Biggest impact: the cluster naming finalized — Authority Avatar's voice model now drafts against a stable taxonomy. The substrate hardened a notch.
+              </div>
+            </div>
+
+            <!-- Stats strip -->
+            <div class="stats-strip">
+              <div class="stat-cell attention">
+                <span class="num">8</span>
+                <span class="label">Standing now</span>
+              </div>
+              <div class="stat-cell warn">
+                <span class="num">1</span>
+                <span class="label">At risk</span>
+              </div>
+              <div class="stat-cell">
+                <span class="num">47</span>
+                <span class="label">Ratified · all-time</span>
+              </div>
+              <div class="stat-cell dim">
+                <span class="num">23</span>
+                <span class="label">Delivered</span>
+              </div>
+            </div>
+
+            <!-- Filter bar -->
+            <div class="filter-bar">
+              <button class="filter-chip active">All</button>
+              <button class="filter-chip">Decisions</button>
+              <button class="filter-chip">Schedule</button>
+              <button class="filter-chip">Positioning</button>
+              <button class="filter-chip">Pilot agreements</button>
+              <span class="spacer"></span>
+              <button class="filter-chip">
+                <i class="ph ph-funnel"></i>
+                Last 30 days
+              </button>
+            </div>
+
+            <!-- Chronicle -->
+            <div class="chronicle">
+
+              <div class="chronicle-group">
+                <div class="chronicle-group-head">
+                  <span class="ttl">Today · Wed 14 May</span>
+                  <span class="ct">2</span>
+                </div>
+
+                <div class="chronicle-row">
+                  <span class="ts">14:08</span>
+                  <div class="item">
+                    <span class="nm">Cluster naming finalized · BRAIN / MIND / MACHINES / FOUNDER</span>
+                    <span class="meta">Decision · architectural · interface-strategy doc</span>
+                  </div>
+                  <span class="pill ratify">RATIFIED</span>
+                </div>
+
+                <div class="chronicle-row">
+                  <span class="ts">11:42</span>
+                  <div class="item">
+                    <span class="nm">Tuesday 14:00 · weekly sync with Johnny</span>
+                    <span class="meta">Schedule · pilot · 30 min</span>
+                  </div>
+                  <span class="pill ready">BOOKED</span>
+                </div>
+              </div>
+
+              <div class="chronicle-group">
+                <div class="chronicle-group-head">
+                  <span class="ttl">Yesterday · Tue 13 May</span>
+                  <span class="ct">3</span>
+                </div>
+
+                <div class="chronicle-row">
+                  <span class="ts">17:21</span>
+                  <div class="item">
+                    <span class="nm">Editorial Page = canonical Kilonova output format</span>
+                    <span class="meta">Decision · Q2 brief synthesis · ★ COUNCIL · 4 souls</span>
+                  </div>
+                  <span class="pill ratify">RATIFIED</span>
+                </div>
+
+                <div class="chronicle-row">
+                  <span class="ts">15:08</span>
+                  <div class="item">
+                    <span class="nm">Avatar System v0.1 spec ratified</span>
+                    <span class="meta">Decision · Founder Interface Layer 6</span>
+                  </div>
+                  <span class="pill ratify">RATIFIED</span>
+                </div>
+
+                <div class="chronicle-row">
+                  <span class="ts">10:14</span>
+                  <div class="item">
+                    <span class="nm">"Compounding intelligence" promoted to signature soundbite</span>
+                    <span class="meta">Positioning · Voice library · tier upgrade</span>
+                  </div>
+                  <span class="pill ratify">RATIFIED</span>
+                </div>
+              </div>
+
+              <div class="chronicle-group">
+                <div class="chronicle-group-head">
+                  <span class="ttl">Earlier this week</span>
+                  <span class="ct">3</span>
+                </div>
+
+                <div class="chronicle-row dim">
+                  <span class="ts">Mon · 16:55</span>
+                  <div class="item">
+                    <span class="nm">FIRST READ ratify gates onboarding unlock</span>
+                    <span class="meta">Decision · interface-strategy Q5</span>
+                  </div>
+                  <span class="pill ratify">RATIFIED</span>
+                </div>
+
+                <div class="chronicle-row dim">
+                  <span class="ts">Mon · 14:02</span>
+                  <div class="item">
+                    <span class="nm">UI references + format language v0.2</span>
+                    <span class="meta">Decision · 25 surfaces mapped to references</span>
+                  </div>
+                  <span class="pill ratify">RATIFIED</span>
+                </div>
+
+                <div class="chronicle-row dim">
+                  <span class="ts">Sun · 21:30</span>
+                  <div class="item">
+                    <span class="nm">Founder Interface Layer v0.6 spec</span>
+                    <span class="meta">Decision · Bruno Canon-aligned reframe</span>
+                  </div>
+                  <span class="pill ratify">RATIFIED</span>
+                </div>
+              </div>
+
+              <div class="chronicle-group">
+                <div class="chronicle-group-head">
+                  <span class="ttl">Last week</span>
+                  <span class="ct">4</span>
+                </div>
+
+                <div class="chronicle-row dim">
+                  <span class="ts">Fri · 11:08</span>
+                  <div class="item">
+                    <span class="nm">GTM Decision Brief commitment to Q3 motion</span>
+                    <span class="meta">Decision · ★ COUNCIL · pending re-review</span>
+                  </div>
+                  <span class="pill warn" style="background:rgba(232,156,74,0.10);color:var(--warn);border:1px solid rgba(232,156,74,0.25);">AT RISK</span>
+                </div>
+
+                <div class="chronicle-row dim">
+                  <span class="ts">Fri · 09:20</span>
+                  <div class="item">
+                    <span class="nm">Brand Voice Doc · ratified for Authority Avatar</span>
+                    <span class="meta">Positioning · enables Channels capability</span>
+                  </div>
+                  <span class="pill" style="color:var(--fg-dim);background:transparent;border:1px solid var(--line);">DELIVERED</span>
+                </div>
+
+              </div>
+
+            </div>
+
           </div>
         </div>
 
