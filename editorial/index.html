@@ -1,0 +1,634 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1.0" />
+<title>GTM Decision Brief · Q3 motion · Editorial Page · Kilonova</title>
+<link rel="icon" href="../images/favicon.ico" />
+
+<script src="https://unpkg.com/@phosphor-icons/web@2.1.1"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,400;8..60,500;8..60,600;8..60,700&family=Space+Mono:wght@400;700&family=JetBrains+Mono:wght@400;500&display=swap" />
+
+<style>
+  @font-face { font-family: 'Helvetica Neue'; src: url('../images/fonts/HelveticaNeue-Roman.otf') format('opentype'); font-weight: 400; }
+  @font-face { font-family: 'Helvetica Neue'; src: url('../images/fonts/HelveticaNeueItalic.ttf') format('truetype'); font-weight: 400; font-style: italic; }
+  @font-face { font-family: 'Helvetica Neue'; src: url('../images/fonts/HelveticaNeue-Medium.otf') format('opentype'); font-weight: 500; }
+  @font-face { font-family: 'Helvetica Neue'; src: url('../images/fonts/HelveticaNeueBold.ttf') format('truetype'); font-weight: 700; }
+
+  :root {
+    --bg: #000;
+    --bg-elev: #0a0a0a;
+    --line: #1a1a1a;
+    --fg: #f4f4f4;
+    --fg-mid: #b0b0b0;
+    --fg-dim: #7a7a7a;
+    --fg-faint: #4a4a4a;
+    --accent: #DFFF00;
+    --accent-line: rgba(223,255,0,0.30);
+    --warm: #d4a857;
+    --f-display: 'Helvetica Neue','Inter',ui-sans-serif,system-ui,sans-serif;
+    --f-editorial: 'Source Serif 4',Georgia,serif;
+    --f-mono: 'Space Mono',ui-monospace,Menlo,monospace;
+    --f-code: 'JetBrains Mono',monospace;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body { background: var(--bg); color: var(--fg); -webkit-font-smoothing: antialiased; }
+  body { font-family: var(--f-display); }
+  a { color: inherit; text-decoration: none; }
+
+  /* Scroll progress bar */
+  .scroll-progress {
+    position: fixed; top: 0; left: 0;
+    height: 2px; width: 0%;
+    background: var(--accent);
+    z-index: 100;
+    transition: width 0.05s linear;
+  }
+
+  /* Top bar */
+  .topbar {
+    position: fixed; top: 0; left: 0; right: 0;
+    height: 56px;
+    background: rgba(0,0,0,0.85);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--line);
+    z-index: 50;
+    display: flex; align-items: center; padding: 0 32px;
+    gap: 24px;
+  }
+  .topbar .brand img { height: 18px; opacity: 0.9; }
+  .topbar .breadcrumb {
+    display: flex; gap: 12px; align-items: center;
+    font-family: var(--f-mono); font-size: 10.5px;
+    letter-spacing: 0.08em; text-transform: uppercase;
+    color: var(--fg-dim);
+  }
+  .topbar .back {
+    margin-left: auto;
+    display: inline-flex; align-items: center; gap: 6px;
+    padding: 6px 12px;
+    color: var(--fg-mid);
+    border: 1px solid var(--line);
+    border-radius: 4px;
+    font-family: var(--f-mono); font-size: 10px;
+    letter-spacing: 0.08em; text-transform: uppercase;
+    transition: color 0.12s, border-color 0.12s;
+  }
+  .topbar .back:hover { color: var(--accent); border-color: var(--accent-line); }
+
+  /* Cinematic cover */
+  .cover {
+    min-height: 100vh;
+    display: flex; flex-direction: column; justify-content: center;
+    padding: 120px 32px 80px;
+    max-width: 1080px;
+    margin: 0 auto;
+  }
+  .cover .eyebrow {
+    font-family: var(--f-mono);
+    font-size: 11px; letter-spacing: 0.16em; text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 24px;
+    display: inline-flex; align-items: center; gap: 12px;
+  }
+  .cover .eyebrow::before {
+    content: ''; width: 24px; height: 1px; background: var(--accent);
+  }
+  .cover h1 {
+    font-family: var(--f-display);
+    font-weight: 500; font-size: clamp(36px, 5.5vw, 64px);
+    line-height: 1.05; letter-spacing: -0.02em;
+    color: var(--fg);
+    max-width: 920px;
+    margin-bottom: 32px;
+  }
+  .cover h1 .accent { color: var(--accent); }
+  .cover h1 .em { font-style: italic; font-family: var(--f-editorial); font-weight: 400; }
+  .cover .lede {
+    font-family: var(--f-editorial);
+    font-size: clamp(18px, 1.6vw, 22px);
+    line-height: 1.55; color: var(--fg-mid);
+    max-width: 720px;
+  }
+  .cover .meta {
+    margin-top: 56px;
+    display: flex; gap: 32px; flex-wrap: wrap;
+    font-family: var(--f-mono);
+    font-size: 11px; letter-spacing: 0.06em; text-transform: uppercase;
+    color: var(--fg-dim);
+  }
+  .cover .meta strong { color: var(--fg); font-weight: 500; }
+  .cover .scroll-cue {
+    margin-top: 80px;
+    color: var(--fg-faint);
+    font-family: var(--f-mono);
+    font-size: 10px; letter-spacing: 0.16em; text-transform: uppercase;
+    display: inline-flex; align-items: center; gap: 8px;
+  }
+
+  /* Chapter zero */
+  .chapter-zero {
+    background: var(--bg-elev);
+    border-top: 1px solid var(--line);
+    padding: 72px 32px;
+  }
+  .chapter-zero-inner {
+    max-width: 720px; margin: 0 auto;
+    font-family: var(--f-editorial);
+    font-size: 19px; line-height: 1.7; color: var(--fg);
+  }
+  .chapter-zero-inner p { margin-bottom: 24px; }
+  .chapter-zero-inner mark {
+    background: rgba(212, 168, 87, 0.18);
+    color: var(--fg);
+    padding: 1px 2px;
+  }
+  .chapter-zero-inner mark.kn {
+    background: rgba(223, 255, 0, 0.16);
+    color: var(--fg);
+  }
+
+  /* Numbered sections */
+  section.chapter {
+    padding: 96px 32px;
+    border-top: 1px solid var(--line);
+  }
+  .chapter-inner {
+    max-width: 720px; margin: 0 auto;
+  }
+  .kicker {
+    display: flex; align-items: center; gap: 16px;
+    margin-bottom: 24px;
+    font-family: var(--f-mono);
+    font-size: 11px; letter-spacing: 0.16em; text-transform: uppercase;
+    color: var(--accent);
+  }
+  .kicker .num { font-size: 12px; font-weight: 700; }
+  .kicker .line { flex: 1; height: 1px; background: var(--accent); opacity: 0.4; }
+  .chapter h2 {
+    font-family: var(--f-display);
+    font-weight: 500; font-size: clamp(28px, 3.2vw, 40px);
+    line-height: 1.15; letter-spacing: -0.015em;
+    color: var(--fg);
+    margin-bottom: 24px;
+  }
+  .chapter .prose {
+    font-family: var(--f-editorial);
+    font-size: 18px; line-height: 1.7; color: var(--fg);
+  }
+  .chapter .prose p { margin-bottom: 22px; }
+  .chapter .prose mark {
+    background: rgba(212, 168, 87, 0.18);
+    padding: 1px 2px;
+  }
+  .chapter .prose mark.kn {
+    background: rgba(223, 255, 0, 0.16);
+    color: var(--fg);
+  }
+  .chapter .prose strong { color: var(--accent); font-weight: 500; }
+
+  /* Hero figure */
+  .hero-figure {
+    margin: 32px -32px;
+    padding: 32px;
+    background: var(--bg-elev);
+    border-top: 1px solid var(--line);
+    border-bottom: 1px solid var(--line);
+  }
+  .hero-figure .figure-inner {
+    max-width: 1080px; margin: 0 auto;
+  }
+  .hero-figure .placeholder {
+    aspect-ratio: 16 / 9;
+    background: linear-gradient(135deg, rgba(223,255,0,0.06), var(--bg-elev) 60%);
+    border: 1px solid var(--accent-line);
+    border-radius: 8px;
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    gap: 14px;
+  }
+  .hero-figure .placeholder .label {
+    font-family: var(--f-mono);
+    font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase;
+    color: var(--accent);
+  }
+  .hero-figure .placeholder .desc {
+    font-family: var(--f-editorial);
+    font-size: 16px; color: var(--fg-mid);
+    text-align: center; max-width: 560px;
+    padding: 0 24px;
+  }
+  .hero-figure figcaption {
+    font-family: var(--f-mono);
+    font-size: 10.5px; letter-spacing: 0.06em; text-transform: uppercase;
+    color: var(--fg-dim);
+    margin-top: 14px;
+    text-align: center;
+  }
+
+  /* Pull quote */
+  .pull-quote {
+    margin: 40px 0;
+    padding-left: 28px;
+    border-left: 3px solid var(--accent);
+    font-family: var(--f-editorial);
+    font-size: 24px; line-height: 1.45; color: var(--fg);
+    font-style: italic;
+    font-weight: 400;
+  }
+  .pull-quote cite {
+    display: block;
+    font-family: var(--f-mono);
+    font-style: normal;
+    font-size: 10.5px; letter-spacing: 0.08em; text-transform: uppercase;
+    color: var(--fg-dim);
+    margin-top: 14px;
+  }
+
+  /* Stat row */
+  .stat-row {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 32px;
+    margin: 40px 0;
+    padding: 32px 0;
+    border-top: 1px solid var(--line);
+    border-bottom: 1px solid var(--line);
+  }
+  .stat {
+    display: flex; flex-direction: column; gap: 6px;
+  }
+  .stat .num {
+    font-family: var(--f-display);
+    font-weight: 500; font-size: 40px;
+    color: var(--accent); line-height: 1;
+    letter-spacing: -0.02em;
+  }
+  .stat .label {
+    font-family: var(--f-mono);
+    font-size: 10px; letter-spacing: 0.1em; text-transform: uppercase;
+    color: var(--fg-dim);
+  }
+  .stat .body { font-size: 13px; color: var(--fg-mid); line-height: 1.5; }
+
+  /* Compare table */
+  .compare {
+    margin: 40px 0;
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    overflow: hidden;
+  }
+  .compare-row {
+    display: grid;
+    grid-template-columns: 200px 1fr 1fr;
+    border-bottom: 1px solid var(--line);
+  }
+  .compare-row:last-child { border-bottom: 0; }
+  .compare-row.header { background: var(--bg-elev); }
+  .compare-row > div {
+    padding: 14px 18px;
+    border-right: 1px solid var(--line);
+    font-size: 13px;
+    color: var(--fg);
+    line-height: 1.5;
+  }
+  .compare-row > div:last-child { border-right: 0; }
+  .compare-row.header > div {
+    font-family: var(--f-mono);
+    font-size: 10.5px; letter-spacing: 0.1em; text-transform: uppercase;
+    color: var(--fg-dim);
+    font-weight: 500;
+  }
+  .compare-row .axis {
+    font-family: var(--f-mono);
+    font-size: 11px; letter-spacing: 0.06em; text-transform: uppercase;
+    color: var(--fg-dim);
+  }
+  .compare-row .winner {
+    background: rgba(223,255,0,0.04);
+    color: var(--fg);
+  }
+  .compare-row .winner strong { color: var(--accent); }
+
+  /* Mentor annotation */
+  .mentor {
+    margin: 40px 0;
+    padding: 24px 28px;
+    background: linear-gradient(180deg, rgba(223,255,0,0.04), transparent);
+    border-left: 2px solid var(--accent);
+    font-family: var(--f-editorial);
+    font-size: 17px; line-height: 1.55; color: var(--fg);
+  }
+  .mentor .marker {
+    display: block;
+    font-family: var(--f-mono);
+    font-size: 10px; letter-spacing: 0.1em; text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 10px;
+  }
+  .mentor .marker .star { color: var(--accent); }
+
+  /* Recommendation footer */
+  .recommendation {
+    background: linear-gradient(135deg, rgba(223,255,0,0.06), var(--bg-elev) 60%);
+    border-top: 1px solid var(--accent-line);
+    padding: 96px 32px;
+  }
+  .recommendation-inner {
+    max-width: 720px; margin: 0 auto;
+  }
+  .recommendation .label {
+    font-family: var(--f-mono);
+    font-size: 11px; letter-spacing: 0.16em; text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 20px;
+  }
+  .recommendation h2 {
+    font-family: var(--f-display);
+    font-weight: 500; font-size: clamp(32px, 4vw, 48px);
+    line-height: 1.1; letter-spacing: -0.02em;
+    color: var(--fg);
+    margin-bottom: 20px;
+  }
+  .recommendation .why {
+    font-family: var(--f-editorial);
+    font-size: 18px; line-height: 1.7; color: var(--fg-mid);
+    margin-bottom: 36px;
+  }
+  .recommendation .actions { display: flex; gap: 12px; }
+  .btn-primary {
+    display: inline-flex; align-items: center; gap: 8px;
+    padding: 14px 24px;
+    background: var(--accent); color: var(--bg);
+    font-family: var(--f-mono);
+    font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase;
+    font-weight: 700; border-radius: 5px;
+    border: 0; cursor: pointer;
+  }
+  .btn-primary:hover { background: #f0ff66; }
+  .btn-secondary {
+    display: inline-flex; align-items: center; gap: 6px;
+    padding: 13px 20px;
+    color: var(--fg);
+    font-family: var(--f-mono);
+    font-size: 10px; letter-spacing: 0.1em; text-transform: uppercase;
+    border: 1px solid var(--line);
+    background: transparent;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  .btn-secondary:hover { border-color: var(--fg-mid); }
+
+  /* Footer attribution */
+  .footer {
+    padding: 64px 32px;
+    border-top: 1px solid var(--line);
+    text-align: center;
+    color: var(--fg-dim);
+  }
+  .footer .attribution {
+    font-family: var(--f-mono);
+    font-size: 10.5px; letter-spacing: 0.08em; text-transform: uppercase;
+    margin-bottom: 8px;
+  }
+  .footer .attribution .star { color: var(--accent); }
+  .footer .meta {
+    font-family: var(--f-editorial);
+    font-size: 13px; color: var(--fg-mid);
+    font-style: italic;
+  }
+
+  ::selection { background: rgba(223,255,0,0.30); color: var(--fg); }
+</style>
+</head>
+
+<body>
+
+<div class="scroll-progress" id="scrollProgress"></div>
+
+<div class="topbar">
+  <a class="brand" href="../"><img src="../images/logo.svg" alt="Kilonova" /></a>
+  <div class="breadcrumb">
+    <span>MIND</span>
+    <span style="color:var(--fg-faint);">/</span>
+    <span>NICHOLAS</span>
+    <span style="color:var(--fg-faint);">/</span>
+    <span>Decision Brief · Q3 GTM</span>
+  </div>
+  <a class="back" href="../">
+    <i class="ph ph-arrow-left"></i>
+    BACK TO COMMAND
+  </a>
+</div>
+
+<!-- Cinematic cover -->
+<div class="cover">
+  <div class="eyebrow">Decision Brief · Q3 GTM motion</div>
+  <h1>
+    Lead with <span class="accent">Authority</span>, not <span class="em">Growth Campaign</span> — and treat the founder-OS waitlist as a downstream beneficiary, not a destination.
+  </h1>
+  <div class="lede">
+    Kilonova has two viable Q3 motions. The substrate now contains enough customer truth and competitive signal to weigh them against each other. The council deliberated four perspectives. They converged on Authority — but for a non-obvious reason.
+  </div>
+  <div class="meta">
+    <span><strong>Composed by</strong> ★ COUNCIL · 4 souls</span>
+    <span><strong>Synthesized by</strong> HELENA · Gladwell + Feynman + Gawande</span>
+    <span><strong>Substrate read</strong> 247 claims · 412 edges · 38 source-tracked signals</span>
+    <span><strong>Composed</strong> 2026-05-14 · 14:08</span>
+  </div>
+  <div class="scroll-cue">↓ scroll to read · 11 min</div>
+</div>
+
+<!-- Chapter zero · the question -->
+<div class="chapter-zero">
+  <div class="chapter-zero-inner">
+    <p>You came in with a real trade-off, not a sequencing question. Both motions have signal in the substrate: the <mark class="kn">founder-OS waitlist</mark> is filling, and the <mark class="kn">Authority Avatar</mark>'s LinkedIn anchor just hit signature engagement. You asked which one to put your weight behind in Q3.</p>
+    <p>The wrong answer would be: <em>"do both, sequence them."</em> That sounds reasonable but quietly fails — running both at half-power produces neither validation nor compounding. The substrate is clear on this: half-runs miss the moment.</p>
+    <p>The right answer turns out to depend on a question you didn't ask: <mark class="kn">which motion makes the OTHER one easier later?</mark></p>
+  </div>
+</div>
+
+<!-- Chapter 1 -->
+<section class="chapter">
+  <div class="chapter-inner">
+    <div class="kicker"><span class="num">01</span><span>The two motions</span><span class="line"></span></div>
+    <h2>What we're actually choosing between</h2>
+
+    <div class="prose">
+      <p>Authority is the move where Kilonova publishes thought leadership at the rate the substrate can support — drafts compound through the Authority Avatar, the soundbite library hardens, the territory of <mark class="kn">"AI-native company building"</mark> gets staked publicly. The funnel is <em>indirect</em>: founders who read the work qualify themselves into the waitlist.</p>
+
+      <p>Growth Campaign is the move where Kilonova runs a paid + outbound push for the founder-OS waitlist directly. The funnel is <em>direct</em>: ads → landing page → signups. The Avatars optimize copy variations. The metric is conversion rate and CAC.</p>
+
+      <div class="pull-quote">
+        Both motions can ship. The question is which one we put behind. The substrate suggests the answer isn't symmetric.
+        <cite>— Council deliberation · turn 7</cite>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Hero figure -->
+<figure class="hero-figure">
+  <div class="figure-inner">
+    <div class="placeholder">
+      <span class="label">Figure 01 · Funnel comparison</span>
+      <span class="desc">Authority motion: indirect funnel, slow start, compounding tail. Growth Campaign: direct funnel, fast start, flat tail. The shapes are not the same — and the tails matter more than the starts.</span>
+    </div>
+    <figcaption>Authority's compounding tail vs Growth Campaign's flat one · per substrate claim cluster #047</figcaption>
+  </div>
+</figure>
+
+<!-- Chapter 2 -->
+<section class="chapter">
+  <div class="chapter-inner">
+    <div class="kicker"><span class="num">02</span><span>What the council saw</span><span class="line"></span></div>
+    <h2>Four perspectives, one convergence</h2>
+
+    <div class="prose">
+      <p>The council deliberated four souls. Christensen looked at the jobs-to-be-done by your buyer. Wardley mapped the position evolution of the territory. Munger inverted — what would have to be true for the WRONG choice. Minto structured the argument.</p>
+
+      <p>They converged on Authority. Here's why each got there.</p>
+    </div>
+
+    <div class="compare">
+      <div class="compare-row header">
+        <div>Soul</div>
+        <div>Authority motion</div>
+        <div>Growth Campaign motion</div>
+      </div>
+
+      <div class="compare-row">
+        <div class="axis">★ Christensen</div>
+        <div class="winner"><strong>Wins on JTBD.</strong> Buyer's job-to-be-done isn't "find a product to sign up for" — it's "figure out what AI-native company building actually means." Authority IS that figure-out moment.</div>
+        <div>Loses on JTBD. Direct funnel asks for commitment before the buyer has done their thinking.</div>
+      </div>
+
+      <div class="compare-row">
+        <div class="axis">★ Wardley</div>
+        <div class="winner"><strong>Wins on positioning evolution.</strong> Authority moves the entire category boundary (substrate-first, Avatars-not-agents). Growth Campaign optimizes within the existing boundary.</div>
+        <div>Wins on short-term volume but loses on category ownership.</div>
+      </div>
+
+      <div class="compare-row">
+        <div class="axis">★ Munger (inverted)</div>
+        <div>Authority fails IF the territory is already crowded. Substrate signal: 6 owned territories, 3 white-space openings. Not crowded.</div>
+        <div class="winner">Growth Campaign would only be the right call if the buyer was already convinced and just needed to find the form. Substrate signal says they're NOT convinced.</div>
+      </div>
+
+      <div class="compare-row">
+        <div class="axis">★ Minto</div>
+        <div class="winner"><strong>Argument structures cleanly:</strong> the moves are not symmetric — Authority makes Growth Campaign easier later (warm leads, brand recognition). Growth Campaign does NOT make Authority easier later (it would dilute the brand voice with conversion-optimized copy).</div>
+        <div>Asymmetric in the wrong direction.</div>
+      </div>
+    </div>
+
+    <div class="prose">
+      <p>The convergence was not on which motion is "better" in isolation. It's on which motion makes the OTHER one easier later. Authority warms the ground for a Growth Campaign that would convert at 3-4× the rate it would today. The reverse isn't true.</p>
+    </div>
+  </div>
+</section>
+
+<!-- Chapter 3 · stats -->
+<section class="chapter">
+  <div class="chapter-inner">
+    <div class="kicker"><span class="num">03</span><span>The numbers</span><span class="line"></span></div>
+    <h2>What the substrate says</h2>
+
+    <div class="prose">
+      <p>The substrate has been watching this for 11 weeks. Some of the signal:</p>
+    </div>
+
+    <div class="stat-row">
+      <div class="stat">
+        <span class="num">3.4×</span>
+        <span class="label">Authority engagement</span>
+        <span class="body">"Other tools answer questions" post · last Mon · 3.4× normal baseline. Signature soundbite emerged from one shipped post.</span>
+      </div>
+      <div class="stat">
+        <span class="num">247</span>
+        <span class="label">Substrate claims</span>
+        <span class="body">Up from 178 four weeks ago. The brain is hardening — drafts get sharper, not flatter.</span>
+      </div>
+      <div class="stat">
+        <span class="num">38</span>
+        <span class="label">Source-tracked signals</span>
+        <span class="body">Including 4 customer-call instances of "Other tools answer..." resurfacing in pitch conversations unprompted.</span>
+      </div>
+    </div>
+
+    <div class="prose">
+      <p>The growth-campaign side has signal too: the waitlist landing page converts at 3.2% — solid for a cold-traffic funnel. But the qualifier is buried in the substrate: <mark class="kn">5 of the 7 highest-engaged signups came from a thread reply, not the ad creative</mark>. The form was there to capture intent that Authority had already produced.</p>
+    </div>
+  </div>
+</section>
+
+<!-- Mentor pull -->
+<section class="chapter">
+  <div class="chapter-inner">
+    <div class="mentor">
+      <span class="marker"><span class="star">★</span> KILONOVA</span>
+      The cleanest version of this decision: Authority IS the GTM motion. The waitlist is a measurement instrument, not a destination. Treat signups as <em>signal</em>, not <em>conversion</em>. Sequence Growth Campaign in Q4 once the territory is staked publicly.
+    </div>
+  </div>
+</section>
+
+<!-- Chapter 4 · risks -->
+<section class="chapter">
+  <div class="chapter-inner">
+    <div class="kicker"><span class="num">04</span><span>What this could miss</span><span class="line"></span></div>
+    <h2>The risks worth naming</h2>
+
+    <div class="prose">
+      <p><strong>Risk 1 · Authority is slow.</strong> If runway tightens mid-Q3, you'll wish you had Growth Campaign already running. The mitigation: Growth Campaign is <em>warm</em>, not cold — the infra is built, the Avatar is configured, the landing page is live. Switching it on takes a week, not a month.</p>
+
+      <p><strong>Risk 2 · Authority depends on you.</strong> Bruno's voice is the asset. The Authority Avatar can draft, but the calibration loop is your ratify rate. If your attention drops, the Avatar's drafts drift. Mitigation: this is what the Reviewer Avatar exists for — quality gate before founder queue, so you don't have to read every draft.</p>
+
+      <p><strong>Risk 3 · Adjacent voices catch up.</strong> Lindy's "persistent agents" framing is in the same neighborhood. If they sharpen first, your distinction blurs. Mitigation: the Avatar/agent distinction is in the substrate as a load-bearing claim — every Authority Avatar draft references it, hardening the position daily.</p>
+    </div>
+  </div>
+</section>
+
+<!-- Recommendation -->
+<div class="recommendation">
+  <div class="recommendation-inner">
+    <div class="label">★ COUNCIL · recommendation</div>
+    <h2>Approve Authority as the Q3 motion. Hold Growth Campaign warm for Q4 trigger.</h2>
+    <div class="why">
+      Authority compounds; Growth Campaign converts. The substrate is in the compounding phase, not the conversion phase. Approving this unblocks the Authority Avatar's full Q3 cadence (3 LinkedIn posts/week + weekly newsletter + 1 podcast/month + 2 talks). It also unblocks the Narrative Ratchet Machine (currently locked behind this brief). Growth Campaign can fire in Q4 with 3-4× warmer ground than it would have today.
+    </div>
+    <div class="actions">
+      <button class="btn-primary"><i class="ph ph-check"></i> APPROVE THIS BRIEF</button>
+      <button class="btn-secondary">RESHAPE WITH A SENTENCE</button>
+      <button class="btn-secondary">SEND BACK</button>
+    </div>
+  </div>
+</div>
+
+<!-- Footer attribution -->
+<div class="footer">
+  <div class="attribution">
+    <span class="star">★</span> COUNCIL · 4 souls · synthesized by HELENA · grounded in 247 substrate claims
+  </div>
+  <div class="meta">
+    Editorial Page · canonical Kilonova output format · v0.4 template · composed 2026-05-14
+  </div>
+</div>
+
+<script>
+  // Scroll progress bar
+  const progress = document.getElementById('scrollProgress');
+  function updateProgress() {
+    const h = document.documentElement;
+    const scrollTop = h.scrollTop || document.body.scrollTop;
+    const scrollHeight = h.scrollHeight - h.clientHeight;
+    const pct = scrollHeight > 0 ? (scrollTop / scrollHeight) * 100 : 0;
+    progress.style.width = pct + '%';
+  }
+  document.addEventListener('scroll', updateProgress, { passive: true });
+  window.addEventListener('resize', updateProgress);
+  updateProgress();
+</script>
+
+</body>
+</html>

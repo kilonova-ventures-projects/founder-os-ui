@@ -2020,7 +2020,7 @@
         <span class="tip">FOUNDER</span>
       </button>
       <div class="nav-bottom"></div>
-      <button class="nav-item" aria-label="Settings">
+      <button class="nav-item" data-surface="settings" aria-label="Settings">
         <i class="ph ph-sliders"></i>
         <span class="tip">SETTINGS</span>
       </button>
@@ -2067,8 +2067,8 @@
                   </div>
                 </div>
                 <div class="hero-action">
-                  <button class="btn-primary">APPROVE THE BRIEF <i class="ph ph-arrow-right"></i></button>
-                  <button class="btn-secondary">PREVIEW</button>
+                  <button class="btn-primary" onclick="window.location.href='editorial/'">APPROVE THE BRIEF <i class="ph ph-arrow-right"></i></button>
+                  <button class="btn-secondary" onclick="window.location.href='editorial/'">PREVIEW</button>
                 </div>
               </div>
             </div>
@@ -2554,7 +2554,7 @@
                   <span class="mentor-marker"><span class="star">★</span> KILONOVA</span> &middot; This is the longest-slipping commitment standing — and it's also the one blocking the most downstream work. Channels can't ship without the GTM positioning anchor. Worth a 30-min review with the council to either ratify the current synthesis or renegotiate the timeline.
                 </div>
                 <div class="actions">
-                  <button class="btn-primary" style="font-size:10px;padding:9px 14px;">REVIEW SYNTHESIS</button>
+                  <button class="btn-primary" style="font-size:10px;padding:9px 14px;" onclick="window.location.href='editorial/'">REVIEW SYNTHESIS</button>
                   <button class="btn-secondary">RENEGOTIATE</button>
                   <button class="btn-secondary">DELIVER AS-IS</button>
                 </div>
@@ -3798,7 +3798,7 @@
               <span class="mentor-marker"><span class="star">★</span> KILONOVA</span> &middot; The narrative refresh depends on the Q3 positioning anchor. Without that ratified, the Narrative Avatar would draft against stale ground. Once you approve the brief, this machine wakes automatically and absorbs the new positioning into the messaging house, deck, and homepage.
             </div>
             <div style="display:flex;gap:8px;">
-              <button class="btn-primary" style="font-size:10px;padding:9px 14px;" onclick="document.querySelector('.tab[data-tab=control-panel]')?.click(); document.querySelector('[data-surface=command]')?.click();">REVIEW THE BRIEF</button>
+              <button class="btn-primary" style="font-size:10px;padding:9px 14px;" onclick="window.location.href='editorial/'">REVIEW THE BRIEF</button>
             </div>
           </div>
 
@@ -3818,6 +3818,251 @@
         </div>
 
       </section>
+      <!-- ===== SURFACE · SETTINGS ===== -->
+      <section class="surface" id="surface-settings">
+
+        <div class="cluster-tabs">
+          <button class="ctab active" data-csub="settings" data-target="account">Account</button>
+          <button class="ctab" data-csub="settings" data-target="integrations">Integrations</button>
+          <button class="ctab" data-csub="settings" data-target="pilot">Pilot</button>
+          <button class="ctab" data-csub="settings" data-target="theme">Theme</button>
+          <span class="ctab-meta">Bruno · Kilonova · plan: Founder OS Beta</span>
+        </div>
+
+        <div class="csurface active" data-cs="settings-account">
+          <div class="page-head">
+            <div class="left">
+              <h1>Account</h1>
+              <div class="sub">Profile · billing · workspace</div>
+            </div>
+          </div>
+
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;">
+
+            <div class="block">
+              <div class="block-header"><span class="eyebrow">Profile</span></div>
+              <div style="display:flex;align-items:center;gap:14px;padding:6px 0;">
+                <img src="images/avatar.jpg" alt="" style="width:48px;height:48px;border-radius:50%;border:1px solid var(--line-strong);">
+                <div>
+                  <div style="font-family:var(--f-display);font-size:15px;font-weight:500;color:var(--fg);">Bruno Ahualli</div>
+                  <div style="font-size:11.5px;color:var(--fg-dim);">bruno@kilonova.ventures</div>
+                </div>
+              </div>
+              <div class="block-foot"><a href="#">Edit profile →</a></div>
+            </div>
+
+            <div class="block">
+              <div class="block-header"><span class="eyebrow">Workspace</span></div>
+              <div style="display:flex;flex-direction:column;gap:6px;padding:4px 0;">
+                <div style="font-family:var(--f-display);font-size:14px;font-weight:500;color:var(--fg);">Kilonova</div>
+                <div style="font-size:11.5px;color:var(--fg-dim);">Multi-tenant · 1 founder · 2 pilot ops</div>
+                <div style="font-size:11.5px;color:var(--fg-dim);">Substrate · 247 claims · 412 edges</div>
+              </div>
+              <div class="block-foot"><a href="#">Manage workspace →</a></div>
+            </div>
+
+            <div class="block">
+              <div class="block-header"><span class="eyebrow">Plan</span></div>
+              <div style="display:flex;flex-direction:column;gap:6px;padding:4px 0;">
+                <div style="font-family:var(--f-display);font-size:14px;font-weight:500;color:var(--fg);">Founder OS Beta</div>
+                <div style="font-size:11.5px;color:var(--fg-dim);">Avatars: 6 primary + 2 system · unlimited substrate · pilot included</div>
+              </div>
+              <div class="block-foot"><a href="#">View billing →</a></div>
+            </div>
+
+            <div class="block">
+              <div class="block-header"><span class="eyebrow">Security</span></div>
+              <div style="display:flex;flex-direction:column;gap:6px;padding:4px 0;">
+                <div style="font-size:12.5px;color:var(--fg);">Two-factor · enabled</div>
+                <div style="font-size:12.5px;color:var(--fg);">Sessions · 2 active</div>
+                <div style="font-size:11.5px;color:var(--fg-dim);">Last sign-in · today 09:14</div>
+              </div>
+              <div class="block-foot"><a href="#">Security settings →</a></div>
+            </div>
+
+          </div>
+        </div>
+
+        <div class="csurface" data-cs="settings-integrations">
+          <div class="page-head">
+            <div class="left">
+              <h1>Integrations</h1>
+              <div class="sub">External sources Avatars and machines pull from</div>
+            </div>
+          </div>
+
+          <div style="display:flex;flex-direction:column;gap:8px;">
+
+            <div class="work-row">
+              <span class="marker done"><i class="ph ph-check-circle-fill"></i></span>
+              <div class="body">
+                <div class="nm">LinkedIn · publishing + analytics</div>
+                <div class="meta">Connected · Authority Avatar · Channels capability · last sync 4m ago</div>
+              </div>
+              <span class="pill" style="background:transparent;color:var(--fg-dim);border:1px solid var(--line);">CONNECTED</span>
+              <div class="actions"><button class="btn-secondary">MANAGE</button></div>
+            </div>
+
+            <div class="work-row">
+              <span class="marker done"><i class="ph ph-check-circle-fill"></i></span>
+              <div class="body">
+                <div class="nm">Twitter / X · publishing + listening</div>
+                <div class="meta">Connected · Listening + Authority Avatar · last sync 12m ago</div>
+              </div>
+              <span class="pill" style="background:transparent;color:var(--fg-dim);border:1px solid var(--line);">CONNECTED</span>
+              <div class="actions"><button class="btn-secondary">MANAGE</button></div>
+            </div>
+
+            <div class="work-row">
+              <span class="marker done"><i class="ph ph-check-circle-fill"></i></span>
+              <div class="body">
+                <div class="nm">Google Calendar · pilot scheduling</div>
+                <div class="meta">Connected · Book a Call · auto-prep 24h ahead</div>
+              </div>
+              <span class="pill" style="background:transparent;color:var(--fg-dim);border:1px solid var(--line);">CONNECTED</span>
+              <div class="actions"><button class="btn-secondary">MANAGE</button></div>
+            </div>
+
+            <div class="work-row">
+              <span class="marker pending"><i class="ph ph-circle"></i></span>
+              <div class="body">
+                <div class="nm">Stripe · investor update metrics</div>
+                <div class="meta">Not connected · would feed IR Machine + Insights</div>
+              </div>
+              <span class="pill ratify">CONNECT</span>
+              <div class="actions"><button class="btn-secondary">CONNECT</button></div>
+            </div>
+
+            <div class="work-row">
+              <span class="marker pending"><i class="ph ph-circle"></i></span>
+              <div class="body">
+                <div class="nm">Substack · newsletter publishing</div>
+                <div class="meta">Not connected · would activate newsletter cadence</div>
+              </div>
+              <span class="pill ratify">CONNECT</span>
+              <div class="actions"><button class="btn-secondary">CONNECT</button></div>
+            </div>
+
+            <div class="work-row">
+              <span class="marker pending"><i class="ph ph-circle"></i></span>
+              <div class="body">
+                <div class="nm">Notion · meeting notes ingest</div>
+                <div class="meta">Not connected · would auto-ingest into Memory</div>
+              </div>
+              <span class="pill ready">OPTIONAL</span>
+              <div class="actions"><button class="btn-secondary">CONNECT</button></div>
+            </div>
+
+          </div>
+        </div>
+
+        <div class="csurface" data-cs="settings-pilot">
+          <div class="page-head">
+            <div class="left">
+              <h1>Pilot</h1>
+              <div class="sub">Your assigned Kilonova pilot operator</div>
+            </div>
+          </div>
+
+          <div style="background:var(--bg-elev-1);border:1px solid var(--line);border-radius:10px;padding:22px 26px;display:flex;flex-direction:column;gap:14px;">
+            <div style="display:flex;align-items:center;gap:14px;">
+              <div style="width:54px;height:54px;border-radius:50%;background:var(--bg-elev-3);display:flex;align-items:center;justify-content:center;font-family:var(--f-display);font-size:22px;font-weight:500;color:var(--fg);">J</div>
+              <div>
+                <div style="font-family:var(--f-display);font-size:18px;font-weight:500;color:var(--fg);">Johnny Mendes</div>
+                <div style="font-size:12px;color:var(--fg-dim);">Pilot operator · since founding · johnny@kilonova.ventures</div>
+              </div>
+              <div style="margin-left:auto;display:flex;gap:8px;">
+                <button class="btn-secondary"><i class="ph ph-calendar-blank"></i> BOOK CALL</button>
+                <button class="btn-secondary">MESSAGE</button>
+              </div>
+            </div>
+            <div style="display:flex;gap:24px;font-family:var(--f-mono);font-size:11px;color:var(--fg-dim);letter-spacing:0.04em;text-transform:uppercase;padding-top:14px;border-top:1px solid var(--line);">
+              <span><strong style="color:var(--fg);">42</strong> calls · all-time</span>
+              <span><strong style="color:var(--fg);">14h</strong> avg response</span>
+              <span><strong style="color:var(--fg);">94%</strong> founder ratify rate</span>
+              <span><strong style="color:var(--fg);">8</strong> hours / onboarding (pre-seed)</span>
+            </div>
+          </div>
+
+          <div style="margin-top:18px;">
+            <div class="commit-section-head">
+              <span class="ttl">What pilot operates</span>
+              <span class="meta">behind the scenes</span>
+            </div>
+            <div style="display:grid;grid-template-columns:repeat(2,1fr);gap:8px;">
+              <div class="wi-link-row">
+                <span class="marker done"><i class="ph ph-check"></i></span>
+                <span>Substrate curation · membrane crossings</span>
+              </div>
+              <div class="wi-link-row">
+                <span class="marker done"><i class="ph ph-check"></i></span>
+                <span>Avatar configuration · soul tuning</span>
+              </div>
+              <div class="wi-link-row">
+                <span class="marker done"><i class="ph ph-check"></i></span>
+                <span>Quality gate · Reviewer Avatar oversight</span>
+              </div>
+              <div class="wi-link-row">
+                <span class="marker done"><i class="ph ph-check"></i></span>
+                <span>Mentor authoring · ★ KILONOVA annotations</span>
+              </div>
+              <div class="wi-link-row">
+                <span class="marker done"><i class="ph ph-check"></i></span>
+                <span>Onboarding extraction · FIRST READ pre-seed</span>
+              </div>
+              <div class="wi-link-row">
+                <span class="marker done"><i class="ph ph-check"></i></span>
+                <span>Signal interpretation · proposal to substrate</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="csurface" data-cs="settings-theme">
+          <div class="page-head">
+            <div class="left">
+              <h1>Theme</h1>
+              <div class="sub">Visual register · accessibility</div>
+            </div>
+          </div>
+
+          <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:12px;">
+
+            <div class="block" style="border-color:var(--accent-line);">
+              <div class="block-header"><span class="eyebrow">Default · dark</span><span class="pill ratify">ACTIVE</span></div>
+              <div style="display:flex;flex-direction:column;gap:6px;padding:8px 0;">
+                <div style="height:60px;background:#0a0a0a;border:1px solid var(--line);border-radius:4px;display:flex;align-items:center;justify-content:center;">
+                  <div style="width:24px;height:24px;background:var(--accent);border-radius:4px;"></div>
+                </div>
+                <div style="font-size:11.5px;color:var(--fg-dim);">Editorial register · chartreuse accent</div>
+              </div>
+            </div>
+
+            <div class="block" style="opacity:0.6;">
+              <div class="block-header"><span class="eyebrow">Light</span><span class="pill ready">SOON</span></div>
+              <div style="display:flex;flex-direction:column;gap:6px;padding:8px 0;">
+                <div style="height:60px;background:#f8f8f5;border:1px solid #ddd;border-radius:4px;display:flex;align-items:center;justify-content:center;">
+                  <div style="width:24px;height:24px;background:var(--accent-dark);border-radius:4px;"></div>
+                </div>
+                <div style="font-size:11.5px;color:var(--fg-dim);">Print-leaning · for daytime work</div>
+              </div>
+            </div>
+
+            <div class="block" style="opacity:0.6;">
+              <div class="block-header"><span class="eyebrow">High contrast</span><span class="pill ready">SOON</span></div>
+              <div style="display:flex;flex-direction:column;gap:6px;padding:8px 0;">
+                <div style="height:60px;background:#000;border:1px solid #fff;border-radius:4px;display:flex;align-items:center;justify-content:center;">
+                  <div style="width:24px;height:24px;background:#fff;border-radius:4px;"></div>
+                </div>
+                <div style="font-size:11.5px;color:var(--fg-dim);">Accessibility · WCAG AAA</div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+      </section>
+
       <section class="surface" id="surface-founder">
 
         <div class="cluster-tabs">
