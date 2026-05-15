@@ -1943,13 +1943,13 @@
     border-radius: 8px;
     padding: 12px 16px;
     display: grid;
-    grid-template-columns: auto 1fr auto auto;
+    grid-template-columns: auto 1fr auto;
     column-gap: 14px;
     align-items: center;
     cursor: pointer;
-    transition: border-color 0.12s;
+    transition: border-color 0.12s, background 0.12s;
   }
-  .work-row:hover { border-color: var(--line-strong); }
+  .work-row:hover { border-color: var(--line-strong); background: var(--bg-elev-2); }
   .work-row .marker { width: 18px; height: 18px; }
   .work-row .marker i { font-size: 16px; }
   .work-row .body { display: flex; flex-direction: column; gap: 3px; min-width: 0; }
@@ -1960,9 +1960,8 @@
   .work-row .meta {
     font-family: var(--f-mono); font-size: 10px; color: var(--fg-dim);
     letter-spacing: 0.04em;
+    overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
   }
-  .work-row .actions { display: flex; gap: 6px; }
-  .work-row .actions .btn-secondary { font-size: 9px; padding: 6px 10px; }
   .work-row.locked { opacity: 0.55; }
 
   /* =================================================== */
@@ -4257,15 +4256,7 @@
           <div class="page-head">
             <div class="left">
               <h1>Founder Authority Machine</h1>
-              <div class="sub">First proof Machine per Bruno's Canon · Authority Avatar produces public-facing thought leadership</div>
-              <div class="meta" style="margin-top:6px;">
-                <span style="display:inline-flex;align-items:center;gap:6px;">
-                  <span class="sigil sigil-16"><svg viewBox="0 0 24 24"><polygon class="stroke" points="12,3 21,20 3,20"/></svg></span>
-                  Authority Avatar · primary
-                </span>
-                <span class="pill family world">→ WORLD</span>
-                <span class="pill in-flight">RUNNING</span>
-              </div>
+              <div class="sub">Authority Avatar produces public-facing thought leadership · first proof Machine per Bruno's Canon</div>
             </div>
             <div class="right">
               <button class="btn-secondary">+ NEW</button>
@@ -4286,36 +4277,27 @@
                   <span class="marker pending"><i class="ph ph-circle"></i></span>
                   <div class="body">
                     <div class="nm">"Compounding intelligence" LinkedIn long-form draft</div>
-                    <div class="meta">Authority Avatar · drafted 12m ago · 720 words · Reviewer Avatar passed</div>
+                    <div class="meta">Authority Avatar · 12m ago · 720 words · Reviewer passed</div>
                   </div>
                   <span class="pill ratify">APPROVE</span>
-                  <div class="actions">
-                    <button class="btn-secondary">PREVIEW</button>
-                  </div>
                 </div>
 
                 <div class="work-row" onclick="openWorkItem()">
                   <span class="marker pending"><i class="ph ph-circle"></i></span>
                   <div class="body">
                     <div class="nm">"Other tools answer questions" → newsletter expansion</div>
-                    <div class="meta">Authority Avatar · drafted 2h ago · 1,200 words · 3 soundbites embedded</div>
+                    <div class="meta">Authority Avatar · 2h ago · 1,200 words · 3 soundbites embedded</div>
                   </div>
                   <span class="pill ratify">APPROVE</span>
-                  <div class="actions">
-                    <button class="btn-secondary">PREVIEW</button>
-                  </div>
                 </div>
 
                 <div class="work-row" onclick="openWorkItem()">
                   <span class="marker pending"><i class="ph ph-circle"></i></span>
                   <div class="body">
                     <div class="nm">Talk pitch · "Avatars vs Agents" for AI Engineer Summit</div>
-                    <div class="meta">Authority Avatar · 1d ago · 200-word abstract · Speaking Avatar collaborating</div>
+                    <div class="meta">Authority Avatar · 1d ago · 200-word abstract</div>
                   </div>
                   <span class="pill your-call">YOUR CALL</span>
-                  <div class="actions">
-                    <button class="btn-secondary">REVIEW</button>
-                  </div>
                 </div>
 
               </div>
@@ -4332,20 +4314,18 @@
                   <span class="sigil sigil-20"><svg viewBox="0 0 24 24"><polygon class="stroke" points="12,3 21,20 3,20"/></svg></span>
                   <div class="body">
                     <div class="nm">Drafting "ICP shift signals" · LinkedIn long-form</div>
-                    <div class="meta">Authority Avatar · started 12m ago · ETA ~8m · 64% complete</div>
+                    <div class="meta">Authority Avatar · 12m · ETA ~8m · 64%</div>
                   </div>
                   <span class="pill in-flight">RUNNING</span>
-                  <div class="actions"></div>
                 </div>
 
                 <div class="work-row">
                   <span class="sigil sigil-20"><svg viewBox="0 0 24 24"><polygon class="stroke-system" points="6,3 18,3 22,12 18,21 6,21 2,12"/></svg></span>
                   <div class="body">
                     <div class="nm">Gating Authority Avatar's draft before queue</div>
-                    <div class="meta">Reviewer Avatar · started 2m ago · ETA &lt;1m · 90% complete</div>
+                    <div class="meta">Reviewer Avatar · 2m · ETA &lt;1m · 90%</div>
                   </div>
                   <span class="pill in-flight">RUNNING</span>
-                  <div class="actions"></div>
                 </div>
 
               </div>
@@ -4362,30 +4342,27 @@
                   <span class="marker done"><i class="ph ph-check-circle-fill"></i></span>
                   <div class="body">
                     <div class="nm">"Watch your decision get built" LinkedIn post</div>
-                    <div class="meta">Shipped Mon · 3.4× normal engagement · soundbite promoted</div>
+                    <div class="meta">Mon · 3.4× engagement · soundbite promoted</div>
                   </div>
-                  <span class="pill" style="background:transparent;color:var(--fg-dim);border:1px solid var(--line);">SHIPPED</span>
-                  <div class="actions"></div>
+                  <span style="font-family:var(--f-mono);font-size:10px;color:var(--fg-dim);letter-spacing:0.04em;">3 days ago</span>
                 </div>
 
                 <div class="work-row">
                   <span class="marker done"><i class="ph ph-check-circle-fill"></i></span>
                   <div class="body">
                     <div class="nm">Newsletter · "Why we don't say agents"</div>
-                    <div class="meta">Shipped Mon · 1,400 words · 24% open · 8% click</div>
+                    <div class="meta">Mon · 1,400 words · 24% open · 8% click</div>
                   </div>
-                  <span class="pill" style="background:transparent;color:var(--fg-dim);border:1px solid var(--line);">SHIPPED</span>
-                  <div class="actions"></div>
+                  <span style="font-family:var(--f-mono);font-size:10px;color:var(--fg-dim);letter-spacing:0.04em;">3 days ago</span>
                 </div>
 
                 <div class="work-row">
                   <span class="marker done"><i class="ph ph-check-circle-fill"></i></span>
                   <div class="body">
                     <div class="nm">Twitter thread · founder time scarcity (5 tweets)</div>
-                    <div class="meta">Shipped Sun · 87 retweets · 4 inbound DMs</div>
+                    <div class="meta">Sun · 87 RTs · 4 inbound DMs</div>
                   </div>
-                  <span class="pill" style="background:transparent;color:var(--fg-dim);border:1px solid var(--line);">SHIPPED</span>
-                  <div class="actions"></div>
+                  <span style="font-family:var(--f-mono);font-size:10px;color:var(--fg-dim);letter-spacing:0.04em;">4 days ago</span>
                 </div>
 
               </div>
@@ -4394,22 +4371,15 @@
           </div>
         </div>
 
-        <!-- Other machine stubs (lighter content) -->
+        <!-- Growth Campaign Machine -->
         <div class="csurface" data-cs="machines-growth">
           <div class="page-head">
             <div class="left">
               <h1>Growth Campaign Machine</h1>
-              <div class="sub">Governed campaigns · assets · experiments · signal review</div>
-              <div class="meta" style="margin-top:6px;">
-                <span style="display:inline-flex;align-items:center;gap:6px;">
-                  <span class="sigil sigil-16"><svg viewBox="0 0 24 24"><polygon class="stroke" points="12,3 21,9 18,20 6,20 3,9"/></svg></span>
-                  Growth Avatar · primary
-                </span>
-                <span class="pill family world">→ WORLD</span>
-                <span class="pill ready">READY</span>
-              </div>
+              <div class="sub">Growth Avatar runs governed campaigns · assets · experiments · signal review</div>
             </div>
             <div class="right">
+              <button class="btn-secondary">CONFIGURE</button>
               <button class="btn-primary">+ NEW CAMPAIGN</button>
             </div>
           </div>
@@ -4420,23 +4390,21 @@
                 <span class="ttl">Active campaigns · 2</span>
               </div>
               <div style="display:flex;flex-direction:column;gap:8px;">
-                <div class="work-row">
+                <div class="work-row" onclick="openWorkItem()">
                   <span class="marker pending"><i class="ph ph-circle-half-tilt"></i></span>
                   <div class="body">
                     <div class="nm">Founder-OS waitlist · Q2 push</div>
-                    <div class="meta">Started 3w ago · 247 signups · CR 3.2% · ★ on track</div>
+                    <div class="meta">Growth Avatar · 3w · 247 signups · CR 3.2% · on track</div>
                   </div>
                   <span class="pill in-flight">RUNNING</span>
-                  <div class="actions"><button class="btn-secondary">REVIEW</button></div>
                 </div>
-                <div class="work-row">
+                <div class="work-row" onclick="openWorkItem()">
                   <span class="marker pending"><i class="ph ph-circle-half-tilt"></i></span>
                   <div class="body">
                     <div class="nm">"Avatars" positioning experiment · paid LinkedIn</div>
-                    <div class="meta">Started 1w ago · A/B testing 3 angles · early signal favors angle 2</div>
+                    <div class="meta">Growth Avatar · 1w · A/B 3 angles · favoring angle 2</div>
                   </div>
                   <span class="pill in-flight">RUNNING</span>
-                  <div class="actions"><button class="btn-secondary">REVIEW</button></div>
                 </div>
               </div>
             </div>
@@ -4447,18 +4415,11 @@
           <div class="page-head">
             <div class="left">
               <h1>Customer Truth Machine</h1>
-              <div class="sub">Calls, objections, support, market feedback metabolized into substrate</div>
-              <div class="meta" style="margin-top:6px;">
-                <span style="display:inline-flex;align-items:center;gap:6px;">
-                  <span class="sigil sigil-16"><svg viewBox="0 0 24 24"><polygon class="stroke" points="6,3 18,3 22,12 18,21 6,21 2,12"/></svg></span>
-                  Customer Truth Avatar · primary
-                </span>
-                <span class="pill family substrate">→ SUBSTRATE</span>
-                <span class="pill in-flight">RUNNING</span>
-              </div>
+              <div class="sub">Customer Truth Avatar metabolizes calls, objections, support, market feedback into substrate</div>
             </div>
             <div class="right">
-              <button class="btn-secondary">+ INGEST CALL</button>
+              <button class="btn-secondary">CONFIGURE</button>
+              <button class="btn-primary">+ INGEST CALL</button>
             </div>
           </div>
 
@@ -4472,37 +4433,43 @@
                   <span class="sigil sigil-20"><svg viewBox="0 0 24 24"><polygon class="stroke" points="6,3 18,3 22,12 18,21 6,21 2,12"/></svg></span>
                   <div class="body">
                     <div class="nm">MVH-04 transcript · 32 min</div>
-                    <div class="meta">28% complete · ETA ~14m · 6 candidate claims surfaced so far</div>
+                    <div class="meta">Customer Truth Avatar · 28% · ETA ~14m · 6 claims surfaced</div>
                   </div>
                   <span class="pill in-flight">RUNNING</span>
-                  <div class="actions"></div>
                 </div>
               </div>
             </div>
 
             <div class="machine-section">
               <div class="machine-section-head">
-                <span class="ttl">Recent claims surfaced · last 7d</span>
-                <span class="ct">12</span>
+                <span class="ttl">Approve · 1</span>
+                <span class="ct">claim candidates ready</span>
+              </div>
+              <div style="display:flex;flex-direction:column;gap:8px;">
+                <div class="work-row" onclick="openWorkItem()">
+                  <span class="marker pending"><i class="ph ph-circle"></i></span>
+                  <div class="body">
+                    <div class="nm">Founder objection: "agents vs avatars — what's the difference?" (×4)</div>
+                    <div class="meta">Pattern across 4 calls · 5d · positioning needs sharpening</div>
+                  </div>
+                  <span class="pill ratify">APPROVE</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="machine-section">
+              <div class="machine-section-head">
+                <span class="ttl">Recent claims ratified · last 7d</span>
+                <span class="ct">11</span>
               </div>
               <div style="display:flex;flex-direction:column;gap:8px;">
                 <div class="work-row">
                   <span class="marker done"><i class="ph ph-check-circle-fill"></i></span>
                   <div class="body">
-                    <div class="nm">Founder objection: "agents vs avatars — what's the difference?" (×4)</div>
-                    <div class="meta">Pattern across 4 calls last 5d · ★ KILONOVA: positioning needs sharpening</div>
-                  </div>
-                  <span class="pill ratify">APPROVE</span>
-                  <div class="actions"></div>
-                </div>
-                <div class="work-row">
-                  <span class="marker done"><i class="ph ph-check-circle-fill"></i></span>
-                  <div class="body">
                     <div class="nm">"Founder time scarcity" framing resonates (×3)</div>
-                    <div class="meta">Top phrase across recent positive calls · adds to signature soundbite</div>
+                    <div class="meta">Top phrase across positive calls · added to signature soundbite</div>
                   </div>
-                  <span class="pill" style="background:transparent;color:var(--fg-dim);border:1px solid var(--line);">RATIFIED</span>
-                  <div class="actions"></div>
+                  <span style="font-family:var(--f-mono);font-size:10px;color:var(--fg-dim);letter-spacing:0.04em;">2 days ago</span>
                 </div>
               </div>
             </div>
@@ -4513,17 +4480,10 @@
           <div class="page-head">
             <div class="left">
               <h1>Investor Relations Machine</h1>
-              <div class="sub">Structured narrative · outreach · objection capture · follow-up · update memos</div>
-              <div class="meta" style="margin-top:6px;">
-                <span style="display:inline-flex;align-items:center;gap:6px;">
-                  <span class="sigil sigil-16"><svg viewBox="0 0 24 24"><rect x="4" y="4" width="16" height="16" class="stroke"/></svg></span>
-                  IR Avatar · primary
-                </span>
-                <span class="pill family world">→ WORLD</span>
-                <span class="pill ready">READY</span>
-              </div>
+              <div class="sub">IR Avatar handles structured narrative · outreach · objection capture · update memos · cycle-paced</div>
             </div>
             <div class="right">
+              <button class="btn-secondary">CONFIGURE</button>
               <button class="btn-primary">+ NEW UPDATE</button>
             </div>
           </div>
@@ -4533,11 +4493,8 @@
               <div class="machine-section-head">
                 <span class="ttl">No active work · cycle-paced</span>
               </div>
-              <div class="body" style="padding:24px;background:var(--bg-elev-1);border:1px solid var(--line);border-radius:8px;color:var(--fg-mid);font-size:13px;line-height:1.55;">
-                Next investor update memo scheduled for end of month. IR Avatar wakes when:
-                <br>· Decision Brief outcome materially affects positioning
-                <br>· Quarter-end deliverables come due
-                <br>· Founder schedules an outreach push
+              <div style="padding:22px 24px;background:var(--bg-elev-1);border:1px solid var(--line);border-radius:8px;color:var(--fg-mid);font-size:13px;line-height:1.6;">
+                Next investor update memo scheduled for end of month. IR Avatar wakes when Decision Brief outcomes materially affect positioning, quarter-end deliverables come due, or founder schedules an outreach push.
               </div>
             </div>
 
@@ -4551,10 +4508,9 @@
                   <span class="marker done"><i class="ph ph-check-circle-fill"></i></span>
                   <div class="body">
                     <div class="nm">Q1 investor update · 8 LPs notified</div>
-                    <div class="meta">Shipped 3w ago · 6 of 8 acknowledged · 2 follow-up calls booked</div>
+                    <div class="meta">IR Avatar · 6 of 8 acknowledged · 2 follow-up calls booked</div>
                   </div>
-                  <span class="pill" style="background:transparent;color:var(--fg-dim);border:1px solid var(--line);">SHIPPED</span>
-                  <div class="actions"></div>
+                  <span style="font-family:var(--f-mono);font-size:10px;color:var(--fg-dim);letter-spacing:0.04em;">3 weeks ago</span>
                 </div>
               </div>
             </div>
@@ -4565,18 +4521,11 @@
           <div class="page-head">
             <div class="left">
               <h1>Weekly Founder Review Machine</h1>
-              <div class="sub">Operating rhythm · signal · commitments · slippage · decisions per cycle</div>
-              <div class="meta" style="margin-top:6px;">
-                <span style="display:inline-flex;align-items:center;gap:6px;">
-                  <span class="sigil sigil-16"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9" class="stroke"/></svg></span>
-                  Operating Cadence Avatar · primary
-                </span>
-                <span class="pill family commitment">→ COMMITMENT</span>
-                <span class="pill ready">READY</span>
-              </div>
+              <div class="sub">Operating Cadence Avatar surfaces signal · commitments · slippage · decisions on a weekly heartbeat</div>
             </div>
             <div class="right">
-              <button class="btn-secondary">RUN NOW</button>
+              <button class="btn-secondary">CONFIGURE</button>
+              <button class="btn-primary">RUN NOW</button>
             </div>
           </div>
 
@@ -4586,15 +4535,15 @@
                 <span class="ttl">Next wake · today 17:00</span>
                 <span class="ct">in 2h 48m</span>
               </div>
-              <div class="body" style="padding:18px;background:var(--bg-elev-1);border:1px solid var(--line);border-radius:8px;color:var(--fg);font-size:13px;line-height:1.55;">
-                <div style="font-family:var(--f-mono);font-size:10px;letter-spacing:0.1em;text-transform:uppercase;color:var(--fg-dim);margin-bottom:8px;">Weekly review will cover</div>
-                <ul style="list-style:none;padding:0;display:flex;flex-direction:column;gap:6px;">
-                  <li>· Active commitments · slippage check · 1 at risk</li>
-                  <li>· Substrate growth this week · 12 new claims · 1 contradiction</li>
-                  <li>· Avatars utilization · 42 runs · 0 misses</li>
-                  <li>· Founder ratify rate · 94% (up from 88%)</li>
-                  <li>· Signal interpretation backlog · 4 pending</li>
-                </ul>
+              <div style="padding:20px 24px;background:var(--bg-elev-1);border:1px solid var(--line);border-radius:8px;">
+                <div style="font-family:var(--f-mono);font-size:10px;letter-spacing:0.1em;text-transform:uppercase;color:var(--fg-dim);margin-bottom:12px;">Weekly review will cover</div>
+                <div style="font-size:13px;line-height:1.7;color:var(--fg);">
+                  Active commitments · slippage check · 1 at risk<br>
+                  Substrate growth this week · 12 new claims · 1 contradiction<br>
+                  Avatars utilization · 42 runs · 0 misses<br>
+                  Founder ratify rate · 94% (up from 88%)<br>
+                  Signal interpretation backlog · 4 pending
+                </div>
               </div>
             </div>
 
@@ -4604,23 +4553,21 @@
                 <span class="ct">4-week streak</span>
               </div>
               <div style="display:flex;flex-direction:column;gap:8px;">
-                <div class="work-row">
+                <div class="work-row" onclick="openWorkItem()">
                   <span class="marker done"><i class="ph ph-check-circle-fill"></i></span>
                   <div class="body">
                     <div class="nm">Week of May 6 · review delivered</div>
-                    <div class="meta">3 commitments delivered · 1 missed (Narrative drift) · 28 substrate claims added</div>
+                    <div class="meta">3 delivered · 1 missed (Narrative drift) · 28 claims added</div>
                   </div>
-                  <span class="pill" style="background:transparent;color:var(--fg-dim);border:1px solid var(--line);">DELIVERED</span>
-                  <div class="actions"><button class="btn-secondary">VIEW</button></div>
+                  <span style="font-family:var(--f-mono);font-size:10px;color:var(--fg-dim);letter-spacing:0.04em;">last week</span>
                 </div>
-                <div class="work-row">
+                <div class="work-row" onclick="openWorkItem()">
                   <span class="marker done"><i class="ph ph-check-circle-fill"></i></span>
                   <div class="body">
                     <div class="nm">Week of Apr 29 · review delivered</div>
-                    <div class="meta">5 commitments delivered · 0 missed · 34 substrate claims added</div>
+                    <div class="meta">5 delivered · 0 missed · 34 claims added</div>
                   </div>
-                  <span class="pill" style="background:transparent;color:var(--fg-dim);border:1px solid var(--line);">DELIVERED</span>
-                  <div class="actions"><button class="btn-secondary">VIEW</button></div>
+                  <span style="font-family:var(--f-mono);font-size:10px;color:var(--fg-dim);letter-spacing:0.04em;">2 weeks ago</span>
                 </div>
               </div>
             </div>
@@ -4631,15 +4578,7 @@
           <div class="page-head">
             <div class="left">
               <h1>Narrative Ratchet Machine</h1>
-              <div class="sub">Continuously improves messaging · narrative · deck · homepage · founder story</div>
-              <div class="meta" style="margin-top:6px;">
-                <span style="display:inline-flex;align-items:center;gap:6px;">
-                  <span class="sigil sigil-16"><svg viewBox="0 0 24 24"><polygon class="stroke" points="12,3 21,12 12,21 3,12"/></svg></span>
-                  Narrative Avatar · primary
-                </span>
-                <span class="pill family world">→ WORLD</span>
-                <span class="pill locked">LOCKED · CHAIN</span>
-              </div>
+              <div class="sub">Narrative Avatar continuously improves messaging · narrative · deck · homepage · founder story</div>
             </div>
             <div class="right">
               <button class="btn-secondary" disabled style="opacity:0.5;cursor:not-allowed;">+ NEW</button>
