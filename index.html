@@ -75,16 +75,12 @@
     line-height: 1; font-size: 16px;
   }
 
-  /* ---------- Shell (header + nav + main + right-rail) ---------- */
+  /* ---------- Shell (header + nav + main) ---------- */
   .shell { display: grid; grid-template-rows: var(--header-h) 1fr; height: 100vh; }
   .shell-body {
     display: grid;
-    grid-template-columns: var(--nav-w) 1fr var(--rail-w);
+    grid-template-columns: var(--nav-w) 1fr;
     min-height: 0;
-    transition: grid-template-columns 0.22s ease;
-  }
-  .shell-body.rail-collapsed {
-    grid-template-columns: var(--nav-w) 1fr 52px;
   }
 
   /* ---------- Header ---------- */
@@ -512,36 +508,25 @@
   }
   .block.mentor .body-prose .accent { color: var(--accent); font-weight: 500; }
 
-  /* ---------- Right rail · Kilonova Agent ---------- */
+  /* ---------- Right rail · Kilonova Agent (slide-over panel) ---------- */
   .rail {
+    position: fixed;
+    top: var(--header-h);
+    right: 0;
+    bottom: 0;
+    width: var(--rail-w);
     border-left: 1px solid var(--line);
     background: var(--bg);
     display: grid;
     grid-template-rows: auto 1fr auto;
     min-height: 0;
     overflow: hidden;
+    transform: translateX(100%);
+    transition: transform 0.22s ease;
+    z-index: 80;
+    box-shadow: -8px 0 28px rgba(0,0,0,0.40);
   }
-  /* Collapsed state · only the toggle column visible */
-  .rail.collapsed { grid-template-rows: 1fr; }
-  .rail.collapsed .rail-head .ttl,
-  .rail.collapsed .rail-head .actions,
-  .rail.collapsed .rail-body,
-  .rail.collapsed .rail-input {
-    display: none;
-  }
-  .rail.collapsed .rail-head {
-    flex-direction: column;
-    align-items: center;
-    justify-content: flex-start;
-    padding: 14px 0 0;
-    border-bottom: 0;
-    height: 100%;
-  }
-  .rail.collapsed .rail-collapse-btn {
-    width: 32px; height: 32px;
-    margin: 0 auto;
-  }
-  .rail.collapsed .rail-collapse-btn i { font-size: 16px; }
+  .rail.open { transform: translateX(0); }
   .rail-head {
     display: flex; align-items: center; justify-content: space-between;
     padding: 14px 18px;
@@ -555,6 +540,26 @@
   }
   .rail-collapse-btn:hover { background: var(--bg-elev-1); color: var(--fg); }
   .rail-collapse-btn i { font-size: 14px; }
+
+  /* Header Agent button */
+  .header-agent-btn {
+    display: inline-flex; align-items: center; gap: 8px;
+    padding: 6px 12px;
+    margin-right: 10px;
+    color: var(--fg-mid);
+    border: 1px solid var(--line);
+    border-radius: 5px;
+    font-family: var(--f-mono);
+    font-size: 11px; letter-spacing: 0.06em; text-transform: uppercase;
+    background: var(--bg-elev-1);
+    transition: color 0.12s, border-color 0.12s, background 0.12s;
+  }
+  .header-agent-btn:hover {
+    color: var(--accent);
+    border-color: var(--accent-line);
+    background: rgba(223,255,0,0.04);
+  }
+  .header-agent-btn i { font-size: 14px; }
   .rail-head .ttl {
     font-family: var(--f-mono);
     font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase;
@@ -2370,6 +2375,10 @@
     </div>
 
     <div class="header-actions">
+      <button class="header-agent-btn" id="header-agent-btn" aria-label="Open Kilonova Agent">
+        <i class="ph ph-chat-circle-text"></i>
+        Agent
+      </button>
       <button class="header-action-btn" aria-label="Book a call with your pilot">
         <i class="ph ph-calendar-blank"></i>
       </button>
@@ -5333,18 +5342,22 @@
 
     </main>
 
-    <!-- ============ RIGHT RAIL · KILONOVA AGENT ============ -->
-    <aside class="rail collapsed" id="rail">
-      <div class="rail-head">
-        <button class="rail-collapse-btn" id="rail-toggle" aria-label="Toggle Kilonova Agent panel">
-          <i class="ph ph-sidebar-simple"></i>
-        </button>
-        <div class="ttl">Kilonova Agent</div>
-        <div class="actions">
-          <button class="rail-action" aria-label="History"><i class="ph ph-clock-counter-clockwise"></i></button>
-          <button class="rail-action" aria-label="New conversation"><i class="ph ph-plus"></i></button>
-        </div>
-      </div>
+  </div>
+</div>
+
+<!-- ============ KILONOVA AGENT · slide-over from right ============ -->
+<aside class="rail" id="rail">
+  <div class="rail-head">
+    <div class="ttl">Kilonova Agent</div>
+    <div class="actions">
+      <button class="rail-action" aria-label="History"><i class="ph ph-clock-counter-clockwise"></i></button>
+      <button class="rail-action" aria-label="New conversation"><i class="ph ph-plus"></i></button>
+      <button class="rail-collapse-btn" id="rail-close" aria-label="Close Kilonova Agent">
+        <i class="ph ph-x"></i>
+      </button>
+    </div>
+  </div>
+<!-- begin agent body -->
 
       <div class="rail-body">
 
@@ -5374,10 +5387,7 @@
         </div>
       </div>
 
-    </aside>
-
-  </div>
-</div>
+</aside>
 
 <!-- ============ MODALS · Avatar profile + WorkItem detail ============ -->
 <div class="modal-backdrop" id="modal-backdrop"></div>
@@ -5826,49 +5836,42 @@
     }
   });
 
-  // ----- Right rail (Kilonova Agent) collapse/expand -----
-  const shellBody = document.querySelector('.shell-body');
+  // ----- Kilonova Agent (slide-over rail) -----
   const rail = document.getElementById('rail');
-  const railToggle = document.getElementById('rail-toggle');
+  const headerAgentBtn = document.getElementById('header-agent-btn');
+  const railClose = document.getElementById('rail-close');
 
-  // Default collapsed
-  if (shellBody) shellBody.classList.add('rail-collapsed');
-
-  function setRailCollapsed(collapsed) {
-    if (collapsed) {
-      shellBody.classList.add('rail-collapsed');
-      rail.classList.add('collapsed');
-    } else {
-      shellBody.classList.remove('rail-collapsed');
-      rail.classList.remove('collapsed');
-    }
+  function openRail() {
+    rail.classList.add('open');
+    setTimeout(() => {
+      const ta = document.querySelector('.rail-input-box textarea');
+      if (ta) ta.focus();
+    }, 240);
+  }
+  function closeRail() {
+    rail.classList.remove('open');
   }
   function toggleRail() {
-    const isCollapsed = rail.classList.contains('collapsed');
-    setRailCollapsed(!isCollapsed);
-    if (isCollapsed) {
-      // expanded; focus the input
-      setTimeout(() => {
-        const ta = document.querySelector('.rail-input-box textarea');
-        if (ta) ta.focus();
-      }, 240);
-    }
+    if (rail.classList.contains('open')) closeRail();
+    else openRail();
   }
-  if (railToggle) railToggle.addEventListener('click', toggleRail);
 
-  // K shortcut: expand rail (if collapsed) + focus input
+  if (headerAgentBtn) headerAgentBtn.addEventListener('click', toggleRail);
+  if (railClose) railClose.addEventListener('click', closeRail);
+
+  // Esc closes rail
+  document.addEventListener('keydown', e => {
+    if (e.key === 'Escape' && rail.classList.contains('open')) closeRail();
+  });
+
+  // K shortcut: open rail + focus input
   document.addEventListener('keydown', e => {
     if (e.key.toLowerCase() === 'k' && !e.metaKey && !e.ctrlKey) {
       const target = document.activeElement;
       if (target && (target.tagName === 'INPUT' || target.tagName === 'TEXTAREA' || target.isContentEditable)) return;
       e.preventDefault();
-      if (rail.classList.contains('collapsed')) {
-        setRailCollapsed(false);
-        setTimeout(() => {
-          const ta = document.querySelector('.rail-input-box textarea');
-          if (ta) ta.focus();
-        }, 240);
-      } else {
+      if (!rail.classList.contains('open')) openRail();
+      else {
         const ta = document.querySelector('.rail-input-box textarea');
         if (ta) ta.focus();
       }
