@@ -1301,31 +1301,389 @@
   }
 
   /* =================================================== */
-  /* RSN surface (substrate generator runs)                  */
+  /* RSN canvas · mirrors Bruno's RSN center pattern        */
   /* =================================================== */
-  .rsn-list { display: flex; flex-direction: column; gap: 10px; }
-  .rsn-row {
+  .rsn-canvas {
+    display: flex; flex-direction: column;
+    gap: 28px;
+  }
+  .rsn-section { display: flex; flex-direction: column; gap: 14px; }
+  .rsn-section-head {
+    display: flex; align-items: baseline; gap: 14px;
+    padding-bottom: 4px;
+  }
+  .rsn-section-head .ttl {
+    font-family: var(--f-mono);
+    font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase;
+    color: var(--accent);
+    font-weight: 500;
+  }
+  .rsn-section-head .line {
+    flex: 1; height: 1px;
+    background: var(--line);
+  }
+
+  .rsn-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(176px, 1fr));
+    gap: 12px;
+  }
+  .rsn-card {
+    background: transparent;
+    border: 1.5px solid var(--line);
+    border-radius: 8px;
+    padding: 16px 18px;
+    display: flex; flex-direction: column;
+    min-height: 130px;
+    cursor: pointer;
+    position: relative;
+    transition: border-color 0.12s, background 0.12s;
+  }
+  .rsn-card:hover {
+    background: var(--bg-elev-1);
+  }
+  .rsn-card.ready {
+    border-color: var(--accent);
+  }
+  .rsn-card.ready:hover {
+    background: rgba(223,255,0,0.04);
+  }
+  .rsn-card .top {
+    display: flex; align-items: flex-start; justify-content: space-between;
+    margin-bottom: 14px;
+  }
+  .rsn-card .id {
+    font-family: var(--f-mono);
+    font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase;
+    color: var(--fg-dim);
+  }
+  .rsn-card.ready .id { color: var(--fg-mid); }
+  .rsn-card .score {
+    font-family: var(--f-mono);
+    font-size: 11.5px; font-weight: 700;
+    color: var(--accent);
+    background: rgba(223,255,0,0.08);
+    padding: 2px 7px;
+    border-radius: 3px;
+  }
+  .rsn-card .nm {
+    font-family: var(--f-display);
+    font-size: 14.5px; font-weight: 500;
+    line-height: 1.3; color: var(--fg);
+    flex: 1;
+  }
+  .rsn-card.upcoming .nm { color: var(--fg-faint); }
+  .rsn-card .status {
+    margin-top: auto;
+    padding-top: 14px;
+  }
+  .rsn-status {
+    display: inline-flex; align-items: center; gap: 6px;
+    font-family: var(--f-mono);
+    font-size: 9.5px; letter-spacing: 0.1em; text-transform: uppercase;
+    padding: 3px 8px;
+    border-radius: 3px;
+    border: 1px solid;
+  }
+  .rsn-status.ready {
+    color: var(--accent);
+    border-color: var(--accent-line);
+    background: rgba(223,255,0,0.06);
+  }
+  .rsn-status.upcoming {
+    color: var(--fg-faint);
+    border-color: var(--line);
+    background: transparent;
+  }
+  .rsn-status .dot {
+    width: 6px; height: 6px;
+    border-radius: 50%;
+    flex-shrink: 0;
+  }
+  .rsn-status.ready .dot { background: var(--accent); }
+  .rsn-status.upcoming .dot { background: var(--fg-faint); }
+
+  /* RSN canvas page header */
+  .rsn-page-head {
+    display: flex; align-items: flex-end; justify-content: space-between;
+    padding-bottom: 22px;
+    margin-bottom: 12px;
+    border-bottom: 1px solid var(--line);
+  }
+  .rsn-page-head .left { display: flex; flex-direction: column; gap: 4px; }
+  .rsn-page-head h1 {
+    font-family: var(--f-display);
+    font-weight: 500; font-size: 28px; color: var(--fg);
+    letter-spacing: -0.015em;
+  }
+  .rsn-page-head .sub {
+    font-size: 13px; color: var(--fg-dim);
+  }
+  .rsn-page-head .right {
+    display: flex; align-items: center; gap: 14px;
+    font-family: var(--f-mono);
+    font-size: 10px; letter-spacing: 0.06em; text-transform: uppercase;
+    color: var(--fg-dim);
+  }
+  .rsn-page-head .right strong { color: var(--accent); font-weight: 500; }
+
+  /* =================================================== */
+  /* RSN detail modal (full-screen)                          */
+  /* =================================================== */
+  .rsn-detail {
+    position: fixed; inset: 0;
+    background: var(--bg);
+    z-index: 300;
+    display: none;
+    flex-direction: column;
+  }
+  .rsn-detail.open { display: flex; }
+  .rsn-detail-bar {
+    height: var(--header-h);
+    border-bottom: 1px solid var(--line);
+    display: grid;
+    grid-template-columns: auto auto 1fr auto auto;
+    align-items: center;
+    gap: 16px;
+    padding: 0 24px;
+    background: var(--bg);
+  }
+  .rsn-detail-bar .back {
+    width: 32px; height: 32px;
+    display: inline-flex; align-items: center; justify-content: center;
+    color: var(--fg-mid);
+    border: 1px solid var(--line);
+    border-radius: 4px;
+  }
+  .rsn-detail-bar .back:hover { color: var(--fg); border-color: var(--line-strong); }
+  .rsn-detail-bar .picker {
+    display: inline-flex; align-items: center; gap: 8px;
+    padding: 7px 12px;
+    border: 1px solid var(--line);
+    border-radius: 4px;
+    font-family: var(--f-mono);
+    font-size: 11px; letter-spacing: 0.06em;
+    color: var(--fg);
+  }
+  .rsn-detail-bar .picker i { font-size: 11px; color: var(--fg-dim); }
+  .rsn-detail-bar .files {
+    padding: 7px 12px;
+    border: 1px solid var(--line);
+    border-radius: 4px;
+    font-family: var(--f-mono);
+    font-size: 10.5px; letter-spacing: 0.06em; text-transform: uppercase;
+    color: var(--fg-mid);
+  }
+  .rsn-detail-bar .project-name {
+    font-family: var(--f-mono);
+    font-size: 11px; letter-spacing: 0.16em; text-transform: uppercase;
+    color: var(--fg-dim);
+    margin-left: auto;
+  }
+  .rsn-detail-bar .exit {
+    padding: 7px 14px;
+    border: 1px solid var(--line);
+    border-radius: 4px;
+    font-size: 12px;
+    color: var(--fg-mid);
+    background: transparent;
+  }
+  .rsn-detail-body {
+    display: grid;
+    grid-template-columns: 280px 1fr;
+    flex: 1; min-height: 0;
+  }
+  .rsn-detail-side {
+    border-right: 1px solid var(--line);
+    padding: 24px 22px;
+    background: var(--bg);
+    overflow-y: auto;
+  }
+  .rsn-detail-side .ctx-name {
+    font-family: var(--f-display);
+    font-size: 17px; font-weight: 500; color: var(--fg);
+    margin-bottom: 4px;
+  }
+  .rsn-detail-side .ctx-project {
+    font-size: 12px; color: var(--fg-dim);
+    margin-bottom: 14px;
+  }
+  .rsn-detail-side .ctx-score {
+    display: inline-flex; align-items: center; gap: 8px;
+    padding: 4px 8px;
+    border: 1.5px solid var(--accent-line);
+    border-radius: 3px;
+    font-family: var(--f-mono);
+    font-size: 11px; color: var(--accent);
+    background: rgba(223,255,0,0.06);
+    font-weight: 500;
+    margin-bottom: 28px;
+  }
+  .rsn-detail-side .ctx-score .theme {
+    color: var(--fg-mid); font-weight: 400;
+    border-left: 1px solid var(--accent-line);
+    padding-left: 8px;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    font-size: 9.5px;
+  }
+  .rsn-chapters { display: flex; flex-direction: column; gap: 0; }
+  .rsn-chapter {
+    display: flex; align-items: center; gap: 14px;
+    padding: 10px 0;
+    color: var(--fg-mid);
+    font-size: 13px;
+    cursor: pointer;
+    transition: color 0.12s;
+    border-left: 2px solid transparent;
+    padding-left: 12px;
+    margin-left: -12px;
+  }
+  .rsn-chapter:hover { color: var(--fg); }
+  .rsn-chapter.active {
+    color: var(--accent);
+    border-left-color: var(--accent);
+  }
+  .rsn-chapter .ch-num {
+    font-family: var(--f-mono);
+    font-size: 11px; color: var(--fg-faint);
+    width: 22px;
+  }
+  .rsn-chapter.active .ch-num { color: var(--accent); }
+
+  .rsn-detail-main {
+    overflow-y: auto;
+    padding: 32px 56px 80px;
+    max-width: 1200px;
+  }
+  .rsn-detail-main .eyebrow-mono {
+    font-family: var(--f-mono);
+    font-size: 11px; letter-spacing: 0.16em; text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 14px;
+  }
+  .rsn-detail-main h2 {
+    font-family: var(--f-display);
+    font-weight: 500; font-size: 36px; line-height: 1.15;
+    letter-spacing: -0.015em; color: var(--fg);
+    margin-bottom: 18px;
+  }
+  .rsn-detail-main .lede {
+    font-size: 15px; line-height: 1.6; color: var(--fg-mid);
+    margin-bottom: 32px; max-width: 920px;
+  }
+  .rsn-stats {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 12px;
+    margin-bottom: 28px;
+  }
+  .rsn-stat {
     background: var(--bg-elev-1);
     border: 1px solid var(--line);
     border-radius: 8px;
+    padding: 22px 24px;
+    display: flex; flex-direction: column; gap: 8px;
+  }
+  .rsn-stat .num {
+    font-family: var(--f-display);
+    font-weight: 500; font-size: 44px;
+    color: var(--fg); line-height: 1;
+    letter-spacing: -0.02em;
+  }
+  .rsn-stat .label {
+    font-family: var(--f-mono);
+    font-size: 9.5px; letter-spacing: 0.12em; text-transform: uppercase;
+    color: var(--accent);
+  }
+  .rsn-stat .desc {
+    font-size: 11.5px; color: var(--fg-dim); line-height: 1.5;
+  }
+  .key-finding {
+    border: 1.5px solid var(--accent-line);
+    background: linear-gradient(135deg, rgba(223,255,0,0.04), transparent 80%);
+    border-radius: 8px;
+    padding: 28px 32px;
+    margin-bottom: 32px;
+  }
+  .key-finding .label {
+    font-family: var(--f-mono);
+    font-size: 11px; letter-spacing: 0.16em; text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 16px;
+  }
+  .key-finding .body {
+    font-size: 15px; line-height: 1.65; color: var(--fg);
+  }
+  .key-finding .body strong {
+    color: var(--accent); font-weight: 500;
+  }
+  .key-finding .footer {
+    font-size: 12.5px; color: var(--fg-dim);
+    margin-top: 14px; line-height: 1.55;
+  }
+
+  .rsn-section-title {
+    font-family: var(--f-display);
+    font-weight: 500; font-size: 22px;
+    color: var(--fg);
+    margin-top: 32px; margin-bottom: 16px;
+    letter-spacing: -0.01em;
+  }
+  .compare-table {
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    overflow: hidden;
+  }
+  .compare-table table { width: 100%; border-collapse: collapse; }
+  .compare-table th, .compare-table td {
     padding: 14px 18px;
-    display: grid;
-    grid-template-columns: auto 1fr auto auto;
-    column-gap: 14px;
-    align-items: center;
+    text-align: left;
+    border-bottom: 1px solid var(--line);
+    border-right: 1px solid var(--line);
+    font-size: 13px;
   }
-  .rsn-row .icon {
-    width: 32px; height: 32px;
+  .compare-table th:last-child, .compare-table td:last-child { border-right: 0; }
+  .compare-table tr:last-child td { border-bottom: 0; }
+  .compare-table thead th {
+    font-family: var(--f-mono);
+    font-size: 10.5px; letter-spacing: 0.1em; text-transform: uppercase;
+    color: var(--accent);
+    background: var(--bg-elev-1);
+    font-weight: 500;
+  }
+  .compare-table tbody td:first-child {
+    color: var(--fg);
+    font-weight: 500;
+  }
+  .compare-table tbody td { color: var(--fg); }
+  .compare-table .winner-text { color: #6fb84a; }
+  .compare-table .warn-text { color: var(--warn); }
+  .compare-table .accent-text { color: var(--accent); font-weight: 500; }
+  .compare-table .danger-text { color: #d24545; }
+
+  .rsn-detail-footer {
+    margin-top: 40px;
+    padding-top: 18px;
+    border-top: 1px solid var(--line);
+    font-family: var(--f-mono);
+    font-size: 10.5px; letter-spacing: 0.06em;
+    color: var(--fg-faint);
+  }
+  .annotations-btn {
+    position: fixed;
+    bottom: 24px; right: 24px;
+    padding: 10px 16px;
+    background: var(--bg-elev-2);
+    border: 1px solid var(--line-strong);
     border-radius: 6px;
-    background: var(--bg-elev-3);
-    display: flex; align-items: center; justify-content: center;
     color: var(--fg-mid);
+    font-family: var(--f-mono);
+    font-size: 10.5px; letter-spacing: 0.08em; text-transform: uppercase;
+    display: inline-flex; align-items: center; gap: 8px;
+    z-index: 10;
   }
-  .rsn-row .icon i { font-size: 16px; }
-  .rsn-row .body { display: flex; flex-direction: column; gap: 2px; min-width: 0; }
-  .rsn-row .nm { font-size: 13px; color: var(--fg); }
-  .rsn-row .meta { font-family: var(--f-mono); font-size: 10px; color: var(--fg-dim); letter-spacing: 0.04em; }
-  .rsn-row .ct { font-family: var(--f-mono); font-size: 11px; color: var(--fg-mid); }
+  .annotations-btn:hover { color: var(--fg); border-color: var(--accent-line); }
 
   /* =================================================== */
   /* MIND · NICHOLAS chat (full-height)                     */
@@ -2907,69 +3265,298 @@
           </div>
         </div>
 
-        <!-- RSN -->
-        <div class="csurface" data-cs="brain-rsn">
-          <div class="page-head">
+        <!-- RSN · canonical RSN center pattern (mirrors Bruno's UI) -->
+        <div class="csurface" data-cs="brain-rsn" style="padding: 28px 32px 60px;">
+
+          <div class="rsn-page-head">
             <div class="left">
-              <h1>RSN</h1>
-              <div class="sub">Strategic substrate generator · Research / Strategy / Narrative compiler</div>
+              <h1>Kilonova</h1>
+              <div class="sub">AI-Native Founder OS — RSN-X Track</div>
             </div>
             <div class="right">
-              <button class="btn-primary">RUN A LENS</button>
+              <span><strong>22</strong> ready</span>
+              <span>·</span>
+              <span><strong>4</strong> upcoming</span>
+              <span>·</span>
+              <span>last refresh · today 09:14</span>
             </div>
           </div>
 
-          <div class="commit-section-head">
-            <span class="ttl">Recent runs</span>
-            <span class="meta">last 30 days · 7 runs</span>
-          </div>
+          <div class="rsn-canvas">
 
-          <div class="rsn-list">
-            <div class="rsn-row">
-              <div class="icon"><i class="ph ph-graph"></i></div>
-              <div class="body">
-                <div class="nm">N5 · Narrative refresh · Q2 positioning</div>
-                <div class="meta">Today · 18 claims generated · 3 contradictions surfaced</div>
+            <!-- RESEARCH -->
+            <div class="rsn-section">
+              <div class="rsn-section-head">
+                <span class="ttl">Research</span>
+                <span class="line"></span>
               </div>
-              <span class="pill ratify">APPROVE</span>
-              <span class="ct">12 min</span>
-            </div>
-            <div class="rsn-row">
-              <div class="icon"><i class="ph ph-graph"></i></div>
-              <div class="body">
-                <div class="nm">S6 · Value proposition refresh</div>
-                <div class="meta">2d ago · 24 claims · canonicalized into substrate</div>
+              <div class="rsn-grid">
+
+                <div class="rsn-card ready" onclick="openRsnDetail('R0', 'Overview', 8.5)">
+                  <div class="top">
+                    <span class="id">R0</span>
+                    <span class="score">8.5</span>
+                  </div>
+                  <div class="nm">Overview</div>
+                  <div class="status"><span class="rsn-status ready"><span class="dot"></span>Ready</span></div>
+                </div>
+
+                <div class="rsn-card ready" onclick="openRsnDetail('R1', 'Sector Immersion', 9.0)">
+                  <div class="top">
+                    <span class="id">R1</span>
+                    <span class="score">9.0</span>
+                  </div>
+                  <div class="nm">Sector Immersion</div>
+                  <div class="status"><span class="rsn-status ready"><span class="dot"></span>Ready</span></div>
+                </div>
+
+                <div class="rsn-card ready" onclick="openRsnDetail('R2', 'Competitive Landscape', 8.7)">
+                  <div class="top">
+                    <span class="id">R2</span>
+                    <span class="score">8.7</span>
+                  </div>
+                  <div class="nm">Competitive Landscape</div>
+                  <div class="status"><span class="rsn-status ready"><span class="dot"></span>Ready</span></div>
+                </div>
+
+                <div class="rsn-card ready" onclick="openRsnDetail('R3', 'Opportunity Mapping', 8.9)">
+                  <div class="top">
+                    <span class="id">R3</span>
+                    <span class="score">8.9</span>
+                  </div>
+                  <div class="nm">Opportunity Mapping</div>
+                  <div class="status"><span class="rsn-status ready"><span class="dot"></span>Ready</span></div>
+                </div>
+
+                <div class="rsn-card ready" onclick="openRsnDetail('R4', 'Opportunity-Solution Tree', 8.4)">
+                  <div class="top">
+                    <span class="id">R4</span>
+                    <span class="score">8.4</span>
+                  </div>
+                  <div class="nm">Opportunity-Solution Tree</div>
+                  <div class="status"><span class="rsn-status ready"><span class="dot"></span>Ready</span></div>
+                </div>
+
+                <div class="rsn-card ready" onclick="openRsnDetail('R5', 'Research Synthesis', 8.6)">
+                  <div class="top">
+                    <span class="id">R5</span>
+                    <span class="score">8.6</span>
+                  </div>
+                  <div class="nm">Research Synthesis</div>
+                  <div class="status"><span class="rsn-status ready"><span class="dot"></span>Ready</span></div>
+                </div>
+
+                <div class="rsn-card ready" onclick="openRsnDetail('R6', 'Founder OS Deep Dive', 9.1)">
+                  <div class="top">
+                    <span class="id">R6</span>
+                    <span class="score">9.1</span>
+                  </div>
+                  <div class="nm">Founder OS Deep Dive</div>
+                  <div class="status"><span class="rsn-status ready"><span class="dot"></span>Ready</span></div>
+                </div>
+
               </div>
-              <span class="pill" style="color:var(--fg-dim);background:transparent;border:1px solid var(--line);">DELIVERED</span>
-              <span class="ct">42 min</span>
             </div>
-            <div class="rsn-row">
-              <div class="icon"><i class="ph ph-graph"></i></div>
-              <div class="body">
-                <div class="nm">R2 · Competitive landscape scan</div>
-                <div class="meta">3d ago · 31 claims · 2 contradictions resolved</div>
+
+            <!-- STRATEGY -->
+            <div class="rsn-section">
+              <div class="rsn-section-head">
+                <span class="ttl">Strategy</span>
+                <span class="line"></span>
               </div>
-              <span class="pill" style="color:var(--fg-dim);background:transparent;border:1px solid var(--line);">DELIVERED</span>
-              <span class="ct">1h 8m</span>
-            </div>
-            <div class="rsn-row">
-              <div class="icon"><i class="ph ph-graph"></i></div>
-              <div class="body">
-                <div class="nm">N3 · Brand platform · Avatar concept positioning</div>
-                <div class="meta">1w ago · 18 claims · narrative anchor updated</div>
+              <div class="rsn-grid">
+
+                <div class="rsn-card ready" onclick="openRsnDetail('S1', 'Lean Canvas', 8.0)">
+                  <div class="top">
+                    <span class="id">S1</span>
+                    <span class="score">8.0</span>
+                  </div>
+                  <div class="nm">Lean Canvas</div>
+                  <div class="status"><span class="rsn-status ready"><span class="dot"></span>Ready</span></div>
+                </div>
+
+                <div class="rsn-card ready" onclick="openRsnDetail('S2', 'Business Model Canvas', 8.3)">
+                  <div class="top">
+                    <span class="id">S2</span>
+                    <span class="score">8.3</span>
+                  </div>
+                  <div class="nm">Business Model Canvas</div>
+                  <div class="status"><span class="rsn-status ready"><span class="dot"></span>Ready</span></div>
+                </div>
+
+                <div class="rsn-card ready" onclick="openRsnDetail('S3', 'Product Overview', 8.5)">
+                  <div class="top">
+                    <span class="id">S3</span>
+                    <span class="score">8.5</span>
+                  </div>
+                  <div class="nm">Product Overview</div>
+                  <div class="status"><span class="rsn-status ready"><span class="dot"></span>Ready</span></div>
+                </div>
+
+                <div class="rsn-card ready" onclick="openRsnDetail('S4', 'Tech Architecture', 9.0)">
+                  <div class="top">
+                    <span class="id">S4</span>
+                    <span class="score">9.0</span>
+                  </div>
+                  <div class="nm">Tech Architecture</div>
+                  <div class="status"><span class="rsn-status ready"><span class="dot"></span>Ready</span></div>
+                </div>
+
+                <div class="rsn-card ready" onclick="openRsnDetail('S5', 'Future Ecosystem', 8.2)">
+                  <div class="top">
+                    <span class="id">S5</span>
+                    <span class="score">8.2</span>
+                  </div>
+                  <div class="nm">Future Ecosystem</div>
+                  <div class="status"><span class="rsn-status ready"><span class="dot"></span>Ready</span></div>
+                </div>
+
+                <div class="rsn-card ready" onclick="openRsnDetail('S6', 'Value Proposition', 8.7)">
+                  <div class="top">
+                    <span class="id">S6</span>
+                    <span class="score">8.7</span>
+                  </div>
+                  <div class="nm">Value Proposition</div>
+                  <div class="status"><span class="rsn-status ready"><span class="dot"></span>Ready</span></div>
+                </div>
+
+                <div class="rsn-card upcoming">
+                  <div class="top">
+                    <span class="id">S7</span>
+                  </div>
+                  <div class="nm">Journey Map</div>
+                  <div class="status"><span class="rsn-status upcoming"><span class="dot"></span>Upcoming</span></div>
+                </div>
+
+                <div class="rsn-card upcoming">
+                  <div class="top">
+                    <span class="id">S8</span>
+                  </div>
+                  <div class="nm">Tokenomics</div>
+                  <div class="status"><span class="rsn-status upcoming"><span class="dot"></span>Upcoming</span></div>
+                </div>
+
               </div>
-              <span class="pill" style="color:var(--fg-dim);background:transparent;border:1px solid var(--line);">DELIVERED</span>
-              <span class="ct">38 min</span>
             </div>
-            <div class="rsn-row">
-              <div class="icon"><i class="ph ph-graph"></i></div>
-              <div class="body">
-                <div class="nm">S1 · Lean canvas refresh · founder-OS positioning</div>
-                <div class="meta">2w ago · 22 claims · 4 assumptions tested</div>
+
+            <!-- NARRATIVE -->
+            <div class="rsn-section">
+              <div class="rsn-section-head">
+                <span class="ttl">Narrative</span>
+                <span class="line"></span>
               </div>
-              <span class="pill" style="color:var(--fg-dim);background:transparent;border:1px solid var(--line);">DELIVERED</span>
-              <span class="ct">52 min</span>
+              <div class="rsn-grid">
+
+                <div class="rsn-card ready" onclick="openRsnDetail('NX1', 'Brand Architecture Decision Brief', 8.4)">
+                  <div class="top">
+                    <span class="id">NX1</span>
+                    <span class="score">8.4</span>
+                  </div>
+                  <div class="nm">Brand Architecture Decision Brief</div>
+                  <div class="status"><span class="rsn-status ready"><span class="dot"></span>Ready</span></div>
+                </div>
+
+                <div class="rsn-card ready" onclick="openRsnDetail('N1', 'MTP', 8.6)">
+                  <div class="top">
+                    <span class="id">N1</span>
+                    <span class="score">8.6</span>
+                  </div>
+                  <div class="nm">MTP</div>
+                  <div class="status"><span class="rsn-status ready"><span class="dot"></span>Ready</span></div>
+                </div>
+
+                <div class="rsn-card ready" onclick="openRsnDetail('N2', 'Brand Archetype', 8.3)">
+                  <div class="top">
+                    <span class="id">N2</span>
+                    <span class="score">8.3</span>
+                  </div>
+                  <div class="nm">Brand Archetype</div>
+                  <div class="status"><span class="rsn-status ready"><span class="dot"></span>Ready</span></div>
+                </div>
+
+                <div class="rsn-card ready" onclick="openRsnDetail('N3', 'Brand Platform', 8.5)">
+                  <div class="top">
+                    <span class="id">N3</span>
+                    <span class="score">8.5</span>
+                  </div>
+                  <div class="nm">Brand Platform</div>
+                  <div class="status"><span class="rsn-status ready"><span class="dot"></span>Ready</span></div>
+                </div>
+
+                <div class="rsn-card upcoming">
+                  <div class="top">
+                    <span class="id">N4</span>
+                  </div>
+                  <div class="nm">Messaging House</div>
+                  <div class="status"><span class="rsn-status upcoming"><span class="dot"></span>Upcoming</span></div>
+                </div>
+
+                <div class="rsn-card upcoming">
+                  <div class="top">
+                    <span class="id">N5</span>
+                  </div>
+                  <div class="nm">Brand Narrative</div>
+                  <div class="status"><span class="rsn-status upcoming"><span class="dot"></span>Upcoming</span></div>
+                </div>
+
+              </div>
             </div>
+
+            <!-- EXTRAS -->
+            <div class="rsn-section">
+              <div class="rsn-section-head">
+                <span class="ttl">Extras</span>
+                <span class="line"></span>
+              </div>
+              <div class="rsn-grid">
+
+                <div class="rsn-card upcoming">
+                  <div class="top">
+                    <span class="id">X1</span>
+                  </div>
+                  <div class="nm">Foresight Scenarios</div>
+                  <div class="status"><span class="rsn-status upcoming"><span class="dot"></span>Upcoming</span></div>
+                </div>
+
+                <div class="rsn-card ready" onclick="openRsnDetail('X2', 'First Principles', 8.8)">
+                  <div class="top">
+                    <span class="id">X2</span>
+                    <span class="score">8.8</span>
+                  </div>
+                  <div class="nm">First Principles</div>
+                  <div class="status"><span class="rsn-status ready"><span class="dot"></span>Ready</span></div>
+                </div>
+
+                <div class="rsn-card ready" onclick="openRsnDetail('X3', 'Jobs to be Done', 8.5)">
+                  <div class="top">
+                    <span class="id">X3</span>
+                    <span class="score">8.5</span>
+                  </div>
+                  <div class="nm">Jobs to be Done</div>
+                  <div class="status"><span class="rsn-status ready"><span class="dot"></span>Ready</span></div>
+                </div>
+
+                <div class="rsn-card ready" onclick="openRsnDetail('X4', 'Wardley Maps', 8.2)">
+                  <div class="top">
+                    <span class="id">X4</span>
+                    <span class="score">8.2</span>
+                  </div>
+                  <div class="nm">Wardley Maps</div>
+                  <div class="status"><span class="rsn-status ready"><span class="dot"></span>Ready</span></div>
+                </div>
+
+                <div class="rsn-card ready" onclick="openRsnDetail('X5', 'North Star + OKR', 8.4)">
+                  <div class="top">
+                    <span class="id">X5</span>
+                    <span class="score">8.4</span>
+                  </div>
+                  <div class="nm">North Star + OKR</div>
+                  <div class="status"><span class="rsn-status ready"><span class="dot"></span>Ready</span></div>
+                </div>
+
+              </div>
+            </div>
+
           </div>
         </div>
 
@@ -4623,6 +5210,161 @@
   </div>
 </aside>
 
+<!-- RSN detail · full-screen modal (Bruno's S1 Lean Canvas pattern) -->
+<div class="rsn-detail" id="rsn-detail">
+  <div class="rsn-detail-bar">
+    <button class="back" data-modal-close aria-label="Back"><i class="ph ph-arrow-left"></i></button>
+    <div class="picker">
+      <span id="rsn-detail-picker">S1 — Lean Canvas</span>
+      <i class="ph ph-caret-down"></i>
+    </div>
+    <div class="files">Files (1)</div>
+    <div class="project-name">Kilonova</div>
+    <button class="exit" data-modal-close>Exit</button>
+  </div>
+
+  <div class="rsn-detail-body">
+
+    <aside class="rsn-detail-side">
+      <div class="ctx-name" id="rsn-detail-ctx-name">S1 Lean Canvas</div>
+      <div class="ctx-project">Kilonova / Founder OS</div>
+      <div class="ctx-score" id="rsn-detail-ctx-score">
+        <span>8.0</span>
+        <span class="theme">● Theme</span>
+      </div>
+
+      <div class="rsn-chapters">
+        <div class="rsn-chapter active">
+          <span class="ch-num">00</span>
+          <span>Overview</span>
+        </div>
+        <div class="rsn-chapter">
+          <span class="ch-num">01</span>
+          <span>Finalist 1: Authority Avatar</span>
+        </div>
+        <div class="rsn-chapter">
+          <span class="ch-num">02</span>
+          <span>Finalist 2: Substrate-as-Service</span>
+        </div>
+        <div class="rsn-chapter">
+          <span class="ch-num">03</span>
+          <span>What Got Killed</span>
+        </div>
+        <div class="rsn-chapter">
+          <span class="ch-num">04</span>
+          <span>Attack Findings</span>
+        </div>
+        <div class="rsn-chapter">
+          <span class="ch-num">05</span>
+          <span>Experiments</span>
+        </div>
+      </div>
+    </aside>
+
+    <div class="rsn-detail-main">
+      <div class="eyebrow-mono"><span id="rsn-detail-eyebrow">S1 — OVERVIEW</span></div>
+      <h2 id="rsn-detail-headline">Two Business Models Survived. Four Were Tested.</h2>
+      <div class="lede">
+        102 claims generated, stress-tested with 46 attacks, compressed to 2 finalists and 7 experiments. The question is not whether Kilonova should exist — it is which architecture reaches founder-OS adoption first.
+      </div>
+
+      <div class="rsn-stats">
+        <div class="rsn-stat">
+          <span class="num">4</span>
+          <span class="label">Candidates tested</span>
+          <span class="desc">Full claim-graph canvases</span>
+        </div>
+        <div class="rsn-stat">
+          <span class="num">102</span>
+          <span class="label">Claims generated</span>
+          <span class="desc">66 survived, 36 killed or absorbed</span>
+        </div>
+        <div class="rsn-stat">
+          <span class="num">2</span>
+          <span class="label">Finalists</span>
+          <span class="desc">B killed, D absorbed into A</span>
+        </div>
+        <div class="rsn-stat">
+          <span class="num">7</span>
+          <span class="label">Experiments</span>
+          <span class="desc">3 start this week</span>
+        </div>
+      </div>
+
+      <div class="key-finding">
+        <div class="label">Key Finding</div>
+        <div class="body">
+          <strong>Finalist 1</strong> (Authority Avatar wedge) is fastest to founder-OS adoption — Avatars persist, voice compounds, founders self-qualify into the substrate. <strong>Finalist 2</strong> (Substrate-as-Service for ventures studios) has the largest ceiling but a binary gate: <strong>partner network</strong> must validate the substrate-as-platform thesis, and we haven't run that test yet.
+        </div>
+        <div class="footer">
+          Both finalists are pre-revenue hypotheses. The 7 experiments below convert guesses into evidence.
+        </div>
+      </div>
+
+      <div class="rsn-section-title">Structural Comparison</div>
+
+      <div class="compare-table">
+        <table>
+          <thead>
+            <tr>
+              <th>Dimension</th>
+              <th>Finalist 1: Authority Avatar wedge</th>
+              <th>Finalist 2: Substrate-as-Service</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Revenue model</td>
+              <td>Subscription (per founder · OS access)</td>
+              <td>Licensing + revenue share with venture studio</td>
+            </tr>
+            <tr>
+              <td>Primary customer</td>
+              <td>Solo / co-founder pairs (direct OS adoption)</td>
+              <td>Venture studios (B2B platform)</td>
+            </tr>
+            <tr>
+              <td>Distribution</td>
+              <td>Authority Avatar content + waitlist + word-of-mouth</td>
+              <td>Studio partner networks (3-5 partners)</td>
+            </tr>
+            <tr>
+              <td>Time to revenue</td>
+              <td><span class="winner-text">Fastest — subscription from day 1</span></td>
+              <td><span class="warn-text">Slow — partner procurement in quarters</span></td>
+            </tr>
+            <tr>
+              <td>Key risk</td>
+              <td><span class="accent-text">Avatar concept</span> + voice differentiation</td>
+              <td><span class="danger-text">Partner network validation (binary gate)</span></td>
+            </tr>
+            <tr>
+              <td>Moat</td>
+              <td>Substrate compound + signature soundbite library</td>
+              <td>Studio switching costs + first-mover lock-in</td>
+            </tr>
+            <tr>
+              <td>First test</td>
+              <td>Sign 50 founders to waitlist · measure activation</td>
+              <td>Get <span class="accent-text">2 venture studios</span> to evaluate fit</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="rsn-detail-footer">
+        S1 Lean Canvas — Kilonova / Founder OS — Score: 8.0 — Upstream: R3 (8.9), R4 (8.4)
+      </div>
+    </div>
+
+  </div>
+
+  <button class="annotations-btn">
+    <i class="ph ph-chat-circle-text"></i>
+    ANNOTATIONS
+  </button>
+</div>
+
 <aside class="modal-panel" id="modal-workitem">
   <div class="modal-head">
     <span class="ttl">Work item detail</span>
@@ -4787,6 +5529,8 @@
   const avatarModal = document.getElementById('modal-avatar');
   const workitemModal = document.getElementById('modal-workitem');
 
+  const rsnDetail = document.getElementById('rsn-detail');
+
   function openModal(modal) {
     backdrop.classList.add('open');
     modal.classList.add('open');
@@ -4794,9 +5538,18 @@
   function closeAllModals() {
     backdrop.classList.remove('open');
     document.querySelectorAll('.modal-panel').forEach(m => m.classList.remove('open'));
+    if (rsnDetail) rsnDetail.classList.remove('open');
   }
   function openAvatarProfile() { openModal(avatarModal); }
   function openWorkItem() { openModal(workitemModal); }
+  function openRsnDetail(id, name, score) {
+    if (!rsnDetail) return;
+    document.getElementById('rsn-detail-picker').textContent = `${id} — ${name}`;
+    document.getElementById('rsn-detail-ctx-name').textContent = `${id} ${name}`;
+    document.getElementById('rsn-detail-ctx-score').innerHTML = `<span>${score}</span><span class="theme">● Theme</span>`;
+    document.getElementById('rsn-detail-eyebrow').textContent = `${id} — OVERVIEW`;
+    rsnDetail.classList.add('open');
+  }
 
   backdrop.addEventListener('click', closeAllModals);
   document.querySelectorAll('[data-modal-close]').forEach(b => b.addEventListener('click', closeAllModals));
