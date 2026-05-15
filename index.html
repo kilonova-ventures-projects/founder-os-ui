@@ -1274,11 +1274,11 @@
   /* =================================================== */
   .rsn-canvas {
     display: flex; flex-direction: column;
-    gap: 28px;
+    gap: 40px;
   }
-  .rsn-section { display: flex; flex-direction: column; gap: 14px; }
+  .rsn-section { display: flex; flex-direction: column; gap: 18px; }
   .rsn-section-head {
-    display: flex; align-items: baseline; gap: 14px;
+    display: flex; align-items: baseline; gap: 16px;
     padding-bottom: 4px;
   }
   .rsn-section-head .ttl {
@@ -1294,54 +1294,59 @@
 
   .rsn-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(176px, 1fr));
-    gap: 12px;
+    grid-template-columns: repeat(auto-fill, minmax(210px, 1fr));
+    gap: 16px;
   }
   .rsn-card {
     background: transparent;
-    border: 1.5px solid var(--line);
-    border-radius: 8px;
-    padding: 16px 18px;
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    padding: 20px 22px;
     display: flex; flex-direction: column;
-    min-height: 130px;
+    min-height: 152px;
     cursor: pointer;
     position: relative;
-    transition: border-color 0.12s, background 0.12s;
+    transition: border-color 0.15s, background 0.15s, box-shadow 0.15s;
   }
   .rsn-card:hover {
     background: var(--bg-elev-1);
+    border-color: var(--line-strong);
   }
+  /* READY state · subtle accent-line border (not solid bright accent)
+     Bright accent reserved for hover/focus interaction */
   .rsn-card.ready {
-    border-color: var(--accent);
+    border-color: var(--accent-line);
   }
   .rsn-card.ready:hover {
     background: rgba(223,255,0,0.04);
+    border-color: var(--accent);
   }
   .rsn-card .top {
     display: flex; align-items: flex-start; justify-content: space-between;
-    margin-bottom: 14px;
+    margin-bottom: 18px;
   }
   .rsn-card .id {
     font-family: var(--f-mono);
-    font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase;
+    font-size: 10px; letter-spacing: 0.16em; text-transform: uppercase;
     color: var(--fg-dim);
   }
   .rsn-card.ready .id { color: var(--fg-mid); }
   .rsn-card .score {
     font-family: var(--f-mono);
-    font-size: 11.5px; font-weight: 500;
+    font-size: 12px; font-weight: 500;
     color: var(--fg);
   }
   .rsn-card .nm {
     font-family: var(--f-display);
-    font-size: 14.5px; font-weight: 500;
-    line-height: 1.3; color: var(--fg);
+    font-size: 15px; font-weight: 500;
+    line-height: 1.35; color: var(--fg);
     flex: 1;
+    letter-spacing: -0.005em;
   }
   .rsn-card.upcoming .nm { color: var(--fg-faint); }
   .rsn-card .status {
     margin-top: auto;
-    padding-top: 14px;
+    padding-top: 18px;
   }
   .rsn-status {
     display: inline-flex; align-items: center; gap: 6px;
@@ -1372,18 +1377,18 @@
   /* RSN canvas page header */
   .rsn-page-head {
     display: flex; align-items: flex-end; justify-content: space-between;
-    padding-bottom: 22px;
-    margin-bottom: 12px;
+    padding-bottom: 28px;
+    margin-bottom: 24px;
     border-bottom: 1px solid var(--line);
   }
-  .rsn-page-head .left { display: flex; flex-direction: column; gap: 4px; }
+  .rsn-page-head .left { display: flex; flex-direction: column; gap: 6px; }
   .rsn-page-head h1 {
     font-family: var(--f-display);
-    font-weight: 500; font-size: 28px; color: var(--fg);
+    font-weight: 500; font-size: 32px; color: var(--fg);
     letter-spacing: -0.015em;
   }
   .rsn-page-head .sub {
-    font-size: 13px; color: var(--fg-dim);
+    font-size: 13.5px; color: var(--fg-dim);
   }
   .rsn-page-head .right {
     display: flex; align-items: center; gap: 14px;
@@ -1886,9 +1891,12 @@
     border-color: var(--line-strong);
   }
   .machine-card.active {
+    border-color: var(--accent-line);
+  }
+  .machine-card.active:hover {
+    background: rgba(223,255,0,0.04);
     border-color: var(--accent);
   }
-  .machine-card.active:hover { background: rgba(223,255,0,0.04); }
   .machine-card.locked { opacity: 0.55; }
   .machine-card .top {
     display: flex; align-items: center; gap: 10px;
