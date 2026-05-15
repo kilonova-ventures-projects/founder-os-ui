@@ -128,8 +128,10 @@
     height: 100%;
     cursor: pointer;
     transition: background 0.12s ease;
+    position: relative;
   }
   .header-user:hover { background: var(--bg-elev-1); }
+  .header-user.open { background: var(--bg-elev-1); }
   .header-user img.user-photo {
     width: 26px; height: 26px;
     border-radius: 50%;
@@ -141,7 +143,63 @@
   }
   .header-user i.ph-caret-down {
     font-size: 11px; color: var(--fg-dim);
+    transition: transform 0.15s ease;
   }
+  .header-user.open i.ph-caret-down { transform: rotate(180deg); }
+
+  /* User dropdown menu */
+  .user-dropdown {
+    position: absolute;
+    top: calc(100% + 4px);
+    right: 8px;
+    min-width: 220px;
+    background: var(--bg-elev-2);
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    padding: 6px;
+    box-shadow: 0 8px 24px rgba(0,0,0,0.35);
+    z-index: 90;
+    display: none;
+    flex-direction: column;
+    gap: 1px;
+  }
+  .user-dropdown.open { display: flex; }
+  .user-dropdown-item {
+    display: flex; align-items: center; gap: 10px;
+    padding: 8px 10px;
+    border-radius: 5px;
+    color: var(--fg);
+    font-size: 12.5px;
+    cursor: pointer;
+    background: transparent;
+    border: 0;
+    width: 100%;
+    text-align: left;
+    transition: background 0.12s ease, color 0.12s ease;
+  }
+  .user-dropdown-item:hover { background: var(--bg-elev-3); }
+  .user-dropdown-item i { font-size: 14px; color: var(--fg-mid); }
+  .user-dropdown-item:hover i { color: var(--fg); }
+  .user-dropdown-item .meta {
+    margin-left: auto;
+    font-family: var(--f-mono);
+    font-size: 9.5px; color: var(--fg-dim);
+    letter-spacing: 0.06em;
+  }
+  .user-dropdown-divider {
+    height: 1px;
+    background: var(--line);
+    margin: 4px 2px;
+  }
+  .user-dropdown-info {
+    padding: 10px 10px 8px;
+    display: flex; flex-direction: column; gap: 2px;
+  }
+  .user-dropdown-info .nm { font-size: 13px; color: var(--fg); font-weight: 500; }
+  .user-dropdown-info .em { font-size: 11px; color: var(--fg-dim); }
+  .user-dropdown-item.logout { color: var(--warn); }
+  .user-dropdown-item.logout i { color: var(--warn); }
+  .user-dropdown-item.logout:hover { background: rgba(232,156,74,0.08); }
   .header-actions {
     display: flex; align-items: center; gap: 4px;
     padding-right: 18px;
@@ -2383,10 +2441,51 @@
     </div>
 
     <div class="header-actions">
-      <div class="header-user" role="button" tabindex="0">
+      <div class="header-user" id="header-user" role="button" tabindex="0">
         <img src="images/avatar.jpg" alt="Gus" class="user-photo" />
         <span class="user-name">Gus Barta</span>
         <i class="ph ph-caret-down"></i>
+
+        <div class="user-dropdown" id="user-dropdown">
+          <div class="user-dropdown-info">
+            <div class="nm">Gus Barta</div>
+            <div class="em">gus@kilonova.ventures</div>
+          </div>
+          <div class="user-dropdown-divider"></div>
+          <button class="user-dropdown-item">
+            <i class="ph ph-user"></i>
+            Account settings
+          </button>
+          <button class="user-dropdown-item">
+            <i class="ph ph-sliders"></i>
+            Workspace settings
+          </button>
+          <button class="user-dropdown-item">
+            <i class="ph ph-moon"></i>
+            Theme
+            <span class="meta">DARK</span>
+          </button>
+          <button class="user-dropdown-item">
+            <i class="ph ph-keyboard"></i>
+            Keyboard shortcuts
+            <span class="meta">?</span>
+          </button>
+          <div class="user-dropdown-divider"></div>
+          <button class="user-dropdown-item">
+            <i class="ph ph-question"></i>
+            Help &amp; documentation
+          </button>
+          <button class="user-dropdown-item">
+            <i class="ph ph-envelope"></i>
+            Contact your pilot
+          </button>
+          <div class="user-dropdown-divider"></div>
+          <button class="user-dropdown-item logout">
+            <i class="ph ph-sign-out"></i>
+            Log out
+          </button>
+        </div>
+
       </div>
       <button class="header-agent-btn" id="header-agent-btn" aria-label="Open Kilonova Agent">
         <i class="ph ph-chat-circle-text"></i>
@@ -5839,6 +5938,33 @@
       }
     }
   });
+
+  // ----- User dropdown (profile menu) -----
+  const headerUser = document.getElementById('header-user');
+  const userDropdown = document.getElementById('user-dropdown');
+
+  function toggleUserDropdown(e) {
+    e.stopPropagation();
+    const isOpen = userDropdown.classList.toggle('open');
+    headerUser.classList.toggle('open', isOpen);
+  }
+  function closeUserDropdown() {
+    userDropdown.classList.remove('open');
+    headerUser.classList.remove('open');
+  }
+  if (headerUser && userDropdown) {
+    headerUser.addEventListener('click', e => {
+      // don't toggle when clicking inside the dropdown items
+      if (e.target.closest('.user-dropdown')) return;
+      toggleUserDropdown(e);
+    });
+    document.addEventListener('click', e => {
+      if (!headerUser.contains(e.target)) closeUserDropdown();
+    });
+    document.addEventListener('keydown', e => {
+      if (e.key === 'Escape' && userDropdown.classList.contains('open')) closeUserDropdown();
+    });
+  }
 
   // ----- Kilonova Agent (push rail · grid column animated) -----
   const shellBody = document.querySelector('.shell-body');
