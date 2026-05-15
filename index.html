@@ -1803,11 +1803,128 @@
   .annotations-btn:hover { color: var(--fg); border-color: var(--fg-mid); }
 
   /* =================================================== */
-  /* MIND · NICHOLAS chat (full-height)                     */
+  /* MIND · chat-first (Claude-style · no tabs)             */
   /* =================================================== */
+  .mind {
+    display: grid;
+    grid-template-columns: 260px 1fr;
+    height: 100%;
+    min-height: 0;
+  }
+
+  /* Empty/welcome state · centered question field */
+  .mind-empty {
+    display: flex; flex-direction: column;
+    align-items: center; justify-content: center;
+    padding: 32px;
+    height: 100%;
+    overflow-y: auto;
+  }
+  .mind-empty .welcome {
+    font-family: var(--f-display);
+    font-size: 32px; font-weight: 500;
+    color: var(--fg);
+    letter-spacing: -0.015em;
+    line-height: 1.2;
+    text-align: center;
+    margin-bottom: 8px;
+  }
+  .mind-empty .welcome .accent { color: var(--accent); }
+  .mind-empty .sub {
+    font-family: var(--f-editorial);
+    font-size: 15px; color: var(--fg-mid);
+    line-height: 1.5;
+    text-align: center;
+    margin-bottom: 36px;
+    max-width: 540px;
+  }
+  .mind-empty .input-wrap {
+    width: 100%;
+    max-width: 720px;
+    margin-bottom: 28px;
+  }
+  .mind-empty .input-box {
+    background: var(--bg-elev-1);
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    padding: 18px 20px;
+    display: flex; align-items: flex-end; gap: 12px;
+    transition: border-color 0.15s;
+    box-shadow: 0 4px 16px rgba(0,0,0,0.20);
+  }
+  .mind-empty .input-box:focus-within { border-color: var(--accent-line); }
+  .mind-empty .input-box textarea {
+    resize: none; min-height: 28px; max-height: 200px;
+    font-size: 15px; line-height: 1.5; color: var(--fg);
+    background: transparent; border: 0; outline: none;
+    width: 100%;
+    font-family: inherit;
+  }
+  .mind-empty .input-box textarea::placeholder {
+    color: var(--fg-faint);
+    font-family: var(--f-editorial);
+    font-size: 15px;
+  }
+  .mind-empty .input-box .send-btn {
+    width: 32px; height: 32px;
+    background: var(--accent); color: var(--bg);
+    border-radius: 6px;
+    display: inline-flex; align-items: center; justify-content: center;
+    flex-shrink: 0;
+    border: 0; cursor: pointer;
+    transition: background 0.12s;
+  }
+  .mind-empty .input-box .send-btn:hover { background: #f0ff66; }
+  .mind-empty .input-box .send-btn i { font-size: 16px; }
+  .mind-empty .input-foot {
+    display: flex; align-items: center; justify-content: space-between;
+    margin-top: 12px;
+    color: var(--fg-faint);
+    font-family: var(--f-mono);
+    font-size: 10px; letter-spacing: 0.06em; text-transform: uppercase;
+  }
+  .mind-empty .input-foot .shortcut {
+    padding: 2px 6px;
+    border: 1px solid var(--line);
+    border-radius: 3px;
+    color: var(--fg-dim);
+  }
+
+  .mind-suggestions {
+    width: 100%;
+    max-width: 720px;
+    display: flex; flex-direction: column; gap: 10px;
+  }
+  .mind-suggestions .label {
+    font-family: var(--f-mono);
+    font-size: 10px; letter-spacing: 0.1em; text-transform: uppercase;
+    color: var(--fg-dim);
+    margin-bottom: 4px;
+  }
+  .mind-suggestions .chips {
+    display: flex; flex-wrap: wrap; gap: 8px;
+  }
+  .mind-suggestion {
+    padding: 10px 14px;
+    background: var(--bg-elev-1);
+    border: 1px solid var(--line);
+    border-radius: 6px;
+    color: var(--fg);
+    font-size: 13px;
+    cursor: pointer;
+    transition: border-color 0.12s, background 0.12s, color 0.12s;
+    font-family: var(--f-editorial);
+    line-height: 1.4;
+  }
+  .mind-suggestion:hover {
+    border-color: var(--accent-line);
+    background: rgba(223,255,0,0.04);
+  }
+
+  /* Legacy nicholas styles still used inside conversation view */
   .nicholas {
     display: grid;
-    grid-template-columns: 240px 1fr;
+    grid-template-columns: 260px 1fr;
     height: 100%;
     min-height: 0;
   }
@@ -4113,17 +4230,12 @@
       </section>
       <section class="surface" id="surface-mind">
 
-        <div class="cluster-tabs">
-          <button class="ctab active" data-csub="mind" data-target="nicholas">NICHOLAS</button>
-          <button class="ctab" data-csub="mind" data-target="insights">Insights</button>
-          <span class="ctab-meta">Reasoning kernel · metrics</span>
-        </div>
+        <!-- MIND · chat-first (Claude-style · no tabs) -->
+        <div style="height: calc(100vh - var(--header-h)); min-height: 0;">
 
-        <!-- NICHOLAS · chat-first deep mode -->
-        <div class="csurface active" data-cs="mind-nicholas" style="padding: 0; height: calc(100vh - var(--header-h) - var(--tab-h)); min-height: 0;">
+          <div class="mind">
 
-          <div class="nicholas">
-
+            <!-- History sidebar (left) -->
             <div class="nich-history">
               <div class="nich-history-head">
                 <span class="ttl">Conversations</span>
@@ -4131,7 +4243,7 @@
               </div>
 
               <div class="nich-history-list">
-                <div class="nich-history-item active">
+                <div class="nich-history-item">
                   <div class="h-nm">GTM motion · Q3 trade-offs</div>
                   <div class="h-meta">Today · ★ COUNCIL · 4 souls</div>
                 </div>
@@ -4154,168 +4266,42 @@
               </div>
             </div>
 
-            <div class="nich-main">
+            <!-- Main · empty/welcome state · centered question field -->
+            <div class="mind-empty">
 
-              <div class="nich-head">
-                <div>
-                  <div class="nm">GTM motion · Q3 trade-offs</div>
-                  <div class="meta">★ COUNCIL · 4 souls deliberating · ETA ~12 min from start</div>
-                </div>
-                <button class="btn-secondary">SHARE</button>
+              <div class="welcome">
+                What can I help you with, <span class="accent">Gus</span>?
+              </div>
+              <div class="sub">
+                Ask anything. Decision-shaped questions get routed to a deep engine — others get a quick answer.
               </div>
 
-              <div class="nich-body">
-
-                <div class="nich-msg user">
-                  <div class="author">You · 13:42</div>
-                  <div class="body">Should we lead Q3 with founder-OS adoption or with the Authority Machine product wedge? Both have signal — feels like a real trade-off, not just sequencing.</div>
+              <div class="input-wrap">
+                <div class="input-box">
+                  <textarea placeholder="Ask Kilonova..." rows="1"></textarea>
+                  <button class="send-btn" aria-label="Send"><i class="ph ph-arrow-up"></i></button>
                 </div>
-
-                <div class="nich-msg deep">
-                  <div class="engine"><span class="star">★</span> COUNCIL · 4 souls deliberating · ETA ~12 min</div>
-                  <div class="author">Routing · 13:42</div>
+                <div class="input-foot">
+                  <span>Routing happens automatically · you can pick a different engine after</span>
+                  <span class="shortcut">Enter ↵</span>
                 </div>
-
-                <div class="nich-routing">
-                  <div class="head">Decision-shaped query · here's how we'd handle it</div>
-
-                  <div class="opt recommended">
-                    <div class="top">
-                      <span class="name">★ COUNCIL</span>
-                      <span class="badge">recommended</span>
-                      <span class="eta">ETA ~12 min · 4 souls</span>
-                    </div>
-                    <div class="desc">Multi-soul deliberation — Christensen on jobs-to-be-done, Wardley on positioning evolution, Munger on inversion, Minto on argument structure</div>
-                  </div>
-
-                  <div class="opt">
-                    <div class="top">
-                      <span class="name">★ SWARM</span>
-                      <span class="eta">ETA ~8 min · 3 prisms</span>
-                    </div>
-                    <div class="desc">Parallel comparative — MINTO + WARDLEY + CHRISTENSEN run independently, surface where they diverge</div>
-                  </div>
-
-                  <div class="opt">
-                    <div class="top">
-                      <span class="name">★ NICHOLAS</span>
-                      <span class="eta">ETA ~3 min · single engine</span>
-                    </div>
-                    <div class="desc">Master consultant — fastest, but for a real Q3 trade-off the council perspectives compound. Use this if you want a quick first read.</div>
-                  </div>
-
-                  <div style="display:flex;gap:8px;margin-top:4px;">
-                    <button class="btn-primary" style="font-size:10px;padding:9px 14px;">CONTINUE WITH COUNCIL</button>
-                    <button class="btn-secondary">CHOOSE SWARM</button>
-                    <button class="btn-secondary">CHOOSE NICHOLAS</button>
-                  </div>
-                </div>
-
-                <div class="nich-msg deep">
-                  <div class="engine"><span class="star">★</span> COUNCIL · in flight</div>
-                  <div class="author">Kilonova · 13:42</div>
-                  <div class="body">
-                    Reading substrate · 247 claims · 412 edges · 18 sources active · 8 standing commitments... <br><br>
-                    Loading souls (Christensen · Wardley · Munger · Minto)... <br><br>
-                    Souls deliberating · synthesis will land in this thread when ready. You'll get a notification.
-                  </div>
-                </div>
-
               </div>
 
-              <div class="nich-input">
-                <div class="nich-input-box">
-                  <textarea placeholder="Ask anything · decision-shaped questions trigger deep mode..." rows="1"></textarea>
-                  <button class="nich-send" aria-label="Send"><i class="ph ph-arrow-up"></i></button>
+              <div class="mind-suggestions">
+                <div class="label">Try asking</div>
+                <div class="chips">
+                  <button class="mind-suggestion">What's blocking Channels capability right now?</button>
+                  <button class="mind-suggestion">Show me commitments at risk this week</button>
+                  <button class="mind-suggestion">Run a Decision Brief on Q3 GTM motion</button>
+                  <button class="mind-suggestion">Why is Narrative Avatar drifting?</button>
+                  <button class="mind-suggestion">Summarize the substrate growth this month</button>
+                  <button class="mind-suggestion">Compare Authority and Customer Truth Avatars · last 30d</button>
                 </div>
               </div>
 
             </div>
 
           </div>
-        </div>
-
-        <!-- Insights -->
-        <div class="csurface" data-cs="mind-insights">
-          <div class="page-head">
-            <div class="left">
-              <h1>Insights</h1>
-              <div class="sub">Operating metrics · what changed this week</div>
-            </div>
-            <div class="right">
-              <button class="btn-secondary">7D</button>
-              <button class="btn-secondary">30D</button>
-              <button class="btn-secondary">90D</button>
-            </div>
-          </div>
-
-          <div class="insights-grid">
-
-            <!-- Hero metric -->
-            <div class="metric-card hero">
-              <div class="label">Substrate growth · 30d</div>
-              <div style="display:flex;align-items:baseline;gap:14px;">
-                <div class="num-big">+47</div>
-                <div class="delta"><i class="ph ph-arrow-up"></i> +32% w/w</div>
-              </div>
-              <div class="sub">claims canonicalized · 12 contradictions resolved</div>
-              <svg class="spark" viewBox="0 0 400 110" preserveAspectRatio="none">
-                <defs>
-                  <linearGradient id="hero-grad" x1="0" y1="0" x2="0" y2="1">
-                    <stop offset="0%" stop-color="#DFFF00" stop-opacity="0.20"/>
-                    <stop offset="100%" stop-color="#DFFF00" stop-opacity="0"/>
-                  </linearGradient>
-                </defs>
-                <path d="M0,80 L40,75 L80,72 L120,65 L160,60 L200,55 L240,42 L280,38 L320,28 L360,18 L400,10 L400,110 L0,110 Z" fill="url(#hero-grad)"/>
-                <path d="M0,80 L40,75 L80,72 L120,65 L160,60 L200,55 L240,42 L280,38 L320,28 L360,18 L400,10" fill="none" stroke="var(--accent)" stroke-width="1.6"/>
-              </svg>
-            </div>
-
-            <!-- Approve rate -->
-            <div class="metric-card">
-              <div class="label">Approve rate · 7d</div>
-              <div class="num-mid">94%</div>
-              <div class="delta"><i class="ph ph-arrow-up"></i> +6%</div>
-              <div class="sub">17 of 18 ratified · 1 reshape</div>
-            </div>
-
-            <!-- Avatar utilization -->
-            <div class="metric-card">
-              <div class="label">Avatars · running 7d</div>
-              <div class="num-mid">42</div>
-              <div class="delta"><i class="ph ph-arrow-up"></i> +8</div>
-              <div class="sub">Authority 16 · Customer Truth 12 · Reviewer 14</div>
-            </div>
-
-            <!-- Engagement -->
-            <div class="metric-card">
-              <div class="label">Voice · LinkedIn · 7d</div>
-              <div class="num-mid">3.4×</div>
-              <div class="delta"><i class="ph ph-arrow-up"></i> normal baseline</div>
-              <div class="sub">"Other tools answer questions" hit signature</div>
-            </div>
-
-            <!-- Cycle time -->
-            <div class="metric-card">
-              <div class="label">Decision cycle · avg</div>
-              <div class="num-mid">2.1d</div>
-              <div class="delta down"><i class="ph ph-arrow-down"></i> +0.4d</div>
-              <div class="sub">Q3 GTM brief contributing to drift</div>
-            </div>
-
-          </div>
-
-          <div class="block mentor" style="background:linear-gradient(180deg,rgba(223,255,0,0.025),var(--bg-elev-1) 80%);">
-            <div class="block-header">
-              <span class="mentor-marker"><span class="star">★</span> KILONOVA</span>
-            </div>
-            <div class="block-body">
-              <div class="body-prose">
-                <span class="accent">Velocity is up across the board</span> — except cycle time. The GTM brief is the single drag on Decision Cycle. Approving it would shave ~0.6d off the average and unblock 3 downstream items.
-              </div>
-            </div>
-          </div>
-
         </div>
 
       </section>
