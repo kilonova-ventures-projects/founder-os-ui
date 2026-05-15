@@ -442,7 +442,7 @@
   }
   .metric-big .delta {
     font-family: var(--f-mono);
-    font-size: 11px; color: var(--accent);
+    font-size: 11px; color: var(--fg-mid);
     display: inline-flex; align-items: center; gap: 3px;
   }
   .metric-big .delta i { font-size: 11px; }
@@ -886,7 +886,7 @@
     font-size: 10px; color: var(--fg-mid);
     letter-spacing: 0.04em;
   }
-  .commit-card .due strong { color: var(--accent); font-weight: 500; }
+  .commit-card .due strong { color: var(--fg); font-weight: 500; }
   .commit-card .nm {
     font-size: 13.5px; line-height: 1.4; color: var(--fg);
     font-weight: 500;
@@ -1251,7 +1251,7 @@
   .topic-row .bar-wrap {
     height: 5px; background: var(--bg-elev-3); border-radius: 2.5px; overflow: hidden;
   }
-  .topic-row .bar { height: 100%; background: var(--accent); border-radius: 2.5px; }
+  .topic-row .bar { height: 100%; background: var(--fg-mid); border-radius: 2.5px; }
   .topic-row .ct {
     font-family: var(--f-mono);
     font-size: 11px; color: var(--fg-mid);
@@ -1880,9 +1880,10 @@
   }
   .metric-card .delta {
     font-family: var(--f-mono);
-    font-size: 11px; color: var(--accent);
+    font-size: 11px; color: var(--fg-mid);
     display: inline-flex; align-items: center; gap: 4px;
   }
+  .metric-card.hero .delta { color: var(--accent); }
   .metric-card .delta.down { color: var(--warn); }
   .metric-card .sub {
     font-family: var(--f-mono); font-size: 10px;
@@ -2058,7 +2059,7 @@
   }
   .channel-card .delta {
     font-family: var(--f-mono);
-    font-size: 10px; color: var(--accent);
+    font-size: 10px; color: var(--fg-mid);
   }
   .channel-card .num {
     font-family: var(--f-display);
@@ -2104,7 +2105,7 @@
     font-size: 10px; color: var(--fg-dim);
     letter-spacing: 0.04em;
   }
-  .soundbite-card .meta strong { color: var(--accent); font-weight: 500; }
+  .soundbite-card .meta strong { color: var(--fg); font-weight: 500; }
 
   /* Territory — typographic emphasis (no custom viz per spec) */
   .territory-section { display: flex; flex-direction: column; gap: 24px; }
@@ -2935,31 +2936,31 @@
                 <div class="activity-row">
                   <span class="ts">Today · 14:08</span>
                   <span class="nm">Cluster naming finalized</span>
-                  <span class="pill ratify">→ ACTIVE</span>
+                  <span class="pill ready">→ ACTIVE</span>
                 </div>
 
                 <div class="activity-row">
                   <span class="ts">Today · 11:42</span>
                   <span class="nm">Tuesday sync with Johnny booked</span>
-                  <span class="pill ratify">→ ACTIVE</span>
+                  <span class="pill ready">→ ACTIVE</span>
                 </div>
 
                 <div class="activity-row">
                   <span class="ts">Yest · 17:21</span>
                   <span class="nm">Editorial Page = canonical output format</span>
-                  <span class="pill ratify">→ ACTIVE</span>
+                  <span class="pill ready">→ ACTIVE</span>
                 </div>
 
                 <div class="activity-row">
                   <span class="ts">Yest · 15:08</span>
                   <span class="nm">Avatar System v0.1 spec</span>
-                  <span class="pill ratify">→ ACTIVE</span>
+                  <span class="pill ready">→ ACTIVE</span>
                 </div>
 
                 <div class="activity-row">
                   <span class="ts">Yest · 10:14</span>
                   <span class="nm">"Compounding intelligence" → signature</span>
-                  <span class="pill ratify">→ ACTIVE</span>
+                  <span class="pill ready">→ ACTIVE</span>
                 </div>
 
                 <div class="activity-row">
@@ -3013,7 +3014,7 @@
               <div class="delta">+8 · 7d</div>
             </div>
             <div class="sub-stat">
-              <div class="num attention">3</div>
+              <div class="num" style="color:var(--warn);">3</div>
               <div class="label">Contradictions</div>
               <div class="delta" style="color:var(--warn);">+1 · 7d</div>
             </div>
