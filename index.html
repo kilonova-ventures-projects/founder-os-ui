@@ -1153,41 +1153,10 @@
   .memory-drop .sub {
     font-size: 11.5px; color: var(--fg-dim);
   }
-  .file-grid {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 12px;
-  }
-  .file-card {
-    background: var(--bg-elev-1);
-    border: 1px solid var(--line);
-    border-radius: 8px;
-    padding: 14px;
+  /* Memory · uses rsn-card pattern */
+  .memory-canvas {
     display: flex; flex-direction: column;
-    gap: 8px;
-    cursor: pointer;
-    transition: border-color 0.12s;
-  }
-  .file-card:hover { border-color: var(--line-strong); }
-  .file-card .ftype {
-    width: 36px; height: 36px;
-    border-radius: 6px;
-    background: var(--bg-elev-3);
-    display: flex; align-items: center; justify-content: center;
-    color: var(--fg-mid);
-  }
-  .file-card .ftype i { font-size: 18px; }
-  .file-card .nm {
-    font-size: 12.5px; color: var(--fg);
-    line-height: 1.35;
-    overflow: hidden; text-overflow: ellipsis;
-    display: -webkit-box;
-    -webkit-line-clamp: 2;
-    -webkit-box-orient: vertical;
-  }
-  .file-card .meta {
-    font-family: var(--f-mono); font-size: 10px;
-    color: var(--fg-dim); letter-spacing: 0.04em;
+    gap: 28px;
   }
 
   /* =================================================== */
@@ -1893,48 +1862,58 @@
   .metric-card.hero .spark { height: 110px; }
 
   /* =================================================== */
-  /* MACHINES · cluster overview cards                      */
+  /* MACHINES · cluster overview cards (RSN-canon discipline) */
   /* =================================================== */
   .machines-grid {
     display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 14px;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px;
   }
   .machine-card {
-    background: var(--bg-elev-1);
-    border: 1px solid var(--line);
-    border-radius: 10px;
-    padding: 18px 22px;
+    background: transparent;
+    border: 1.5px solid var(--line);
+    border-radius: 8px;
+    padding: 18px 20px;
     display: flex; flex-direction: column;
-    gap: 12px;
+    gap: 14px;
     cursor: pointer;
+    min-height: 168px;
     transition: border-color 0.12s, background 0.12s;
+    position: relative;
   }
-  .machine-card:hover { border-color: var(--line-strong); background: var(--bg-elev-2); }
-  .machine-card.locked { opacity: 0.65; }
+  .machine-card:hover {
+    background: var(--bg-elev-1);
+    border-color: var(--line-strong);
+  }
+  .machine-card.active {
+    border-color: var(--accent);
+  }
+  .machine-card.active:hover { background: rgba(223,255,0,0.04); }
+  .machine-card.locked { opacity: 0.55; }
   .machine-card .top {
-    display: flex; align-items: center; gap: 12px;
+    display: flex; align-items: center; gap: 10px;
   }
-  .machine-card .top .sigil { width: 28px; height: 28px; }
+  .machine-card .top .sigil { width: 22px; height: 22px; }
   .machine-card .top .nm {
     font-family: var(--f-display);
-    font-weight: 500; font-size: 16px;
-    color: var(--fg);
-  }
-  .machine-card .pills {
-    display: flex; gap: 6px; align-items: center;
-    margin-left: auto;
+    font-weight: 500; font-size: 14.5px;
+    line-height: 1.3; color: var(--fg);
   }
   .machine-card .body {
-    font-size: 12.5px; color: var(--fg-mid); line-height: 1.5;
+    font-size: 12px; color: var(--fg-mid);
+    line-height: 1.5;
+    flex: 1;
   }
-  .machine-card .stats {
-    display: flex; gap: 18px;
+  .machine-card .footer {
+    display: flex; align-items: center; justify-content: space-between;
+    gap: 8px;
+    margin-top: auto;
+  }
+  .machine-card .footer .avatar-ref {
     font-family: var(--f-mono);
-    font-size: 10px; color: var(--fg-dim);
-    letter-spacing: 0.04em;
+    font-size: 9.5px; letter-spacing: 0.06em; text-transform: uppercase;
+    color: var(--fg-dim);
   }
-  .machine-card .stats strong { color: var(--fg); font-weight: 500; }
 
   /* =================================================== */
   /* MACHINE DETAIL · queue surface                         */
@@ -3122,20 +3101,24 @@
           </div>
         </div>
 
-        <!-- Memory -->
-        <div class="csurface" data-cs="brain-memory">
-          <div class="page-head">
+        <!-- Memory · canonical card pattern (RSN-style) -->
+        <div class="csurface" data-cs="brain-memory" style="padding: 28px 32px 60px;">
+
+          <div class="rsn-page-head">
             <div class="left">
               <h1>Memory</h1>
               <div class="sub">Raw preserves · what's been seen, said, decided</div>
             </div>
             <div class="right">
-              <button class="btn-secondary">FILTER</button>
-              <button class="btn-primary">UPLOAD <i class="ph ph-upload-simple"></i></button>
+              <span><strong>17</strong> items</span>
+              <span>·</span>
+              <span><strong>2</strong> processing</span>
+              <span>·</span>
+              <span>last ingest · today 14:08</span>
             </div>
           </div>
 
-          <div class="memory-drop">
+          <div class="memory-drop" style="margin-bottom: 24px;">
             <i class="ph ph-upload-simple"></i>
             <div>
               <div class="ttl">Drop files to ingest into substrate</div>
@@ -3143,47 +3126,213 @@
             </div>
           </div>
 
-          <div class="file-grid">
-            <div class="file-card">
-              <div class="ftype"><i class="ph ph-file-pdf"></i></div>
-              <div class="nm">Bruno · Kilonova OS v1.4 Canon</div>
-              <div class="meta">PDF · 2 days ago · 47 claims extracted</div>
+          <div class="memory-canvas">
+
+            <!-- TRANSCRIPTS -->
+            <div class="rsn-section">
+              <div class="rsn-section-head">
+                <span class="ttl">Transcripts</span>
+                <span class="line"></span>
+              </div>
+              <div class="rsn-grid">
+
+                <div class="rsn-card ready">
+                  <div class="top">
+                    <span class="id">M001</span>
+                    <span class="score">34</span>
+                  </div>
+                  <div class="nm">Bruno + Gus weekly sync · May 7</div>
+                  <div class="status"><span class="rsn-status ready"><span class="dot"></span>Processed</span></div>
+                </div>
+
+                <div class="rsn-card upcoming">
+                  <div class="top">
+                    <span class="id">M002</span>
+                  </div>
+                  <div class="nm">Discovery call · MVH-04</div>
+                  <div class="status"><span class="rsn-status upcoming"><span class="dot"></span>Processing</span></div>
+                </div>
+
+                <div class="rsn-card ready">
+                  <div class="top">
+                    <span class="id">M003</span>
+                    <span class="score">47</span>
+                  </div>
+                  <div class="nm">Founders Camp transcript</div>
+                  <div class="status"><span class="rsn-status ready"><span class="dot"></span>Processed</span></div>
+                </div>
+
+                <div class="rsn-card ready">
+                  <div class="top">
+                    <span class="id">M004</span>
+                    <span class="score">18</span>
+                  </div>
+                  <div class="nm">Latent Space podcast prep</div>
+                  <div class="status"><span class="rsn-status ready"><span class="dot"></span>Processed</span></div>
+                </div>
+
+              </div>
             </div>
-            <div class="file-card">
-              <div class="ftype"><i class="ph ph-microphone"></i></div>
-              <div class="nm">Discovery call · MVH-04 transcript</div>
-              <div class="meta">Audio · 4m ago · processing...</div>
+
+            <!-- DOCUMENTS -->
+            <div class="rsn-section">
+              <div class="rsn-section-head">
+                <span class="ttl">Documents</span>
+                <span class="line"></span>
+              </div>
+              <div class="rsn-grid">
+
+                <div class="rsn-card ready">
+                  <div class="top">
+                    <span class="id">D001</span>
+                    <span class="score">47</span>
+                  </div>
+                  <div class="nm">Bruno · Kilonova OS v1.4 Canon</div>
+                  <div class="status"><span class="rsn-status ready"><span class="dot"></span>Processed</span></div>
+                </div>
+
+                <div class="rsn-card ready">
+                  <div class="top">
+                    <span class="id">D002</span>
+                    <span class="score">12</span>
+                  </div>
+                  <div class="nm">Architecture v0.6 reframe notes</div>
+                  <div class="status"><span class="rsn-status ready"><span class="dot"></span>Processed</span></div>
+                </div>
+
+                <div class="rsn-card ready">
+                  <div class="top">
+                    <span class="id">D003</span>
+                    <span class="score">23</span>
+                  </div>
+                  <div class="nm">Y Combinator demo script v3</div>
+                  <div class="status"><span class="rsn-status ready"><span class="dot"></span>Processed</span></div>
+                </div>
+
+                <div class="rsn-card ready">
+                  <div class="top">
+                    <span class="id">D004</span>
+                    <span class="score">18</span>
+                  </div>
+                  <div class="nm">RSN-X output · positioning v3</div>
+                  <div class="status"><span class="rsn-status ready"><span class="dot"></span>Processed</span></div>
+                </div>
+
+                <div class="rsn-card ready">
+                  <div class="top">
+                    <span class="id">D005</span>
+                    <span class="score">8</span>
+                  </div>
+                  <div class="nm">Avatar System spec v0.1</div>
+                  <div class="status"><span class="rsn-status ready"><span class="dot"></span>Processed</span></div>
+                </div>
+
+              </div>
             </div>
-            <div class="file-card">
-              <div class="ftype"><i class="ph ph-file-text"></i></div>
-              <div class="nm">Architecture v0.6 reframe notes</div>
-              <div class="meta">Markdown · 3 days ago · 12 claims</div>
+
+            <!-- NOTES -->
+            <div class="rsn-section">
+              <div class="rsn-section-head">
+                <span class="ttl">Notes</span>
+                <span class="line"></span>
+              </div>
+              <div class="rsn-grid">
+
+                <div class="rsn-card ready">
+                  <div class="top">
+                    <span class="id">N001</span>
+                    <span class="score">4</span>
+                  </div>
+                  <div class="nm">Founder feedback meeting notes</div>
+                  <div class="status"><span class="rsn-status ready"><span class="dot"></span>Processed</span></div>
+                </div>
+
+                <div class="rsn-card upcoming">
+                  <div class="top">
+                    <span class="id">N002</span>
+                  </div>
+                  <div class="nm">Council deliberation · Q3 GTM</div>
+                  <div class="status"><span class="rsn-status upcoming"><span class="dot"></span>Processing</span></div>
+                </div>
+
+                <div class="rsn-card ready">
+                  <div class="top">
+                    <span class="id">N003</span>
+                    <span class="score">7</span>
+                  </div>
+                  <div class="nm">Mentor stance · editorial register</div>
+                  <div class="status"><span class="rsn-status ready"><span class="dot"></span>Processed</span></div>
+                </div>
+
+              </div>
             </div>
-            <div class="file-card">
-              <div class="ftype"><i class="ph ph-image"></i></div>
-              <div class="nm">Cofounder app reference screenshots</div>
-              <div class="meta">PNG · 1 week ago · 8 patterns extracted</div>
+
+            <!-- IMAGES -->
+            <div class="rsn-section">
+              <div class="rsn-section-head">
+                <span class="ttl">Images</span>
+                <span class="line"></span>
+              </div>
+              <div class="rsn-grid">
+
+                <div class="rsn-card ready">
+                  <div class="top">
+                    <span class="id">I001</span>
+                    <span class="score">8</span>
+                  </div>
+                  <div class="nm">Cofounder app reference screenshots</div>
+                  <div class="status"><span class="rsn-status ready"><span class="dot"></span>Processed</span></div>
+                </div>
+
+                <div class="rsn-card ready">
+                  <div class="top">
+                    <span class="id">I002</span>
+                    <span class="score">5</span>
+                  </div>
+                  <div class="nm">Mercury dashboard inspiration</div>
+                  <div class="status"><span class="rsn-status ready"><span class="dot"></span>Processed</span></div>
+                </div>
+
+              </div>
             </div>
-            <div class="file-card">
-              <div class="ftype"><i class="ph ph-file-doc"></i></div>
-              <div class="nm">Y Combinator demo script v3</div>
-              <div class="meta">Doc · 2 weeks ago · 23 soundbites</div>
+
+            <!-- LINKS -->
+            <div class="rsn-section">
+              <div class="rsn-section-head">
+                <span class="ttl">Links</span>
+                <span class="line"></span>
+              </div>
+              <div class="rsn-grid">
+
+                <div class="rsn-card ready">
+                  <div class="top">
+                    <span class="id">L001</span>
+                    <span class="score">6</span>
+                  </div>
+                  <div class="nm">Linear redesign blog post</div>
+                  <div class="status"><span class="rsn-status ready"><span class="dot"></span>Processed</span></div>
+                </div>
+
+                <div class="rsn-card ready">
+                  <div class="top">
+                    <span class="id">L002</span>
+                    <span class="score">3</span>
+                  </div>
+                  <div class="nm">Lindy "persistent agents" thread</div>
+                  <div class="status"><span class="rsn-status ready"><span class="dot"></span>Processed</span></div>
+                </div>
+
+                <div class="rsn-card upcoming">
+                  <div class="top">
+                    <span class="id">L003</span>
+                  </div>
+                  <div class="nm">Cursor agent-mode redesign</div>
+                  <div class="status"><span class="rsn-status upcoming"><span class="dot"></span>Processing</span></div>
+                </div>
+
+              </div>
             </div>
-            <div class="file-card">
-              <div class="ftype"><i class="ph ph-link"></i></div>
-              <div class="nm">Linear redesign blog post</div>
-              <div class="meta">URL · 1 week ago · 6 patterns</div>
-            </div>
-            <div class="file-card">
-              <div class="ftype"><i class="ph ph-microphone"></i></div>
-              <div class="nm">Bruno + Gus weekly sync · May 7</div>
-              <div class="meta">Audio · 1 week ago · 34 claims</div>
-            </div>
-            <div class="file-card">
-              <div class="ftype"><i class="ph ph-file-text"></i></div>
-              <div class="nm">RSN-X output · positioning v3</div>
-              <div class="meta">Markdown · 2 weeks ago · 18 claims</div>
-            </div>
+
           </div>
         </div>
 
@@ -3871,22 +4020,17 @@
 
           <div class="machines-grid">
 
-            <div class="machine-card" onclick="openMachineTab('authority')">
+            <div class="machine-card active" onclick="openMachineTab('authority')">
               <div class="top">
                 <span class="sigil"><svg viewBox="0 0 24 24"><polygon class="stroke" points="12,3 21,20 3,20"/></svg></span>
                 <span class="nm">Founder Authority Machine</span>
-                <div class="pills">
-                  <span class="pill in-flight">RUNNING</span>
-                  <span class="pill family world">→ WORLD</span>
-                </div>
               </div>
               <div class="body">
-                Turns founder insight + strategic substrate into public authority — posts, essays, talks. <strong style="color:var(--accent);">First proof Machine</strong> per Bruno's Canon.
+                Turns founder insight + strategic substrate into public authority — posts, essays, talks.
               </div>
-              <div class="stats">
-                <span><strong>Authority Avatar</strong> active · 64%</span>
-                <span><strong>3</strong> approve</span>
-                <span><strong>9</strong> shipped 30d</span>
+              <div class="footer">
+                <span class="avatar-ref">Authority Avatar · running 64%</span>
+                <span class="rsn-status ready"><span class="dot"></span>Active</span>
               </div>
             </div>
 
@@ -3894,37 +4038,27 @@
               <div class="top">
                 <span class="sigil"><svg viewBox="0 0 24 24"><polygon class="stroke" points="12,3 21,9 18,20 6,20 3,9"/></svg></span>
                 <span class="nm">Growth Campaign Machine</span>
-                <div class="pills">
-                  <span class="pill ready">READY</span>
-                  <span class="pill family world">→ WORLD</span>
-                </div>
               </div>
               <div class="body">
-                Turns growth objectives into governed campaigns · assets · experiments · signal review.
+                Governed campaigns · assets · experiments · signal review.
               </div>
-              <div class="stats">
-                <span><strong>Growth Avatar</strong> standby</span>
-                <span><strong>2</strong> campaigns active</span>
-                <span><strong>14</strong> experiments 30d</span>
+              <div class="footer">
+                <span class="avatar-ref">Growth Avatar · standby</span>
+                <span class="rsn-status ready"><span class="dot"></span>Ready</span>
               </div>
             </div>
 
-            <div class="machine-card" onclick="openMachineTab('customer-truth')">
+            <div class="machine-card active" onclick="openMachineTab('customer-truth')">
               <div class="top">
                 <span class="sigil"><svg viewBox="0 0 24 24"><polygon class="stroke" points="6,3 18,3 22,12 18,21 6,21 2,12"/></svg></span>
                 <span class="nm">Customer Truth Machine</span>
-                <div class="pills">
-                  <span class="pill in-flight">RUNNING</span>
-                  <span class="pill family substrate">→ SUBSTRATE</span>
-                </div>
               </div>
               <div class="body">
-                Turns calls, objections, support, market feedback into substrate claims · standing pattern detection.
+                Calls, objections, support, market feedback metabolized into substrate.
               </div>
-              <div class="stats">
-                <span><strong>Customer Truth Avatar</strong> · 28%</span>
-                <span><strong>1</strong> processing</span>
-                <span><strong>34</strong> claims 30d</span>
+              <div class="footer">
+                <span class="avatar-ref">Customer Truth Avatar · running 28%</span>
+                <span class="rsn-status ready"><span class="dot"></span>Active</span>
               </div>
             </div>
 
@@ -3932,18 +4066,13 @@
               <div class="top">
                 <span class="sigil"><svg viewBox="0 0 24 24"><rect x="4" y="4" width="16" height="16" class="stroke"/></svg></span>
                 <span class="nm">Investor Relations Machine</span>
-                <div class="pills">
-                  <span class="pill ready">READY</span>
-                  <span class="pill family world">→ WORLD</span>
-                </div>
               </div>
               <div class="body">
-                Turns fundraising into structured narrative · outreach · objection capture · update memos.
+                Structured narrative · outreach · objection capture · update memos.
               </div>
-              <div class="stats">
-                <span><strong>IR Avatar</strong> standby</span>
-                <span><strong>0</strong> in flight</span>
-                <span><strong>cycle-paced</strong></span>
+              <div class="footer">
+                <span class="avatar-ref">IR Avatar · standby</span>
+                <span class="rsn-status ready"><span class="dot"></span>Ready</span>
               </div>
             </div>
 
@@ -3951,18 +4080,13 @@
               <div class="top">
                 <span class="sigil"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9" class="stroke"/></svg></span>
                 <span class="nm">Weekly Founder Review Machine</span>
-                <div class="pills">
-                  <span class="pill ready">READY</span>
-                  <span class="pill family commitment">→ COMMITMENT</span>
-                </div>
               </div>
               <div class="body">
-                Turns signal · commitments · slippage · decisions into operating rhythm. Wakes weekly.
+                Signal · commitments · slippage · decisions metabolized into operating rhythm.
               </div>
-              <div class="stats">
-                <span><strong>Cadence Avatar</strong> · next 17:00</span>
-                <span><strong>4-week</strong> streak</span>
-                <span><strong>weekly heartbeat</strong></span>
+              <div class="footer">
+                <span class="avatar-ref">Cadence Avatar · next 17:00</span>
+                <span class="rsn-status ready"><span class="dot"></span>Ready</span>
               </div>
             </div>
 
@@ -3970,17 +4094,13 @@
               <div class="top">
                 <span class="sigil"><svg viewBox="0 0 24 24"><polygon class="stroke" points="12,3 21,12 12,21 3,12"/></svg></span>
                 <span class="nm">Narrative Ratchet Machine</span>
-                <div class="pills">
-                  <span class="pill locked">LOCKED · CHAIN</span>
-                  <span class="pill family world">→ WORLD</span>
-                </div>
               </div>
               <div class="body">
-                Continuously improves messaging · narrative · deck · homepage · founder story. Locked until GTM Decision Brief approves.
+                Continuously improves messaging · narrative · deck · homepage · founder story.
               </div>
-              <div class="stats">
-                <span><strong>Narrative Avatar</strong> · 5d drift</span>
-                <span style="color:var(--warn);"><strong>blocked</strong></span>
+              <div class="footer">
+                <span class="avatar-ref">Narrative Avatar · 5d drift</span>
+                <span class="rsn-status upcoming"><span class="dot"></span>Locked</span>
               </div>
             </div>
 
