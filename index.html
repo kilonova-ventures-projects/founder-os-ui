@@ -89,8 +89,7 @@
 
   /* ---------- Header ---------- */
   .header {
-    display: grid;
-    grid-template-columns: auto 1fr auto;
+    display: flex;
     align-items: center;
     border-bottom: 1px solid var(--line);
     background: var(--bg);
@@ -99,32 +98,48 @@
   .header-logo {
     display: flex; align-items: center;
     height: var(--header-h);
-    padding: 0 20px;
+    padding: 0 22px;
     border-right: 1px solid var(--line);
   }
-  .header-logo img { height: 22px; width: auto; }
-  .header-tenant {
-    display: flex; align-items: center; gap: 10px;
+  .header-logo img { height: 29px; width: auto; }
+
+  /* Client selector (org switcher) — left side */
+  .header-client {
+    display: flex; align-items: center; gap: 8px;
     padding: 0 18px;
     color: var(--fg);
     height: 100%;
     cursor: pointer;
     transition: background 0.12s ease;
   }
-  .header-tenant:hover { background: var(--bg-elev-1); }
-  .header-tenant img.tenant-photo {
+  .header-client:hover { background: var(--bg-elev-1); }
+  .header-client .client-name {
+    font-weight: 500; font-size: 13px;
+  }
+  .header-client i.ph-caret-down {
+    font-size: 11px; color: var(--fg-dim);
+  }
+
+  /* User identity (founder) — right side, before Agent button */
+  .header-user {
+    display: flex; align-items: center; gap: 10px;
+    padding: 0 14px;
+    color: var(--fg);
+    height: 100%;
+    cursor: pointer;
+    transition: background 0.12s ease;
+  }
+  .header-user:hover { background: var(--bg-elev-1); }
+  .header-user img.user-photo {
     width: 26px; height: 26px;
     border-radius: 50%;
     object-fit: cover;
     border: 1px solid var(--line-strong);
   }
-  .header-tenant .tenant-name {
+  .header-user .user-name {
     font-weight: 500; font-size: 13px;
   }
-  .header-tenant .tenant-org {
-    color: var(--fg-dim); font-size: 13px;
-  }
-  .header-tenant i.ph-caret-down {
+  .header-user i.ph-caret-down {
     font-size: 11px; color: var(--fg-dim);
   }
   .header-actions {
@@ -2362,14 +2377,17 @@
       <img src="images/logo.svg" alt="Kilonova" />
     </div>
 
-    <div class="header-tenant" role="button" tabindex="0">
-      <img src="images/avatar.jpg" alt="Gus" class="tenant-photo" />
-      <span class="tenant-name">Gus Barta</span>
-      <span class="tenant-org">· Kilonova</span>
+    <div class="header-client" role="button" tabindex="0">
+      <span class="client-name">Kilonova</span>
       <i class="ph ph-caret-down"></i>
     </div>
 
     <div class="header-actions">
+      <div class="header-user" role="button" tabindex="0">
+        <img src="images/avatar.jpg" alt="Gus" class="user-photo" />
+        <span class="user-name">Gus Barta</span>
+        <i class="ph ph-caret-down"></i>
+      </div>
       <button class="header-agent-btn" id="header-agent-btn" aria-label="Open Kilonova Agent">
         <i class="ph ph-chat-circle-text"></i>
         Agent
