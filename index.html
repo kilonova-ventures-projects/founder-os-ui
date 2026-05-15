@@ -75,12 +75,16 @@
     line-height: 1; font-size: 16px;
   }
 
-  /* ---------- Shell (header + nav + main) ---------- */
+  /* ---------- Shell (header + nav + main + optional rail) ---------- */
   .shell { display: grid; grid-template-rows: var(--header-h) 1fr; height: 100vh; }
   .shell-body {
     display: grid;
-    grid-template-columns: var(--nav-w) 1fr;
+    grid-template-columns: var(--nav-w) 1fr 0;
     min-height: 0;
+    transition: grid-template-columns 0.22s ease;
+  }
+  .shell-body.rail-open {
+    grid-template-columns: var(--nav-w) 1fr var(--rail-w);
   }
 
   /* ---------- Header ---------- */
@@ -508,25 +512,17 @@
   }
   .block.mentor .body-prose .accent { color: var(--accent); font-weight: 500; }
 
-  /* ---------- Right rail · Kilonova Agent (slide-over panel) ---------- */
+  /* ---------- Right rail · Kilonova Agent (push panel · 3rd grid col) ---------- */
   .rail {
-    position: fixed;
-    top: var(--header-h);
-    right: 0;
-    bottom: 0;
-    width: var(--rail-w);
     border-left: 1px solid var(--line);
     background: var(--bg);
     display: grid;
     grid-template-rows: auto 1fr auto;
     min-height: 0;
     overflow: hidden;
-    transform: translateX(100%);
-    transition: transform 0.22s ease;
-    z-index: 80;
-    box-shadow: -8px 0 28px rgba(0,0,0,0.40);
+    /* Width is controlled by parent grid (.shell-body grid column).
+       Rail.open class added in sync just for child styling hooks. */
   }
-  .rail.open { transform: translateX(0); }
   .rail-head {
     display: flex; align-items: center; justify-content: space-between;
     padding: 14px 18px;
@@ -545,7 +541,7 @@
   .header-agent-btn {
     display: inline-flex; align-items: center; gap: 8px;
     padding: 6px 12px;
-    margin-right: 10px;
+    margin-left: 8px;
     color: var(--fg-mid);
     border: 1px solid var(--line);
     border-radius: 5px;
@@ -2375,15 +2371,15 @@
     </div>
 
     <div class="header-actions">
-      <button class="header-agent-btn" id="header-agent-btn" aria-label="Open Kilonova Agent">
-        <i class="ph ph-chat-circle-text"></i>
-        Agent
-      </button>
       <button class="header-action-btn" aria-label="Book a call with your pilot">
         <i class="ph ph-calendar-blank"></i>
       </button>
       <button class="header-action-btn" aria-label="Theme">
         <i class="ph ph-moon"></i>
+      </button>
+      <button class="header-agent-btn" id="header-agent-btn" aria-label="Open Kilonova Agent">
+        <i class="ph ph-chat-circle-text"></i>
+        Agent
       </button>
     </div>
 
@@ -5342,25 +5338,20 @@
 
     </main>
 
-  </div>
-</div>
-
-<!-- ============ KILONOVA AGENT · slide-over from right ============ -->
-<aside class="rail" id="rail">
-  <div class="rail-head">
-    <div class="ttl">Kilonova Agent</div>
-    <div class="actions">
-      <button class="rail-action" aria-label="History"><i class="ph ph-clock-counter-clockwise"></i></button>
-      <button class="rail-action" aria-label="New conversation"><i class="ph ph-plus"></i></button>
-      <button class="rail-collapse-btn" id="rail-close" aria-label="Close Kilonova Agent">
-        <i class="ph ph-x"></i>
-      </button>
-    </div>
-  </div>
-<!-- begin agent body -->
+    <!-- ============ KILONOVA AGENT · push panel (3rd grid column) ============ -->
+    <aside class="rail" id="rail">
+      <div class="rail-head">
+        <div class="ttl">Kilonova Agent</div>
+        <div class="actions">
+          <button class="rail-action" aria-label="History"><i class="ph ph-clock-counter-clockwise"></i></button>
+          <button class="rail-action" aria-label="New conversation"><i class="ph ph-plus"></i></button>
+          <button class="rail-collapse-btn" id="rail-close" aria-label="Close Kilonova Agent">
+            <i class="ph ph-x"></i>
+          </button>
+        </div>
+      </div>
 
       <div class="rail-body">
-
         <div class="msg user">
           <div class="author">You · 13:58</div>
           <div class="body">Why is Channels capability locked right now?</div>
@@ -5373,7 +5364,6 @@
             Two upstream prerequisites cleared this week (Brand Voice Doc · LinkedIn auth). The brief is the last gate. Synthesis landed 18 minutes ago — approving it unlocks Channels and the Authority Avatar can resume the weekly push.
           </div>
         </div>
-
       </div>
 
       <div class="rail-input">
@@ -5387,7 +5377,10 @@
         </div>
       </div>
 
-</aside>
+    </aside>
+
+  </div>
+</div>
 
 <!-- ============ MODALS · Avatar profile + WorkItem detail ============ -->
 <div class="modal-backdrop" id="modal-backdrop"></div>
@@ -5836,12 +5829,14 @@
     }
   });
 
-  // ----- Kilonova Agent (slide-over rail) -----
+  // ----- Kilonova Agent (push rail · grid column animated) -----
+  const shellBody = document.querySelector('.shell-body');
   const rail = document.getElementById('rail');
   const headerAgentBtn = document.getElementById('header-agent-btn');
   const railClose = document.getElementById('rail-close');
 
   function openRail() {
+    shellBody.classList.add('rail-open');
     rail.classList.add('open');
     setTimeout(() => {
       const ta = document.querySelector('.rail-input-box textarea');
@@ -5849,10 +5844,11 @@
     }, 240);
   }
   function closeRail() {
+    shellBody.classList.remove('rail-open');
     rail.classList.remove('open');
   }
   function toggleRail() {
-    if (rail.classList.contains('open')) closeRail();
+    if (shellBody.classList.contains('rail-open')) closeRail();
     else openRail();
   }
 
@@ -5861,7 +5857,7 @@
 
   // Esc closes rail
   document.addEventListener('keydown', e => {
-    if (e.key === 'Escape' && rail.classList.contains('open')) closeRail();
+    if (e.key === 'Escape' && shellBody.classList.contains('rail-open')) closeRail();
   });
 
   // K shortcut: open rail + focus input
@@ -5870,7 +5866,7 @@
       const target = document.activeElement;
       if (target && (target.tagName === 'INPUT' || target.tagName === 'TEXTAREA' || target.isContentEditable)) return;
       e.preventDefault();
-      if (!rail.classList.contains('open')) openRail();
+      if (!shellBody.classList.contains('rail-open')) openRail();
       else {
         const ta = document.querySelector('.rail-input-box textarea');
         if (ta) ta.focus();
