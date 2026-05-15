@@ -81,6 +81,10 @@
     display: grid;
     grid-template-columns: var(--nav-w) 1fr var(--rail-w);
     min-height: 0;
+    transition: grid-template-columns 0.22s ease;
+  }
+  .shell-body.rail-collapsed {
+    grid-template-columns: var(--nav-w) 1fr 52px;
   }
 
   /* ---------- Header ---------- */
@@ -508,19 +512,49 @@
   }
   .block.mentor .body-prose .accent { color: var(--accent); font-weight: 500; }
 
-  /* ---------- Right rail · Ask Layer ---------- */
+  /* ---------- Right rail · Kilonova Agent ---------- */
   .rail {
     border-left: 1px solid var(--line);
     background: var(--bg);
     display: grid;
     grid-template-rows: auto 1fr auto;
     min-height: 0;
+    overflow: hidden;
   }
+  /* Collapsed state · only the toggle column visible */
+  .rail.collapsed { grid-template-rows: 1fr; }
+  .rail.collapsed .rail-head .ttl,
+  .rail.collapsed .rail-head .actions,
+  .rail.collapsed .rail-body,
+  .rail.collapsed .rail-input {
+    display: none;
+  }
+  .rail.collapsed .rail-head {
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    padding: 14px 0 0;
+    border-bottom: 0;
+    height: 100%;
+  }
+  .rail.collapsed .rail-collapse-btn {
+    width: 32px; height: 32px;
+    margin: 0 auto;
+  }
+  .rail.collapsed .rail-collapse-btn i { font-size: 16px; }
   .rail-head {
     display: flex; align-items: center; justify-content: space-between;
     padding: 14px 18px;
     border-bottom: 1px solid var(--line);
   }
+  .rail-collapse-btn {
+    width: 28px; height: 28px;
+    display: inline-flex; align-items: center; justify-content: center;
+    color: var(--fg-mid); border-radius: 4px;
+    transition: background 0.12s, color 0.12s;
+  }
+  .rail-collapse-btn:hover { background: var(--bg-elev-1); color: var(--fg); }
+  .rail-collapse-btn i { font-size: 14px; }
   .rail-head .ttl {
     font-family: var(--f-mono);
     font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase;
@@ -5299,10 +5333,13 @@
 
     </main>
 
-    <!-- ============ RIGHT RAIL · ASK LAYER ============ -->
-    <aside class="rail">
+    <!-- ============ RIGHT RAIL · KILONOVA AGENT ============ -->
+    <aside class="rail collapsed" id="rail">
       <div class="rail-head">
-        <div class="ttl">Ask Kilonova</div>
+        <button class="rail-collapse-btn" id="rail-toggle" aria-label="Toggle Kilonova Agent panel">
+          <i class="ph ph-sidebar-simple"></i>
+        </button>
+        <div class="ttl">Kilonova Agent</div>
         <div class="actions">
           <button class="rail-action" aria-label="History"><i class="ph ph-clock-counter-clockwise"></i></button>
           <button class="rail-action" aria-label="New conversation"><i class="ph ph-plus"></i></button>
@@ -5789,14 +5826,52 @@
     }
   });
 
-  // K shortcut focuses Ask textarea (right rail)
+  // ----- Right rail (Kilonova Agent) collapse/expand -----
+  const shellBody = document.querySelector('.shell-body');
+  const rail = document.getElementById('rail');
+  const railToggle = document.getElementById('rail-toggle');
+
+  // Default collapsed
+  if (shellBody) shellBody.classList.add('rail-collapsed');
+
+  function setRailCollapsed(collapsed) {
+    if (collapsed) {
+      shellBody.classList.add('rail-collapsed');
+      rail.classList.add('collapsed');
+    } else {
+      shellBody.classList.remove('rail-collapsed');
+      rail.classList.remove('collapsed');
+    }
+  }
+  function toggleRail() {
+    const isCollapsed = rail.classList.contains('collapsed');
+    setRailCollapsed(!isCollapsed);
+    if (isCollapsed) {
+      // expanded; focus the input
+      setTimeout(() => {
+        const ta = document.querySelector('.rail-input-box textarea');
+        if (ta) ta.focus();
+      }, 240);
+    }
+  }
+  if (railToggle) railToggle.addEventListener('click', toggleRail);
+
+  // K shortcut: expand rail (if collapsed) + focus input
   document.addEventListener('keydown', e => {
     if (e.key.toLowerCase() === 'k' && !e.metaKey && !e.ctrlKey) {
       const target = document.activeElement;
       if (target && (target.tagName === 'INPUT' || target.tagName === 'TEXTAREA' || target.isContentEditable)) return;
       e.preventDefault();
-      const ta = document.querySelector('.rail-input-box textarea');
-      if (ta) ta.focus();
+      if (rail.classList.contains('collapsed')) {
+        setRailCollapsed(false);
+        setTimeout(() => {
+          const ta = document.querySelector('.rail-input-box textarea');
+          if (ta) ta.focus();
+        }, 240);
+      } else {
+        const ta = document.querySelector('.rail-input-box textarea');
+        if (ta) ta.focus();
+      }
     }
   });
 
