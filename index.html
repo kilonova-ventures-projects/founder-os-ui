@@ -3336,83 +3336,145 @@
           </div>
         </div>
 
-        <!-- Signal Feed -->
-        <div class="csurface" data-cs="brain-signal-feed">
-          <div class="page-head">
+        <!-- Signal Feed · canonical card pattern (state-grouped) -->
+        <div class="csurface" data-cs="brain-signal-feed" style="padding: 28px 32px 60px;">
+
+          <div class="rsn-page-head">
             <div class="left">
               <h1>Signal Feed</h1>
               <div class="sub">Curated inbound from reality · interpret to update substrate</div>
             </div>
             <div class="right">
-              <button class="btn-secondary">FILTER</button>
+              <span><strong>4</strong> need interpretation</span>
+              <span>·</span>
+              <span><strong>9</strong> ratified · 30d</span>
+              <span>·</span>
+              <span>last capture · today 13:54</span>
             </div>
           </div>
 
-          <div class="signal-list">
+          <div class="memory-canvas">
 
-            <div class="signal-card">
-              <span class="src">Listening</span>
-              <div class="body">
-                <div class="nm">"AI-native" search interest +18% · weekly Google Trends</div>
-                <div class="meta">Captured today · raw · interpretation pending</div>
+            <!-- NEEDS INTERPRETATION -->
+            <div class="rsn-section">
+              <div class="rsn-section-head">
+                <span class="ttl">Needs interpretation</span>
+                <span class="line"></span>
               </div>
-              <div class="actions">
-                <span class="pill ratify">INTERPRET</span>
+              <div class="rsn-grid">
+
+                <div class="rsn-card ready">
+                  <div class="top">
+                    <span class="id">SIG-024</span>
+                    <span class="score">today</span>
+                  </div>
+                  <div class="nm">"AI-native" search interest +18% · weekly Google Trends</div>
+                  <div class="status"><span class="rsn-status ready"><span class="dot"></span>Listening</span></div>
+                </div>
+
+                <div class="rsn-card ready">
+                  <div class="top">
+                    <span class="id">SIG-023</span>
+                    <span class="score">today</span>
+                  </div>
+                  <div class="nm">Founder objection: "agents vs avatars — what's the difference?"</div>
+                  <div class="status"><span class="rsn-status ready"><span class="dot"></span>Customer Truth</span></div>
+                </div>
+
+                <div class="rsn-card ready">
+                  <div class="top">
+                    <span class="id">SIG-022</span>
+                    <span class="score">2d ago</span>
+                  </div>
+                  <div class="nm">Competitor Lindy launched "persistent agents" framing</div>
+                  <div class="status"><span class="rsn-status ready"><span class="dot"></span>Listening</span></div>
+                </div>
+
+                <div class="rsn-card ready">
+                  <div class="top">
+                    <span class="id">SIG-021</span>
+                    <span class="score">3d ago</span>
+                  </div>
+                  <div class="nm">Reid Hoffman essay · "AI as cofounder" · 87k impressions</div>
+                  <div class="status"><span class="rsn-status ready"><span class="dot"></span>Listening</span></div>
+                </div>
+
               </div>
             </div>
 
-            <div class="signal-card">
-              <span class="src">Customer Truth</span>
-              <div class="body">
-                <div class="nm">Founder objection: "agents vs avatars — what's the difference?"</div>
-                <div class="meta">Captured today · pitch call MVH-04 · 02:14 mark</div>
+            <!-- INTERPRETED -->
+            <div class="rsn-section">
+              <div class="rsn-section-head">
+                <span class="ttl">Interpreted · awaiting substrate ratify</span>
+                <span class="line"></span>
               </div>
-              <div class="actions">
-                <span class="pill ratify">INTERPRET</span>
+              <div class="rsn-grid">
+
+                <div class="rsn-card upcoming">
+                  <div class="top">
+                    <span class="id">SIG-020</span>
+                    <span class="score">yest</span>
+                  </div>
+                  <div class="nm">"Other tools answer questions" post · 3.4× normal engagement</div>
+                  <div class="status"><span class="rsn-status upcoming"><span class="dot"></span>Channels</span></div>
+                </div>
+
+                <div class="rsn-card upcoming">
+                  <div class="top">
+                    <span class="id">SIG-019</span>
+                    <span class="score">yest</span>
+                  </div>
+                  <div class="nm">Cursor agent-mode redesign · interface adjacency</div>
+                  <div class="status"><span class="rsn-status upcoming"><span class="dot"></span>Listening</span></div>
+                </div>
+
               </div>
             </div>
 
-            <div class="signal-card">
-              <span class="src">Channels</span>
-              <div class="body">
-                <div class="nm">"Other tools answer questions" post · 3.4× normal engagement</div>
-                <div class="meta">Captured yesterday · LinkedIn · interpreted → signature soundbite</div>
+            <!-- RATIFIED -->
+            <div class="rsn-section">
+              <div class="rsn-section-head">
+                <span class="ttl">Ratified into substrate · last 30d</span>
+                <span class="line"></span>
               </div>
-              <div class="actions">
-                <span class="pill ready">INTERPRETED</span>
-              </div>
-            </div>
+              <div class="rsn-grid">
 
-            <div class="signal-card">
-              <span class="src">Listening</span>
-              <div class="body">
-                <div class="nm">Competitor Lindy launched "persistent agents" framing</div>
-                <div class="meta">Captured 2d ago · Twitter thread · interpretation pending</div>
-              </div>
-              <div class="actions">
-                <span class="pill ratify">INTERPRET</span>
-              </div>
-            </div>
+                <div class="rsn-card upcoming">
+                  <div class="top">
+                    <span class="id">SIG-018</span>
+                    <span class="score">3d</span>
+                  </div>
+                  <div class="nm">"Founder time scarcity" surfaced 4× in last 5 calls</div>
+                  <div class="status"><span class="rsn-status upcoming"><span class="dot"></span>Customer Truth</span></div>
+                </div>
 
-            <div class="signal-card">
-              <span class="src">Customer Truth</span>
-              <div class="body">
-                <div class="nm">"Founder time scarcity" surfaced 4× in last 5 calls</div>
-                <div class="meta">Captured 3d ago · pattern flagged · → substrate cluster</div>
-              </div>
-              <div class="actions">
-                <span class="pill" style="color:var(--fg-dim);background:transparent;border:1px solid var(--line);">RATIFIED</span>
-              </div>
-            </div>
+                <div class="rsn-card upcoming">
+                  <div class="top">
+                    <span class="id">SIG-017</span>
+                    <span class="score">3d</span>
+                  </div>
+                  <div class="nm">Substrate growth velocity up 32% week-over-week</div>
+                  <div class="status"><span class="rsn-status upcoming"><span class="dot"></span>Insights</span></div>
+                </div>
 
-            <div class="signal-card">
-              <span class="src">Insights</span>
-              <div class="body">
-                <div class="nm">Substrate growth velocity up 32% week-over-week</div>
-                <div class="meta">Captured 3d ago · positive · informs operating cadence</div>
-              </div>
-              <div class="actions">
-                <span class="pill" style="color:var(--fg-dim);background:transparent;border:1px solid var(--line);">RATIFIED</span>
+                <div class="rsn-card upcoming">
+                  <div class="top">
+                    <span class="id">SIG-016</span>
+                    <span class="score">5d</span>
+                  </div>
+                  <div class="nm">Patrick Collison · "operator-grade tooling" framing</div>
+                  <div class="status"><span class="rsn-status upcoming"><span class="dot"></span>Listening</span></div>
+                </div>
+
+                <div class="rsn-card upcoming">
+                  <div class="top">
+                    <span class="id">SIG-015</span>
+                    <span class="score">1w</span>
+                  </div>
+                  <div class="nm">Latent Space podcast inbound · invitation</div>
+                  <div class="status"><span class="rsn-status upcoming"><span class="dot"></span>Speaking</span></div>
+                </div>
+
               </div>
             </div>
 
@@ -3714,70 +3776,153 @@
           </div>
         </div>
 
-        <!-- Listening -->
-        <div class="csurface" data-cs="brain-listening">
-          <div class="page-head">
+        <!-- Listening · canonical card pattern (monitor-grouped) -->
+        <div class="csurface" data-cs="brain-listening" style="padding: 28px 32px 60px;">
+
+          <div class="rsn-page-head">
             <div class="left">
               <h1>Listening</h1>
-              <div class="sub">Continuous social, sentiment, user research · feeds Signal Feed</div>
+              <div class="sub">Continuous monitors · social, sentiment, market signal · feeds Signal Feed</div>
             </div>
             <div class="right">
-              <button class="btn-secondary">SOURCES</button>
+              <span><strong>11</strong> monitors live</span>
+              <span>·</span>
+              <span><strong>24</strong> signals captured · 7d</span>
+              <span>·</span>
+              <span>last refresh · today 14:08</span>
             </div>
           </div>
 
-          <div class="band band-secondary">
+          <div class="memory-canvas">
 
-            <div class="block">
-              <div class="block-header">
-                <span class="eyebrow">LinkedIn · territory</span>
-                <span class="count">live</span>
+            <!-- SOCIAL CHANNELS -->
+            <div class="rsn-section">
+              <div class="rsn-section-head">
+                <span class="ttl">Social channels</span>
+                <span class="line"></span>
               </div>
-              <div class="block-body">
-                <div style="display:flex;flex-direction:column;gap:6px;">
-                  <div style="font-family:var(--f-display);font-size:24px;font-weight:500;color:var(--fg);">+18%</div>
-                  <div style="font-size:11px;color:var(--fg-dim);">"AI-native company" search · 7d trend</div>
+              <div class="rsn-grid">
+
+                <div class="rsn-card ready">
+                  <div class="top">
+                    <span class="id">LST-001</span>
+                    <span class="score">+18%</span>
+                  </div>
+                  <div class="nm">LinkedIn · founder-OS territory</div>
+                  <div class="status"><span class="rsn-status ready"><span class="dot"></span>Live</span></div>
                 </div>
-                <svg class="sparkline" viewBox="0 0 200 38" preserveAspectRatio="none" style="height:30px;margin-top:8px;">
-                  <path d="M0,32 L33,30 L66,28 L99,24 L132,18 L165,10 L200,6" fill="none" stroke="var(--accent)" stroke-width="1.5"/>
-                </svg>
+
+                <div class="rsn-card ready">
+                  <div class="top">
+                    <span class="id">LST-002</span>
+                    <span class="score">+6%</span>
+                  </div>
+                  <div class="nm">X / Twitter · founder voice + replies</div>
+                  <div class="status"><span class="rsn-status ready"><span class="dot"></span>Live</span></div>
+                </div>
+
+                <div class="rsn-card ready">
+                  <div class="top">
+                    <span class="id">LST-003</span>
+                    <span class="score">+24%</span>
+                  </div>
+                  <div class="nm">Newsletter open + click</div>
+                  <div class="status"><span class="rsn-status ready"><span class="dot"></span>Live</span></div>
+                </div>
+
+                <div class="rsn-card upcoming">
+                  <div class="top">
+                    <span class="id">LST-004</span>
+                  </div>
+                  <div class="nm">Podcast guesting · mentions</div>
+                  <div class="status"><span class="rsn-status upcoming"><span class="dot"></span>Paused · 2 booked</span></div>
+                </div>
+
               </div>
             </div>
 
-            <div class="block">
-              <div class="block-header">
-                <span class="eyebrow">Twitter · adjacent voices</span>
-                <span class="count">14 tracked</span>
+            <!-- CUSTOMER VOICE -->
+            <div class="rsn-section">
+              <div class="rsn-section-head">
+                <span class="ttl">Customer voice</span>
+                <span class="line"></span>
               </div>
-              <div class="block-body">
-                <div class="row">
-                  <div class="row-content">
-                    <div class="row-title">Lindy · "persistent agents" framing</div>
-                    <div class="row-sub">2d ago · adjacent territory</div>
+              <div class="rsn-grid">
+
+                <div class="rsn-card ready">
+                  <div class="top">
+                    <span class="id">LST-005</span>
+                    <span class="score">0.78</span>
                   </div>
+                  <div class="nm">Pitch call sentiment · last 5 calls</div>
+                  <div class="status"><span class="rsn-status ready"><span class="dot"></span>Live</span></div>
                 </div>
-                <div class="row">
-                  <div class="row-content">
-                    <div class="row-title">Cursor · agent-mode redesign</div>
-                    <div class="row-sub">5d ago · interface adjacency</div>
+
+                <div class="rsn-card ready">
+                  <div class="top">
+                    <span class="id">LST-006</span>
+                    <span class="score">4×</span>
                   </div>
+                  <div class="nm">Objection clustering · agents-vs-avatars</div>
+                  <div class="status"><span class="rsn-status ready"><span class="dot"></span>Live</span></div>
                 </div>
+
+                <div class="rsn-card ready">
+                  <div class="top">
+                    <span class="id">LST-007</span>
+                    <span class="score">12 in</span>
+                  </div>
+                  <div class="nm">Waitlist signups · attribution + quality</div>
+                  <div class="status"><span class="rsn-status ready"><span class="dot"></span>Live</span></div>
+                </div>
+
               </div>
             </div>
 
-            <div class="block">
-              <div class="block-header">
-                <span class="eyebrow">Customer calls · sentiment</span>
-                <span class="count">last 5</span>
+            <!-- COMPETITIVE -->
+            <div class="rsn-section">
+              <div class="rsn-section-head">
+                <span class="ttl">Competitive · industry</span>
+                <span class="line"></span>
               </div>
-              <div class="block-body">
-                <div style="display:flex;align-items:baseline;gap:8px;">
-                  <span style="font-family:var(--f-display);font-size:24px;font-weight:500;color:var(--accent);">0.78</span>
-                  <span style="font-family:var(--f-mono);font-size:10px;color:var(--fg-dim);">positive engagement</span>
+              <div class="rsn-grid">
+
+                <div class="rsn-card ready">
+                  <div class="top">
+                    <span class="id">LST-008</span>
+                    <span class="score">14</span>
+                  </div>
+                  <div class="nm">Adjacent voices · Twitter watchlist</div>
+                  <div class="status"><span class="rsn-status ready"><span class="dot"></span>Live</span></div>
                 </div>
-                <div style="font-size:11px;color:var(--fg-mid);margin-top:6px;line-height:1.5;">
-                  Top phrases: "this is what we needed" · "feels different" · "where do I sign up"
+
+                <div class="rsn-card ready">
+                  <div class="top">
+                    <span class="id">LST-009</span>
+                    <span class="score">5</span>
+                  </div>
+                  <div class="nm">Direct competitor product changelogs</div>
+                  <div class="status"><span class="rsn-status ready"><span class="dot"></span>Live</span></div>
                 </div>
+
+                <div class="rsn-card ready">
+                  <div class="top">
+                    <span class="id">LST-010</span>
+                    <span class="score">3</span>
+                  </div>
+                  <div class="nm">Investor-side signal · a16z + USV writing</div>
+                  <div class="status"><span class="rsn-status ready"><span class="dot"></span>Live</span></div>
+                </div>
+
+                <div class="rsn-card ready">
+                  <div class="top">
+                    <span class="id">LST-011</span>
+                    <span class="score">7</span>
+                  </div>
+                  <div class="nm">Founder-tooling category mentions</div>
+                  <div class="status"><span class="rsn-status ready"><span class="dot"></span>Live</span></div>
+                </div>
+
               </div>
             </div>
 
