@@ -1315,7 +1315,7 @@
   .rsn-section-head .ttl {
     font-family: var(--f-mono);
     font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase;
-    color: var(--accent);
+    color: var(--fg-mid);
     font-weight: 500;
   }
   .rsn-section-head .line {
@@ -1360,11 +1360,8 @@
   .rsn-card.ready .id { color: var(--fg-mid); }
   .rsn-card .score {
     font-family: var(--f-mono);
-    font-size: 11.5px; font-weight: 700;
-    color: var(--accent);
-    background: rgba(223,255,0,0.08);
-    padding: 2px 7px;
-    border-radius: 3px;
+    font-size: 11.5px; font-weight: 500;
+    color: var(--fg);
   }
   .rsn-card .nm {
     font-family: var(--f-display);
@@ -1386,9 +1383,9 @@
     border: 1px solid;
   }
   .rsn-status.ready {
-    color: var(--accent);
-    border-color: var(--accent-line);
-    background: rgba(223,255,0,0.06);
+    color: var(--fg-mid);
+    border-color: var(--line);
+    background: transparent;
   }
   .rsn-status.upcoming {
     color: var(--fg-faint);
@@ -1425,7 +1422,7 @@
     font-size: 10px; letter-spacing: 0.06em; text-transform: uppercase;
     color: var(--fg-dim);
   }
-  .rsn-page-head .right strong { color: var(--accent); font-weight: 500; }
+  .rsn-page-head .right strong { color: var(--fg); font-weight: 500; }
 
   /* =================================================== */
   /* RSN detail modal (full-screen)                          */
@@ -1511,21 +1508,28 @@
   .rsn-detail-side .ctx-score {
     display: inline-flex; align-items: center; gap: 8px;
     padding: 4px 8px;
-    border: 1.5px solid var(--accent-line);
+    border: 1px solid var(--line);
     border-radius: 3px;
     font-family: var(--f-mono);
-    font-size: 11px; color: var(--accent);
-    background: rgba(223,255,0,0.06);
+    font-size: 11px; color: var(--fg);
+    background: transparent;
     font-weight: 500;
     margin-bottom: 28px;
   }
   .rsn-detail-side .ctx-score .theme {
-    color: var(--fg-mid); font-weight: 400;
-    border-left: 1px solid var(--accent-line);
+    color: var(--fg-dim); font-weight: 400;
+    border-left: 1px solid var(--line);
     padding-left: 8px;
     text-transform: uppercase;
     letter-spacing: 0.08em;
     font-size: 9.5px;
+    display: inline-flex; align-items: center; gap: 5px;
+  }
+  .theme-dot {
+    width: 5px; height: 5px;
+    border-radius: 50%;
+    background: var(--accent);
+    display: inline-block;
   }
   .rsn-chapters { display: flex; flex-direction: column; gap: 0; }
   .rsn-chapter {
@@ -1594,7 +1598,7 @@
   .rsn-stat .label {
     font-family: var(--f-mono);
     font-size: 9.5px; letter-spacing: 0.12em; text-transform: uppercase;
-    color: var(--accent);
+    color: var(--fg-dim);
   }
   .rsn-stat .desc {
     font-size: 11.5px; color: var(--fg-dim); line-height: 1.5;
@@ -1648,7 +1652,7 @@
   .compare-table thead th {
     font-family: var(--f-mono);
     font-size: 10.5px; letter-spacing: 0.1em; text-transform: uppercase;
-    color: var(--accent);
+    color: var(--fg-mid);
     background: var(--bg-elev-1);
     font-weight: 500;
   }
@@ -1683,7 +1687,7 @@
     display: inline-flex; align-items: center; gap: 8px;
     z-index: 10;
   }
-  .annotations-btn:hover { color: var(--fg); border-color: var(--accent-line); }
+  .annotations-btn:hover { color: var(--fg); border-color: var(--fg-mid); }
 
   /* =================================================== */
   /* MIND · NICHOLAS chat (full-height)                     */
@@ -5230,7 +5234,7 @@
       <div class="ctx-project">Kilonova / Founder OS</div>
       <div class="ctx-score" id="rsn-detail-ctx-score">
         <span>8.0</span>
-        <span class="theme">● Theme</span>
+        <span class="theme"><span class="theme-dot"></span>Theme</span>
       </div>
 
       <div class="rsn-chapters">
@@ -5546,7 +5550,7 @@
     if (!rsnDetail) return;
     document.getElementById('rsn-detail-picker').textContent = `${id} — ${name}`;
     document.getElementById('rsn-detail-ctx-name').textContent = `${id} ${name}`;
-    document.getElementById('rsn-detail-ctx-score').innerHTML = `<span>${score}</span><span class="theme">● Theme</span>`;
+    document.getElementById('rsn-detail-ctx-score').innerHTML = `<span>${score}</span><span class="theme"><span class="theme-dot"></span>Theme</span>`;
     document.getElementById('rsn-detail-eyebrow').textContent = `${id} — OVERVIEW`;
     rsnDetail.classList.add('open');
   }
