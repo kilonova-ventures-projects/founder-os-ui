@@ -200,6 +200,36 @@
   .user-dropdown-item.logout { color: var(--warn); }
   .user-dropdown-item.logout i { color: var(--warn); }
   .user-dropdown-item.logout:hover { background: rgba(232,156,74,0.08); }
+
+  /* Toggle switch (used in dropdown for theme) */
+  .user-toggle {
+    display: inline-block;
+    width: 30px; height: 18px;
+    background: var(--bg-elev-3);
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    position: relative;
+    margin-left: auto;
+    transition: background 0.15s, border-color 0.15s;
+    flex-shrink: 0;
+  }
+  .user-toggle::after {
+    content: '';
+    position: absolute;
+    top: 2px; left: 2px;
+    width: 12px; height: 12px;
+    border-radius: 50%;
+    background: var(--fg-mid);
+    transition: transform 0.15s ease, background 0.15s ease;
+  }
+  .user-toggle.on {
+    background: var(--accent-fill);
+    border-color: var(--accent-line);
+  }
+  .user-toggle.on::after {
+    transform: translateX(12px);
+    background: var(--accent);
+  }
   .header-actions {
     display: flex; align-items: center; gap: 4px;
     padding-right: 18px;
@@ -2460,15 +2490,10 @@
             <i class="ph ph-sliders"></i>
             Workspace settings
           </button>
-          <button class="user-dropdown-item">
+          <button class="user-dropdown-item" id="theme-toggle-row">
             <i class="ph ph-moon"></i>
-            Theme
-            <span class="meta">DARK</span>
-          </button>
-          <button class="user-dropdown-item">
-            <i class="ph ph-keyboard"></i>
-            Keyboard shortcuts
-            <span class="meta">?</span>
+            Dark mode
+            <span class="user-toggle on" id="theme-toggle"></span>
           </button>
           <div class="user-dropdown-divider"></div>
           <button class="user-dropdown-item">
@@ -5963,6 +5988,16 @@
     });
     document.addEventListener('keydown', e => {
       if (e.key === 'Escape' && userDropdown.classList.contains('open')) closeUserDropdown();
+    });
+  }
+
+  // Theme toggle (visual only for now — keeps dropdown open on click)
+  const themeToggleRow = document.getElementById('theme-toggle-row');
+  const themeToggle = document.getElementById('theme-toggle');
+  if (themeToggleRow && themeToggle) {
+    themeToggleRow.addEventListener('click', e => {
+      e.stopPropagation();
+      themeToggle.classList.toggle('on');
     });
   }
 
