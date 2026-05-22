@@ -92,7 +92,7 @@ html[data-theme="light"] .audience-bar{ background:#f0f0f0; }
   font-family:var(--font-mono); font-size:10px;
   letter-spacing:0.08em; text-transform:uppercase; color:var(--ink-3);
 }
-.audience-meta .dot{ width:6px; height:6px; border-radius:50%; background:var(--accent); }
+.audience-meta .dot{ display:inline-block; width:6px; height:6px; border-radius:50%; background:var(--accent); flex-shrink:0; }
 
 .app:not([data-audience="founder"]) nav.left{ display:none; }
 .app:not([data-audience="founder"]) aside.rail{ display:none; }
@@ -127,7 +127,7 @@ html[data-theme="light"] .brand .logo{ filter: invert(1); }
   cursor:pointer; transition:border-color var(--t-fast) var(--ease), color var(--t-fast) var(--ease);
 }
 .client-select:hover{ border-color:var(--line-strong); color:var(--ink); }
-.client-select .dot{ width:6px; height:6px; border-radius:50%; background:var(--accent); }
+.client-select .dot{ display:inline-block; width:6px; height:6px; border-radius:50%; background:var(--accent); flex-shrink:0; }
 .client-select i{ font-size:14px; color:var(--ink-3); }
 
 .identity{ position:relative; }
@@ -976,7 +976,7 @@ aside.rail{
   padding:7px 12px; border:1px solid var(--line); border-radius:var(--radius-sm);
   font-family:var(--font-display); font-size:13px; color:var(--ink-2);
 }
-.client-pill .dot{ width:6px; height:6px; border-radius:50%; background:var(--accent); }
+.client-pill .dot{ display:inline-block; width:6px; height:6px; border-radius:50%; background:var(--accent); flex-shrink:0; }
 
 .rsn-strip{
   display:grid; grid-template-columns:repeat(4,1fr); gap:12px;
