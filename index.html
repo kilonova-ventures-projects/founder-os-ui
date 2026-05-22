@@ -1300,6 +1300,72 @@ aside.rail{
   color:var(--ink-3); letter-spacing:0.04em;
 }
 
+/* ---------- History table (Reading · read items) ---------- */
+.history-table{
+  padding: 6px 36px 40px;
+  display: flex; flex-direction: column;
+}
+.history-head{
+  display: grid;
+  grid-template-columns: 130px 1fr 90px 150px 110px;
+  gap: 14px;
+  padding: 10px 14px;
+  border-bottom: 1px solid var(--line);
+  font-family: var(--font-mono);
+  font-size: 9px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--ink-3);
+}
+.history-row{
+  display: grid;
+  grid-template-columns: 130px 1fr 90px 150px 110px;
+  gap: 14px;
+  align-items: center;
+  padding: 12px 14px;
+  border-bottom: 1px solid var(--line-soft);
+  cursor: pointer;
+  transition: background var(--t-fast) var(--ease);
+}
+.history-row:hover{ background: var(--bg-card); }
+.history-row:last-child{ border-bottom: 0; }
+.history-row .h-title{
+  font-family: var(--font-body);
+  color: var(--ink);
+  font-size: 14px;
+  line-height: 1.3;
+  white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+}
+.history-row .h-time{
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--ink-3);
+}
+.history-row .h-sources{
+  display: flex; align-items: center; gap: 8px;
+  font-family: var(--font-mono);
+  font-size: 10px;
+  color: var(--ink-3);
+  min-width: 0;
+}
+.history-row .h-sources .src-stack .src{ border-color: var(--bg); }
+.history-row .h-sources .src-label{
+  white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+}
+.history-row .h-actions{
+  display: flex; gap: 2px; justify-content: flex-end;
+}
+
+@media (max-width: 900px){
+  .history-head, .history-row{
+    grid-template-columns: 110px 1fr 70px 100px;
+    padding-left: 10px; padding-right: 10px;
+  }
+  .history-head > div:nth-child(4),
+  .history-row .h-sources{ display: none; }
+  .history-table{ padding-left: 22px; padding-right: 22px; }
+}
+
 /* ---------- Scrollbars ---------- */
 main::-webkit-scrollbar, .rail-body::-webkit-scrollbar, .pipeline-col .col-body::-webkit-scrollbar{ width:8px; }
 main::-webkit-scrollbar-thumb, .rail-body::-webkit-scrollbar-thumb, .pipeline-col .col-body::-webkit-scrollbar-thumb{
@@ -1411,9 +1477,9 @@ main::-webkit-scrollbar-thumb:hover, .rail-body::-webkit-scrollbar-thumb:hover{
       </div>
 
       <div class="chips">
-        <button class="chip active" data-filter="all">All <span class="count" data-count-for="all">11</span></button>
+        <button class="chip active" data-filter="all">All <span class="count" data-count-for="all">13</span></button>
         <button class="chip" data-filter="decision">Decisions <span class="count" data-count-for="decision">2</span></button>
-        <button class="chip" data-filter="rsn">RSN <span class="count" data-count-for="rsn">5</span></button>
+        <button class="chip" data-filter="rsn">RSN <span class="count" data-count-for="rsn">6</span></button>
         <button class="chip" data-filter="status">Status <span class="count" data-count-for="status">1</span></button>
         <button class="chip" data-filter="pilot">Pilot notes <span class="count" data-count-for="pilot">2</span></button>
         <button class="chip" data-filter="minutes">Meeting minutes <span class="count" data-count-for="minutes">2</span></button>
@@ -1499,148 +1565,121 @@ main::-webkit-scrollbar-thumb:hover, .rail-body::-webkit-scrollbar-thumb:hover{
 
       </div>
 
-      <div class="section-head" data-section="read">
-        <h3>Recently read · <span class="count-here">5</span></h3>
+      <div class="section-head" data-section="history">
+        <h3>History · <span class="count-here">7</span></h3>
       </div>
 
-      <div class="brief-grid" data-grid="read">
-        <div class="brief-card" data-type="decision" data-context="Hiring decision">
-          <div class="brief-meta-row">
-            <span class="type-badge decision">Decision brief</span>
-            <span class="meta-right">
-              <span class="brief-time">3d</span>
-              <span class="card-actions">
-                <button class="icon-btn chat-open" title="Chat about this brief"><i class="ph ph-chat-circle-dots"></i></button>
-                <button class="icon-btn comment-add" title="Leave a comment"><i class="ph ph-chat-text"></i></button>
-                <button class="icon-btn done" title="Already read"><i class="ph ph-check-circle"></i></button>
-              </span>
-            </span>
+      <div class="history-table" data-grid="history">
+        <div class="history-head">
+          <div>Type</div>
+          <div>Title</div>
+          <div>Date</div>
+          <div>Sources</div>
+          <div></div>
+        </div>
+
+        <div class="history-row" data-type="decision" data-context="Hiring decision">
+          <div><span class="type-badge decision">Decision</span></div>
+          <div class="h-title">Hiring · 3 senior engineer profiles</div>
+          <div class="h-time">3d ago</div>
+          <div class="h-sources">
+            <div class="src-stack"><div class="src">N</div><div class="src">H</div></div>
+            <span class="src-label">2 comments</span>
           </div>
-          <h2 class="brief-title">Hiring · 3 senior engineer profiles</h2>
-          <p class="brief-synopsis">Recommendation locked: candidate B. Comments from you in §3 sent to pilot to draft offer.</p>
-          <div class="brief-foot">
-            <div class="left"><div class="src-stack"><div class="src">N</div><div class="src">H</div></div><span>Closed · 2 comments</span></div>
-            <div class="read"><i class="ph ph-check"></i>Read</div>
+          <div class="h-actions">
+            <button class="icon-btn chat-open" title="Chat about this brief"><i class="ph ph-chat-circle-dots"></i></button>
+            <button class="icon-btn comment-add" title="Leave a comment"><i class="ph ph-chat-text"></i></button>
+            <button class="icon-btn done" title="Already read"><i class="ph ph-check-circle"></i></button>
           </div>
         </div>
 
-        <div class="brief-card" data-type="rsn" data-context="RSN W20">
-          <div class="brief-meta-row">
-            <span class="type-badge rsn">RSN output</span>
-            <span class="meta-right">
-              <span class="brief-time">8d</span>
-              <span class="card-actions">
-                <button class="icon-btn chat-open" title="Chat about this brief"><i class="ph ph-chat-circle-dots"></i></button>
-                <button class="icon-btn comment-add" title="Leave a comment"><i class="ph ph-chat-text"></i></button>
-                <button class="icon-btn done" title="Already read"><i class="ph ph-check-circle"></i></button>
-              </span>
-            </span>
+        <div class="history-row" data-type="minutes" data-context="Investor sync minutes">
+          <div><span class="type-badge minutes">Minutes</span></div>
+          <div class="h-title">Investor sync · 2026-05-17</div>
+          <div class="h-time">4d ago</div>
+          <div class="h-sources">
+            <div class="src-stack"><div class="src">M</div></div>
+            <span class="src-label">Minutes engine</span>
           </div>
-          <h2 class="brief-title">RSN · 2026-W20 · Weekly reasoning</h2>
-          <p class="brief-synopsis">18 signals, 3 surfaced. Hopper pricing thesis emerged, escalated to a decision brief that landed two days later.</p>
-          <div class="brief-foot">
-            <div class="left"><div class="src-stack"><div class="src">N</div><div class="src">R</div></div><span>RSN engine</span></div>
-            <div class="read"><i class="ph ph-check"></i>Read</div>
+          <div class="h-actions">
+            <button class="icon-btn chat-open" title="Chat about this brief"><i class="ph ph-chat-circle-dots"></i></button>
+            <button class="icon-btn comment-add" title="Leave a comment"><i class="ph ph-chat-text"></i></button>
+            <button class="icon-btn done" title="Already read"><i class="ph ph-check-circle"></i></button>
           </div>
         </div>
 
-        <div class="brief-card" data-type="minutes" data-context="Investor sync minutes">
-          <div class="brief-meta-row">
-            <span class="type-badge minutes">Meeting minutes</span>
-            <span class="meta-right">
-              <span class="brief-time">4d</span>
-              <span class="card-actions">
-                <button class="icon-btn chat-open" title="Chat about this brief"><i class="ph ph-chat-circle-dots"></i></button>
-                <button class="icon-btn comment-add" title="Leave a comment"><i class="ph ph-chat-text"></i></button>
-                <button class="icon-btn done" title="Already read"><i class="ph ph-check-circle"></i></button>
-              </span>
-            </span>
+        <div class="history-row" data-type="pilot" data-context="Acme drift">
+          <div><span class="type-badge pilot">Pilot</span></div>
+          <div class="h-title">Acme · onboarding deviation</div>
+          <div class="h-time">6d ago</div>
+          <div class="h-sources">
+            <div class="src-stack"><div class="src">P</div></div>
+            <span class="src-label">Pilot loop</span>
           </div>
-          <h2 class="brief-title">Investor sync · 2026-05-17</h2>
-          <p class="brief-synopsis">Verbatim + decisions extracted. 3 commitments auto-routed to Commitments surface.</p>
-          <div class="brief-foot">
-            <div class="left"><div class="src-stack"><div class="src">M</div></div><span>Minutes engine</span></div>
-            <div class="read"><i class="ph ph-check"></i>Read</div>
+          <div class="h-actions">
+            <button class="icon-btn chat-open" title="Chat about this brief"><i class="ph ph-chat-circle-dots"></i></button>
+            <button class="icon-btn comment-add" title="Leave a comment"><i class="ph ph-chat-text"></i></button>
+            <button class="icon-btn done" title="Already read"><i class="ph ph-check-circle"></i></button>
           </div>
         </div>
 
-        <div class="brief-card" data-type="pilot" data-context="Acme drift">
-          <div class="brief-meta-row">
-            <span class="type-badge pilot">Pilot note</span>
-            <span class="meta-right">
-              <span class="brief-time">6d</span>
-              <span class="card-actions">
-                <button class="icon-btn chat-open" title="Chat about this brief"><i class="ph ph-chat-circle-dots"></i></button>
-                <button class="icon-btn comment-add" title="Leave a comment"><i class="ph ph-chat-text"></i></button>
-                <button class="icon-btn done" title="Already read"><i class="ph ph-check-circle"></i></button>
-              </span>
-            </span>
+        <div class="history-row" data-type="rsn" data-context="RSN W20">
+          <div><span class="type-badge rsn">RSN</span></div>
+          <div class="h-title">RSN · 2026-W20 · Weekly reasoning</div>
+          <div class="h-time">8d ago</div>
+          <div class="h-sources">
+            <div class="src-stack"><div class="src">N</div><div class="src">R</div></div>
+            <span class="src-label">RSN engine</span>
           </div>
-          <h2 class="brief-title">Acme · onboarding deviation</h2>
-          <p class="brief-synopsis">Pilot caught a drift in cadence. Council ratified the correction. No founder action needed.</p>
-          <div class="brief-foot">
-            <div class="left"><div class="src-stack"><div class="src">P</div></div><span>Pilot loop</span></div>
-            <div class="read"><i class="ph ph-check"></i>Read</div>
+          <div class="h-actions">
+            <button class="icon-btn chat-open" title="Chat about this brief"><i class="ph ph-chat-circle-dots"></i></button>
+            <button class="icon-btn comment-add" title="Leave a comment"><i class="ph ph-chat-text"></i></button>
+            <button class="icon-btn done" title="Already read"><i class="ph ph-check-circle"></i></button>
           </div>
         </div>
 
-        <div class="brief-card" data-type="minutes" data-context="Council architecture review">
-          <div class="brief-meta-row">
-            <span class="type-badge minutes">Meeting minutes</span>
-            <span class="meta-right">
-              <span class="brief-time">8d</span>
-              <span class="card-actions">
-                <button class="icon-btn chat-open" title="Chat about this brief"><i class="ph ph-chat-circle-dots"></i></button>
-                <button class="icon-btn comment-add" title="Leave a comment"><i class="ph ph-chat-text"></i></button>
-                <button class="icon-btn done" title="Already read"><i class="ph ph-check-circle"></i></button>
-              </span>
-            </span>
+        <div class="history-row" data-type="minutes" data-context="Council architecture review">
+          <div><span class="type-badge minutes">Minutes</span></div>
+          <div class="h-title">Council · architecture review · 05-13</div>
+          <div class="h-time">8d ago</div>
+          <div class="h-sources">
+            <div class="src-stack"><div class="src">C</div></div>
+            <span class="src-label">Council session</span>
           </div>
-          <h2 class="brief-title">Council · architecture review · 05-13</h2>
-          <p class="brief-synopsis">Decisions on Heartbeat vs Activity nomenclature locked into voice & tone v0.7.</p>
-          <div class="brief-foot">
-            <div class="left"><div class="src-stack"><div class="src">C</div></div><span>Council session</span></div>
-            <div class="read"><i class="ph ph-check"></i>Read</div>
+          <div class="h-actions">
+            <button class="icon-btn chat-open" title="Chat about this brief"><i class="ph ph-chat-circle-dots"></i></button>
+            <button class="icon-btn comment-add" title="Leave a comment"><i class="ph ph-chat-text"></i></button>
+            <button class="icon-btn done" title="Already read"><i class="ph ph-check-circle"></i></button>
           </div>
         </div>
 
-        <div class="brief-card" data-type="rsn" data-context="RSN W19">
-          <div class="brief-meta-row">
-            <span class="type-badge rsn">RSN output</span>
-            <span class="meta-right">
-              <span class="brief-time">15d</span>
-              <span class="card-actions">
-                <button class="icon-btn chat-open" title="Chat about this brief"><i class="ph ph-chat-circle-dots"></i></button>
-                <button class="icon-btn comment-add" title="Leave a comment"><i class="ph ph-chat-text"></i></button>
-                <button class="icon-btn done" title="Already read"><i class="ph ph-check-circle"></i></button>
-              </span>
-            </span>
+        <div class="history-row" data-type="pilot" data-context="Hopper pricing">
+          <div><span class="type-badge pilot">Pilot</span></div>
+          <div class="h-title">Hopper · pricing signal · +14%</div>
+          <div class="h-time">11d ago</div>
+          <div class="h-sources">
+            <div class="src-stack"><div class="src">P</div><div class="src">I</div></div>
+            <span class="src-label">Pilot · Intel</span>
           </div>
-          <h2 class="brief-title">RSN · 2026-W19 · Weekly reasoning</h2>
-          <p class="brief-synopsis">12 signals, 2 surfaced. Council cadence drift recognized, became the trigger for the bi-weekly shift.</p>
-          <div class="brief-foot">
-            <div class="left"><div class="src-stack"><div class="src">N</div><div class="src">R</div></div><span>RSN engine</span></div>
-            <div class="read"><i class="ph ph-check"></i>Read</div>
+          <div class="h-actions">
+            <button class="icon-btn chat-open" title="Chat about this brief"><i class="ph ph-chat-circle-dots"></i></button>
+            <button class="icon-btn comment-add" title="Leave a comment"><i class="ph ph-chat-text"></i></button>
+            <button class="icon-btn done" title="Already read"><i class="ph ph-check-circle"></i></button>
           </div>
         </div>
 
-        <div class="brief-card" data-type="pilot" data-context="Hopper pricing">
-          <div class="brief-meta-row">
-            <span class="type-badge pilot">Pilot note</span>
-            <span class="meta-right">
-              <span class="brief-time">11d</span>
-              <span class="card-actions">
-                <button class="icon-btn chat-open" title="Chat about this brief"><i class="ph ph-chat-circle-dots"></i></button>
-                <button class="icon-btn comment-add" title="Leave a comment"><i class="ph ph-chat-text"></i></button>
-                <button class="icon-btn done" title="Already read"><i class="ph ph-check-circle"></i></button>
-              </span>
-            </span>
+        <div class="history-row" data-type="rsn" data-context="RSN W19">
+          <div><span class="type-badge rsn">RSN</span></div>
+          <div class="h-title">RSN · 2026-W19 · Weekly reasoning</div>
+          <div class="h-time">15d ago</div>
+          <div class="h-sources">
+            <div class="src-stack"><div class="src">N</div><div class="src">R</div></div>
+            <span class="src-label">RSN engine</span>
           </div>
-          <h2 class="brief-title">Hopper · pricing signal · +14%</h2>
-          <p class="brief-synopsis">Market intel suggests we are under-priced. Pilot drafted a re-price proposal, awaiting your call in Approval.</p>
-          <div class="brief-foot">
-            <div class="left"><div class="src-stack"><div class="src">P</div><div class="src">I</div></div><span>Pilot · Intel</span></div>
-            <div class="read"><i class="ph ph-check"></i>Read</div>
+          <div class="h-actions">
+            <button class="icon-btn chat-open" title="Chat about this brief"><i class="ph ph-chat-circle-dots"></i></button>
+            <button class="icon-btn comment-add" title="Leave a comment"><i class="ph ph-chat-text"></i></button>
+            <button class="icon-btn done" title="Already read"><i class="ph ph-check-circle"></i></button>
           </div>
         </div>
       </div>
@@ -1690,9 +1729,6 @@ main::-webkit-scrollbar-thumb:hover, .rail-body::-webkit-scrollbar-thumb:hover{
         </div>
       </div>
 
-      <div class="surface-footnote">
-        EVERY BRIEF IS A SUBSTRATE · SELECT TEXT TO COMMENT OR CHAT · CLICK ICONS TO ACT
-      </div>
     </section>
 
     <!-- ============ DECISION BRIEF ============ -->
@@ -3002,18 +3038,19 @@ main::-webkit-scrollbar-thumb:hover, .rail-body::-webkit-scrollbar-thumb:hover{
 
   // ---------- Chips (filter content) ----------
   function applyFilter(surface, filter){
-    const cards = surface.querySelectorAll('.brief-card[data-type]');
-    cards.forEach(card => {
-      const show = filter === 'all' || card.dataset.type === filter;
-      card.style.display = show ? '' : 'none';
+    // filter both card-style items (Unread, RSN upcoming) AND table-style items (History)
+    const items = surface.querySelectorAll('.brief-card[data-type], .history-row[data-type]');
+    items.forEach(item => {
+      const show = filter === 'all' || item.dataset.type === filter;
+      item.style.display = show ? '' : 'none';
     });
-    // RSN-only "upcoming" section
+    // RSN-only upcoming section
     surface.querySelectorAll('[data-grid="rsn-upcoming"], [data-section="rsn-upcoming"]').forEach(el => {
       el.style.display = filter === 'rsn' ? '' : 'none';
     });
     // Hide empty sections + update per-section counts
-    surface.querySelectorAll('.brief-grid[data-grid]').forEach(grid => {
-      const visible = [...grid.querySelectorAll('.brief-card[data-type]')].filter(c => c.style.display !== 'none').length;
+    surface.querySelectorAll('[data-grid]').forEach(grid => {
+      const visible = [...grid.querySelectorAll('[data-type]')].filter(c => c.style.display !== 'none').length;
       const gridName = grid.dataset.grid;
       const head = surface.querySelector(`.section-head[data-section="${gridName}"]`);
       const isUpcoming = gridName === 'rsn-upcoming';
@@ -3062,16 +3099,15 @@ main::-webkit-scrollbar-thumb:hover, .rail-body::-webkit-scrollbar-thumb:hover{
     });
   });
 
-  // ---------- Comment icon (stub: pulse the card) ----------
+  // ---------- Comment icon (stub: pulse the row/card) ----------
   document.querySelectorAll('.comment-add').forEach(btn => {
     btn.addEventListener('click', (e) => {
       e.stopPropagation();
-      // visual stub: flash border accent for feedback
-      const card = btn.closest('.brief-card');
-      if (!card) return;
-      card.style.transition = 'box-shadow .3s';
-      card.style.boxShadow = '0 0 0 2px var(--accent-line)';
-      setTimeout(() => { card.style.boxShadow = ''; }, 320);
+      const item = btn.closest('.brief-card, .history-row');
+      if (!item) return;
+      item.style.transition = 'box-shadow .3s';
+      item.style.boxShadow = '0 0 0 2px var(--accent-line)';
+      setTimeout(() => { item.style.boxShadow = ''; }, 320);
     });
   });
 
