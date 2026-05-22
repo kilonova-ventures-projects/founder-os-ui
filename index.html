@@ -59,44 +59,52 @@ hr{border:0;border-top:1px solid var(--line);margin:0}
 .app[data-audience="pilot"],
 .app[data-audience="prospect"]{ grid-template-columns: 0 1fr 0 !important; }
 
-/* ---------- Audience bar ---------- */
+/* ---------- Audience bar · demo tool (not part of the real app) ---------- */
 .audience-bar{
   grid-area: audience;
-  display:flex; align-items:stretch; justify-content:space-between;
-  background:#060606; border-bottom:1px solid var(--line);
-  padding:0 22px; z-index:50;
+  display:flex; align-items:center; justify-content:center;
+  background:var(--bg); border-bottom:1px solid var(--line);
+  padding:0; z-index:50;
 }
-html[data-theme="light"] .audience-bar{ background:#f0f0f0; }
-.audience-tabs{ display:flex; align-items:stretch; }
-.audience-tab{
-  position:relative; display:flex; align-items:center; gap:8px;
-  padding:0 18px;
-  font-family:var(--font-display); font-size:11px; font-weight:600;
-  letter-spacing:0.06em; text-transform:uppercase;
+
+.demo-chip{
+  display:flex; align-items:stretch; gap:0;
+  background:var(--bg-card);
+  border:1px dashed var(--line-strong);
+  border-radius:99px;
+  padding:3px;
+  position:relative;
+  box-shadow:0 0 0 4px var(--bg);
+}
+
+.demo-chip .demo-label{
+  display:flex; align-items:center; gap:6px;
+  padding:0 12px 0 14px;
+  font-family:var(--font-mono); font-size:9px;
+  letter-spacing:0.14em; text-transform:uppercase;
   color:var(--ink-3);
-  border-bottom:2px solid transparent;
-  transition:color var(--t-fast) var(--ease), border-color var(--t-fast) var(--ease);
+  border-right:1px solid var(--line);
+  margin-right:4px;
 }
-.audience-tab i{ font-size:14px; opacity:0.9; }
-.audience-tab .lock{
-  font-family:var(--font-mono); font-size:9px; letter-spacing:0.1em;
-  color:var(--ink-4); margin-left:4px;
-  padding:2px 6px; border:1px solid var(--line); border-radius:3px;
-  text-transform:uppercase;
+.demo-chip .demo-label i{ font-size:12px; color:var(--ink-3); }
+
+.audience-tabs{ display:flex; align-items:stretch; gap:2px; }
+
+.audience-tab{
+  position:relative; display:flex; align-items:center; gap:6px;
+  padding:5px 14px;
+  font-family:var(--font-display); font-size:11px; font-weight:600;
+  letter-spacing:0.04em;
+  color:var(--ink-3);
+  border:0; border-radius:99px;
+  transition:color var(--t-fast) var(--ease), background var(--t-fast) var(--ease);
 }
-.audience-tab:hover{ color:var(--ink-2); }
-.audience-tab.active{ color:var(--accent); border-bottom-color:var(--accent); }
-.audience-tab.active .lock{ color:var(--ink-3); border-color:var(--line-strong); }
-.audience-meta{
-  display:flex; align-items:center; gap:8px;
-  font-family:var(--font-mono); font-size:10px;
-  letter-spacing:0.08em; text-transform:uppercase; color:var(--ink-3);
+.audience-tab i{ font-size:13px; opacity:0.85; }
+.audience-tab:hover{ color:var(--ink); background:var(--bg-card-hover); }
+.audience-tab.active{
+  color:var(--accent-ink); background:var(--accent);
 }
-.audience-meta::before{
-  content:""; display:block;
-  width:7px; height:7px; min-width:7px; min-height:7px;
-  border-radius:50%; background:var(--accent); flex-shrink:0;
-}
+.audience-tab.active i{ opacity:1; }
 
 .app:not([data-audience="founder"]) nav.left{ display:none; }
 .app:not([data-audience="founder"]) aside.rail{ display:none; }
@@ -1324,21 +1332,24 @@ main::-webkit-scrollbar-thumb:hover, .rail-body::-webkit-scrollbar-thumb:hover{
 <body>
 <div class="app" id="app" data-rail="closed" data-audience="founder">
 
-  <!-- ============== AUDIENCE BAR ============== -->
+  <!-- ============== AUDIENCE SWITCHER · demo tool only ============== -->
   <div class="audience-bar">
-    <div class="audience-tabs">
-      <button class="audience-tab active" data-audience="founder" type="button">
-        <i class="ph ph-user-focus"></i><span>Founder</span>
-      </button>
-      <button class="audience-tab" data-audience="pilot" type="button">
-        <i class="ph ph-gear-six"></i><span>Pilot</span><span class="lock">Preview</span>
-      </button>
-      <button class="audience-tab" data-audience="prospect" type="button">
-        <i class="ph ph-globe-hemisphere-west"></i><span>Prospect</span><span class="lock">Preview</span>
-      </button>
-    </div>
-    <div class="audience-meta" id="audienceMeta">
-      <span id="audienceMetaText">Consumer · Ratifier · 5 surfaces live</span>
+    <div class="demo-chip" role="group" aria-label="Audience preview switcher">
+      <div class="demo-label">
+        <i class="ph ph-eye"></i>
+        <span>Demo · view as</span>
+      </div>
+      <div class="audience-tabs">
+        <button class="audience-tab active" data-audience="founder" type="button">
+          <i class="ph ph-user-focus"></i><span>Founder</span>
+        </button>
+        <button class="audience-tab" data-audience="pilot" type="button">
+          <i class="ph ph-gear-six"></i><span>Pilot</span>
+        </button>
+        <button class="audience-tab" data-audience="prospect" type="button">
+          <i class="ph ph-globe-hemisphere-west"></i><span>Prospect</span>
+        </button>
+      </div>
     </div>
   </div>
 
