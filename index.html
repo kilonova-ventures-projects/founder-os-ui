@@ -1409,6 +1409,31 @@ aside.rail{
   padding: 0;
 }
 
+/* Upcoming cards: hide synopsis, surface the blocker chain instead */
+.brief-card.upcoming .brief-synopsis{ display: none; }
+.brief-card.upcoming .brief-foot .left{ visibility: hidden; }
+
+.blocked-by{
+  display: flex; align-items: center; gap: 6px;
+  flex-wrap: wrap;
+  margin: 4px 0 auto;
+  font-family: var(--font-mono); font-size: 10px;
+  color: var(--ink-3);
+}
+.blocked-by i{ font-size: 12px; color: var(--ink-3); }
+.blocked-by .label{
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  margin-right: 2px;
+}
+.blocked-by .dep{
+  padding: 2px 6px; border-radius: 3px;
+  border: 1px solid var(--line-strong);
+  color: var(--ink-2);
+  font-weight: 700; letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
 @media (max-width: 900px){
   .rsn-structure{ padding-left: 22px; padding-right: 22px; }
   .rsn-structure-head .right{ display: none; }
@@ -1838,14 +1863,14 @@ main::-webkit-scrollbar-thumb:hover, .rail-body::-webkit-scrollbar-thumb:hover{
             <div class="brief-card upcoming" data-context="S7 Journey Map">
               <div class="brief-meta-row"><span class="type-badge">S7</span><span class="meta-right"><span class="brief-time">queued</span><span class="card-actions"><button class="icon-btn chat-open" title="Chat about this artifact"><i class="ph ph-chat-circle-dots"></i></button><button class="icon-btn comment-add" title="Leave a comment"><i class="ph ph-chat-text"></i></button><button class="icon-btn" title="Upcoming"><i class="ph ph-clock"></i></button></span></span></div>
               <h2 class="brief-title">Journey Map</h2>
-              <p class="brief-synopsis">Customer journey across product touchpoints with friction and emotion arcs.</p>
-              <div class="brief-foot"><div class="left"><span>Specced · awaiting trigger</span></div><div class="read"><i class="ph ph-clock"></i>Upcoming</div></div>
+              <div class="blocked-by"><i class="ph ph-lock-simple"></i><span class="label">Blocked by</span><span class="dep">S3</span><span class="dep">S6</span></div>
+              <div class="brief-foot"><div class="left"></div><div class="read"><i class="ph ph-clock"></i>Upcoming</div></div>
             </div>
             <div class="brief-card upcoming" data-context="S8 Tokenomics">
               <div class="brief-meta-row"><span class="type-badge">S8</span><span class="meta-right"><span class="brief-time">queued</span><span class="card-actions"><button class="icon-btn chat-open" title="Chat about this artifact"><i class="ph ph-chat-circle-dots"></i></button><button class="icon-btn comment-add" title="Leave a comment"><i class="ph ph-chat-text"></i></button><button class="icon-btn" title="Upcoming"><i class="ph ph-clock"></i></button></span></span></div>
               <h2 class="brief-title">Tokenomics</h2>
-              <p class="brief-synopsis">Token design, supply, distribution, and incentive flows. Only if applicable.</p>
-              <div class="brief-foot"><div class="left"><span>Specced · awaiting trigger</span></div><div class="read"><i class="ph ph-clock"></i>Upcoming</div></div>
+              <div class="blocked-by"><i class="ph ph-lock-simple"></i><span class="label">Blocked by</span><span class="dep">S2</span></div>
+              <div class="brief-foot"><div class="left"></div><div class="read"><i class="ph ph-clock"></i>Upcoming</div></div>
             </div>
           </div>
         </div>
@@ -1880,14 +1905,14 @@ main::-webkit-scrollbar-thumb:hover, .rail-body::-webkit-scrollbar-thumb:hover{
             <div class="brief-card upcoming" data-context="N4 Messaging House">
               <div class="brief-meta-row"><span class="type-badge">N4</span><span class="meta-right"><span class="brief-time">queued</span><span class="card-actions"><button class="icon-btn chat-open" title="Chat about this artifact"><i class="ph ph-chat-circle-dots"></i></button><button class="icon-btn comment-add" title="Leave a comment"><i class="ph ph-chat-text"></i></button><button class="icon-btn" title="Upcoming"><i class="ph ph-clock"></i></button></span></span></div>
               <h2 class="brief-title">Messaging House</h2>
-              <p class="brief-synopsis">Pillar messages per audience with proof points and reactive variations.</p>
-              <div class="brief-foot"><div class="left"><span>Specced · awaiting trigger</span></div><div class="read"><i class="ph ph-clock"></i>Upcoming</div></div>
+              <div class="blocked-by"><i class="ph ph-lock-simple"></i><span class="label">Blocked by</span><span class="dep">N1</span><span class="dep">N2</span><span class="dep">N3</span></div>
+              <div class="brief-foot"><div class="left"></div><div class="read"><i class="ph ph-clock"></i>Upcoming</div></div>
             </div>
             <div class="brief-card upcoming" data-context="N5 Brand Narrative">
               <div class="brief-meta-row"><span class="type-badge">N5</span><span class="meta-right"><span class="brief-time">queued</span><span class="card-actions"><button class="icon-btn chat-open" title="Chat about this artifact"><i class="ph ph-chat-circle-dots"></i></button><button class="icon-btn comment-add" title="Leave a comment"><i class="ph ph-chat-text"></i></button><button class="icon-btn" title="Upcoming"><i class="ph ph-clock"></i></button></span></span></div>
               <h2 class="brief-title">Brand Narrative</h2>
-              <p class="brief-synopsis">The story arc connecting brand purpose, product reality, and customer transformation.</p>
-              <div class="brief-foot"><div class="left"><span>Specced · awaiting trigger</span></div><div class="read"><i class="ph ph-clock"></i>Upcoming</div></div>
+              <div class="blocked-by"><i class="ph ph-lock-simple"></i><span class="label">Blocked by</span><span class="dep">N1</span><span class="dep">N2</span><span class="dep">N3</span><span class="dep">N4</span></div>
+              <div class="brief-foot"><div class="left"></div><div class="read"><i class="ph ph-clock"></i>Upcoming</div></div>
             </div>
           </div>
         </div>
@@ -1898,8 +1923,8 @@ main::-webkit-scrollbar-thumb:hover, .rail-body::-webkit-scrollbar-thumb:hover{
             <div class="brief-card upcoming" data-context="X1 Foresight Scenarios">
               <div class="brief-meta-row"><span class="type-badge">X1</span><span class="meta-right"><span class="brief-time">queued</span><span class="card-actions"><button class="icon-btn chat-open" title="Chat about this artifact"><i class="ph ph-chat-circle-dots"></i></button><button class="icon-btn comment-add" title="Leave a comment"><i class="ph ph-chat-text"></i></button><button class="icon-btn" title="Upcoming"><i class="ph ph-clock"></i></button></span></span></div>
               <h2 class="brief-title">Foresight Scenarios</h2>
-              <p class="brief-synopsis">Three-to-five year market scenarios with branching decision points.</p>
-              <div class="brief-foot"><div class="left"><span>Specced · awaiting trigger</span></div><div class="read"><i class="ph ph-clock"></i>Upcoming</div></div>
+              <div class="blocked-by"><i class="ph ph-lock-simple"></i><span class="label">Blocked by</span><span class="dep">R1</span><span class="dep">S5</span></div>
+              <div class="brief-foot"><div class="left"></div><div class="read"><i class="ph ph-clock"></i>Upcoming</div></div>
             </div>
             <div class="brief-card" data-context="X2 First Principles">
               <div class="brief-meta-row"><span class="type-badge rsn">X2</span><span class="meta-right"><span class="brief-time">8.8</span><span class="card-actions"><button class="icon-btn chat-open" title="Chat about this artifact"><i class="ph ph-chat-circle-dots"></i></button><button class="icon-btn comment-add" title="Leave a comment"><i class="ph ph-chat-text"></i></button><button class="icon-btn done" title="Ready"><i class="ph ph-check-circle"></i></button></span></span></div>
