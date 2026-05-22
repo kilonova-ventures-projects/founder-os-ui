@@ -77,17 +77,6 @@ hr{border:0;border-top:1px solid var(--line);margin:0}
   box-shadow:0 0 0 4px var(--bg);
 }
 
-.demo-chip .demo-label{
-  display:flex; align-items:center; gap:6px;
-  padding:0 12px 0 14px;
-  font-family:var(--font-mono); font-size:9px;
-  letter-spacing:0.14em; text-transform:uppercase;
-  color:var(--ink-3);
-  border-right:1px solid var(--line);
-  margin-right:4px;
-}
-.demo-chip .demo-label i{ font-size:12px; color:var(--ink-3); }
-
 .audience-tabs{ display:flex; align-items:stretch; gap:2px; }
 
 .audience-tab{
@@ -1335,10 +1324,6 @@ main::-webkit-scrollbar-thumb:hover, .rail-body::-webkit-scrollbar-thumb:hover{
   <!-- ============== AUDIENCE SWITCHER · demo tool only ============== -->
   <div class="audience-bar">
     <div class="demo-chip" role="group" aria-label="Audience preview switcher">
-      <div class="demo-label">
-        <i class="ph ph-eye"></i>
-        <span>Demo · view as</span>
-      </div>
       <div class="audience-tabs">
         <button class="audience-tab active" data-audience="founder" type="button">
           <i class="ph ph-user-focus"></i><span>Founder</span>
