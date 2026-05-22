@@ -92,7 +92,11 @@ html[data-theme="light"] .audience-bar{ background:#f0f0f0; }
   font-family:var(--font-mono); font-size:10px;
   letter-spacing:0.08em; text-transform:uppercase; color:var(--ink-3);
 }
-.audience-meta .dot{ display:inline-block; width:6px; height:6px; border-radius:50%; background:var(--accent); flex-shrink:0; }
+.audience-meta::before{
+  content:""; display:block;
+  width:7px; height:7px; min-width:7px; min-height:7px;
+  border-radius:50%; background:var(--accent); flex-shrink:0;
+}
 
 .app:not([data-audience="founder"]) nav.left{ display:none; }
 .app:not([data-audience="founder"]) aside.rail{ display:none; }
@@ -127,7 +131,11 @@ html[data-theme="light"] .brand .logo{ filter: invert(1); }
   cursor:pointer; transition:border-color var(--t-fast) var(--ease), color var(--t-fast) var(--ease);
 }
 .client-select:hover{ border-color:var(--line-strong); color:var(--ink); }
-.client-select .dot{ display:inline-block; width:6px; height:6px; border-radius:50%; background:var(--accent); flex-shrink:0; }
+.client-select::before{
+  content:""; display:block;
+  width:7px; height:7px; min-width:7px; min-height:7px;
+  border-radius:50%; background:var(--accent); flex-shrink:0;
+}
 .client-select i{ font-size:14px; color:var(--ink-3); }
 
 .identity{ position:relative; }
@@ -976,7 +984,11 @@ aside.rail{
   padding:7px 12px; border:1px solid var(--line); border-radius:var(--radius-sm);
   font-family:var(--font-display); font-size:13px; color:var(--ink-2);
 }
-.client-pill .dot{ display:inline-block; width:6px; height:6px; border-radius:50%; background:var(--accent); flex-shrink:0; }
+.client-pill::before{
+  content:""; display:block;
+  width:7px; height:7px; min-width:7px; min-height:7px;
+  border-radius:50%; background:var(--accent); flex-shrink:0;
+}
 
 .rsn-strip{
   display:grid; grid-template-columns:repeat(4,1fr); gap:12px;
@@ -1326,7 +1338,6 @@ main::-webkit-scrollbar-thumb:hover, .rail-body::-webkit-scrollbar-thumb:hover{
       </button>
     </div>
     <div class="audience-meta" id="audienceMeta">
-      <span class="dot"></span>
       <span id="audienceMetaText">Consumer · Ratifier · 5 surfaces live</span>
     </div>
   </div>
@@ -1338,7 +1349,7 @@ main::-webkit-scrollbar-thumb:hover, .rail-body::-webkit-scrollbar-thumb:hover{
         <img class="logo" src="images/logo.svg" alt="Kilonova" />
       </div>
       <button class="client-select" type="button">
-        <span class="dot"></span><span>Kilonova</span><i class="ph ph-caret-down"></i>
+        <span>Kilonova</span><i class="ph ph-caret-down"></i>
       </button>
     </div>
     <div class="header-right">
@@ -2315,7 +2326,7 @@ main::-webkit-scrollbar-thumb:hover, .rail-body::-webkit-scrollbar-thumb:hover{
             <p>The pilot surface — author every R-phase, drive the human-in-the-loop gates, ship the brief to Reading.</p>
           </div>
           <div class="right">
-            <button class="client-pill"><span class="dot"></span><span>Kilonova · workspace</span><i class="ph ph-caret-down"></i></button>
+            <button class="client-pill"><span>Kilonova · workspace</span><i class="ph ph-caret-down"></i></button>
             <button class="btn-secondary"><i class="ph ph-cube"></i>opus-4.7</button>
             <button class="btn-primary"><i class="ph ph-plus"></i>New RSN</button>
           </div>
