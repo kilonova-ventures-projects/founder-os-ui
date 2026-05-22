@@ -3,81 +3,38 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Kilonova · Founder OS · v1</title>
+<title>Kilonova · Founder OS · v1.1</title>
 
-<!-- Fonts -->
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,300;8..60,400;8..60,500;8..60,600;8..60,700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet" />
-
-<!-- Phosphor Icons -->
 <script src="https://unpkg.com/@phosphor-icons/web"></script>
 
 <style>
 /* ============================================================
-   KILONOVA · FOUNDER OS · v1.0.0
-   Founder-first scope · 4 surfaces + Settings
-   Design system: V&T v0.7 (chartreuse focal-only)
+   KILONOVA · FOUNDER OS · v1.1
+   Founder-first · all surfaces · 3 audiences (Founder · Pilot · Prospect)
    ============================================================ */
 
-/* ---------- Tokens ---------- */
 :root{
-  /* Surface */
-  --bg: #0a0a0a;
-  --bg-elev: #111111;
-  --bg-card: #141414;
-  --bg-card-hover: #181818;
-  --bg-rail: #0d0d0d;
-
-  /* Lines */
-  --line: rgba(255,255,255,0.06);
-  --line-strong: rgba(255,255,255,0.12);
-  --line-soft: rgba(255,255,255,0.04);
-
-  /* Text */
-  --ink: #f4f4f4;
-  --ink-2: #b3b3b3;
-  --ink-3: #6e6e6e;
-  --ink-4: #4a4a4a;
-
-  /* Accent — focal only */
-  --accent: #DFFF00;
-  --accent-ink: #0a0a0a;
-  --accent-line: rgba(223,255,0,0.22);
-  --accent-glow: rgba(223,255,0,0.10);
-
-  /* Status hues — desaturated, semantic only */
-  --ok: #93c5b3;
-  --warn: #e0c98a;
-  --crit: #d39c93;
-  --info: #9bb3c9;
-
-  /* Geometry */
-  --nav-w: 64px;
-  --rail-w: 420px;
-  --header-h: 64px;
-  --radius: 10px;
-  --radius-sm: 6px;
-
-  /* Type */
-  --font-display: "Helvetica Neue", Helvetica, Arial, sans-serif;
-  --font-body: "Source Serif 4", "Source Serif Pro", Georgia, serif;
-  --font-mono: "Space Mono", ui-monospace, "SF Mono", Menlo, monospace;
-
-  /* Motion */
-  --ease: cubic-bezier(.2,.7,.2,1);
-  --t-fast: 120ms;
-  --t-base: 220ms;
+  --bg:#0a0a0a; --bg-elev:#111; --bg-card:#141414; --bg-card-hover:#181818; --bg-rail:#0d0d0d;
+  --line: rgba(255,255,255,0.06); --line-strong: rgba(255,255,255,0.12); --line-soft: rgba(255,255,255,0.04);
+  --ink:#f4f4f4; --ink-2:#b3b3b3; --ink-3:#6e6e6e; --ink-4:#4a4a4a;
+  --accent:#DFFF00; --accent-ink:#0a0a0a; --accent-line:rgba(223,255,0,0.22); --accent-glow:rgba(223,255,0,0.10);
+  --ok:#93c5b3; --warn:#e0c98a; --crit:#d39c93; --info:#9bb3c9;
+  --nav-w:64px; --rail-w:420px; --header-h:64px;
+  --radius:10px; --radius-sm:6px;
+  --font-display:"Helvetica Neue", Helvetica, Arial, sans-serif;
+  --font-body:"Source Serif 4","Source Serif Pro", Georgia, serif;
+  --font-mono:"Space Mono", ui-monospace, "SF Mono", Menlo, monospace;
+  --ease:cubic-bezier(.2,.7,.2,1); --t-fast:120ms; --t-base:220ms;
 }
-
-/* Light mode (kept for parity; app defaults dark) */
 html[data-theme="light"]{
   --bg:#fafafa; --bg-elev:#ffffff; --bg-card:#ffffff; --bg-card-hover:#f4f4f4; --bg-rail:#f6f6f6;
-  --line: rgba(0,0,0,0.08); --line-strong: rgba(0,0,0,0.16); --line-soft: rgba(0,0,0,0.04);
+  --line:rgba(0,0,0,0.08); --line-strong:rgba(0,0,0,0.16); --line-soft:rgba(0,0,0,0.04);
   --ink:#101010; --ink-2:#404040; --ink-3:#707070; --ink-4:#a0a0a0;
 }
 
-/* ---------- Reset ---------- */
 *,*::before,*::after{box-sizing:border-box}
 html,body{margin:0;padding:0;background:var(--bg);color:var(--ink);font-family:var(--font-body);font-size:15px;line-height:1.55;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale}
 button{font:inherit;color:inherit;background:none;border:0;cursor:pointer;padding:0}
@@ -102,855 +59,1241 @@ hr{border:0;border-top:1px solid var(--line);margin:0}
 .app[data-audience="pilot"],
 .app[data-audience="prospect"]{ grid-template-columns: 0 1fr 0 !important; }
 
-/* ---------- Audience bar (top-most · 3 audiences) ---------- */
+/* ---------- Audience bar ---------- */
 .audience-bar{
   grid-area: audience;
-  display:flex; align-items: stretch; justify-content: space-between;
-  background: #060606;
-  border-bottom: 1px solid var(--line);
-  padding: 0 22px;
-  z-index: 50;
+  display:flex; align-items:stretch; justify-content:space-between;
+  background:#060606; border-bottom:1px solid var(--line);
+  padding:0 22px; z-index:50;
 }
-html[data-theme="light"] .audience-bar{ background: #f0f0f0; }
-
-.audience-tabs{ display:flex; align-items: stretch; gap: 0; }
+html[data-theme="light"] .audience-bar{ background:#f0f0f0; }
+.audience-tabs{ display:flex; align-items:stretch; }
 .audience-tab{
-  position: relative;
-  display:flex; align-items: center; gap: 8px;
-  padding: 0 18px;
-  font-family: var(--font-display);
-  font-size: 11px;
-  font-weight: 600;
-  letter-spacing: 0.06em;
-  text-transform: uppercase;
-  color: var(--ink-3);
-  border-bottom: 2px solid transparent;
-  transition: color var(--t-fast) var(--ease), border-color var(--t-fast) var(--ease);
+  position:relative; display:flex; align-items:center; gap:8px;
+  padding:0 18px;
+  font-family:var(--font-display); font-size:11px; font-weight:600;
+  letter-spacing:0.06em; text-transform:uppercase;
+  color:var(--ink-3);
+  border-bottom:2px solid transparent;
+  transition:color var(--t-fast) var(--ease), border-color var(--t-fast) var(--ease);
 }
-.audience-tab i{ font-size: 14px; opacity: 0.9; }
+.audience-tab i{ font-size:14px; opacity:0.9; }
 .audience-tab .lock{
-  font-family: var(--font-mono);
-  font-size: 9px;
-  letter-spacing: 0.1em;
-  color: var(--ink-4);
-  margin-left: 4px;
-  padding: 2px 6px;
-  border: 1px solid var(--line);
-  border-radius: 3px;
-  text-transform: uppercase;
+  font-family:var(--font-mono); font-size:9px; letter-spacing:0.1em;
+  color:var(--ink-4); margin-left:4px;
+  padding:2px 6px; border:1px solid var(--line); border-radius:3px;
+  text-transform:uppercase;
 }
-.audience-tab:hover{ color: var(--ink-2); }
-.audience-tab.active{
-  color: var(--accent);
-  border-bottom-color: var(--accent);
-}
-.audience-tab.active .lock{ color: var(--ink-3); border-color: var(--line-strong); }
-
+.audience-tab:hover{ color:var(--ink-2); }
+.audience-tab.active{ color:var(--accent); border-bottom-color:var(--accent); }
+.audience-tab.active .lock{ color:var(--ink-3); border-color:var(--line-strong); }
 .audience-meta{
-  display:flex; align-items: center; gap: 8px;
-  font-family: var(--font-mono);
-  font-size: 10px;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  color: var(--ink-3);
+  display:flex; align-items:center; gap:8px;
+  font-family:var(--font-mono); font-size:10px;
+  letter-spacing:0.08em; text-transform:uppercase; color:var(--ink-3);
 }
-.audience-meta .dot{
-  width: 6px; height: 6px; border-radius: 50%;
-  background: var(--accent);
-  display:inline-block;
-}
+.audience-meta .dot{ width:6px; height:6px; border-radius:50%; background:var(--accent); }
 
-/* Hide founder-only chrome when in pilot/prospect */
-.app:not([data-audience="founder"]) nav.left{ display: none; }
-.app:not([data-audience="founder"]) aside.rail{ display: none; }
-.app:not([data-audience="founder"]) #askBtn{ display: none; }
-
-/* Audience-level views (pilot/prospect previews) */
-.audience-view{ display: none; min-height: 100%; }
-.audience-view.active{ display: block; }
-.app:not([data-audience="founder"]) .surface{ display: none !important; }
-.app[data-audience="founder"] .audience-view{ display: none; }
+.app:not([data-audience="founder"]) nav.left{ display:none; }
+.app:not([data-audience="founder"]) aside.rail{ display:none; }
+.app:not([data-audience="founder"]) #askBtn{ display:none; }
+.audience-view{ display:none; min-height:100%; }
+.audience-view.active{ display:block; }
+.app:not([data-audience="founder"]) .surface{ display:none !important; }
+.app[data-audience="founder"] .audience-view{ display:none; }
 
 /* ---------- Header ---------- */
 header{
-  grid-area: header;
+  grid-area:header;
   display:flex; align-items:center; justify-content:space-between;
-  padding: 0 22px;
-  border-bottom: 1px solid var(--line);
-  background: var(--bg);
-  z-index: 30;
+  padding:0 22px;
+  border-bottom:1px solid var(--line);
+  background:var(--bg); z-index:30;
 }
 .brand{ display:flex; align-items:center; gap:14px; }
-.brand .mark{
-  font-family: var(--font-display);
-  font-weight: 700;
-  letter-spacing: -0.02em;
-  font-size: 22px;
-  line-height: 1;
-}
-.brand .mark .star{ color: var(--accent); margin-right: 2px; }
-.brand .sep{ color: var(--ink-4); }
-.brand .meta{
-  font-family: var(--font-mono);
-  font-size: 11px;
-  color: var(--ink-3);
-  letter-spacing: 0.04em;
-  text-transform: uppercase;
-}
+.brand .mark{ font-family:var(--font-display); font-weight:700; letter-spacing:-0.02em; font-size:22px; line-height:1; }
+.brand .mark .star{ color:var(--accent); margin-right:2px; }
+.brand .sep{ color:var(--ink-4); }
+.brand .meta{ font-family:var(--font-mono); font-size:11px; color:var(--ink-3); letter-spacing:0.04em; text-transform:uppercase; }
+.header-right{ display:flex; align-items:center; gap:10px; }
 
-.header-right{ display:flex; align-items:center; gap: 10px; }
-
-/* Client selector */
 .client-select{
   display:flex; align-items:center; gap:8px;
-  padding: 7px 11px;
-  border: 1px solid var(--line);
-  border-radius: var(--radius-sm);
-  font-family: var(--font-display);
-  font-size: 13px;
-  color: var(--ink-2);
-  cursor: pointer;
-  transition: border-color var(--t-fast) var(--ease), color var(--t-fast) var(--ease);
+  padding:7px 11px; border:1px solid var(--line); border-radius:var(--radius-sm);
+  font-family:var(--font-display); font-size:13px; color:var(--ink-2);
+  cursor:pointer; transition:border-color var(--t-fast) var(--ease), color var(--t-fast) var(--ease);
 }
-.client-select:hover{ border-color: var(--line-strong); color: var(--ink); }
-.client-select .dot{ width:6px;height:6px;border-radius:50%;background:var(--accent); }
-.client-select i{ font-size: 14px; color: var(--ink-3); }
+.client-select:hover{ border-color:var(--line-strong); color:var(--ink); }
+.client-select .dot{ width:6px; height:6px; border-radius:50%; background:var(--accent); }
+.client-select i{ font-size:14px; color:var(--ink-3); }
 
-/* User identity */
-.identity{ position: relative; }
+.identity{ position:relative; }
 .identity-btn{
   display:flex; align-items:center; gap:9px;
-  padding: 6px 11px 6px 6px;
-  border: 1px solid var(--line);
-  border-radius: var(--radius-sm);
-  transition: border-color var(--t-fast) var(--ease);
+  padding:6px 11px 6px 6px; border:1px solid var(--line); border-radius:var(--radius-sm);
+  transition:border-color var(--t-fast) var(--ease);
 }
-.identity-btn:hover{ border-color: var(--line-strong); }
+.identity-btn:hover{ border-color:var(--line-strong); }
 .avatar{
-  width: 26px; height: 26px; border-radius: 50%;
-  background: linear-gradient(135deg, #2a2a2a, #1a1a1a);
+  width:26px; height:26px; border-radius:50%;
+  background:linear-gradient(135deg, #2a2a2a, #1a1a1a);
   display:flex; align-items:center; justify-content:center;
-  font-family: var(--font-display); font-weight:700; font-size:11px;
-  color: var(--ink); letter-spacing: 0.02em;
-  border: 1px solid var(--line-strong);
+  font-family:var(--font-display); font-weight:700; font-size:11px;
+  color:var(--ink); letter-spacing:0.02em;
+  border:1px solid var(--line-strong);
 }
-.identity-name{ font-family: var(--font-display); font-size: 13px; color: var(--ink); }
-.identity-btn i{ font-size: 13px; color: var(--ink-3); }
+.identity-name{ font-family:var(--font-display); font-size:13px; color:var(--ink); }
+.identity-btn i{ font-size:13px; color:var(--ink-3); }
 
 .identity-menu{
-  position: absolute; top: calc(100% + 6px); right: 0;
-  min-width: 220px;
-  background: var(--bg-elev);
-  border: 1px solid var(--line-strong);
-  border-radius: var(--radius);
-  box-shadow: 0 12px 36px rgba(0,0,0,0.55);
-  padding: 6px;
-  display: none;
-  z-index: 40;
+  position:absolute; top:calc(100% + 6px); right:0;
+  min-width:220px; background:var(--bg-elev); border:1px solid var(--line-strong); border-radius:var(--radius);
+  box-shadow:0 12px 36px rgba(0,0,0,0.55); padding:6px;
+  display:none; z-index:40;
 }
 .identity-menu.open{ display:block; }
 .menu-item{
   display:flex; align-items:center; justify-content:space-between; gap:10px;
-  padding: 10px 12px;
-  border-radius: var(--radius-sm);
-  font-family: var(--font-display);
-  font-size: 13px;
-  color: var(--ink-2);
-  cursor: pointer;
-  transition: background var(--t-fast) var(--ease), color var(--t-fast) var(--ease);
-  width: 100%;
-  text-align: left;
+  padding:10px 12px; border-radius:var(--radius-sm);
+  font-family:var(--font-display); font-size:13px; color:var(--ink-2);
+  cursor:pointer; transition:background var(--t-fast) var(--ease), color var(--t-fast) var(--ease);
+  width:100%; text-align:left;
 }
-.menu-item:hover{ background: var(--bg-card-hover); color: var(--ink); }
+.menu-item:hover{ background:var(--bg-card-hover); color:var(--ink); }
 .menu-item .left{ display:flex; align-items:center; gap:10px; }
-.menu-item i{ font-size: 15px; color: var(--ink-3); }
-.menu-divider{ height:1px; background: var(--line); margin: 4px 6px; }
+.menu-item i{ font-size:15px; color:var(--ink-3); }
+.menu-divider{ height:1px; background:var(--line); margin:4px 6px; }
 .toggle{
-  width: 30px; height: 16px; border-radius: 99px;
-  background: var(--line-strong);
-  position: relative;
-  transition: background var(--t-base) var(--ease);
-  cursor: pointer;
+  width:30px; height:16px; border-radius:99px; background:var(--line-strong);
+  position:relative; cursor:pointer;
+  transition:background var(--t-base) var(--ease);
 }
 .toggle::after{
   content:""; position:absolute; top:2px; left:2px;
   width:12px; height:12px; border-radius:50%;
-  background: var(--ink-2);
-  transition: transform var(--t-base) var(--ease), background var(--t-base) var(--ease);
+  background:var(--ink-2);
+  transition:transform var(--t-base) var(--ease), background var(--t-base) var(--ease);
 }
-.toggle.on{ background: var(--accent); }
-.toggle.on::after{ transform: translateX(14px); background: var(--accent-ink); }
+.toggle.on{ background:var(--accent); }
+.toggle.on::after{ transform:translateX(14px); background:var(--accent-ink); }
 
-/* Ask Kilonova button — primary CTA */
 .ask-btn{
   display:flex; align-items:center; gap:8px;
-  padding: 9px 14px;
-  background: var(--accent);
-  color: var(--accent-ink);
-  border-radius: var(--radius-sm);
-  font-family: var(--font-display);
-  font-weight: 600;
-  font-size: 13px;
-  letter-spacing: 0.01em;
-  transition: filter var(--t-fast) var(--ease), transform var(--t-fast) var(--ease);
+  padding:9px 14px; background:var(--accent); color:var(--accent-ink);
+  border-radius:var(--radius-sm);
+  font-family:var(--font-display); font-weight:600; font-size:13px; letter-spacing:0.01em;
+  transition:filter var(--t-fast) var(--ease), transform var(--t-fast) var(--ease);
 }
-.ask-btn:hover{ filter: brightness(1.05); }
-.ask-btn:active{ transform: translateY(1px); }
-.ask-btn i{ font-size: 15px; }
-.app[data-rail="open"] .ask-btn{ filter: brightness(0.85); }
+.ask-btn:hover{ filter:brightness(1.05); }
+.ask-btn:active{ transform:translateY(1px); }
+.ask-btn i{ font-size:15px; }
+.app[data-rail="open"] .ask-btn{ filter:brightness(0.85); }
 
-/* ---------- Left nav (icon only) ---------- */
+/* ---------- Left nav ---------- */
 nav.left{
-  grid-area: nav;
+  grid-area:nav;
   display:flex; flex-direction:column; align-items:stretch;
-  padding: 14px 0;
-  border-right: 1px solid var(--line);
-  background: var(--bg);
-  z-index: 20;
+  padding:14px 0; border-right:1px solid var(--line); background:var(--bg); z-index:20;
 }
 .nav-item{
-  position: relative;
-  display:flex; align-items:center; justify-content:center;
-  width: var(--nav-w); height: 44px;
-  color: var(--ink-3);
-  cursor: pointer;
-  transition: color var(--t-fast) var(--ease), background var(--t-fast) var(--ease);
+  position:relative; display:flex; align-items:center; justify-content:center;
+  width:var(--nav-w); height:44px;
+  color:var(--ink-3); cursor:pointer;
+  transition:color var(--t-fast) var(--ease), background var(--t-fast) var(--ease);
 }
-.nav-item:hover{ color: var(--ink); background: var(--bg-card); }
-.nav-item.active{ color: var(--ink); }
+.nav-item:hover{ color:var(--ink); background:var(--bg-card); }
+.nav-item.active{ color:var(--ink); }
 .nav-item.active::before{
   content:""; position:absolute; left:0; top:8px; bottom:8px;
-  width: 3px; background: var(--accent); border-radius: 0 2px 2px 0;
+  width:3px; background:var(--accent); border-radius:0 2px 2px 0;
 }
-.nav-item i{ font-size: 22px; }
+.nav-item i{ font-size:22px; }
 .nav-tip{
-  position: absolute; left: calc(var(--nav-w) + 8px); top: 50%; transform: translateY(-50%);
-  background: var(--bg-elev);
-  border: 1px solid var(--line-strong);
-  color: var(--ink);
-  font-family: var(--font-display);
-  font-size: 12px;
-  padding: 6px 10px;
-  border-radius: var(--radius-sm);
-  white-space: nowrap;
-  opacity: 0; pointer-events: none;
-  transition: opacity var(--t-fast) var(--ease);
-  z-index: 50;
-  box-shadow: 0 6px 16px rgba(0,0,0,0.4);
+  position:absolute; left:calc(var(--nav-w) + 8px); top:50%; transform:translateY(-50%);
+  background:var(--bg-elev); border:1px solid var(--line-strong); color:var(--ink);
+  font-family:var(--font-display); font-size:12px;
+  padding:6px 10px; border-radius:var(--radius-sm); white-space:nowrap;
+  opacity:0; pointer-events:none;
+  transition:opacity var(--t-fast) var(--ease);
+  z-index:50;
+  box-shadow:0 6px 16px rgba(0,0,0,0.4);
 }
-.nav-item:hover .nav-tip{ opacity: 1; }
-.nav-spacer{ flex: 1; }
+.nav-item:hover .nav-tip{ opacity:1; }
+.nav-spacer{ flex:1; }
 .nav-counter{
-  position: absolute; top: 6px; right: 12px;
-  background: var(--accent);
-  color: var(--accent-ink);
-  font-family: var(--font-mono);
-  font-size: 9px;
-  font-weight: 700;
-  line-height: 1;
-  padding: 3px 5px;
-  border-radius: 999px;
-  min-width: 16px;
-  text-align: center;
+  position:absolute; top:6px; right:12px;
+  background:var(--accent); color:var(--accent-ink);
+  font-family:var(--font-mono); font-size:9px; font-weight:700; line-height:1;
+  padding:3px 5px; border-radius:999px;
+  min-width:16px; text-align:center;
 }
 
-/* ---------- Main ---------- */
+/* ---------- Main + Surface ---------- */
 main{
-  grid-area: main;
-  overflow: auto;
-  background: var(--bg);
-  min-width: 0;
+  grid-area:main; overflow:auto; background:var(--bg); min-width:0;
 }
-.surface{ display: none; min-height: 100%; }
-.surface.active{ display: block; }
-
-/* Surface header */
+.surface{ display:none; min-height:100%; }
+.surface.active{ display:block; }
 .surface-head{
-  position: sticky; top: 0;
-  background: var(--bg);
-  border-bottom: 1px solid var(--line);
-  padding: 22px 36px 18px;
-  z-index: 10;
+  position:sticky; top:0; background:var(--bg); border-bottom:1px solid var(--line);
+  padding:22px 36px 18px; z-index:10;
 }
 .surface-eyebrow{
-  font-family: var(--font-mono);
-  font-size: 10px;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  color: var(--ink-3);
-  margin-bottom: 8px;
+  font-family:var(--font-mono); font-size:10px;
+  letter-spacing:0.12em; text-transform:uppercase;
+  color:var(--ink-3); margin-bottom:8px;
 }
 .surface-title{
-  font-family: var(--font-display);
-  font-weight: 600;
-  letter-spacing: -0.02em;
-  font-size: 30px;
-  line-height: 1.1;
-  margin: 0 0 6px;
-  color: var(--ink);
+  font-family:var(--font-display); font-weight:600;
+  letter-spacing:-0.02em; font-size:30px; line-height:1.1;
+  margin:0 0 6px; color:var(--ink);
 }
 .surface-sub{
-  font-family: var(--font-body);
-  font-size: 14px;
-  color: var(--ink-2);
-  margin: 0;
-  max-width: 720px;
+  font-family:var(--font-body); font-size:14px;
+  color:var(--ink-2); margin:0; max-width:760px;
+}
+.surface-head-actions{
+  display:flex; align-items:center; gap:8px; margin-top:14px;
 }
 
-/* Filter chips */
-.chips{
-  display:flex; gap:8px; flex-wrap:wrap;
-  padding: 16px 36px 0;
-}
+.chips{ display:flex; gap:8px; flex-wrap:wrap; padding:16px 36px 0; }
 .chip{
-  padding: 6px 12px;
-  border: 1px solid var(--line);
-  border-radius: 999px;
-  font-family: var(--font-display);
-  font-size: 12px;
-  color: var(--ink-2);
-  cursor: pointer;
-  transition: all var(--t-fast) var(--ease);
+  padding:6px 12px; border:1px solid var(--line); border-radius:999px;
+  font-family:var(--font-display); font-size:12px; color:var(--ink-2);
+  cursor:pointer; transition:all var(--t-fast) var(--ease);
 }
-.chip:hover{ border-color: var(--line-strong); color: var(--ink); }
-.chip.active{ background: var(--ink); color: var(--bg); border-color: var(--ink); }
-.chip .count{
-  font-family: var(--font-mono);
-  font-size: 10px;
-  margin-left: 6px;
-  color: var(--ink-3);
-}
-.chip.active .count{ color: var(--bg-elev); opacity: 0.7; }
+.chip:hover{ border-color:var(--line-strong); color:var(--ink); }
+.chip.active{ background:var(--ink); color:var(--bg); border-color:var(--ink); }
+.chip .count{ font-family:var(--font-mono); font-size:10px; margin-left:6px; color:var(--ink-3); }
+.chip.active .count{ color:var(--bg-elev); opacity:0.7; }
 
-/* Section heads */
 .section-head{
   display:flex; align-items:baseline; justify-content:space-between;
-  padding: 28px 36px 12px;
+  padding:28px 36px 12px;
 }
 .section-head h3{
-  font-family: var(--font-display);
-  font-weight: 600;
-  font-size: 13px;
-  letter-spacing: 0.04em;
-  text-transform: uppercase;
-  color: var(--ink-2);
-  margin: 0;
+  font-family:var(--font-display); font-weight:600;
+  font-size:13px; letter-spacing:0.04em; text-transform:uppercase;
+  color:var(--ink-2); margin:0;
 }
-.section-head .meta{
-  font-family: var(--font-mono);
-  font-size: 11px;
-  color: var(--ink-3);
-}
+.section-head .meta{ font-family:var(--font-mono); font-size:11px; color:var(--ink-3); }
 
-/* ---------- Brief grid (Reading Surface) ---------- */
+/* ---------- Reading: brief grid ---------- */
 .brief-grid{
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
-  gap: 14px;
-  padding: 0 36px 40px;
+  display:grid; grid-template-columns:repeat(auto-fill, minmax(340px, 1fr));
+  gap:14px; padding:0 36px 16px;
 }
 .brief-card{
-  display: flex; flex-direction: column;
-  background: var(--bg-card);
-  border: 1px solid var(--line);
-  border-radius: var(--radius);
-  padding: 18px 18px 16px;
-  transition: border-color var(--t-base) var(--ease), background var(--t-base) var(--ease), transform var(--t-base) var(--ease);
-  cursor: pointer;
-  position: relative;
-  min-height: 196px;
+  display:flex; flex-direction:column;
+  background:var(--bg-card); border:1px solid var(--line); border-radius:var(--radius);
+  padding:18px; position:relative; min-height:196px;
+  transition:border-color var(--t-base) var(--ease), background var(--t-base) var(--ease), transform var(--t-base) var(--ease);
+  cursor:pointer;
 }
 .brief-card:hover{
-  background: var(--bg-card-hover);
-  border-color: var(--accent-line);
-  transform: translateY(-1px);
+  background:var(--bg-card-hover); border-color:var(--accent-line); transform:translateY(-1px);
 }
-.brief-card.unread{ border-color: var(--accent-line); }
+.brief-card.unread{ border-color:var(--accent-line); }
 .brief-card.unread::before{
-  content:""; position: absolute; top: 18px; right: 18px;
-  width: 6px; height: 6px; border-radius: 50%;
-  background: var(--accent);
-  box-shadow: 0 0 8px var(--accent-glow);
+  content:""; position:absolute; top:18px; right:18px;
+  width:6px; height:6px; border-radius:50%; background:var(--accent);
+  box-shadow:0 0 8px var(--accent-glow);
 }
-
-.brief-meta-row{ display:flex; align-items:center; gap: 8px; margin-bottom: 12px; }
+.brief-meta-row{ display:flex; align-items:center; gap:8px; margin-bottom:12px; }
 .type-badge{
-  font-family: var(--font-mono);
-  font-size: 9px;
-  font-weight: 700;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  padding: 3px 7px;
-  border-radius: 3px;
-  border: 1px solid var(--line-strong);
-  color: var(--ink-2);
+  font-family:var(--font-mono); font-size:9px; font-weight:700;
+  letter-spacing:0.12em; text-transform:uppercase;
+  padding:3px 7px; border-radius:3px;
+  border:1px solid var(--line-strong); color:var(--ink-2);
 }
-.type-badge.decision{ color: var(--accent); border-color: var(--accent-line); }
-.type-badge.rsn{ color: var(--info); border-color: rgba(155,179,201,0.3); }
-.type-badge.status{ color: var(--ok); border-color: rgba(147,197,179,0.3); }
-.type-badge.pilot{ color: var(--warn); border-color: rgba(224,201,138,0.3); }
-.type-badge.minutes{ color: var(--ink-2); }
-
-.brief-time{
-  font-family: var(--font-mono);
-  font-size: 10px;
-  color: var(--ink-3);
-  margin-left: auto;
-}
-
+.type-badge.decision{ color:var(--accent); border-color:var(--accent-line); }
+.type-badge.rsn{ color:var(--info); border-color:rgba(155,179,201,0.3); }
+.type-badge.status{ color:var(--ok); border-color:rgba(147,197,179,0.3); }
+.type-badge.pilot{ color:var(--warn); border-color:rgba(224,201,138,0.3); }
+.type-badge.minutes{ color:var(--ink-2); }
+.brief-time{ font-family:var(--font-mono); font-size:10px; color:var(--ink-3); margin-left:auto; }
 .brief-title{
-  font-family: var(--font-body);
-  font-weight: 500;
-  font-size: 19px;
-  line-height: 1.3;
-  letter-spacing: -0.005em;
-  color: var(--ink);
-  margin: 0 0 8px;
+  font-family:var(--font-body); font-weight:500;
+  font-size:19px; line-height:1.3; letter-spacing:-0.005em;
+  color:var(--ink); margin:0 0 8px;
 }
 .brief-synopsis{
-  font-family: var(--font-body);
-  font-size: 14px;
-  line-height: 1.5;
-  color: var(--ink-2);
-  margin: 0 0 14px;
-  flex: 1;
+  font-family:var(--font-body); font-size:14px; line-height:1.5;
+  color:var(--ink-2); margin:0 0 14px; flex:1;
 }
-
 .brief-foot{
   display:flex; align-items:center; justify-content:space-between;
-  padding-top: 12px;
-  border-top: 1px solid var(--line-soft);
+  padding-top:12px; border-top:1px solid var(--line-soft);
 }
 .brief-foot .left{
-  display:flex; align-items:center; gap: 8px;
-  font-family: var(--font-mono);
-  font-size: 10px;
-  color: var(--ink-3);
+  display:flex; align-items:center; gap:8px;
+  font-family:var(--font-mono); font-size:10px; color:var(--ink-3);
 }
 .brief-foot .read{
-  display: flex; align-items: center; gap: 4px;
-  font-family: var(--font-display);
-  font-size: 11px;
-  color: var(--ink-2);
-  font-weight: 500;
+  display:flex; align-items:center; gap:4px;
+  font-family:var(--font-display); font-size:11px; color:var(--ink-2); font-weight:500;
 }
-.brief-foot .read i{ font-size: 13px; }
-
+.brief-foot .read i{ font-size:13px; }
 .src-stack{ display:flex; align-items:center; }
 .src-stack .src{
-  width: 18px; height: 18px; border-radius: 50%;
-  background: linear-gradient(135deg, #222, #161616);
-  border: 1.5px solid var(--bg-card);
-  font-family: var(--font-mono);
-  font-size: 8px;
-  font-weight: 700;
-  color: var(--ink-2);
+  width:18px; height:18px; border-radius:50%;
+  background:linear-gradient(135deg, #222, #161616);
+  border:1.5px solid var(--bg-card);
+  font-family:var(--font-mono); font-size:8px; font-weight:700; color:var(--ink-2);
   display:flex; align-items:center; justify-content:center;
-  margin-left: -5px;
+  margin-left:-5px;
 }
-.src-stack .src:first-child{ margin-left: 0; }
+.src-stack .src:first-child{ margin-left:0; }
 
-/* ---------- Stub surfaces ---------- */
-.stub{
-  display:flex; flex-direction:column; align-items:flex-start;
-  padding: 60px 36px;
-  max-width: 720px;
+/* Card chat icon + sources expand */
+.card-actions{
+  position:absolute; top:14px; right:14px;
+  display:flex; gap:4px;
 }
-.stub .phase-tag{
-  font-family: var(--font-mono);
-  font-size: 10px;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  color: var(--accent);
-  background: var(--accent-glow);
-  border: 1px solid var(--accent-line);
-  padding: 4px 10px;
-  border-radius: 999px;
-  margin-bottom: 24px;
+.brief-card.unread .card-actions{ right:32px; }
+.icon-btn{
+  width:26px; height:26px; border-radius:6px;
+  display:flex; align-items:center; justify-content:center;
+  color:var(--ink-3); opacity:0;
+  transition:opacity var(--t-fast) var(--ease), background var(--t-fast) var(--ease), color var(--t-fast) var(--ease);
 }
-.stub h2{
-  font-family: var(--font-display);
-  font-weight: 600;
-  letter-spacing: -0.02em;
-  font-size: 36px;
-  line-height: 1.1;
-  margin: 0 0 14px;
-  color: var(--ink);
-}
-.stub p{
-  font-family: var(--font-body);
-  font-size: 17px;
-  line-height: 1.6;
-  color: var(--ink-2);
-  margin: 0 0 14px;
-  max-width: 620px;
-}
-.stub p strong{ color: var(--ink); font-weight: 600; }
+.brief-card:hover .icon-btn{ opacity:1; }
+.icon-btn:hover{ background:var(--bg-elev); color:var(--ink); }
+.icon-btn i{ font-size:14px; }
 
-.stub-spec{
-  margin-top: 28px;
-  width: 100%;
-  max-width: 680px;
-  border: 1px solid var(--line);
-  border-radius: var(--radius);
-  background: var(--bg-card);
-  padding: 20px 22px;
+.sources-expand{
+  margin-top:10px; padding-top:10px; border-top:1px solid var(--line-soft);
 }
-.stub-spec h4{
-  font-family: var(--font-display);
-  font-size: 12px;
-  letter-spacing: 0.06em;
-  text-transform: uppercase;
-  color: var(--ink-3);
-  margin: 0 0 12px;
-  font-weight: 600;
+.sources-toggle{
+  display:flex; align-items:center; gap:6px;
+  font-family:var(--font-mono); font-size:10px; color:var(--ink-3);
+  cursor:pointer;
+  transition:color var(--t-fast) var(--ease);
 }
-.stub-spec ul{ margin: 0; padding: 0; list-style: none; }
-.stub-spec li{
-  display:flex; align-items:flex-start; gap: 10px;
-  padding: 8px 0;
-  border-bottom: 1px solid var(--line-soft);
-  font-family: var(--font-body);
-  font-size: 14px;
-  color: var(--ink-2);
+.sources-toggle:hover{ color:var(--ink-2); }
+.sources-toggle i{ font-size:12px; transition:transform var(--t-fast) var(--ease); }
+.sources-expand.open .sources-toggle i{ transform:rotate(90deg); }
+.sources-list{
+  display:none; flex-direction:column; gap:6px;
+  margin-top:10px;
 }
-.stub-spec li:last-child{ border-bottom: 0; }
-.stub-spec li i{ font-size: 16px; color: var(--ink-3); margin-top: 2px; flex-shrink: 0; }
-.stub-spec li strong{ color: var(--ink); font-weight: 600; }
+.sources-expand.open .sources-list{ display:flex; }
+.source-file{
+  display:flex; align-items:center; gap:8px;
+  padding:6px 8px; border-radius:5px;
+  font-family:var(--font-mono); font-size:11px; color:var(--ink-2);
+  background:rgba(255,255,255,0.02);
+  transition:background var(--t-fast) var(--ease);
+}
+.source-file:hover{ background:var(--bg-card-hover); }
+.source-file i{ font-size:13px; color:var(--ink-3); }
+.source-file .size{ margin-left:auto; color:var(--ink-3); font-size:9px; }
 
-/* ---------- Audience preview (Pilot / Prospect) ---------- */
-.audience-hero{
-  padding: 56px 36px 36px;
-  border-bottom: 1px solid var(--line);
-}
-.audience-hero .phase-tag{
+/* ---------- Stub generic ---------- */
+.stub{ display:flex; flex-direction:column; align-items:flex-start; padding:60px 36px; max-width:760px; }
+.phase-tag{
   display:inline-block;
-  font-family: var(--font-mono);
-  font-size: 10px;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  color: var(--accent);
-  background: var(--accent-glow);
-  border: 1px solid var(--accent-line);
-  padding: 4px 10px;
-  border-radius: 999px;
-  margin-bottom: 20px;
-}
-.audience-hero h1{
-  font-family: var(--font-display);
-  font-weight: 600;
-  letter-spacing: -0.024em;
-  font-size: 44px;
-  line-height: 1.05;
-  margin: 0 0 14px;
-  color: var(--ink);
-  max-width: 760px;
-}
-.audience-hero p{
-  font-family: var(--font-body);
-  font-size: 18px;
-  line-height: 1.55;
-  color: var(--ink-2);
-  margin: 0;
-  max-width: 660px;
-}
-.audience-hero p strong{ color: var(--ink); font-weight: 600; }
-
-.audience-surfaces{
-  padding: 32px 36px 16px;
-}
-.audience-surfaces .row-label{
-  display:flex; align-items: baseline; justify-content: space-between;
-  margin-bottom: 16px;
-}
-.audience-surfaces .row-label h3{
-  font-family: var(--font-display);
-  font-weight: 600;
-  font-size: 13px;
-  letter-spacing: 0.04em;
-  text-transform: uppercase;
-  color: var(--ink-2);
-  margin: 0;
-}
-.audience-surfaces .row-label .meta{
-  font-family: var(--font-mono);
-  font-size: 11px;
-  color: var(--ink-3);
+  font-family:var(--font-mono); font-size:10px; letter-spacing:0.12em; text-transform:uppercase;
+  color:var(--accent); background:var(--accent-glow); border:1px solid var(--accent-line);
+  padding:4px 10px; border-radius:999px;
 }
 
-.surface-preview-grid{
+/* ---------- APPROVAL · pipeline (3 cols) ---------- */
+.pipeline{
   display:grid;
-  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
-  gap: 14px;
-  padding-bottom: 32px;
+  grid-template-columns:1fr 1fr 1fr;
+  gap:14px;
+  padding:18px 36px 40px;
 }
-.surface-preview{
-  display:flex; flex-direction: column;
-  background: var(--bg-card);
-  border: 1px solid var(--line);
-  border-radius: var(--radius);
-  padding: 20px 20px 18px;
-  min-height: 168px;
-  transition: border-color var(--t-base) var(--ease), background var(--t-base) var(--ease);
-  cursor: not-allowed;
-  opacity: 0.92;
+.pipeline-col{
+  background:var(--bg-card); border:1px solid var(--line); border-radius:var(--radius);
+  display:flex; flex-direction:column; min-height:520px;
 }
-.surface-preview:hover{ background: var(--bg-card-hover); border-color: var(--line-strong); }
-.surface-preview .head{
-  display:flex; align-items: center; justify-content: space-between;
-  margin-bottom: 12px;
-}
-.surface-preview .verb{
-  font-family: var(--font-mono);
-  font-size: 9px;
-  font-weight: 700;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
-  color: var(--ink-3);
-}
-.surface-preview .phase{
-  font-family: var(--font-mono);
-  font-size: 9px;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  color: var(--ink-3);
-  padding: 3px 7px;
-  border: 1px solid var(--line);
-  border-radius: 3px;
-}
-.surface-preview h4{
-  font-family: var(--font-body);
-  font-weight: 500;
-  font-size: 19px;
-  line-height: 1.25;
-  letter-spacing: -0.005em;
-  color: var(--ink);
-  margin: 0 0 8px;
-}
-.surface-preview p{
-  font-family: var(--font-body);
-  font-size: 14px;
-  line-height: 1.5;
-  color: var(--ink-2);
-  margin: 0 0 14px;
-  flex: 1;
-}
-.surface-preview .foot{
-  display:flex; align-items: center; gap: 8px;
-  padding-top: 12px;
-  border-top: 1px solid var(--line-soft);
-  font-family: var(--font-mono);
-  font-size: 10px;
-  color: var(--ink-3);
-}
-.surface-preview .foot i{ font-size: 12px; }
-
-.audience-notice{
-  margin: 20px 36px 56px;
-  padding: 16px 18px;
-  background: var(--bg-card);
-  border: 1px dashed var(--line-strong);
-  border-radius: var(--radius);
-  display: flex; align-items: flex-start; gap: 12px;
-  max-width: 760px;
-}
-.audience-notice i{
-  font-size: 18px; color: var(--accent); margin-top: 2px; flex-shrink: 0;
-}
-.audience-notice p{
-  margin: 0;
-  font-family: var(--font-body);
-  font-size: 14px;
-  line-height: 1.55;
-  color: var(--ink-2);
-}
-.audience-notice p strong{ color: var(--ink); font-weight: 600; }
-
-/* ---------- Settings ---------- */
-.settings-grid{
-  display:grid; grid-template-columns: 1fr;
-  gap: 14px;
-  padding: 20px 36px 40px;
-  max-width: 760px;
-}
-.setting-row{
+.pipeline-col .col-head{
+  padding:14px 16px; border-bottom:1px solid var(--line);
   display:flex; align-items:center; justify-content:space-between;
-  background: var(--bg-card);
-  border: 1px solid var(--line);
-  border-radius: var(--radius);
-  padding: 18px 20px;
 }
-.setting-row .label{
-  font-family: var(--font-display);
-  font-weight: 600;
-  font-size: 14px;
-  color: var(--ink);
+.pipeline-col .col-head .left{ display:flex; align-items:center; gap:8px; }
+.pipeline-col .col-head h4{
+  font-family:var(--font-display); font-weight:600; font-size:13px;
+  letter-spacing:0.04em; text-transform:uppercase; color:var(--ink);
+  margin:0;
 }
-.setting-row .desc{
-  font-family: var(--font-body);
-  font-size: 13px;
-  color: var(--ink-2);
-  margin-top: 2px;
-  max-width: 480px;
+.pipeline-col .col-head .col-count{
+  font-family:var(--font-mono); font-size:10px;
+  background:var(--bg-elev); border:1px solid var(--line); border-radius:4px;
+  padding:2px 7px; color:var(--ink-2);
 }
-.setting-row .control{ flex-shrink: 0; margin-left: 16px; }
-.settings-section h3{
-  font-family: var(--font-display);
-  font-weight: 600;
-  font-size: 13px;
-  letter-spacing: 0.06em;
-  text-transform: uppercase;
-  color: var(--ink-3);
-  margin: 24px 0 10px;
+.pipeline-col .col-head .verb{
+  font-family:var(--font-mono); font-size:9px; color:var(--ink-3); letter-spacing:0.1em; text-transform:uppercase;
+}
+.pipeline-col .col-body{
+  padding:12px; display:flex; flex-direction:column; gap:10px;
+  overflow:auto; flex:1;
+}
+.approval-card{
+  background:var(--bg-elev); border:1px solid var(--line); border-radius:8px;
+  padding:12px 12px 10px;
+  transition:border-color var(--t-fast) var(--ease);
+}
+.approval-card:hover{ border-color:var(--line-strong); }
+.approval-card .channel{
+  display:flex; align-items:center; gap:5px;
+  margin-bottom:8px;
+  font-family:var(--font-mono); font-size:9px; letter-spacing:0.1em; text-transform:uppercase; color:var(--ink-3);
+}
+.approval-card .channel i{ font-size:12px; }
+.approval-card h5{
+  font-family:var(--font-body); font-weight:500; font-size:14px; line-height:1.35;
+  color:var(--ink); margin:0 0 8px;
+}
+.approval-card .preview{
+  font-family:var(--font-body); font-size:12px; line-height:1.45;
+  color:var(--ink-2);
+  margin:0 0 10px;
+  max-height:54px; overflow:hidden;
+  position:relative;
+}
+.approval-card .meta-line{
+  display:flex; align-items:center; justify-content:space-between;
+  font-family:var(--font-mono); font-size:9px; color:var(--ink-3);
+  margin-bottom:10px;
+}
+.approval-card .scheduled{
+  display:inline-flex; align-items:center; gap:4px;
+  font-family:var(--font-mono); font-size:9px; letter-spacing:0.08em; text-transform:uppercase;
+  color:var(--ok); border:1px solid rgba(147,197,179,0.3);
+  padding:2px 6px; border-radius:3px;
+}
+.approval-card .scheduled i{ font-size:10px; }
+.approval-card .actions{
+  display:flex; gap:6px;
+}
+.act{
+  flex:1; padding:7px 0; border-radius:5px;
+  font-family:var(--font-display); font-size:11px; font-weight:600; letter-spacing:0.02em;
+  display:flex; align-items:center; justify-content:center; gap:5px;
+  transition:background var(--t-fast) var(--ease), color var(--t-fast) var(--ease), border-color var(--t-fast) var(--ease);
+  border:1px solid var(--line);
+}
+.act i{ font-size:13px; }
+.act.approve{ background:var(--accent); color:var(--accent-ink); border-color:var(--accent); }
+.act.approve:hover{ filter:brightness(1.06); }
+.act.rework{ color:var(--ink-2); }
+.act.rework:hover{ background:var(--bg-card-hover); color:var(--ink); }
+.act.decline{ color:var(--crit); border-color:rgba(211,156,147,0.25); }
+.act.decline:hover{ background:rgba(211,156,147,0.08); }
+.act.post-now{ background:var(--bg-elev); color:var(--ink-2); border-color:var(--line-strong); }
+.act.post-now:hover{ color:var(--ink); border-color:var(--accent-line); }
+
+.channel-icons{ display:flex; gap:4px; align-items:center; }
+.channel-icons i{ font-size:13px; color:var(--ink-2); }
+.channel-icons i.linkedin{ color:#7da4cf; }
+.channel-icons i.x{ color:#cccccc; }
+.channel-icons i.instagram{ color:#d39c93; }
+.channel-icons i.youtube{ color:#d39c93; }
+
+.approval-callout{
+  margin:18px 36px 0;
+  padding:12px 16px; background:var(--bg-card);
+  border:1px dashed var(--line-strong); border-radius:var(--radius);
+  display:flex; align-items:flex-start; gap:10px;
+  font-family:var(--font-body); font-size:13px; color:var(--ink-2);
+}
+.approval-callout i{ color:var(--accent); font-size:16px; margin-top:2px; flex-shrink:0; }
+.approval-callout strong{ color:var(--ink); font-weight:600; }
+
+/* ---------- COMMITMENTS · lanes ---------- */
+.commit-strip{
+  display:grid; grid-template-columns:repeat(4, 1fr); gap:12px;
+  padding:18px 36px 0;
+}
+.commit-tile{
+  background:var(--bg-card); border:1px solid var(--line); border-radius:var(--radius);
+  padding:14px 16px;
+}
+.commit-tile .label{
+  font-family:var(--font-mono); font-size:10px;
+  letter-spacing:0.1em; text-transform:uppercase; color:var(--ink-3);
+  margin-bottom:6px;
+}
+.commit-tile .val{
+  font-family:var(--font-display); font-weight:600; font-size:24px;
+  letter-spacing:-0.01em; color:var(--ink); line-height:1.1;
+}
+.commit-tile .val .denom{ color:var(--ink-3); font-size:18px; margin-left:2px; }
+.commit-tile .delta{
+  font-family:var(--font-mono); font-size:10px; color:var(--ink-3); margin-top:4px;
+}
+.commit-tile .delta.up{ color:var(--ok); }
+.commit-tile .delta.down{ color:var(--warn); }
+
+.lanes{ padding:24px 36px 40px; display:flex; flex-direction:column; gap:12px; }
+.lane{
+  background:var(--bg-card); border:1px solid var(--line); border-radius:var(--radius);
+  overflow:hidden;
+}
+.lane-head{
+  display:flex; align-items:center; justify-content:space-between;
+  padding:14px 18px; cursor:pointer;
+  transition:background var(--t-fast) var(--ease);
+}
+.lane-head:hover{ background:var(--bg-card-hover); }
+.lane-head .left{ display:flex; align-items:center; gap:12px; }
+.lane-head i.caret{ font-size:14px; color:var(--ink-3); transition:transform var(--t-fast) var(--ease); }
+.lane.open .lane-head i.caret{ transform:rotate(90deg); }
+.lane-head h4{
+  font-family:var(--font-display); font-weight:600; font-size:14px; color:var(--ink); margin:0;
+}
+.lane-head .meta{
+  font-family:var(--font-mono); font-size:10px; color:var(--ink-3); letter-spacing:0.06em;
+}
+.lane-body{ display:none; padding:6px 18px 18px; border-top:1px solid var(--line-soft); }
+.lane.open .lane-body{ display:block; }
+
+.okr-row{
+  display:grid; grid-template-columns:1fr 200px 60px;
+  align-items:center; gap:14px;
+  padding:12px 0; border-bottom:1px solid var(--line-soft);
+}
+.okr-row:last-child{ border-bottom:0; }
+.okr-row .name{ font-family:var(--font-body); font-size:14px; color:var(--ink); }
+.okr-row .name small{ display:block; color:var(--ink-3); font-size:12px; margin-top:2px; }
+.progress-bar{
+  height:6px; background:var(--bg-elev); border-radius:99px; overflow:hidden;
+}
+.progress-fill{
+  height:100%; background:var(--accent); border-radius:99px;
+  transition:width var(--t-base) var(--ease);
+}
+.progress-fill.warn{ background:var(--warn); }
+.progress-fill.crit{ background:var(--crit); }
+.okr-row .pct{
+  font-family:var(--font-mono); font-size:13px; color:var(--ink-2); text-align:right;
 }
 
-/* ---------- Right rail (Ask Kilonova) ---------- */
+.cal-week{
+  display:grid; grid-template-columns:repeat(7,1fr); gap:8px;
+  margin-top:6px;
+}
+.cal-day{
+  background:var(--bg-elev); border:1px solid var(--line); border-radius:6px;
+  padding:8px 8px; min-height:120px;
+  display:flex; flex-direction:column; gap:5px;
+}
+.cal-day .d-head{
+  display:flex; align-items:baseline; justify-content:space-between;
+}
+.cal-day .d-name{ font-family:var(--font-mono); font-size:9px; color:var(--ink-3); letter-spacing:0.08em; text-transform:uppercase; }
+.cal-day .d-num{ font-family:var(--font-display); font-size:14px; color:var(--ink); font-weight:600; }
+.cal-day.today{ border-color:var(--accent-line); }
+.cal-day.today .d-num{ color:var(--accent); }
+.cal-item{
+  background:var(--bg-card); border:1px solid var(--line); border-radius:4px;
+  padding:4px 6px;
+  font-family:var(--font-display); font-size:10px; color:var(--ink-2); line-height:1.25;
+}
+.cal-item i{ font-size:10px; margin-right:3px; color:var(--ink-3); }
+.cal-item.scheduled{ border-color:rgba(147,197,179,0.25); }
+.cal-item.draft{ border-style:dashed; color:var(--ink-3); }
+
+.roadmap-row{
+  display:grid; grid-template-columns:160px 1fr 80px;
+  align-items:center; gap:14px;
+  padding:12px 0; border-bottom:1px solid var(--line-soft);
+}
+.roadmap-row:last-child{ border-bottom:0; }
+.roadmap-row .name{ font-family:var(--font-body); font-size:14px; color:var(--ink); }
+.roadmap-bar{
+  position:relative; height:28px;
+  background:var(--bg-elev); border:1px solid var(--line); border-radius:5px;
+  overflow:hidden;
+}
+.roadmap-fill{
+  position:absolute; top:0; bottom:0;
+  background:linear-gradient(90deg, rgba(223,255,0,0.18), rgba(223,255,0,0.06));
+  border-right:2px solid var(--accent);
+}
+.roadmap-fill.warn{ background:linear-gradient(90deg, rgba(224,201,138,0.18), rgba(224,201,138,0.06)); border-right-color:var(--warn); }
+.roadmap-row .quarter{ font-family:var(--font-mono); font-size:10px; color:var(--ink-3); text-align:right; }
+
+.fund-row{
+  display:grid; grid-template-columns:1fr 100px 120px 80px;
+  align-items:center; gap:14px;
+  padding:12px 0; border-bottom:1px solid var(--line-soft);
+}
+.fund-row:last-child{ border-bottom:0; }
+.fund-row .name{ font-family:var(--font-body); font-size:14px; color:var(--ink); }
+.fund-row .stage{
+  font-family:var(--font-mono); font-size:10px; color:var(--ink-2); letter-spacing:0.06em; text-transform:uppercase;
+}
+.fund-row .amt{
+  font-family:var(--font-mono); font-size:13px; color:var(--ink);
+}
+.fund-row .next{
+  font-family:var(--font-mono); font-size:10px; color:var(--ink-3); text-align:right;
+}
+
+/* ---------- STATUS ---------- */
+.status-strip{
+  display:grid; grid-template-columns:repeat(4,1fr); gap:12px;
+  padding:18px 36px 0;
+}
+.status-tile{
+  background:var(--bg-card); border:1px solid var(--line); border-radius:var(--radius);
+  padding:14px 16px;
+}
+.status-tile.attention{ border-color:rgba(224,201,138,0.3); }
+.status-tile .label{
+  font-family:var(--font-mono); font-size:10px; letter-spacing:0.1em; text-transform:uppercase; color:var(--ink-3);
+  margin-bottom:6px;
+  display:flex; align-items:center; gap:6px;
+}
+.status-tile .label i{ font-size:12px; }
+.status-tile .val{
+  font-family:var(--font-display); font-weight:600; font-size:24px; letter-spacing:-0.01em;
+  color:var(--ink); line-height:1.1;
+}
+.status-tile.attention .val{ color:var(--warn); }
+.status-tile .delta{
+  font-family:var(--font-mono); font-size:10px; color:var(--ink-3); margin-top:4px;
+}
+
+.process-list{ padding:24px 36px 0; display:flex; flex-direction:column; gap:10px; }
+.process-card{
+  background:var(--bg-card); border:1px solid var(--line); border-radius:var(--radius);
+  padding:14px 18px;
+  display:grid; grid-template-columns:1fr 200px 90px 80px;
+  align-items:center; gap:16px;
+}
+.process-card.blocked{ border-color:rgba(211,156,147,0.3); }
+.process-card .name{
+  font-family:var(--font-body); font-size:15px; color:var(--ink);
+}
+.process-card .name small{ display:block; color:var(--ink-3); font-size:11px; margin-top:2px; font-family:var(--font-mono); letter-spacing:0.04em; }
+.process-card .pct{
+  font-family:var(--font-mono); font-size:13px; color:var(--ink-2); text-align:right;
+}
+.process-card .eta{
+  font-family:var(--font-mono); font-size:10px; color:var(--ink-3); text-align:right; letter-spacing:0.06em;
+}
+.process-card .state{
+  display:inline-flex; align-items:center; gap:4px;
+  font-family:var(--font-mono); font-size:9px; letter-spacing:0.1em; text-transform:uppercase;
+  color:var(--ok); border:1px solid rgba(147,197,179,0.3);
+  padding:3px 7px; border-radius:3px;
+}
+.process-card.blocked .state{ color:var(--crit); border-color:rgba(211,156,147,0.3); }
+.process-card .state i{ font-size:10px; }
+
+.activity-log{ padding:24px 36px 40px; }
+.log-item{
+  display:grid; grid-template-columns:120px 24px 1fr;
+  align-items:start; gap:12px;
+  padding:10px 0; border-bottom:1px solid var(--line-soft);
+}
+.log-item:last-child{ border-bottom:0; }
+.log-item .ts{ font-family:var(--font-mono); font-size:11px; color:var(--ink-3); padding-top:1px; }
+.log-item .icon{
+  width:24px; height:24px; border-radius:5px; background:var(--bg-card);
+  display:flex; align-items:center; justify-content:center;
+  color:var(--ink-3);
+}
+.log-item .icon i{ font-size:12px; }
+.log-item.ok .icon{ color:var(--ok); }
+.log-item.warn .icon{ color:var(--warn); }
+.log-item.crit .icon{ color:var(--crit); }
+.log-item .msg{
+  font-family:var(--font-body); font-size:14px; color:var(--ink-2); line-height:1.5;
+}
+.log-item .msg strong{ color:var(--ink); font-weight:600; }
+.log-item .msg .meta{ font-family:var(--font-mono); font-size:10px; color:var(--ink-3); display:block; margin-top:2px; }
+
+.pilot-only{
+  margin:18px 36px; padding:14px 16px; background:var(--bg-card);
+  border:1px dashed var(--line-strong); border-radius:var(--radius);
+  display:flex; align-items:flex-start; gap:10px;
+  font-family:var(--font-body); font-size:13px; color:var(--ink-2);
+}
+.pilot-only i{ color:var(--warn); font-size:16px; margin-top:2px; flex-shrink:0; }
+.pilot-only strong{ color:var(--ink); font-weight:600; }
+.pilot-only code{ font-family:var(--font-mono); font-size:11px; color:var(--ink); background:var(--bg-elev); padding:1px 5px; border-radius:3px; border:1px solid var(--line); }
+
+/* ---------- DECISION BRIEF ---------- */
+.decision-composer{
+  margin:18px 36px 0;
+  background:var(--bg-card); border:1px solid var(--line); border-radius:var(--radius);
+  padding:22px;
+}
+.decision-composer .label{
+  font-family:var(--font-mono); font-size:10px; letter-spacing:0.1em; text-transform:uppercase; color:var(--ink-3);
+  margin-bottom:10px;
+}
+.decision-input{
+  width:100%; min-height:64px;
+  background:transparent; border:0; outline:0; resize:vertical;
+  font-family:var(--font-body); font-size:20px; line-height:1.4; color:var(--ink);
+  letter-spacing:-0.005em;
+}
+.decision-input::placeholder{ color:var(--ink-4); }
+.decision-composer .composer-foot{
+  display:flex; align-items:center; justify-content:space-between;
+  margin-top:14px; padding-top:14px; border-top:1px solid var(--line-soft);
+}
+.composer-tools{ display:flex; gap:8px; flex-wrap:wrap; }
+.tool-pill{
+  display:inline-flex; align-items:center; gap:5px;
+  padding:5px 10px;
+  font-family:var(--font-mono); font-size:10px;
+  color:var(--ink-2); border:1px solid var(--line); border-radius:99px;
+  cursor:pointer;
+  transition:border-color var(--t-fast) var(--ease), color var(--t-fast) var(--ease);
+}
+.tool-pill:hover{ border-color:var(--line-strong); color:var(--ink); }
+.tool-pill i{ font-size:12px; }
+.tool-pill.active{ border-color:var(--accent-line); color:var(--accent); }
+.btn-primary{
+  padding:8px 14px; background:var(--accent); color:var(--accent-ink);
+  border-radius:var(--radius-sm);
+  font-family:var(--font-display); font-weight:600; font-size:12px; letter-spacing:0.02em;
+  display:inline-flex; align-items:center; gap:6px;
+}
+.btn-primary:hover{ filter:brightness(1.06); }
+.btn-primary i{ font-size:13px; }
+
+.decision-grid{
+  display:grid; grid-template-columns:repeat(auto-fill, minmax(360px, 1fr));
+  gap:14px; padding:0 36px 40px;
+}
+.decision-card{
+  background:var(--bg-card); border:1px solid var(--line); border-radius:var(--radius);
+  padding:18px;
+  display:flex; flex-direction:column; gap:10px;
+  cursor:pointer;
+  transition:border-color var(--t-base) var(--ease), background var(--t-base) var(--ease);
+}
+.decision-card:hover{ border-color:var(--accent-line); background:var(--bg-card-hover); }
+.decision-card .stage{
+  display:inline-flex; align-items:center; gap:5px;
+  font-family:var(--font-mono); font-size:9px; letter-spacing:0.1em; text-transform:uppercase;
+  color:var(--ink-3);
+}
+.decision-card .stage.gate{ color:var(--accent); }
+.decision-card .stage.draft{ color:var(--info); }
+.decision-card .stage.ratified{ color:var(--ok); }
+.decision-card h4{
+  font-family:var(--font-body); font-weight:500; font-size:18px; line-height:1.35;
+  color:var(--ink); margin:0;
+}
+.decision-card .answer{
+  font-family:var(--font-body); font-size:13px; color:var(--ink-2); line-height:1.5;
+  border-left:2px solid var(--accent-line); padding-left:12px; margin:0;
+}
+.decision-card .spine-mini{
+  display:flex; gap:6px; flex-wrap:wrap;
+}
+.spine-pill{
+  font-family:var(--font-mono); font-size:9px; letter-spacing:0.06em;
+  padding:3px 7px; border-radius:3px;
+  color:var(--ink-3); background:var(--bg-elev); border:1px solid var(--line);
+}
+.decision-card .card-foot{
+  display:flex; align-items:center; justify-content:space-between;
+  padding-top:10px; border-top:1px solid var(--line-soft);
+  font-family:var(--font-mono); font-size:10px; color:var(--ink-3);
+}
+
+/* ---------- CONFIGURATION ---------- */
+.config-grid{ padding:20px 36px 40px; max-width:840px; }
+.config-section{ margin-bottom:32px; }
+.config-section h3{
+  font-family:var(--font-display); font-weight:600; font-size:12px;
+  letter-spacing:0.08em; text-transform:uppercase;
+  color:var(--ink-3); margin:0 0 12px;
+}
+.config-row{
+  display:flex; align-items:center; justify-content:space-between;
+  background:var(--bg-card); border:1px solid var(--line); border-radius:var(--radius);
+  padding:16px 18px; margin-bottom:8px;
+}
+.config-row .label{
+  font-family:var(--font-display); font-weight:600; font-size:14px; color:var(--ink);
+}
+.config-row .desc{ font-family:var(--font-body); font-size:13px; color:var(--ink-2); margin-top:2px; max-width:480px; }
+.config-row .control{ flex-shrink:0; margin-left:16px; }
+.config-row.dive-deeper{
+  border-style:dashed; border-color:var(--line-strong);
+  cursor:pointer;
+}
+.config-row.dive-deeper:hover{ border-color:var(--accent-line); }
+.config-row.dive-deeper .label{ display:flex; align-items:center; gap:8px; }
+.config-row.dive-deeper .label i{ font-size:14px; color:var(--accent); }
+.config-row.dive-deeper .control{
+  font-family:var(--font-mono); font-size:10px; color:var(--ink-3); letter-spacing:0.1em; text-transform:uppercase;
+}
+
+/* ---------- RIGHT RAIL · chat-with-content ---------- */
 aside.rail{
-  grid-area: rail;
-  background: var(--bg-rail);
-  border-left: 1px solid var(--line);
-  overflow: hidden;
-  display:flex; flex-direction: column;
-  min-width: 0;
+  grid-area:rail; background:var(--bg-rail); border-left:1px solid var(--line);
+  overflow:hidden; display:flex; flex-direction:column; min-width:0;
 }
 .rail-head{
   display:flex; align-items:center; justify-content:space-between;
-  padding: 16px 18px;
-  border-bottom: 1px solid var(--line);
+  padding:14px 18px; border-bottom:1px solid var(--line);
 }
 .rail-title{
-  display:flex; align-items:center; gap: 8px;
-  font-family: var(--font-display);
-  font-weight: 600;
-  font-size: 14px;
-  color: var(--ink);
+  display:flex; align-items:center; gap:8px;
+  font-family:var(--font-display); font-weight:600; font-size:14px; color:var(--ink);
 }
-.rail-title i{ color: var(--accent); font-size: 18px; }
+.rail-title i{ color:var(--accent); font-size:18px; }
 .rail-close{
-  width: 28px; height: 28px;
-  border-radius: var(--radius-sm);
-  color: var(--ink-3);
-  display:flex; align-items:center; justify-content:center;
-  transition: background var(--t-fast) var(--ease), color var(--t-fast) var(--ease);
+  width:28px; height:28px; border-radius:var(--radius-sm);
+  color:var(--ink-3); display:flex; align-items:center; justify-content:center;
+  transition:background var(--t-fast) var(--ease), color var(--t-fast) var(--ease);
 }
-.rail-close:hover{ background: var(--bg-card-hover); color: var(--ink); }
+.rail-close:hover{ background:var(--bg-card-hover); color:var(--ink); }
+.context-strip{
+  padding:10px 18px; background:rgba(223,255,0,0.03);
+  border-bottom:1px solid var(--line);
+  font-family:var(--font-mono); font-size:10px; letter-spacing:0.04em;
+  color:var(--ink-3);
+  display:flex; align-items:center; gap:8px;
+}
+.context-strip i{ font-size:12px; color:var(--accent); }
+.context-strip strong{ color:var(--ink-2); font-weight:600; }
+.context-strip .close-ctx{
+  margin-left:auto; color:var(--ink-3); cursor:pointer; font-size:11px;
+}
+.context-strip .close-ctx:hover{ color:var(--ink); }
 
-.rail-body{
-  flex: 1; overflow: auto;
-  padding: 18px;
-  display:flex; flex-direction: column; gap: 14px;
-}
-.msg{
-  font-family: var(--font-body);
-  font-size: 14px;
-  line-height: 1.55;
-  color: var(--ink-2);
-}
+.rail-body{ flex:1; overflow:auto; padding:18px; display:flex; flex-direction:column; gap:14px; }
+.msg{ font-family:var(--font-body); font-size:14px; line-height:1.55; color:var(--ink-2); }
 .msg.user{
-  align-self: flex-end;
-  background: var(--bg-card);
-  border: 1px solid var(--line);
-  padding: 10px 14px;
-  border-radius: var(--radius);
-  max-width: 86%;
-  color: var(--ink);
+  align-self:flex-end;
+  background:var(--bg-card); border:1px solid var(--line);
+  padding:10px 14px; border-radius:var(--radius);
+  max-width:86%; color:var(--ink);
 }
-.msg.kilo{ align-self: flex-start; max-width: 100%; color: var(--ink-2); }
-.msg.kilo strong{ color: var(--ink); font-weight: 600; }
+.msg.kilo{ align-self:flex-start; max-width:100%; color:var(--ink-2); }
+.msg.kilo strong{ color:var(--ink); font-weight:600; }
 .msg-source{
-  display:inline-flex; align-items:center; gap: 5px;
-  margin-top: 6px;
-  font-family: var(--font-mono);
-  font-size: 10px;
-  color: var(--ink-3);
-  padding: 3px 7px;
-  border: 1px solid var(--line);
-  border-radius: 4px;
+  display:inline-flex; align-items:center; gap:5px;
+  margin-top:6px;
+  font-family:var(--font-mono); font-size:10px;
+  color:var(--ink-3); padding:3px 7px;
+  border:1px solid var(--line); border-radius:4px;
 }
-.msg-source i{ font-size: 11px; }
-
-.rail-foot{
-  padding: 14px 18px 18px;
-  border-top: 1px solid var(--line);
+.msg-source i{ font-size:11px; }
+.rail-foot{ padding:14px 18px 18px; border-top:1px solid var(--line); }
+.pick-content{
+  display:flex; align-items:center; gap:6px;
+  margin-bottom:10px;
+  font-family:var(--font-mono); font-size:10px;
+  color:var(--ink-3); cursor:pointer;
+  transition:color var(--t-fast) var(--ease);
 }
+.pick-content:hover{ color:var(--accent); }
+.pick-content i{ font-size:13px; }
+.pick-content.active{ color:var(--accent); }
 .composer{
-  display:flex; align-items:flex-end; gap: 8px;
-  background: var(--bg-card);
-  border: 1px solid var(--line);
-  border-radius: var(--radius);
-  padding: 10px 12px;
-  transition: border-color var(--t-fast) var(--ease);
+  display:flex; align-items:flex-end; gap:8px;
+  background:var(--bg-card); border:1px solid var(--line); border-radius:var(--radius);
+  padding:10px 12px;
+  transition:border-color var(--t-fast) var(--ease);
 }
-.composer:focus-within{ border-color: var(--accent-line); }
+.composer:focus-within{ border-color:var(--accent-line); }
 .composer textarea{
-  flex: 1;
-  background: transparent;
-  border: 0;
-  outline: 0;
-  resize: none;
-  font-family: var(--font-body);
-  font-size: 14px;
-  line-height: 1.5;
-  color: var(--ink);
-  min-height: 22px;
-  max-height: 140px;
+  flex:1; background:transparent; border:0; outline:0; resize:none;
+  font-family:var(--font-body); font-size:14px; line-height:1.5;
+  color:var(--ink); min-height:22px; max-height:140px;
 }
-.composer textarea::placeholder{ color: var(--ink-3); }
+.composer textarea::placeholder{ color:var(--ink-3); }
 .composer-send{
-  width: 32px; height: 32px;
-  border-radius: var(--radius-sm);
-  background: var(--ink);
-  color: var(--bg);
-  display:flex; align-items:center; justify-content:center;
-  flex-shrink: 0;
-  transition: background var(--t-fast) var(--ease);
+  width:32px; height:32px; border-radius:var(--radius-sm);
+  background:var(--ink); color:var(--bg);
+  display:flex; align-items:center; justify-content:center; flex-shrink:0;
+  transition:background var(--t-fast) var(--ease);
 }
-.composer-send:hover{ background: var(--accent); color: var(--accent-ink); }
-.composer-send i{ font-size: 14px; }
+.composer-send:hover{ background:var(--accent); color:var(--accent-ink); }
+.composer-send i{ font-size:14px; }
 .composer-meta{
   display:flex; align-items:center; justify-content:space-between;
-  margin-top: 8px;
-  font-family: var(--font-mono);
-  font-size: 10px;
-  color: var(--ink-3);
+  margin-top:8px;
+  font-family:var(--font-mono); font-size:10px; color:var(--ink-3);
 }
-.composer-meta .kbd{
-  border: 1px solid var(--line);
-  border-radius: 3px;
-  padding: 1px 5px;
+.composer-meta .kbd{ border:1px solid var(--line); border-radius:3px; padding:1px 5px; }
+
+/* ---------- Right-click selection menu ---------- */
+.sel-menu{
+  position:fixed; z-index:80; display:none;
+  background:var(--bg-elev); border:1px solid var(--line-strong); border-radius:var(--radius-sm);
+  box-shadow:0 12px 28px rgba(0,0,0,0.55);
+  padding:6px; min-width:200px;
+}
+.sel-menu.open{ display:block; }
+.sel-menu .sel-item{
+  display:flex; align-items:center; justify-content:space-between; gap:10px;
+  padding:8px 12px; border-radius:5px;
+  font-family:var(--font-display); font-size:13px; color:var(--ink-2);
+  cursor:pointer;
+}
+.sel-menu .sel-item:hover{ background:var(--bg-card-hover); color:var(--ink); }
+.sel-menu .sel-item .left{ display:flex; align-items:center; gap:9px; }
+.sel-menu .sel-item i{ font-size:14px; color:var(--ink-3); }
+.sel-menu .sel-item:hover i{ color:var(--accent); }
+.sel-menu .sel-kbd{ font-family:var(--font-mono); font-size:9px; color:var(--ink-3); }
+
+/* ---------- PILOT · RSN Authoring ---------- */
+.rsn-shell{ padding:32px 36px 60px; max-width:1280px; }
+.rsn-head{
+  display:flex; align-items:flex-end; justify-content:space-between;
+  margin-bottom:24px;
+}
+.rsn-head h1{
+  font-family:var(--font-display); font-weight:600; letter-spacing:-0.022em;
+  font-size:34px; line-height:1.1; margin:0 0 6px; color:var(--ink);
+}
+.rsn-head p{
+  font-family:var(--font-body); font-size:14px; color:var(--ink-2); margin:0;
+}
+.rsn-head .right{
+  display:flex; gap:8px; align-items:center;
+}
+.client-pill{
+  display:flex; align-items:center; gap:8px;
+  padding:7px 12px; border:1px solid var(--line); border-radius:var(--radius-sm);
+  font-family:var(--font-display); font-size:13px; color:var(--ink-2);
+}
+.client-pill .dot{ width:6px; height:6px; border-radius:50%; background:var(--accent); }
+
+.rsn-strip{
+  display:grid; grid-template-columns:repeat(4,1fr); gap:12px;
+  margin-bottom:20px;
 }
 
-/* ---------- Footnote ---------- */
+.rsn-grid{
+  display:grid; grid-template-columns:repeat(6, 1fr); gap:10px;
+  margin-bottom:28px;
+}
+.phase-cell{
+  background:var(--bg-card); border:1px solid var(--line); border-radius:8px;
+  padding:14px 12px;
+  display:flex; flex-direction:column; gap:6px;
+  cursor:pointer; min-height:120px;
+  transition:border-color var(--t-fast) var(--ease), background var(--t-fast) var(--ease);
+  position:relative;
+}
+.phase-cell:hover{ border-color:var(--line-strong); background:var(--bg-card-hover); }
+.phase-cell.done{ border-color:rgba(147,197,179,0.3); }
+.phase-cell.active{ border-color:var(--accent-line); }
+.phase-cell.active::after{
+  content:""; position:absolute; top:-1px; right:-1px;
+  width:6px; height:6px; border-radius:50%; background:var(--accent);
+  box-shadow:0 0 8px var(--accent-glow);
+  margin:6px;
+}
+.phase-cell.blocked{ opacity:0.55; }
+.phase-cell .code{
+  font-family:var(--font-mono); font-size:10px; letter-spacing:0.1em; color:var(--ink-3);
+}
+.phase-cell.done .code{ color:var(--ok); }
+.phase-cell.active .code{ color:var(--accent); }
+.phase-cell .name{
+  font-family:var(--font-display); font-weight:600; font-size:13px; color:var(--ink); line-height:1.3;
+}
+.phase-cell .verb{
+  font-family:var(--font-mono); font-size:9px; color:var(--ink-3); letter-spacing:0.08em; text-transform:uppercase;
+  margin-top:auto;
+}
+.phase-cell .state-row{
+  display:flex; align-items:center; gap:4px;
+  font-family:var(--font-mono); font-size:9px; color:var(--ink-3);
+}
+.phase-cell .state-row i{ font-size:11px; }
+.phase-cell.done .state-row i{ color:var(--ok); }
+
+.rsn-detail{
+  display:grid; grid-template-columns:1.4fr 1fr; gap:14px;
+}
+.rsn-panel{
+  background:var(--bg-card); border:1px solid var(--line); border-radius:var(--radius);
+  padding:18px 20px;
+}
+.rsn-panel h3{
+  font-family:var(--font-display); font-weight:600; font-size:13px;
+  letter-spacing:0.04em; text-transform:uppercase; color:var(--ink-2);
+  margin:0 0 14px;
+  display:flex; align-items:center; gap:8px;
+}
+.rsn-panel h3 .accent{ color:var(--accent); }
+.preq-row{
+  display:flex; align-items:center; gap:10px;
+  padding:8px 0; border-bottom:1px solid var(--line-soft);
+  font-family:var(--font-body); font-size:14px; color:var(--ink-2);
+}
+.preq-row:last-child{ border-bottom:0; }
+.preq-row i{ font-size:14px; color:var(--ink-3); }
+.preq-row.met i{ color:var(--ok); }
+.preq-row.missing i{ color:var(--warn); }
+.preq-row.met span{ color:var(--ink); }
+.preq-row .src{
+  margin-left:auto; font-family:var(--font-mono); font-size:10px; color:var(--ink-3);
+}
+.run-row{
+  display:flex; align-items:center; justify-content:space-between;
+  margin-top:18px; padding-top:14px; border-top:1px solid var(--line);
+}
+.run-state{
+  font-family:var(--font-mono); font-size:11px; color:var(--ok); letter-spacing:0.06em;
+  display:flex; align-items:center; gap:6px;
+}
+.run-state.missing{ color:var(--warn); }
+.run-state i{ font-size:13px; }
+.run-actions{ display:flex; gap:8px; }
+.btn-secondary{
+  padding:8px 14px; background:var(--bg-elev); color:var(--ink-2);
+  border:1px solid var(--line-strong); border-radius:var(--radius-sm);
+  font-family:var(--font-display); font-weight:600; font-size:12px;
+  display:inline-flex; align-items:center; gap:6px;
+  cursor:pointer;
+  transition:color var(--t-fast) var(--ease), border-color var(--t-fast) var(--ease);
+}
+.btn-secondary:hover{ color:var(--ink); border-color:var(--accent-line); }
+.btn-secondary i{ font-size:13px; }
+.hitl-counter{
+  margin-top:18px; padding-top:14px; border-top:1px solid var(--line);
+  display:flex; align-items:center; gap:10px;
+  font-family:var(--font-mono); font-size:11px; color:var(--ink-3);
+}
+.hitl-counter .num{ color:var(--accent); font-weight:700; font-size:14px; }
+
+/* Bucket of information drop area */
+.bucket-zone{
+  margin-top:22px;
+  border:1px dashed var(--line-strong); border-radius:var(--radius);
+  background:var(--bg-card);
+  padding:22px; text-align:center;
+}
+.bucket-zone i.big{
+  font-size:28px; color:var(--ink-3); margin-bottom:8px;
+}
+.bucket-zone h4{
+  font-family:var(--font-display); font-weight:600; font-size:14px; color:var(--ink); margin:0 0 4px;
+}
+.bucket-zone p{
+  font-family:var(--font-body); font-size:13px; color:var(--ink-2); margin:0;
+}
+.bucket-items{
+  margin-top:14px; display:flex; flex-wrap:wrap; gap:6px; justify-content:center;
+}
+.bucket-item{
+  display:inline-flex; align-items:center; gap:6px;
+  padding:4px 8px; border-radius:5px;
+  background:var(--bg-elev); border:1px solid var(--line);
+  font-family:var(--font-mono); font-size:11px; color:var(--ink-2);
+}
+.bucket-item i{ font-size:12px; color:var(--ink-3); }
+
+/* File system (Google Drive-style media management) */
+.fs-shell{ margin-top:24px; }
+.fs-shell h3{
+  font-family:var(--font-display); font-weight:600; font-size:13px;
+  letter-spacing:0.04em; text-transform:uppercase; color:var(--ink-2);
+  margin:0 0 12px;
+}
+.fs-breadcrumb{
+  font-family:var(--font-mono); font-size:11px; color:var(--ink-3); margin-bottom:8px;
+}
+.fs-breadcrumb .seg{ color:var(--ink-2); }
+.fs-grid{
+  display:grid; grid-template-columns:repeat(auto-fill, minmax(180px, 1fr)); gap:10px;
+}
+.fs-item{
+  background:var(--bg-card); border:1px solid var(--line); border-radius:8px;
+  padding:14px 14px;
+  display:flex; flex-direction:column; gap:6px;
+  cursor:pointer;
+  transition:border-color var(--t-fast) var(--ease), background var(--t-fast) var(--ease);
+}
+.fs-item:hover{ border-color:var(--accent-line); background:var(--bg-card-hover); }
+.fs-item .ic{ font-size:22px; color:var(--ink-3); }
+.fs-item.folder .ic{ color:var(--accent); }
+.fs-item .name{ font-family:var(--font-display); font-size:13px; color:var(--ink); font-weight:500; }
+.fs-item .meta{ font-family:var(--font-mono); font-size:10px; color:var(--ink-3); }
+
+/* ---------- PROSPECT · R1 Founder Product ---------- */
+.prospect-shell{
+  display:grid; grid-template-columns:1fr 320px;
+  min-height:100%;
+}
+.prospect-main{ padding:60px 56px 80px; }
+.prospect-side{
+  border-left:1px solid var(--line);
+  background:var(--bg-rail);
+  padding:60px 36px;
+  display:flex; flex-direction:column; gap:18px;
+}
+.prospect-eyebrow{
+  font-family:var(--font-mono); font-size:11px;
+  letter-spacing:0.12em; text-transform:uppercase; color:var(--accent);
+  margin-bottom:14px;
+}
+.prospect-h1{
+  font-family:var(--font-display); font-weight:600; letter-spacing:-0.025em;
+  font-size:56px; line-height:1.0;
+  color:var(--ink); margin:0 0 18px;
+  max-width:720px;
+}
+.prospect-h1 em{ font-style:italic; font-family:var(--font-body); font-weight:400; color:var(--accent); }
+.prospect-lead{
+  font-family:var(--font-body); font-size:19px; line-height:1.55;
+  color:var(--ink-2); max-width:580px; margin:0 0 36px;
+}
+.intake-steps{
+  display:grid; grid-template-columns:repeat(4,1fr); gap:6px;
+  margin-bottom:28px; max-width:520px;
+}
+.intake-step-dot{
+  height:4px; background:var(--bg-elev); border-radius:99px;
+}
+.intake-step-dot.done{ background:var(--accent); }
+.intake-step-dot.current{ background:var(--ink-3); }
+.intake-form{
+  background:var(--bg-card); border:1px solid var(--line); border-radius:var(--radius);
+  padding:30px;
+  max-width:580px;
+}
+.intake-form h2{
+  font-family:var(--font-display); font-weight:600; font-size:20px; color:var(--ink); margin:0 0 4px;
+}
+.intake-form .step-label{
+  font-family:var(--font-mono); font-size:10px; letter-spacing:0.1em; text-transform:uppercase; color:var(--accent);
+  margin-bottom:8px;
+}
+.intake-form .help{
+  font-family:var(--font-body); font-size:14px; color:var(--ink-2); margin:0 0 20px;
+}
+.intake-q{ margin-bottom:18px; }
+.intake-q label{
+  display:block; font-family:var(--font-display); font-size:13px; font-weight:600; color:var(--ink-2); margin-bottom:6px;
+}
+.intake-q input,
+.intake-q textarea,
+.intake-q select{
+  width:100%; padding:10px 12px;
+  background:var(--bg-elev); border:1px solid var(--line); border-radius:var(--radius-sm);
+  font-family:var(--font-body); font-size:14px; color:var(--ink); outline:none;
+  transition:border-color var(--t-fast) var(--ease);
+}
+.intake-q input:focus,
+.intake-q textarea:focus,
+.intake-q select:focus{ border-color:var(--accent-line); }
+.intake-q .hint{ font-family:var(--font-mono); font-size:10px; color:var(--ink-3); margin-top:4px; }
+.intake-actions{ display:flex; gap:10px; margin-top:24px; justify-content:space-between; }
+
+/* Book-a-call always-visible */
+.book-call-pill{
+  display:inline-flex; align-items:center; gap:8px;
+  padding:10px 14px;
+  background:var(--accent); color:var(--accent-ink);
+  border-radius:var(--radius-sm);
+  font-family:var(--font-display); font-weight:600; font-size:13px;
+  text-decoration:none;
+}
+.book-call-pill i{ font-size:15px; }
+.book-call-floating{
+  position:fixed; bottom:24px; right:24px; z-index:60;
+  box-shadow:0 8px 24px rgba(0,0,0,0.45);
+}
+
+/* Prospect side panel */
+.side-block{ font-family:var(--font-body); }
+.side-block h4{
+  font-family:var(--font-display); font-weight:600; font-size:12px;
+  letter-spacing:0.06em; text-transform:uppercase; color:var(--ink-3); margin:0 0 8px;
+}
+.side-block p{ font-size:13px; color:var(--ink-2); margin:0 0 8px; line-height:1.5; }
+.side-block ul{ margin:0; padding:0; list-style:none; }
+.side-block ul li{
+  display:flex; align-items:flex-start; gap:8px;
+  padding:6px 0; font-size:13px; color:var(--ink-2);
+}
+.side-block ul li i{ color:var(--ink-3); font-size:13px; margin-top:3px; }
+.side-block .timeline-row{
+  display:flex; justify-content:space-between; padding:6px 0;
+  font-family:var(--font-mono); font-size:11px; color:var(--ink-2);
+  border-bottom:1px solid var(--line-soft);
+}
+.side-block .timeline-row:last-child{ border-bottom:0; }
+.side-block .timeline-row strong{ color:var(--ink); font-weight:600; }
+
+/* Confirmation screen */
+.confirmation{
+  max-width:780px;
+  background:var(--bg-card); border:1px solid var(--line); border-radius:var(--radius);
+  padding:40px;
+}
+.confirmation .frame{
+  border:1px solid var(--line-strong); border-radius:6px; padding:20px;
+  font-family:var(--font-mono); font-size:11px; color:var(--ink-2); line-height:1.6;
+  white-space:pre; overflow-x:auto;
+  background:#070707;
+  margin-bottom:18px;
+}
+.confirmation .frame .h{ color:var(--accent); }
+.confirmation .frame strong{ color:var(--ink); }
+.confirmation .lead{
+  font-family:var(--font-body); font-size:17px; color:var(--ink); line-height:1.55; margin:0 0 18px;
+}
+.confirmation-actions{
+  display:flex; gap:10px; margin-top:24px; flex-wrap:wrap;
+}
+.btn-tertiary{
+  padding:8px 14px; background:transparent; color:var(--ink-2);
+  border:1px solid var(--line); border-radius:var(--radius-sm);
+  font-family:var(--font-display); font-weight:500; font-size:12px;
+  display:inline-flex; align-items:center; gap:6px;
+}
+.btn-tertiary:hover{ color:var(--ink); border-color:var(--line-strong); }
+
+/* ---------- Surface footnote ---------- */
 .surface-footnote{
-  padding: 24px 36px 40px;
-  font-family: var(--font-mono);
-  font-size: 10px;
-  color: var(--ink-3);
-  letter-spacing: 0.04em;
+  padding:24px 36px 40px;
+  font-family:var(--font-mono); font-size:10px;
+  color:var(--ink-3); letter-spacing:0.04em;
 }
 
-/* ---------- Scrollbar ---------- */
-main::-webkit-scrollbar, .rail-body::-webkit-scrollbar{ width: 8px; }
-main::-webkit-scrollbar-thumb, .rail-body::-webkit-scrollbar-thumb{
-  background: rgba(255,255,255,0.06); border-radius: 4px;
+/* ---------- Scrollbars ---------- */
+main::-webkit-scrollbar, .rail-body::-webkit-scrollbar, .pipeline-col .col-body::-webkit-scrollbar{ width:8px; }
+main::-webkit-scrollbar-thumb, .rail-body::-webkit-scrollbar-thumb, .pipeline-col .col-body::-webkit-scrollbar-thumb{
+  background:rgba(255,255,255,0.06); border-radius:4px;
 }
 main::-webkit-scrollbar-thumb:hover, .rail-body::-webkit-scrollbar-thumb:hover{
-  background: rgba(255,255,255,0.12);
+  background:rgba(255,255,255,0.12);
 }
 
-/* ---------- Small ---------- */
+/* ---------- Responsive ---------- */
+@media (max-width: 1100px){
+  .pipeline{ grid-template-columns:1fr; }
+  .commit-strip, .status-strip, .rsn-strip{ grid-template-columns:repeat(2,1fr); }
+  .rsn-grid{ grid-template-columns:repeat(4,1fr); }
+  .rsn-detail{ grid-template-columns:1fr; }
+  .prospect-shell{ grid-template-columns:1fr; }
+  .prospect-side{ border-left:0; border-top:1px solid var(--line); padding:36px; }
+}
 @media (max-width: 900px){
-  .surface-head{ padding: 18px 22px 14px; }
-  .chips, .section-head, .brief-grid, .stub, .settings-grid, .surface-footnote, .audience-hero, .audience-surfaces, .surface-preview-grid{ padding-left: 22px; padding-right: 22px; }
-  .audience-notice{ margin-left: 22px; margin-right: 22px; }
-  .surface-title{ font-size: 26px; }
-  .stub h2{ font-size: 28px; }
-  .audience-hero h1{ font-size: 32px; }
+  .surface-head{ padding:18px 22px 14px; }
+  .chips, .section-head, .brief-grid, .stub, .config-grid, .surface-footnote, .commit-strip, .lanes, .status-strip, .process-list, .activity-log, .decision-composer, .decision-grid, .pipeline, .approval-callout, .pilot-only, .rsn-shell{ padding-left:22px; padding-right:22px; }
+  .surface-title{ font-size:26px; }
+  .prospect-h1{ font-size:38px; }
+  .prospect-main{ padding:36px 22px; }
   .app[data-rail="open"]{ grid-template-columns: var(--nav-w) 0 1fr; }
   aside.rail{ grid-area: main / main / rail / rail; }
-  .audience-tab{ padding: 0 12px; font-size: 10px; }
-  .audience-tab i{ font-size: 13px; }
-  .audience-meta{ display: none; }
+  .audience-tab{ padding:0 12px; font-size:10px; }
+  .audience-tab i{ font-size:13px; }
+  .audience-meta{ display:none; }
+  .commit-strip, .status-strip{ grid-template-columns:1fr 1fr; }
+  .rsn-grid{ grid-template-columns:repeat(3,1fr); }
 }
 </style>
 </head>
@@ -958,27 +1301,22 @@ main::-webkit-scrollbar-thumb:hover, .rail-body::-webkit-scrollbar-thumb:hover{
 <body>
 <div class="app" id="app" data-rail="closed" data-audience="founder">
 
-  <!-- ============== AUDIENCE BAR (3 audiences) ============== -->
+  <!-- ============== AUDIENCE BAR ============== -->
   <div class="audience-bar">
     <div class="audience-tabs">
       <button class="audience-tab active" data-audience="founder" type="button">
-        <i class="ph ph-user-focus"></i>
-        <span>Founder</span>
+        <i class="ph ph-user-focus"></i><span>Founder</span>
       </button>
       <button class="audience-tab" data-audience="pilot" type="button">
-        <i class="ph ph-gear-six"></i>
-        <span>Pilot</span>
-        <span class="lock">Preview</span>
+        <i class="ph ph-gear-six"></i><span>Pilot</span><span class="lock">Preview</span>
       </button>
       <button class="audience-tab" data-audience="prospect" type="button">
-        <i class="ph ph-globe-hemisphere-west"></i>
-        <span>Prospect</span>
-        <span class="lock">Preview</span>
+        <i class="ph ph-globe-hemisphere-west"></i><span>Prospect</span><span class="lock">Preview</span>
       </button>
     </div>
     <div class="audience-meta" id="audienceMeta">
       <span class="dot"></span>
-      <span id="audienceMetaText">Consumer · Ratifier · 4 surfaces live</span>
+      <span id="audienceMetaText">Consumer · Ratifier · 5 surfaces live</span>
     </div>
   </div>
 
@@ -987,16 +1325,12 @@ main::-webkit-scrollbar-thumb:hover, .rail-body::-webkit-scrollbar-thumb:hover{
     <div class="brand">
       <div class="mark"><span class="star">✦</span>KILONOVA</div>
       <div class="sep">·</div>
-      <div class="meta">FOUNDER OS · v1.0</div>
+      <div class="meta">FOUNDER OS · v1.1</div>
     </div>
-
     <div class="header-right">
       <button class="client-select" type="button">
-        <span class="dot"></span>
-        <span>Kilonova</span>
-        <i class="ph ph-caret-down"></i>
+        <span class="dot"></span><span>Kilonova</span><i class="ph ph-caret-down"></i>
       </button>
-
       <div class="identity">
         <button class="identity-btn" type="button" id="identityBtn">
           <div class="avatar">GB</div>
@@ -1004,65 +1338,42 @@ main::-webkit-scrollbar-thumb:hover, .rail-body::-webkit-scrollbar-thumb:hover{
           <i class="ph ph-caret-down"></i>
         </button>
         <div class="identity-menu" id="identityMenu">
-          <button class="menu-item">
-            <div class="left"><i class="ph ph-user-circle"></i><span>Profile</span></div>
-          </button>
+          <button class="menu-item"><div class="left"><i class="ph ph-user-circle"></i><span>Profile</span></div></button>
           <button class="menu-item" id="darkToggleBtn">
             <div class="left"><i class="ph ph-moon"></i><span>Dark mode</span></div>
             <div class="toggle on" id="darkToggle"></div>
           </button>
-          <button class="menu-item">
-            <div class="left"><i class="ph ph-question"></i><span>Help</span></div>
-          </button>
+          <button class="menu-item"><div class="left"><i class="ph ph-question"></i><span>Help</span></div></button>
           <div class="menu-divider"></div>
-          <button class="menu-item">
-            <div class="left"><i class="ph ph-sign-out"></i><span>Log out</span></div>
-          </button>
+          <button class="menu-item"><div class="left"><i class="ph ph-sign-out"></i><span>Log out</span></div></button>
         </div>
       </div>
-
       <button class="ask-btn" id="askBtn" type="button">
-        <i class="ph ph-sparkle"></i>
-        <span>Ask Kilonova</span>
+        <i class="ph ph-sparkle"></i><span>Ask Kilonova</span>
       </button>
     </div>
   </header>
 
   <!-- ============== LEFT NAV ============== -->
   <nav class="left">
-    <button class="nav-item active" data-go="reading" title="Reading">
-      <i class="ph ph-book-open-text"></i>
-      <span class="nav-counter">3</span>
-      <span class="nav-tip">Reading</span>
-    </button>
-    <button class="nav-item" data-go="approval" title="Approval">
-      <i class="ph ph-check-circle"></i>
-      <span class="nav-tip">Approval</span>
-    </button>
-    <button class="nav-item" data-go="commitments" title="Commitments">
-      <i class="ph ph-flag"></i>
-      <span class="nav-tip">Commitments</span>
-    </button>
-    <button class="nav-item" data-go="status" title="Status">
-      <i class="ph ph-pulse"></i>
-      <span class="nav-tip">Status</span>
-    </button>
+    <button class="nav-item active" data-go="reading"><i class="ph ph-book-open-text"></i><span class="nav-counter">3</span><span class="nav-tip">Reading</span></button>
+    <button class="nav-item" data-go="decision"><i class="ph ph-brain"></i><span class="nav-tip">Decision Brief</span></button>
+    <button class="nav-item" data-go="approval"><i class="ph ph-check-circle"></i><span class="nav-counter">14</span><span class="nav-tip">Approval</span></button>
+    <button class="nav-item" data-go="commitments"><i class="ph ph-flag"></i><span class="nav-tip">Commitments</span></button>
+    <button class="nav-item" data-go="status"><i class="ph ph-pulse"></i><span class="nav-tip">Status</span></button>
     <div class="nav-spacer"></div>
-    <button class="nav-item" data-go="settings" title="Settings">
-      <i class="ph ph-sliders-horizontal"></i>
-      <span class="nav-tip">Settings</span>
-    </button>
+    <button class="nav-item" data-go="configuration"><i class="ph ph-gear-six"></i><span class="nav-tip">Configuration</span></button>
   </nav>
 
   <!-- ============== MAIN ============== -->
   <main>
 
-    <!-- ============ SURFACE 3 · READING (default) ============ -->
+    <!-- ============ READING ============ -->
     <section class="surface active" data-surface="reading">
       <div class="surface-head">
         <div class="surface-eyebrow">SURFACE · READING</div>
         <h1 class="surface-title">What the system wrote for you to absorb</h1>
-        <p class="surface-sub">Long-form briefs from Kilonova's reasoning kernel. Read, comment inline, or send to approval. Everything here is a substrate you can edit and discuss.</p>
+        <p class="surface-sub">Opinionated briefs from Kilonova's reasoning kernel. Structural insight at the top, supporting evidence beneath, action prompts at the bottom. Comment, edit-with-reason, or chat with any of them.</p>
       </div>
 
       <div class="chips">
@@ -1081,63 +1392,94 @@ main::-webkit-scrollbar-thumb:hover, .rail-body::-webkit-scrollbar-thumb:hover{
 
       <div class="brief-grid">
 
-        <a class="brief-card unread" href="editorial/index.html">
+        <div class="brief-card unread" data-href="editorial/index.html" data-context="Q3 GTM positioning">
+          <div class="card-actions">
+            <button class="icon-btn chat-open" title="Chat about this brief"><i class="ph ph-chat-circle-dots"></i></button>
+          </div>
           <div class="brief-meta-row">
             <span class="type-badge decision">Decision brief</span>
             <span class="brief-time">2h ago</span>
           </div>
           <h2 class="brief-title">Q3 GTM positioning · synthesis of 4 candidate angles</h2>
           <p class="brief-synopsis">Council ran 11 hours across NICHOLAS, market-intel, and internal docs. Recommends "Operator OS for AI-native founders" over "Council of agents." Trade-offs scored.</p>
+          <div class="sources-expand">
+            <button class="sources-toggle" type="button"><i class="ph ph-caret-right"></i><span>Sources · 8 files</span></button>
+            <div class="sources-list">
+              <div class="source-file"><i class="ph ph-file-text"></i><span>NICHOLAS_session_2026-05-19.md</span><span class="size">42 KB</span></div>
+              <div class="source-file"><i class="ph ph-file-text"></i><span>market-intel_competitive_scan.md</span><span class="size">18 KB</span></div>
+              <div class="source-file"><i class="ph ph-file-text"></i><span>founder-positioning-notes.md</span><span class="size">7 KB</span></div>
+              <div class="source-file"><i class="ph ph-file-presentation"></i><span>Q2-positioning-deck.html</span><span class="size">126 KB</span></div>
+              <div class="source-file"><i class="ph ph-file-text"></i><span>customer-conversations-Q2.md</span><span class="size">31 KB</span></div>
+              <div class="source-file"><i class="ph ph-file-text"></i><span>angle-tests-W18-W20.md</span><span class="size">14 KB</span></div>
+              <div class="source-file"><i class="ph ph-database"></i><span>substrate · jobs-to-be-done</span><span class="size">node</span></div>
+              <div class="source-file"><i class="ph ph-database"></i><span>substrate · positioning-prior</span><span class="size">node</span></div>
+            </div>
+          </div>
           <div class="brief-foot">
             <div class="left">
-              <div class="src-stack">
-                <div class="src">N</div>
-                <div class="src">M</div>
-                <div class="src">I</div>
-              </div>
+              <div class="src-stack"><div class="src">N</div><div class="src">M</div><div class="src">I</div></div>
               <span>3 agents · 11h reasoning</span>
             </div>
             <div class="read"><i class="ph ph-clock"></i>9 min read</div>
           </div>
-        </a>
+        </div>
 
-        <a class="brief-card unread" href="#">
+        <div class="brief-card unread" data-context="RSN W21">
+          <div class="card-actions">
+            <button class="icon-btn chat-open" title="Chat about this brief"><i class="ph ph-chat-circle-dots"></i></button>
+          </div>
           <div class="brief-meta-row">
             <span class="type-badge rsn">RSN output</span>
             <span class="brief-time">5h ago</span>
           </div>
           <h2 class="brief-title">RSN · 2026-W21 · Weekly reasoning</h2>
           <p class="brief-synopsis">22 signals processed, 4 surfaced for your call. Top: pilot conversion thesis vs revenue lag — chain of 6 priors flips after this week's data.</p>
+          <div class="sources-expand">
+            <button class="sources-toggle" type="button"><i class="ph ph-caret-right"></i><span>Sources · 5 files</span></button>
+            <div class="sources-list">
+              <div class="source-file"><i class="ph ph-file-text"></i><span>RSN_W21_raw_signals.md</span><span class="size">88 KB</span></div>
+              <div class="source-file"><i class="ph ph-file-text"></i><span>pilot-conversion-data-W21.md</span><span class="size">12 KB</span></div>
+              <div class="source-file"><i class="ph ph-file-text"></i><span>revenue-lag-analysis.md</span><span class="size">9 KB</span></div>
+              <div class="source-file"><i class="ph ph-database"></i><span>substrate · pilot-thesis</span><span class="size">node</span></div>
+              <div class="source-file"><i class="ph ph-database"></i><span>substrate · revenue-priors</span><span class="size">node</span></div>
+            </div>
+          </div>
           <div class="brief-foot">
             <div class="left">
-              <div class="src-stack">
-                <div class="src">N</div>
-                <div class="src">R</div>
-              </div>
+              <div class="src-stack"><div class="src">N</div><div class="src">R</div></div>
               <span>RSN engine</span>
             </div>
             <div class="read"><i class="ph ph-clock"></i>6 min read</div>
           </div>
-        </a>
+        </div>
 
-        <a class="brief-card unread" href="#">
+        <div class="brief-card unread" data-context="Week 21 status">
+          <div class="card-actions">
+            <button class="icon-btn chat-open" title="Chat about this brief"><i class="ph ph-chat-circle-dots"></i></button>
+          </div>
           <div class="brief-meta-row">
             <span class="type-badge status">Status report</span>
             <span class="brief-time">Yesterday</span>
           </div>
           <h2 class="brief-title">Pilot · Week 21 health check</h2>
           <p class="brief-synopsis">7 active engagements. Two flagged: drift on commitment cadence (Acme), and a pricing signal worth re-pricing (Hopper). Suggested actions inside.</p>
+          <div class="sources-expand">
+            <button class="sources-toggle" type="button"><i class="ph ph-caret-right"></i><span>Sources · 4 files</span></button>
+            <div class="sources-list">
+              <div class="source-file"><i class="ph ph-file-text"></i><span>pilot-W21-engagements.md</span><span class="size">22 KB</span></div>
+              <div class="source-file"><i class="ph ph-file-text"></i><span>acme-cadence-drift.md</span><span class="size">6 KB</span></div>
+              <div class="source-file"><i class="ph ph-file-text"></i><span>hopper-pricing-signal.md</span><span class="size">11 KB</span></div>
+              <div class="source-file"><i class="ph ph-database"></i><span>substrate · engagement-health</span><span class="size">node</span></div>
+            </div>
+          </div>
           <div class="brief-foot">
             <div class="left">
-              <div class="src-stack">
-                <div class="src">P</div>
-                <div class="src">M</div>
-              </div>
+              <div class="src-stack"><div class="src">P</div><div class="src">M</div></div>
               <span>Pilot loop</span>
             </div>
             <div class="read"><i class="ph ph-clock"></i>4 min read</div>
           </div>
-        </a>
+        </div>
 
       </div>
 
@@ -1147,416 +1489,1175 @@ main::-webkit-scrollbar-thumb:hover, .rail-body::-webkit-scrollbar-thumb:hover{
       </div>
 
       <div class="brief-grid">
-
-        <a class="brief-card" href="#">
-          <div class="brief-meta-row">
-            <span class="type-badge decision">Decision brief</span>
-            <span class="brief-time">3d</span>
-          </div>
+        <div class="brief-card" data-context="Hiring decision">
+          <div class="card-actions"><button class="icon-btn chat-open"><i class="ph ph-chat-circle-dots"></i></button></div>
+          <div class="brief-meta-row"><span class="type-badge decision">Decision brief</span><span class="brief-time">3d</span></div>
           <h2 class="brief-title">Hiring · Council weighed 3 senior engineer profiles</h2>
           <p class="brief-synopsis">Recommendation locked: candidate B. Comments from you in §3 sent to pilot to draft offer.</p>
           <div class="brief-foot">
-            <div class="left">
-              <div class="src-stack">
-                <div class="src">N</div>
-                <div class="src">H</div>
-              </div>
-              <span>Closed · 2 comments</span>
-            </div>
+            <div class="left"><div class="src-stack"><div class="src">N</div><div class="src">H</div></div><span>Closed · 2 comments</span></div>
             <div class="read"><i class="ph ph-check"></i>Read</div>
           </div>
-        </a>
-
-        <a class="brief-card" href="#">
-          <div class="brief-meta-row">
-            <span class="type-badge minutes">Meeting minutes</span>
-            <span class="brief-time">4d</span>
-          </div>
+        </div>
+        <div class="brief-card" data-context="Investor sync minutes">
+          <div class="card-actions"><button class="icon-btn chat-open"><i class="ph ph-chat-circle-dots"></i></button></div>
+          <div class="brief-meta-row"><span class="type-badge minutes">Meeting minutes</span><span class="brief-time">4d</span></div>
           <h2 class="brief-title">Founder call · 2026-05-17 · Investor sync</h2>
           <p class="brief-synopsis">Verbatim + decisions extracted. 3 commitments auto-routed to Commitments surface.</p>
           <div class="brief-foot">
-            <div class="left">
-              <div class="src-stack">
-                <div class="src">M</div>
-              </div>
-              <span>Minutes engine</span>
-            </div>
+            <div class="left"><div class="src-stack"><div class="src">M</div></div><span>Minutes engine</span></div>
             <div class="read"><i class="ph ph-check"></i>Read</div>
           </div>
-        </a>
-
-        <a class="brief-card" href="#">
-          <div class="brief-meta-row">
-            <span class="type-badge pilot">Pilot note</span>
-            <span class="brief-time">6d</span>
-          </div>
+        </div>
+        <div class="brief-card" data-context="Acme drift">
+          <div class="card-actions"><button class="icon-btn chat-open"><i class="ph ph-chat-circle-dots"></i></button></div>
+          <div class="brief-meta-row"><span class="type-badge pilot">Pilot note</span><span class="brief-time">6d</span></div>
           <h2 class="brief-title">Acme · Onboarding deviation flagged</h2>
           <p class="brief-synopsis">Pilot caught a drift in cadence. Council ratified the correction. No founder action needed.</p>
           <div class="brief-foot">
-            <div class="left">
-              <div class="src-stack">
-                <div class="src">P</div>
-              </div>
-              <span>Pilot loop</span>
-            </div>
+            <div class="left"><div class="src-stack"><div class="src">P</div></div><span>Pilot loop</span></div>
             <div class="read"><i class="ph ph-check"></i>Read</div>
           </div>
-        </a>
-
-        <a class="brief-card" href="#">
-          <div class="brief-meta-row">
-            <span class="type-badge minutes">Meeting minutes</span>
-            <span class="brief-time">8d</span>
-          </div>
+        </div>
+        <div class="brief-card" data-context="Council architecture review">
+          <div class="card-actions"><button class="icon-btn chat-open"><i class="ph ph-chat-circle-dots"></i></button></div>
+          <div class="brief-meta-row"><span class="type-badge minutes">Meeting minutes</span><span class="brief-time">8d</span></div>
           <h2 class="brief-title">Council session · 2026-05-13 · Architecture review</h2>
           <p class="brief-synopsis">Decisions on Heartbeat vs Activity nomenclature locked into voice & tone v0.7.</p>
           <div class="brief-foot">
-            <div class="left">
-              <div class="src-stack">
-                <div class="src">C</div>
-              </div>
-              <span>Council session</span>
-            </div>
+            <div class="left"><div class="src-stack"><div class="src">C</div></div><span>Council session</span></div>
             <div class="read"><i class="ph ph-check"></i>Read</div>
           </div>
-        </a>
-
-        <a class="brief-card" href="#">
-          <div class="brief-meta-row">
-            <span class="type-badge pilot">Pilot note</span>
-            <span class="brief-time">11d</span>
-          </div>
+        </div>
+        <div class="brief-card" data-context="Hopper pricing">
+          <div class="card-actions"><button class="icon-btn chat-open"><i class="ph ph-chat-circle-dots"></i></button></div>
+          <div class="brief-meta-row"><span class="type-badge pilot">Pilot note</span><span class="brief-time">11d</span></div>
           <h2 class="brief-title">Hopper · Pricing signal · 14% headroom</h2>
           <p class="brief-synopsis">Market intel suggests we are under-priced. Pilot drafted a re-price proposal — awaiting your call in Approval.</p>
           <div class="brief-foot">
-            <div class="left">
-              <div class="src-stack">
-                <div class="src">P</div>
-                <div class="src">I</div>
-              </div>
-              <span>Pilot · Intel</span>
-            </div>
+            <div class="left"><div class="src-stack"><div class="src">P</div><div class="src">I</div></div><span>Pilot · Intel</span></div>
             <div class="read"><i class="ph ph-check"></i>Read</div>
           </div>
-        </a>
+        </div>
+      </div>
+
+      <div class="surface-footnote">
+        EVERY BRIEF IS A SUBSTRATE · SELECT TEXT TO COMMENT OR CHAT · CLICK CHAT ICON FOR PER-BRIEF CONVERSATION
+      </div>
+    </section>
+
+    <!-- ============ DECISION BRIEF ============ -->
+    <section class="surface" data-surface="decision">
+      <div class="surface-head">
+        <div class="surface-eyebrow">SURFACE · DECISION BRIEF</div>
+        <h1 class="surface-title">Pose a decision · the system reasons</h1>
+        <p class="surface-sub">The load-bearing input is the question. The system pulls NICHOLAS, SWARM, Council, premortem and standpoint analyses into a brief with hero question, hero answer, decision spine, paths-not-taken and an acceptance gate.</p>
+      </div>
+
+      <div class="decision-composer">
+        <div class="label">Pose a decision question</div>
+        <textarea class="decision-input" placeholder="Should we keep two-week sprints or switch to weekly cadence for the pilot team this quarter?"></textarea>
+        <div class="composer-foot">
+          <div class="composer-tools">
+            <button class="tool-pill active"><i class="ph ph-cube"></i>NICHOLAS</button>
+            <button class="tool-pill active"><i class="ph ph-graph"></i>SWARM</button>
+            <button class="tool-pill active"><i class="ph ph-users-three"></i>Council</button>
+            <button class="tool-pill"><i class="ph ph-warning"></i>Premortem</button>
+            <button class="tool-pill"><i class="ph ph-eye"></i>Standpoint</button>
+            <button class="tool-pill"><i class="ph ph-plus"></i>Spawn sub-agent</button>
+          </div>
+          <button class="btn-primary"><i class="ph ph-play-circle"></i>Open brief</button>
+        </div>
+      </div>
+
+      <div class="section-head">
+        <h3>Active decisions · 3</h3>
+        <div class="meta">Per-brief versions + diff · session continuity</div>
+      </div>
+
+      <div class="decision-grid">
+
+        <div class="decision-card">
+          <div class="stage gate"><i class="ph ph-flag"></i>At acceptance gate · awaiting ratify</div>
+          <h4>Should the Q3 GTM lead with "Operator OS" or "Council of agents"?</h4>
+          <p class="answer"><strong>Hero answer.</strong> Lead with Operator OS. Council framing tests 28% lower on intent-to-engage and confuses procurement on who is in charge.</p>
+          <div class="spine-mini">
+            <span class="spine-pill">Hero Q</span>
+            <span class="spine-pill">Hero A</span>
+            <span class="spine-pill">Spine · 5 steps</span>
+            <span class="spine-pill">Paths-not-taken · 3</span>
+            <span class="spine-pill">Gate</span>
+          </div>
+          <div class="card-foot">
+            <span>v3 · 11 HTL gates passed</span>
+            <span>Last diff 2h ago</span>
+          </div>
+        </div>
+
+        <div class="decision-card">
+          <div class="stage draft"><i class="ph ph-pencil"></i>Composing · 2 sub-agents running</div>
+          <h4>Re-price Hopper pilot by +14% effective next renewal?</h4>
+          <p class="answer"><strong>Working answer.</strong> Yes, with grandfather window of 60 days. Market intel + competitive scan agree. Premortem to run before gate.</p>
+          <div class="spine-mini">
+            <span class="spine-pill">Hero Q</span>
+            <span class="spine-pill">Hero A · draft</span>
+            <span class="spine-pill">Spine · 3/5 steps</span>
+          </div>
+          <div class="card-foot">
+            <span>v1 · 4 HTL gates passed · 7 pending</span>
+            <span>NICHOLAS active</span>
+          </div>
+        </div>
+
+        <div class="decision-card">
+          <div class="stage ratified"><i class="ph ph-check-circle"></i>Ratified · committed to roadmap</div>
+          <h4>Switch council cadence from monthly to every other Friday?</h4>
+          <p class="answer"><strong>Ratified.</strong> Bi-weekly. Standpoint analysis showed decision latency was the top blocker, not analytical depth.</p>
+          <div class="spine-mini">
+            <span class="spine-pill">Hero Q</span>
+            <span class="spine-pill">Hero A</span>
+            <span class="spine-pill">Spine · 5 steps</span>
+            <span class="spine-pill">Paths · 2</span>
+            <span class="spine-pill">Ratified</span>
+          </div>
+          <div class="card-foot">
+            <span>v6 · final · diff history kept</span>
+            <span>3d ago</span>
+          </div>
+        </div>
 
       </div>
 
       <div class="surface-footnote">
-        EVERY BRIEF IS A SUBSTRATE. SELECT TEXT TO COMMENT · EDIT INLINE · ASK KILONOVA TO CHAT WITH IT.
+        BRIEF STRUCTURE: HERO QUESTION · HERO ANSWER · DECISION SPINE · PATHS-NOT-TAKEN · ACCEPTANCE GATE · CP-EI HTL GATES THROUGHOUT
       </div>
     </section>
 
-    <!-- ============ SURFACE 4 · APPROVAL (stub · Phase B) ============ -->
+    <!-- ============ APPROVAL · 3-stage pipeline ============ -->
     <section class="surface" data-surface="approval">
       <div class="surface-head">
-        <div class="surface-eyebrow">SURFACE · APPROVAL</div>
+        <div class="surface-eyebrow">SURFACE · APPROVAL · THE SPINE</div>
         <h1 class="surface-title">Decisions waiting on your call</h1>
-        <p class="surface-sub">The system has reasoned. It now needs your YES/NO. Each item is a decision packet with a recommendation, the trade-offs, and the consequence if you ratify or defer.</p>
+        <p class="surface-sub">Three pipeline stages. Approving sends the item to the next stage in the production lane. The default action is the right action — fast-lane only appears for items not already on the calendar.</p>
       </div>
 
-      <div class="stub">
-        <div class="phase-tag">Phase B · Building</div>
-        <h2>Approval is the spine of the founder loop.</h2>
-        <p>This surface is the only place where you authorize the system to act on your behalf. Everything else is reading or reviewing. Here, you ratify.</p>
-        <p>We're building this next because it is what makes the rest of Kilonova safe to scale — without a clear approval gate, every other surface becomes ambiguous.</p>
+      <div class="chips">
+        <button class="chip active">All <span class="count">14</span></button>
+        <button class="chip">Social <span class="count">8</span></button>
+        <button class="chip">Blog <span class="count">3</span></button>
+        <button class="chip">Email <span class="count">2</span></button>
+        <button class="chip">Ads <span class="count">1</span></button>
+      </div>
 
-        <div class="stub-spec">
-          <h4>What it will contain (v1)</h4>
-          <ul>
-            <li><i class="ph ph-list-checks"></i><span><strong>Decision packets</strong> · one per pending choice, with recommendation + risk + rollback path.</span></li>
-            <li><i class="ph ph-hourglass-medium"></i><span><strong>SLA timers</strong> · each packet has a default action if you don't decide within the window.</span></li>
-            <li><i class="ph ph-arrow-bend-right-up"></i><span><strong>Ratify / Defer / Send back</strong> · three primitive actions, audit-logged.</span></li>
-            <li><i class="ph ph-chat-circle-text"></i><span><strong>Inline comments</strong> · ask the council for a re-reasoning before deciding.</span></li>
-          </ul>
+      <div class="approval-callout">
+        <i class="ph ph-info"></i>
+        <div><strong>How this works.</strong> Each column is a production stage. Approving moves an item to the next stage. Items already on the calendar will post on schedule when approved — no fast-lane button shown. Items off-calendar can be fast-laned with channel-aware "Post now."</div>
+      </div>
+
+      <div class="pipeline">
+
+        <!-- Stage 1: Briefs -->
+        <div class="pipeline-col">
+          <div class="col-head">
+            <div class="left">
+              <h4>Briefs</h4>
+              <span class="col-count">6</span>
+            </div>
+            <span class="verb">to approve</span>
+          </div>
+          <div class="col-body">
+
+            <div class="approval-card">
+              <div class="channel"><i class="ph ph-megaphone"></i>Story idea · Linkedin</div>
+              <h5>The zero-marketing stack that outperforms $50k/mo tools</h5>
+              <p class="preview">Most founders confuse stack complexity for stack capability. Five tools that compound. Each picked because it earns its keep on a Tuesday morning when nothing is going right.</p>
+              <div class="meta-line"><span>From SignalScan · Reddit r/SaaS</span><span>3 evidence sources</span></div>
+              <div class="actions">
+                <button class="act approve"><i class="ph ph-check"></i>Approve</button>
+                <button class="act rework"><i class="ph ph-pencil-simple"></i>Rework</button>
+                <button class="act decline"><i class="ph ph-x"></i></button>
+              </div>
+            </div>
+
+            <div class="approval-card">
+              <div class="channel"><i class="ph ph-megaphone"></i>Story idea · X / Threads</div>
+              <h5>I built an AI that writes better ads than my agency</h5>
+              <p class="preview">Polarizing hook, two-week test, real spend, real results. Position Kilonova as the system, not the agency replacement.</p>
+              <div class="meta-line"><span>From SignalScan · YouTube</span><span>2 evidence sources</span></div>
+              <div class="actions">
+                <button class="act approve"><i class="ph ph-check"></i>Approve</button>
+                <button class="act rework"><i class="ph ph-pencil-simple"></i>Rework</button>
+                <button class="act decline"><i class="ph ph-x"></i></button>
+              </div>
+            </div>
+
+            <div class="approval-card">
+              <div class="channel"><i class="ph ph-megaphone"></i>Newsletter idea</div>
+              <h5>What we changed about the council cadence (and why)</h5>
+              <p class="preview">From monthly to bi-weekly. The standpoint analysis. The decision latency. The trade-offs we accepted. Useful for any founder running deliberation as a process.</p>
+              <div class="meta-line"><span>From Reading · Council minutes</span><span>1 source</span></div>
+              <div class="actions">
+                <button class="act approve"><i class="ph ph-check"></i>Approve</button>
+                <button class="act rework"><i class="ph ph-pencil-simple"></i>Rework</button>
+                <button class="act decline"><i class="ph ph-x"></i></button>
+              </div>
+            </div>
+
+            <div class="approval-card">
+              <div class="channel"><i class="ph ph-megaphone"></i>Blog draft idea</div>
+              <h5>Founder OS · what we got wrong in v0.9</h5>
+              <p class="preview">The Christmas village. The Cluster nav. The "ratify" naming. Three honest revisions, three things you can copy.</p>
+              <div class="meta-line"><span>From substrate · v0.7 lessons</span><span>4 sources</span></div>
+              <div class="actions">
+                <button class="act approve"><i class="ph ph-check"></i>Approve</button>
+                <button class="act rework"><i class="ph ph-pencil-simple"></i>Rework</button>
+                <button class="act decline"><i class="ph ph-x"></i></button>
+              </div>
+            </div>
+
+          </div>
         </div>
+
+        <!-- Stage 2: Content -->
+        <div class="pipeline-col">
+          <div class="col-head">
+            <div class="left">
+              <h4>Content</h4>
+              <span class="col-count">4</span>
+            </div>
+            <span class="verb">produced · review</span>
+          </div>
+          <div class="col-body">
+
+            <div class="approval-card">
+              <div class="channel">
+                <div class="channel-icons"><i class="ph-fill ph-linkedin-logo linkedin"></i></div>
+                LinkedIn post · long-form
+              </div>
+              <h5>The zero-marketing stack — 5 tools, 12 months of evidence</h5>
+              <p class="preview">Most founders confuse complexity for capability. Here's the stack I run on, what each tool earns, and the one I almost cut last month. (Full post · 380 words · 3 inline visuals)</p>
+              <div class="meta-line"><span>Produced by content-loop · 11 min</span><span>v2 · pilot reviewed</span></div>
+              <div class="actions">
+                <button class="act approve"><i class="ph ph-check"></i>Approve → schedule</button>
+                <button class="act rework"><i class="ph ph-pencil-simple"></i>Rework</button>
+                <button class="act decline"><i class="ph ph-x"></i></button>
+              </div>
+            </div>
+
+            <div class="approval-card">
+              <div class="channel">
+                <div class="channel-icons"><i class="ph-fill ph-instagram-logo instagram"></i></div>
+                Instagram · carousel
+              </div>
+              <h5>Council cadence · the bi-weekly switch · 6 slides</h5>
+              <p class="preview">Slide 1 hook, slides 2-5 walk through the cadence change visually, slide 6 CTA. Designed mobile-first, dark theme to match brand.</p>
+              <div class="meta-line"><span>Produced by content-loop · 8 min</span><span>v1 · ready for ratify</span></div>
+              <div class="actions">
+                <button class="act approve"><i class="ph ph-check"></i>Approve → schedule</button>
+                <button class="act rework"><i class="ph ph-pencil-simple"></i>Rework</button>
+                <button class="act decline"><i class="ph ph-x"></i></button>
+              </div>
+            </div>
+
+            <div class="approval-card">
+              <div class="channel">
+                <div class="channel-icons"><i class="ph-fill ph-x-logo x"></i></div>
+                X · thread
+              </div>
+              <h5>What we got wrong in Founder OS v0.9 · 7-tweet thread</h5>
+              <p class="preview">1/ Christmas village. 2/ Cluster nav. 3/ "Ratify" naming. 4/ The over-saturated accent. 5/ The push-panel debate. 6/ What we kept. 7/ What we're testing next.</p>
+              <div class="meta-line"><span>Produced by content-loop · 14 min</span><span>v3 · accuracy checked</span></div>
+              <div class="actions">
+                <button class="act approve"><i class="ph ph-check"></i>Approve → schedule</button>
+                <button class="act rework"><i class="ph ph-pencil-simple"></i>Rework</button>
+                <button class="act decline"><i class="ph ph-x"></i></button>
+              </div>
+            </div>
+
+            <div class="approval-card">
+              <div class="channel">
+                <div class="channel-icons"><i class="ph-fill ph-envelope-simple"></i></div>
+                Newsletter · weekly
+              </div>
+              <h5>This week in Kilonova · W21 · 3 ideas, 1 demo, 1 ask</h5>
+              <p class="preview">Open with the W21 RSN takeaway, midsection demos the audience switcher, ask is for a 15-min reaction from 5 readers. ~600 words. Reading time on phone: 4 min.</p>
+              <div class="meta-line"><span>Produced by content-loop · 17 min</span><span>v2 · pilot reviewed</span></div>
+              <div class="actions">
+                <button class="act approve"><i class="ph ph-check"></i>Approve → schedule</button>
+                <button class="act rework"><i class="ph ph-pencil-simple"></i>Rework</button>
+                <button class="act decline"><i class="ph ph-x"></i></button>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+        <!-- Stage 3: Schedule -->
+        <div class="pipeline-col">
+          <div class="col-head">
+            <div class="left">
+              <h4>Schedule</h4>
+              <span class="col-count">4</span>
+            </div>
+            <span class="verb">queued · publish</span>
+          </div>
+          <div class="col-body">
+
+            <div class="approval-card">
+              <div class="channel">
+                <div class="channel-icons"><i class="ph-fill ph-linkedin-logo linkedin"></i></div>
+                LinkedIn · long-form
+              </div>
+              <h5>Founder OS shipped · v1.1 with audience switcher</h5>
+              <p class="preview">Behind-the-scenes look at why we picked founder-first. The audience switcher, the surface model, the build phasing. With screenshots.</p>
+              <div class="meta-line">
+                <span>3 evidence sources</span>
+                <span class="scheduled"><i class="ph ph-calendar-check"></i>Thu · 09:00</span>
+              </div>
+              <div class="actions">
+                <button class="act approve"><i class="ph ph-check"></i>Approve & keep schedule</button>
+                <button class="act rework"><i class="ph ph-pencil-simple"></i>Edit</button>
+              </div>
+            </div>
+
+            <div class="approval-card">
+              <div class="channel">
+                <div class="channel-icons">
+                  <i class="ph-fill ph-x-logo x"></i>
+                  <i class="ph-fill ph-linkedin-logo linkedin"></i>
+                </div>
+                X + LinkedIn · cross-post
+              </div>
+              <h5>The two-question test for any decision brief</h5>
+              <p class="preview">One: what's one thing you didn't know about your market? Two: what's one decision this changes? If a brief fails either, it's not ready.</p>
+              <div class="meta-line">
+                <span>From Reading · Bruno's spec</span>
+                <span class="scheduled"><i class="ph ph-calendar-check"></i>Fri · 14:30</span>
+              </div>
+              <div class="actions">
+                <button class="act approve"><i class="ph ph-check"></i>Approve & keep schedule</button>
+                <button class="act rework"><i class="ph ph-pencil-simple"></i>Edit</button>
+              </div>
+            </div>
+
+            <div class="approval-card">
+              <div class="channel">
+                <div class="channel-icons"><i class="ph-fill ph-x-logo x"></i></div>
+                X · reactive · off-calendar
+              </div>
+              <h5>Gemini 2.5 dropped this morning · here's what changes</h5>
+              <p class="preview">10 minutes after the release, NICHOLAS detected it via socials, wrote the angle, pulled 4 evidence points. Time-sensitive — recommend post within the hour.</p>
+              <div class="meta-line">
+                <span>From SignalScan · time-sensitive</span>
+                <span><i class="ph ph-clock"></i>Reactive · no slot</span>
+              </div>
+              <div class="actions">
+                <button class="act post-now"><i class="ph ph-paper-plane-tilt"></i>Post now</button>
+                <button class="act approve"><i class="ph ph-calendar-plus"></i>Schedule</button>
+                <button class="act decline"><i class="ph ph-x"></i></button>
+              </div>
+            </div>
+
+            <div class="approval-card">
+              <div class="channel">
+                <div class="channel-icons"><i class="ph-fill ph-envelope-simple"></i></div>
+                Newsletter · weekly
+              </div>
+              <h5>W21 newsletter — 5 ideas + 1 ask</h5>
+              <p class="preview">Sends to 412 subscribers. Variant test on subject line: "We shipped v1.1" vs "Audience switcher · why and how."</p>
+              <div class="meta-line">
+                <span>2 variants · split 50/50</span>
+                <span class="scheduled"><i class="ph ph-calendar-check"></i>Sun · 08:00</span>
+              </div>
+              <div class="actions">
+                <button class="act approve"><i class="ph ph-check"></i>Approve & keep schedule</button>
+                <button class="act rework"><i class="ph ph-pencil-simple"></i>Edit</button>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+      </div>
+
+      <div class="surface-footnote">
+        APPROVE = NEXT STAGE · DECLINE = REMOVE · REWORK = BACK TO PILOT · DEFAULT IS THE RIGHT ACTION
       </div>
     </section>
 
-    <!-- ============ SURFACE 5 · COMMITMENTS (stub · Phase C) ============ -->
+    <!-- ============ COMMITMENTS · 4 lanes ============ -->
     <section class="surface" data-surface="commitments">
       <div class="surface-head">
         <div class="surface-eyebrow">SURFACE · COMMITMENTS</div>
         <h1 class="surface-title">What you and the system have promised</h1>
-        <p class="surface-sub">Everything you've said yes to. Everything pilot is doing on your behalf. Everything the council is owed. One ledger.</p>
+        <p class="surface-sub">This screen is the one open in the room when the team is in sync. OKRs, content calendar, roadmap, fundraising — collapsible lanes so the noise stays where you want it.</p>
       </div>
 
-      <div class="stub">
-        <div class="phase-tag">Phase C · Specced</div>
-        <h2>A commitment is a promise with a deadline and a witness.</h2>
-        <p>This surface unifies what you committed to in meetings, what pilot picked up from your decisions, and what the council is tracking against. Each commitment shows owner, due date, current state, and the audit trail.</p>
-        <p>Built after Approval — because most commitments are born in that surface.</p>
-
-        <div class="stub-spec">
-          <h4>What it will contain (v1)</h4>
-          <ul>
-            <li><i class="ph ph-flag"></i><span><strong>Commitment ledger</strong> · grouped by owner (You · Pilot · Council · External).</span></li>
-            <li><i class="ph ph-clock-clockwise"></i><span><strong>Cadence view</strong> · this week · this month · this quarter.</span></li>
-            <li><i class="ph ph-warning"></i><span><strong>Drift alerts</strong> · pilot flags when a commitment is at risk before you ask.</span></li>
-            <li><i class="ph ph-link"></i><span><strong>Backlinks to source</strong> · each commitment cites the brief, decision, or call that birthed it.</span></li>
-          </ul>
+      <div class="commit-strip">
+        <div class="commit-tile">
+          <div class="label">Content this month</div>
+          <div class="val">8<span class="denom"> / 12</span></div>
+          <div class="delta up">▲ on track</div>
         </div>
+        <div class="commit-tile">
+          <div class="label">Roadmap milestones · Q2</div>
+          <div class="val">3<span class="denom"> / 5</span></div>
+          <div class="delta">2 in flight</div>
+        </div>
+        <div class="commit-tile">
+          <div class="label">Fundraise · pipeline</div>
+          <div class="val">$2.1M<span class="denom"> / 3.5</span></div>
+          <div class="delta up">▲ 4 conversations open</div>
+        </div>
+        <div class="commit-tile">
+          <div class="label">OKRs at risk</div>
+          <div class="val">1<span class="denom"> / 6</span></div>
+          <div class="delta down">▼ pricing OKR drift</div>
+        </div>
+      </div>
+
+      <div class="lanes">
+
+        <div class="lane open" data-lane="okrs">
+          <div class="lane-head">
+            <div class="left">
+              <i class="ph ph-caret-right caret"></i>
+              <h4>OKRs · Q2 2026</h4>
+            </div>
+            <div class="meta">6 objectives · 1 at risk · refreshed Mon</div>
+          </div>
+          <div class="lane-body">
+            <div class="okr-row">
+              <div class="name">Pilot conversion rate to ≥ 35%<small>From inbound demo to first weekly RSN cycle</small></div>
+              <div class="progress-bar"><div class="progress-fill" style="width:74%"></div></div>
+              <div class="pct">74%</div>
+            </div>
+            <div class="okr-row">
+              <div class="name">Founder Reading-surface engagement<small>Weekly active founder readers · target 12</small></div>
+              <div class="progress-bar"><div class="progress-fill" style="width:62%"></div></div>
+              <div class="pct">62%</div>
+            </div>
+            <div class="okr-row">
+              <div class="name">Council decision latency under 5 days<small>Bi-weekly cadence shift was a response</small></div>
+              <div class="progress-bar"><div class="progress-fill" style="width:88%"></div></div>
+              <div class="pct">88%</div>
+            </div>
+            <div class="okr-row">
+              <div class="name">Pricing realization at +14% headroom<small>Hopper signal still pending ratification</small></div>
+              <div class="progress-bar"><div class="progress-fill warn" style="width:31%"></div></div>
+              <div class="pct">31%</div>
+            </div>
+            <div class="okr-row">
+              <div class="name">Content output · 48 pieces / quarter<small>Across LinkedIn, X, Newsletter, Blog</small></div>
+              <div class="progress-bar"><div class="progress-fill" style="width:67%"></div></div>
+              <div class="pct">67%</div>
+            </div>
+            <div class="okr-row">
+              <div class="name">v1.x feature ship velocity<small>Founder OS surface buildouts on roadmap</small></div>
+              <div class="progress-bar"><div class="progress-fill" style="width:55%"></div></div>
+              <div class="pct">55%</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="lane open" data-lane="calendar">
+          <div class="lane-head">
+            <div class="left">
+              <i class="ph ph-caret-right caret"></i>
+              <h4>Content calendar · week of May 19</h4>
+            </div>
+            <div class="meta">9 scheduled · 3 in approval · 1 reactive open</div>
+          </div>
+          <div class="lane-body">
+            <div class="cal-week">
+              <div class="cal-day">
+                <div class="d-head"><span class="d-name">Mon</span><span class="d-num">19</span></div>
+                <div class="cal-item scheduled"><i class="ph-fill ph-linkedin-logo"></i>Stack post · 9:00</div>
+                <div class="cal-item scheduled"><i class="ph-fill ph-x-logo"></i>Council cadence · 14:00</div>
+              </div>
+              <div class="cal-day">
+                <div class="d-head"><span class="d-name">Tue</span><span class="d-num">20</span></div>
+                <div class="cal-item scheduled"><i class="ph-fill ph-instagram-logo"></i>Carousel · 12:00</div>
+              </div>
+              <div class="cal-day">
+                <div class="d-head"><span class="d-name">Wed</span><span class="d-num">21</span></div>
+                <div class="cal-item draft"><i class="ph ph-pencil"></i>Blog draft</div>
+                <div class="cal-item scheduled"><i class="ph-fill ph-x-logo"></i>v0.9 retro · 16:30</div>
+              </div>
+              <div class="cal-day today">
+                <div class="d-head"><span class="d-name">Thu</span><span class="d-num">22</span></div>
+                <div class="cal-item scheduled"><i class="ph-fill ph-linkedin-logo"></i>v1.1 ship · 9:00</div>
+                <div class="cal-item draft"><i class="ph ph-pencil"></i>Reactive · Gemini</div>
+              </div>
+              <div class="cal-day">
+                <div class="d-head"><span class="d-name">Fri</span><span class="d-num">23</span></div>
+                <div class="cal-item scheduled"><i class="ph-fill ph-x-logo"></i>2-Q test · 14:30</div>
+              </div>
+              <div class="cal-day">
+                <div class="d-head"><span class="d-name">Sat</span><span class="d-num">24</span></div>
+              </div>
+              <div class="cal-day">
+                <div class="d-head"><span class="d-name">Sun</span><span class="d-num">25</span></div>
+                <div class="cal-item scheduled"><i class="ph-fill ph-envelope-simple"></i>Newsletter · 8:00</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="lane" data-lane="roadmap">
+          <div class="lane-head">
+            <div class="left">
+              <i class="ph ph-caret-right caret"></i>
+              <h4>Roadmap · Founder OS</h4>
+            </div>
+            <div class="meta">3 shipped · 2 in flight · 4 specced</div>
+          </div>
+          <div class="lane-body">
+            <div class="roadmap-row">
+              <div class="name">Reading Surface</div>
+              <div class="roadmap-bar"><div class="roadmap-fill" style="width:100%"></div></div>
+              <div class="quarter">Shipped</div>
+            </div>
+            <div class="roadmap-row">
+              <div class="name">Audience switcher</div>
+              <div class="roadmap-bar"><div class="roadmap-fill" style="width:100%"></div></div>
+              <div class="quarter">Shipped</div>
+            </div>
+            <div class="roadmap-row">
+              <div class="name">Approval Surface</div>
+              <div class="roadmap-bar"><div class="roadmap-fill" style="width:72%"></div></div>
+              <div class="quarter">In flight</div>
+            </div>
+            <div class="roadmap-row">
+              <div class="name">Commitments Surface</div>
+              <div class="roadmap-bar"><div class="roadmap-fill" style="width:60%"></div></div>
+              <div class="quarter">In flight</div>
+            </div>
+            <div class="roadmap-row">
+              <div class="name">RSN Authoring (Pilot)</div>
+              <div class="roadmap-bar"><div class="roadmap-fill warn" style="width:18%"></div></div>
+              <div class="quarter">Q3</div>
+            </div>
+            <div class="roadmap-row">
+              <div class="name">Prospect intake (R1 Founder Product)</div>
+              <div class="roadmap-bar"><div class="roadmap-fill warn" style="width:14%"></div></div>
+              <div class="quarter">Q3</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="lane" data-lane="fundraise">
+          <div class="lane-head">
+            <div class="left">
+              <i class="ph ph-caret-right caret"></i>
+              <h4>Fundraising · pipeline</h4>
+            </div>
+            <div class="meta">5 conversations · $2.1M soft · target $3.5M</div>
+          </div>
+          <div class="lane-body">
+            <div class="fund-row">
+              <div class="name">Sequoia · Brand Capital</div>
+              <div class="stage">2nd meeting</div>
+              <div class="amt">$1.0M soft</div>
+              <div class="next">Jun 3 · partner sync</div>
+            </div>
+            <div class="fund-row">
+              <div class="name">Index · Seed program</div>
+              <div class="stage">1st meeting</div>
+              <div class="amt">$500K</div>
+              <div class="next">Jun 7 · intro call</div>
+            </div>
+            <div class="fund-row">
+              <div class="name">Felicis · Seed</div>
+              <div class="stage">Term-sheet</div>
+              <div class="amt">$600K</div>
+              <div class="next">Jun 11 · sign</div>
+            </div>
+            <div class="fund-row">
+              <div class="name">Angel · Naval R.</div>
+              <div class="stage">Verbal yes</div>
+              <div class="amt">$250K</div>
+              <div class="next">Jun 2 · paperwork</div>
+            </div>
+            <div class="fund-row">
+              <div class="name">Angel · Patrick C.</div>
+              <div class="stage">Re-engaged</div>
+              <div class="amt">$150K target</div>
+              <div class="next">TBD</div>
+            </div>
+          </div>
+        </div>
+
       </div>
     </section>
 
-    <!-- ============ SURFACE 6 · STATUS (stub · Phase D) ============ -->
+    <!-- ============ STATUS ============ -->
     <section class="surface" data-surface="status">
       <div class="surface-head">
         <div class="surface-eyebrow">SURFACE · STATUS</div>
         <h1 class="surface-title">Where everything stands, right now</h1>
-        <p class="surface-sub">The pulse view. What's healthy, what's drifting, what's blocked. No reading required — glance and move on.</p>
+        <p class="surface-sub">The 30-second glance. Active machines, ETAs, what's blocked, what landed. Pilot can choose the LLM, pause or stop a run — for the founder, this is read-only telemetry.</p>
       </div>
 
-      <div class="stub">
-        <div class="phase-tag">Phase D · Specced</div>
-        <h2>The cockpit glance.</h2>
-        <p>Status is the only surface designed to be consumed in under 30 seconds. It shows the health of every active pilot engagement, every open commitment, every running council session, and every signal that's escalating.</p>
-        <p>Built last in the founder loop because it depends on the other three surfaces being live to draw signal from.</p>
+      <div class="status-strip">
+        <div class="status-tile">
+          <div class="label"><i class="ph ph-cpu"></i>Active machines</div>
+          <div class="val">4</div>
+          <div class="delta">2 RSN · 1 brief · 1 content</div>
+        </div>
+        <div class="status-tile attention">
+          <div class="label"><i class="ph ph-warning"></i>Blocked</div>
+          <div class="val">1</div>
+          <div class="delta">Pricing decision · waiting input</div>
+        </div>
+        <div class="status-tile">
+          <div class="label"><i class="ph ph-coins"></i>Spend today</div>
+          <div class="val">$47.21</div>
+          <div class="delta">68% NICHOLAS · 24% loops · 8% other</div>
+        </div>
+        <div class="status-tile">
+          <div class="label"><i class="ph ph-stack"></i>Queue depth</div>
+          <div class="val">7</div>
+          <div class="delta">3 reading · 4 approval</div>
+        </div>
+      </div>
 
-        <div class="stub-spec">
-          <h4>What it will contain (v1)</h4>
-          <ul>
-            <li><i class="ph ph-pulse"></i><span><strong>Health strip</strong> · pilots · commitments · approvals · signals — green/amber/red at a glance.</span></li>
-            <li><i class="ph ph-broadcast"></i><span><strong>Active reasoning</strong> · what NICHOLAS and the council are running right now.</span></li>
-            <li><i class="ph ph-trend-up"></i><span><strong>Drift map</strong> · which engagements are moving away from baseline.</span></li>
-            <li><i class="ph ph-stack"></i><span><strong>Queue depth</strong> · what's about to land in Reading and Approval.</span></li>
-          </ul>
+      <div class="section-head">
+        <h3>Active processing</h3>
+        <div class="meta">Live · check-back times approximate</div>
+      </div>
+      <div class="process-list">
+        <div class="process-card">
+          <div class="name">RSN W22 · Phase R5 (signal triage)<small>NICHOLAS · 312 raw signals · candidate filtering</small></div>
+          <div class="progress-bar"><div class="progress-fill" style="width:62%"></div></div>
+          <div class="pct">62%</div>
+          <div class="eta">ETA 18 min</div>
+        </div>
+        <div class="process-card">
+          <div class="name">Decision brief · Hopper pricing<small>Premortem agent · 7 HTL gates pending</small></div>
+          <div class="progress-bar"><div class="progress-fill" style="width:34%"></div></div>
+          <div class="pct">34%</div>
+          <div class="eta">ETA 2h 10m</div>
+        </div>
+        <div class="process-card">
+          <div class="name">Content loop · 4 LinkedIn posts from approved briefs<small>Content-loop · drafting + visual gen</small></div>
+          <div class="progress-bar"><div class="progress-fill" style="width:81%"></div></div>
+          <div class="pct">81%</div>
+          <div class="eta">ETA 6 min</div>
+        </div>
+        <div class="process-card blocked">
+          <div class="name">RSN W22 · Phase R7 (compose)<small>Waiting on founder ratification of Q3 GTM brief</small></div>
+          <div class="progress-bar"><div class="progress-fill crit" style="width:0%"></div></div>
+          <div class="pct">—</div>
+          <div class="eta">Blocked</div>
+        </div>
+      </div>
+
+      <div class="pilot-only">
+        <i class="ph ph-gear-six"></i>
+        <div><strong>Pilot capabilities (hidden in founder view).</strong> Pilots can switch the LLM per-run (<code>sonnet-4.7</code> / <code>opus-4.7</code> / <code>haiku-4.7</code>), pause or stop a process, requeue with different inputs, and inspect the full reasoning trace. Switch to the Pilot audience to preview.</div>
+      </div>
+
+      <div class="section-head">
+        <h3>Activity history · today</h3>
+        <div class="meta">All times PDT</div>
+      </div>
+      <div class="activity-log">
+        <div class="log-item ok">
+          <div class="ts">14:22</div>
+          <div class="icon"><i class="ph ph-check"></i></div>
+          <div class="msg"><strong>Council session · architecture review</strong> closed. 3 commitments routed to Commitments surface.<span class="meta">Council · session 0142</span></div>
+        </div>
+        <div class="log-item ok">
+          <div class="ts">13:48</div>
+          <div class="icon"><i class="ph ph-paper-plane-tilt"></i></div>
+          <div class="msg"><strong>LinkedIn post</strong> published per schedule · "Stack post" reached 412 impressions in 30 min.<span class="meta">Content loop</span></div>
+        </div>
+        <div class="log-item">
+          <div class="ts">13:12</div>
+          <div class="icon"><i class="ph ph-arrow-square-out"></i></div>
+          <div class="msg"><strong>RSN W22 phase R4</strong> handed off to R5 · 312 signals carried forward.<span class="meta">RSN engine · 4 of 7 phases</span></div>
+        </div>
+        <div class="log-item warn">
+          <div class="ts">11:34</div>
+          <div class="icon"><i class="ph ph-warning"></i></div>
+          <div class="msg"><strong>Hopper pricing decision</strong> hit acceptance gate · awaiting your ratify.<span class="meta">Decision brief · v1</span></div>
+        </div>
+        <div class="log-item ok">
+          <div class="ts">10:18</div>
+          <div class="icon"><i class="ph ph-chat-circle-text"></i></div>
+          <div class="msg"><strong>You commented</strong> on Q3 GTM brief · §4 recommendation: "Lock it. Operator OS framing."<span class="meta">Reading · Q3 GTM brief</span></div>
+        </div>
+        <div class="log-item ok">
+          <div class="ts">09:00</div>
+          <div class="icon"><i class="ph ph-paper-plane-tilt"></i></div>
+          <div class="msg"><strong>LinkedIn post</strong> published per schedule · "Council cadence · the bi-weekly switch."<span class="meta">Content loop</span></div>
+        </div>
+        <div class="log-item">
+          <div class="ts">08:42</div>
+          <div class="icon"><i class="ph ph-cpu"></i></div>
+          <div class="msg"><strong>SignalScan</strong> ingested 22 new candidates from 4 sources · 4 routed to brief approvals.<span class="meta">SignalScan · daily</span></div>
         </div>
       </div>
     </section>
 
-    <!-- ============ SETTINGS ============ -->
-    <section class="surface" data-surface="settings">
+    <!-- ============ CONFIGURATION ============ -->
+    <section class="surface" data-surface="configuration">
       <div class="surface-head">
-        <div class="surface-eyebrow">SETTINGS</div>
+        <div class="surface-eyebrow">SETTINGS · CONFIGURATION</div>
         <h1 class="surface-title">Configure your Founder OS</h1>
-        <p class="surface-sub">Display, notifications, council preferences, and integrations. Kept minimal on purpose — most behavior is set by interaction, not by toggle.</p>
+        <p class="surface-sub">Most of the system's behaviour gets set by the way you use it. Here you tune the few things that don't. Marked sections expand in the next v1 wave.</p>
       </div>
 
-      <div class="settings-grid">
-        <div class="settings-section">
+      <div class="config-grid">
+
+        <div class="config-section">
           <h3>Display</h3>
-        </div>
-
-        <div class="setting-row">
-          <div>
-            <div class="label">Dark mode</div>
-            <div class="desc">High-contrast dark surface tuned for long reading sessions.</div>
+          <div class="config-row">
+            <div>
+              <div class="label">Dark mode</div>
+              <div class="desc">High-contrast dark surface, tuned for long reading sessions.</div>
+            </div>
+            <div class="control"><div class="toggle on" id="darkToggleSettings"></div></div>
           </div>
-          <div class="control"><div class="toggle on" id="darkToggleSettings"></div></div>
-        </div>
-
-        <div class="setting-row">
-          <div>
-            <div class="label">Reading width</div>
-            <div class="desc">How wide briefs render in the Reading surface.</div>
-          </div>
-          <div class="control">
-            <button class="client-select" type="button">
-              <span>Comfortable</span>
-              <i class="ph ph-caret-down"></i>
-            </button>
+          <div class="config-row">
+            <div>
+              <div class="label">Reading width</div>
+              <div class="desc">How wide briefs render in the Reading surface.</div>
+            </div>
+            <div class="control"><button class="client-select"><span>Comfortable</span><i class="ph ph-caret-down"></i></button></div>
           </div>
         </div>
 
-        <div class="settings-section">
+        <div class="config-section">
           <h3>Notifications</h3>
-        </div>
-
-        <div class="setting-row">
-          <div>
-            <div class="label">New brief in Reading</div>
-            <div class="desc">Notify when the system publishes a new long-form for you to absorb.</div>
+          <div class="config-row">
+            <div><div class="label">New brief in Reading</div><div class="desc">Notify when the system publishes a new long-form to absorb.</div></div>
+            <div class="control"><div class="toggle on"></div></div>
           </div>
-          <div class="control"><div class="toggle on"></div></div>
-        </div>
-
-        <div class="setting-row">
-          <div>
-            <div class="label">Decision needs your call</div>
-            <div class="desc">Push when an item lands in Approval awaiting ratification.</div>
+          <div class="config-row">
+            <div><div class="label">Decision needs your call</div><div class="desc">Push when an item lands in Approval awaiting ratification.</div></div>
+            <div class="control"><div class="toggle on"></div></div>
           </div>
-          <div class="control"><div class="toggle on"></div></div>
-        </div>
-
-        <div class="setting-row">
-          <div>
-            <div class="label">Drift alert</div>
-            <div class="desc">Pilot flags a commitment that is moving away from baseline.</div>
+          <div class="config-row">
+            <div><div class="label">Drift alert</div><div class="desc">Pilot flags a commitment that is moving away from baseline.</div></div>
+            <div class="control"><div class="toggle"></div></div>
           </div>
-          <div class="control"><div class="toggle"></div></div>
         </div>
 
-        <div class="settings-section">
+        <div class="config-section">
           <h3>Account</h3>
-        </div>
-
-        <div class="setting-row">
-          <div>
-            <div class="label">Identity</div>
-            <div class="desc">Gus Barta · gubarta@gmail.com</div>
+          <div class="config-row">
+            <div><div class="label">Identity</div><div class="desc">Gus Barta · gubarta@gmail.com</div></div>
+            <div class="control"><button class="client-select"><span>Edit</span></button></div>
           </div>
-          <div class="control">
-            <button class="client-select" type="button"><span>Edit</span></button>
+          <div class="config-row">
+            <div><div class="label">Workspace</div><div class="desc">Kilonova · founder workspace · created 2026-04-01</div></div>
+            <div class="control"><button class="client-select"><span>Manage</span></button></div>
           </div>
         </div>
 
-        <div class="setting-row">
-          <div>
-            <div class="label">Workspace</div>
-            <div class="desc">Kilonova · founder workspace · created 2026-04-01</div>
+        <div class="config-section">
+          <h3>Coming in v1.x · dive deeper later</h3>
+          <div class="config-row dive-deeper">
+            <div>
+              <div class="label"><i class="ph ph-robot"></i>Agent setup workflow</div>
+              <div class="desc">Pick skills, set authorities (what the agent can do without asking), set cadence (when it runs).</div>
+            </div>
+            <div class="control">v1.2 · open</div>
           </div>
-          <div class="control">
-            <button class="client-select" type="button"><span>Manage</span></button>
+          <div class="config-row dive-deeper">
+            <div>
+              <div class="label"><i class="ph ph-sliders-horizontal"></i>Rule tuning</div>
+              <div class="desc">Auto-approve thresholds, escalation triggers, banned actions. Per-machine, per-channel.</div>
+            </div>
+            <div class="control">v1.2 · open</div>
+          </div>
+          <div class="config-row dive-deeper">
+            <div>
+              <div class="label"><i class="ph ph-books"></i>Skills & Souls index</div>
+              <div class="desc">Browseable catalog of every available skill (verbs) and soul (persona) installed in this workspace.</div>
+            </div>
+            <div class="control">v1.3 · open</div>
+          </div>
+          <div class="config-row dive-deeper">
+            <div>
+              <div class="label"><i class="ph ph-file-magnifying-glass"></i>Audit log</div>
+              <div class="desc">Every configuration change, with diff and who changed it. Searchable. Exportable.</div>
+            </div>
+            <div class="control">v1.3 · open</div>
           </div>
         </div>
+
       </div>
     </section>
 
-    <!-- ============ AUDIENCE · PILOT (preview) ============ -->
+    <!-- ============ AUDIENCE · PILOT (RSN Authoring) ============ -->
     <div class="audience-view" data-audience="pilot">
-      <div class="audience-hero">
-        <div class="phase-tag">Phase F · Specced · not built in v1</div>
-        <h1>Pilot · the operator running Kilonova back-end</h1>
-        <p>This is where the work that <strong>becomes</strong> the founder's briefs gets done. Pilot drafts the reasoning, runs the council sessions, authors RSNs, and tees up the decisions the founder will ratify.</p>
-      </div>
-
-      <div class="audience-surfaces">
-        <div class="row-label">
-          <h3>Surfaces planned</h3>
-          <div class="meta">Per Bruno's roadmap v0.8 · founder ships first</div>
-        </div>
-
-        <div class="surface-preview-grid">
-          <div class="surface-preview">
-            <div class="head">
-              <span class="verb">Produce</span>
-              <span class="phase">Phase 1A</span>
-            </div>
-            <h4>RSN Authoring</h4>
-            <p>Pilot writes the weekly RSN — drafts, citations, council loop, hand-off to founder Reading queue.</p>
-            <div class="foot"><i class="ph ph-clock"></i>~2 weeks build</div>
+      <div class="rsn-shell">
+        <div class="rsn-head">
+          <div>
+            <h1>RSN Authoring</h1>
+            <p>The pilot surface — author every R-phase, drive the human-in-the-loop gates, ship the brief to Reading.</p>
           </div>
-
-          <div class="surface-preview">
-            <div class="head">
-              <span class="verb">Decide</span>
-              <span class="phase">Phase F</span>
-            </div>
-            <h4>Decision Drafting</h4>
-            <p>Pilot builds the decision packets that land in the founder's Approval surface. Recommendation + risk + rollback.</p>
-            <div class="foot"><i class="ph ph-clock"></i>After Founder Approval lands</div>
-          </div>
-
-          <div class="surface-preview">
-            <div class="head">
-              <span class="verb">Steer</span>
-              <span class="phase">Phase F</span>
-            </div>
-            <h4>Pilot Cockpit</h4>
-            <p>Real-time view of every engagement Pilot is running. Health, drift, council state, next move.</p>
-            <div class="foot"><i class="ph ph-clock"></i>Parallel with Founder Status</div>
-          </div>
-
-          <div class="surface-preview">
-            <div class="head">
-              <span class="verb">Evaluate</span>
-              <span class="phase">Phase F</span>
-            </div>
-            <h4>Audit Trail</h4>
-            <p>Every edit, every ratification, every council vote — searchable, sourced, reversible.</p>
-            <div class="foot"><i class="ph ph-clock"></i>Cross-cutting · v1.2</div>
+          <div class="right">
+            <button class="client-pill"><span class="dot"></span><span>Kilonova · workspace</span><i class="ph ph-caret-down"></i></button>
+            <button class="btn-secondary"><i class="ph ph-cube"></i>opus-4.7</button>
+            <button class="btn-primary"><i class="ph ph-plus"></i>New RSN</button>
           </div>
         </div>
 
-        <div class="audience-notice">
-          <i class="ph ph-info"></i>
-          <p><strong>Why Pilot isn't built yet.</strong> Per the v1 founder-first scope, we ship the consumer surface first so the operator surface can be designed against a stable contract. Building Pilot before Founder is settled risks back-and-forth refactors.</p>
+        <div class="rsn-strip">
+          <div class="commit-tile">
+            <div class="label">Active RSN</div>
+            <div class="val">W22</div>
+            <div class="delta">Started Tue 09:00 · ETA Fri</div>
+          </div>
+          <div class="commit-tile">
+            <div class="label">Phase</div>
+            <div class="val">R5<span class="denom"> / R7</span></div>
+            <div class="delta up">▲ on track</div>
+          </div>
+          <div class="commit-tile">
+            <div class="label">HITL gates passed</div>
+            <div class="val">34<span class="denom"> / 48</span></div>
+            <div class="delta">14 pending</div>
+          </div>
+          <div class="commit-tile">
+            <div class="label">Cost so far</div>
+            <div class="val">$8.40</div>
+            <div class="delta">68% NICHOLAS</div>
+          </div>
+        </div>
+
+        <div class="rsn-grid">
+          <div class="phase-cell done">
+            <div class="code">R0</div>
+            <div class="name">Kickoff intake</div>
+            <div class="state-row"><i class="ph ph-check-circle"></i>done</div>
+            <div class="verb">configure</div>
+          </div>
+          <div class="phase-cell done">
+            <div class="code">R1</div>
+            <div class="name">Market immersion</div>
+            <div class="state-row"><i class="ph ph-check-circle"></i>done · 14 sections</div>
+            <div class="verb">research</div>
+          </div>
+          <div class="phase-cell done">
+            <div class="code">R2</div>
+            <div class="name">Customer model</div>
+            <div class="state-row"><i class="ph ph-check-circle"></i>done</div>
+            <div class="verb">analyze</div>
+          </div>
+          <div class="phase-cell done">
+            <div class="code">R3</div>
+            <div class="name">Strategic group</div>
+            <div class="state-row"><i class="ph ph-check-circle"></i>done · 11 players</div>
+            <div class="verb">map</div>
+          </div>
+          <div class="phase-cell done">
+            <div class="code">R4</div>
+            <div class="name">Signal ingest</div>
+            <div class="state-row"><i class="ph ph-check-circle"></i>done · 312 signals</div>
+            <div class="verb">collect</div>
+          </div>
+          <div class="phase-cell active">
+            <div class="code">R5</div>
+            <div class="name">Signal triage</div>
+            <div class="state-row"><i class="ph ph-spinner-gap"></i>62% · 7 HITL pending</div>
+            <div class="verb">decide</div>
+          </div>
+          <div class="phase-cell">
+            <div class="code">R6</div>
+            <div class="name">Synthesis</div>
+            <div class="state-row"><i class="ph ph-circle"></i>queued</div>
+            <div class="verb">compose</div>
+          </div>
+          <div class="phase-cell blocked">
+            <div class="code">R7</div>
+            <div class="name">Brief compose</div>
+            <div class="state-row"><i class="ph ph-lock"></i>blocked · awaits R6</div>
+            <div class="verb">produce</div>
+          </div>
+          <div class="phase-cell blocked">
+            <div class="code">R8</div>
+            <div class="name">Council review</div>
+            <div class="state-row"><i class="ph ph-lock"></i>blocked</div>
+            <div class="verb">evaluate</div>
+          </div>
+          <div class="phase-cell blocked">
+            <div class="code">R9</div>
+            <div class="name">Pilot pass</div>
+            <div class="state-row"><i class="ph ph-lock"></i>blocked</div>
+            <div class="verb">review</div>
+          </div>
+          <div class="phase-cell blocked">
+            <div class="code">R10</div>
+            <div class="name">Founder ship</div>
+            <div class="state-row"><i class="ph ph-lock"></i>blocked</div>
+            <div class="verb">ship</div>
+          </div>
+          <div class="phase-cell blocked">
+            <div class="code">R11</div>
+            <div class="name">Post-mortem</div>
+            <div class="state-row"><i class="ph ph-lock"></i>blocked</div>
+            <div class="verb">learn</div>
+          </div>
+        </div>
+
+        <div class="rsn-detail">
+          <div class="rsn-panel">
+            <h3><span class="accent">R5</span>Signal triage · prerequisites</h3>
+            <div class="preq-row met">
+              <i class="ph ph-check-circle"></i>
+              <span>R4 signal ingest complete · 312 raw signals</span>
+              <span class="src">/clients/kilonova/outputs/rsn-W22/R4_signals.jsonl</span>
+            </div>
+            <div class="preq-row met">
+              <i class="ph ph-check-circle"></i>
+              <span>Substrate priors loaded · pilot-thesis, revenue-priors</span>
+              <span class="src">substrate</span>
+            </div>
+            <div class="preq-row met">
+              <i class="ph ph-check-circle"></i>
+              <span>Council triage rubric v2.1 attached</span>
+              <span class="src">/skills/rsn-triage/SKILL.md</span>
+            </div>
+            <div class="preq-row missing">
+              <i class="ph ph-warning-circle"></i>
+              <span>Founder ratify on Q3 GTM brief · needed for R7 unlock</span>
+              <span class="src">decision-brief/v3</span>
+            </div>
+            <div class="run-row">
+              <div class="run-state"><i class="ph ph-spinner-gap"></i>Running · 62% complete</div>
+              <div class="run-actions">
+                <button class="btn-secondary"><i class="ph ph-pause"></i>Pause</button>
+                <button class="btn-secondary"><i class="ph ph-stop"></i>Stop</button>
+                <button class="btn-secondary"><i class="ph ph-arrow-clockwise"></i>Requeue</button>
+              </div>
+            </div>
+            <div class="hitl-counter">
+              <span class="num">34 / 48</span>
+              <span>human-in-the-loop gates passed · 14 pending across R5-R11</span>
+            </div>
+          </div>
+
+          <div class="rsn-panel">
+            <h3><i class="ph ph-folder-open"></i>Bucket of information · R0 intake</h3>
+            <div class="bucket-zone">
+              <i class="ph ph-cloud-arrow-up big"></i>
+              <h4>Drop URLs, docs, links for the W22 cycle</h4>
+              <p>Goes into <span style="font-family:var(--font-mono); color:var(--ink); font-size:12px;">/clients/kilonova/inputs/</span> · system organizes by type</p>
+              <div class="bucket-items">
+                <div class="bucket-item"><i class="ph ph-link"></i>3 URLs</div>
+                <div class="bucket-item"><i class="ph ph-file-pdf"></i>2 PDFs</div>
+                <div class="bucket-item"><i class="ph ph-file-text"></i>5 MD files</div>
+                <div class="bucket-item"><i class="ph ph-image"></i>1 screenshot</div>
+              </div>
+            </div>
+
+            <div class="fs-shell">
+              <h3>Workspace files</h3>
+              <div class="fs-breadcrumb"><span class="seg">/clients/kilonova/</span>outputs/rsn-W22/</div>
+              <div class="fs-grid">
+                <div class="fs-item folder"><i class="ph ph-folder ic"></i><div class="name">R1_market</div><div class="meta">14 files · 2d ago</div></div>
+                <div class="fs-item folder"><i class="ph ph-folder ic"></i><div class="name">R2_customer</div><div class="meta">8 files · 2d ago</div></div>
+                <div class="fs-item folder"><i class="ph ph-folder ic"></i><div class="name">R3_group</div><div class="meta">6 files · 1d ago</div></div>
+                <div class="fs-item folder"><i class="ph ph-folder ic"></i><div class="name">R4_signals</div><div class="meta">2 files · 12h ago</div></div>
+                <div class="fs-item"><i class="ph ph-file-text ic"></i><div class="name">triage_state.json</div><div class="meta">live · 12 KB</div></div>
+                <div class="fs-item"><i class="ph ph-file-text ic"></i><div class="name">README.md</div><div class="meta">3 KB</div></div>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </div>
 
-    <!-- ============ AUDIENCE · PROSPECT (preview) ============ -->
+    <!-- ============ AUDIENCE · PROSPECT (R1 Founder Product) ============ -->
     <div class="audience-view" data-audience="prospect">
-      <div class="audience-hero">
-        <div class="phase-tag">Phase G · Specced · not built in v1</div>
-        <h1>Prospect · the public lead funnel</h1>
-        <p>The audience that doesn't have an account yet. A reading-first public surface that lets a prospect <strong>understand the product without a demo call</strong>, then book one if they want to go deeper.</p>
+      <div class="prospect-shell">
+
+        <div class="prospect-main">
+          <div class="prospect-eyebrow">R1 · MARKET IMMERSION · SECTOR REPORT</div>
+          <h1 class="prospect-h1">Map your sector <em>before</em> you ship the wedge.</h1>
+          <p class="prospect-lead">A 14-section sector report delivered in 3-5 working days. Independent research first, then your context. The work you'd hire an analyst for, structured so you can act on it.</p>
+
+          <div class="intake-steps">
+            <div class="intake-step-dot done"></div>
+            <div class="intake-step-dot done"></div>
+            <div class="intake-step-dot current"></div>
+            <div class="intake-step-dot"></div>
+          </div>
+
+          <div class="intake-form">
+            <div class="step-label">Step 3 of 4 · Your situation</div>
+            <h2>Confirm the framing</h2>
+            <p class="help">Three quick fields. The rest we research for you. You'll get a confirmation email and the deliverable inside 3-5 days.</p>
+
+            <div class="intake-q">
+              <label>Your email</label>
+              <input type="email" value="gus@kilonova.so" />
+              <div class="hint">We send progress notifications and the final deliverable here.</div>
+            </div>
+            <div class="intake-q">
+              <label>What sector are you entering?</label>
+              <input type="text" value="Travel-tech · conference-goer ICP · US primary" />
+            </div>
+            <div class="intake-q">
+              <label>Where are you right now?</label>
+              <select>
+                <option>Hypothesis stage · no paying customers · deciding over months</option>
+                <option>Early customers · learning what to scale</option>
+                <option>Scaling · need second-act analysis</option>
+              </select>
+            </div>
+            <div class="intake-q">
+              <label>If you have a URL or one-pager, drop it here (optional)</label>
+              <input type="text" placeholder="https://..." />
+              <div class="hint">URL only — we look outward first. Heavy internal docs make the report inward-looking.</div>
+            </div>
+            <div class="intake-actions">
+              <button class="btn-tertiary"><i class="ph ph-arrow-left"></i>Back</button>
+              <button class="btn-primary">Confirm framing<i class="ph ph-arrow-right"></i></button>
+            </div>
+          </div>
+
+          <div class="section-head" style="padding-left:0">
+            <h3>Sample · confirmation screen</h3>
+            <div class="meta">What you'll see right after submitting</div>
+          </div>
+
+          <div class="confirmation">
+            <p class="lead"><strong>You experienced the conference-goer pain directly.</strong> You are at hypothesis stage with no paying customers yet, planning over months not weeks. Your three sharpest questions: how big the real market is, what offering shape fits the pain, and what wedge gets a new entrant in. Here is what we propose.</p>
+
+<div class="frame"><span class="h">═════════════════════════════════════════════════════════════════════════
+  THE SCOPE
+═════════════════════════════════════════════════════════════════════════</span>
+
+  Sector            Travel-tech · US primary, EU secondary
+  Target customer   Frequent conference-goers who book their own travel
+                    and expense it back, with no corporate procurement
+                    in the way
+  Your position     You lived the pain · hypothesis not yet sold ·
+                    deciding over months, not shipping by Friday
+  How we work       Pilot-assisted · we drive the research, you steer
+                    at three gates
+  Depth             Full immersion · all 14 sections · three deepened
+</div>
+
+<div class="frame"><span class="h">═════════════════════════════════════════════════════════════════════════
+  THE FOURTEEN SECTIONS  ·  every one runs at full depth
+═════════════════════════════════════════════════════════════════════════</span>
+
+  <strong>THREE ANSWER THE QUESTIONS YOU WALKED IN WITH</strong>
+
+  ▶ Market Sizing + Scenarios     →  how big the market really is
+  ▶ Customer Economics + Buying   →  what offering shape fits the pain
+  ▶ Key Players + Group Map       →  what wedge gets a new entrant in
+
+  ───────────────────────────────────────────────────────────────────────
+
+  <strong>ELEVEN MORE MAP THE REST OF THE TERRITORY</strong>
+
+  Shoulders of Giants ......... the sources worth standing on
+  Macro Context ............... the forces moving the whole sector
+  AI Transformation ........... how the AI wave restructures the work
+  Lifecycle Stage ............. where the sector sits in its life
+  Industry Structure .......... the Five Forces verdict
+  Value Chain + Profit Pools .. where profit actually concentrates
+  Discovery Layer Ownership ... who owns demand before vendor is seen
+  Disruption + New-Entry ...... where the openings for entry are
+  Capital Landscape ........... where money flows and what it believes
+  Multi-Scenario Futures ...... how the next few years could break
+  Strategic Synthesis ......... what all of it means for your move
+</div>
+
+<div class="frame"><span class="h">═════════════════════════════════════════════════════════════════════════
+  WHAT YOU'LL RECEIVE
+═════════════════════════════════════════════════════════════════════════</span>
+
+  ▣ <strong>The Sector Report</strong>     The fourteen sections above as one deep-dive
+                          document. Each ends in what it means for your
+                          move, and every claim traces to a source.
+
+  ▣ <strong>The Visual Edition</strong>    The same intelligence as a designed report you
+                          can put in front of a co-founder, board, or
+                          investor without translating it first.
+
+  ▣ <strong>The Foundation</strong>        Not a one-off you read and file. The ground
+                          every later decision stands on.
+
+  Timeline                3-5 working days
+  Investment              [pricing TBD]
+</div>
+
+            <div class="confirmation-actions">
+              <button class="btn-primary"><i class="ph ph-check"></i>Accept as proposed</button>
+              <button class="btn-tertiary"><i class="ph ph-pencil-simple"></i>Edit fields</button>
+              <button class="btn-tertiary"><i class="ph ph-x"></i>Decline</button>
+              <a href="#" class="book-call-pill" style="margin-left:auto"><i class="ph ph-phone"></i>Or book a call</a>
+            </div>
+          </div>
+        </div>
+
+        <aside class="prospect-side">
+          <div class="side-block">
+            <h4>This isn't a chatbot</h4>
+            <p>Real sector research takes time. We notify you by email when the report lands — usually inside 3-5 working days. No staring at a loading bar.</p>
+          </div>
+          <div class="side-block">
+            <h4>What you'll get</h4>
+            <ul>
+              <li><i class="ph ph-file-text"></i>Sector Report · 14 sections, sourced</li>
+              <li><i class="ph ph-file-image"></i>Visual Edition · investor-ready</li>
+              <li><i class="ph ph-database"></i>Foundation substrate · for follow-ons</li>
+            </ul>
+          </div>
+          <div class="side-block">
+            <h4>Timeline</h4>
+            <div class="timeline-row"><span>Form submit</span><strong>Now</strong></div>
+            <div class="timeline-row"><span>Confirmation email</span><strong>~30 sec</strong></div>
+            <div class="timeline-row"><span>R1 deliverable</span><strong>3-5 days</strong></div>
+          </div>
+          <div class="side-block">
+            <h4>Want to skip the queue?</h4>
+            <p>Book a 30-min call. We talk through your sector live, and you start with a richer brief.</p>
+            <a href="#" class="book-call-pill"><i class="ph ph-phone"></i>Book a 30-min call</a>
+          </div>
+        </aside>
+
       </div>
-
-      <div class="audience-surfaces">
-        <div class="row-label">
-          <h3>Surfaces planned</h3>
-          <div class="meta">Track runs parallel to in-app work</div>
-        </div>
-
-        <div class="surface-preview-grid">
-          <div class="surface-preview">
-            <div class="head">
-              <span class="verb">Understand</span>
-              <span class="phase">Phase 1B</span>
-            </div>
-            <h4>R1 Founder Product</h4>
-            <p>The public-facing case for Kilonova. One long-scroll page, written like an editorial, with the actual artifacts shown — not promised.</p>
-            <div class="foot"><i class="ph ph-clock"></i>~2 weeks · parallel to RSN</div>
-          </div>
-
-          <div class="surface-preview">
-            <div class="head">
-              <span class="verb">Book</span>
-              <span class="phase">Phase G</span>
-            </div>
-            <h4>Book-a-call</h4>
-            <p>The only conversion action. Real calendar, real slots, no friction.</p>
-            <div class="foot"><i class="ph ph-clock"></i>Inline with R1</div>
-          </div>
-
-          <div class="surface-preview">
-            <div class="head">
-              <span class="verb">Evaluate</span>
-              <span class="phase">Phase G</span>
-            </div>
-            <h4>Diagnostic</h4>
-            <p>A short self-serve diagnostic that returns a real artifact. Lets the prospect feel the system before they book.</p>
-            <div class="foot"><i class="ph ph-clock"></i>v1.3 candidate</div>
-          </div>
-        </div>
-
-        <div class="audience-notice">
-          <i class="ph ph-info"></i>
-          <p><strong>This is a separate track.</strong> Per our pushback on Bruno's spec, Prospect runs as its own deploy (likely <code>kilonova.com</code>), not inside the app shell. The audience tab here is a preview of what gets shipped on that track.</p>
-        </div>
-      </div>
+      <a href="#" class="book-call-pill book-call-floating"><i class="ph ph-phone"></i>Book a call</a>
     </div>
 
   </main>
 
-  <!-- ============== RIGHT RAIL · ASK KILONOVA ============== -->
+  <!-- ============== RIGHT RAIL · CHAT-WITH-CONTENT ============== -->
   <aside class="rail" id="rail">
     <div class="rail-head">
       <div class="rail-title">
         <i class="ph ph-sparkle"></i>
         <span>Ask Kilonova</span>
       </div>
-      <button class="rail-close" id="railClose" title="Close">
-        <i class="ph ph-x"></i>
-      </button>
+      <button class="rail-close" id="railClose"><i class="ph ph-x"></i></button>
+    </div>
+
+    <div class="context-strip" id="contextStrip" style="display:none">
+      <i class="ph ph-link-simple-horizontal"></i>
+      <span>Chatting about: <strong id="contextTitle">Q3 GTM positioning</strong> · 5 sources loaded</span>
+      <span class="close-ctx" id="closeCtx">clear</span>
     </div>
 
     <div class="rail-body">
       <div class="msg kilo">
-        <strong>Kilonova.</strong> I have context on everything in this workspace. Ask about a brief, a decision, a pilot engagement, or anything I've reasoned on. I cite sources.
+        <strong>Kilonova.</strong> I have context on everything in this workspace. Click the chat icon on any brief to scope me to that artifact's sources. Or just ask globally.
       </div>
-
       <div class="msg user">What's the recommendation in the Q3 GTM brief, in one sentence?</div>
-
       <div class="msg kilo">
         Position Kilonova as an <strong>Operator OS for AI-native founders</strong>, not a "council of agents." The council framing tested 28% lower on intent-to-engage and confuses the buyer about who is in charge.
         <br><span class="msg-source"><i class="ph ph-file-text"></i>Q3 GTM positioning · §4 recommendation</span>
       </div>
-
       <div class="msg user">What's the strongest counter-argument?</div>
-
       <div class="msg kilo">
         The "council" framing is more defensible against commoditized AI tooling — operator-OS competes directly with agent platforms that will outspend us. Coverage in §6 of the same brief.
         <br><span class="msg-source"><i class="ph ph-file-text"></i>Q3 GTM positioning · §6 risks</span>
@@ -1564,14 +2665,15 @@ main::-webkit-scrollbar-thumb:hover, .rail-body::-webkit-scrollbar-thumb:hover{
     </div>
 
     <div class="rail-foot">
+      <button class="pick-content" id="pickContent" type="button">
+        <i class="ph ph-cursor"></i><span>Pick content on the page to chat about</span>
+      </button>
       <div class="composer">
-        <textarea placeholder="Ask anything · cite a brief with @" rows="1" id="composer"></textarea>
-        <button class="composer-send" title="Send">
-          <i class="ph ph-arrow-up"></i>
-        </button>
+        <textarea placeholder="Ask anything · @ a brief · or pick content above" rows="1" id="composer"></textarea>
+        <button class="composer-send"><i class="ph ph-arrow-up"></i></button>
       </div>
       <div class="composer-meta">
-        <span>NICHOLAS reasoning kernel · with workspace context</span>
+        <span>5-doc context window · NICHOLAS kernel</span>
         <span><span class="kbd">⌘ ↵</span> to send</span>
       </div>
     </div>
@@ -1579,18 +2681,27 @@ main::-webkit-scrollbar-thumb:hover, .rail-body::-webkit-scrollbar-thumb:hover{
 
 </div>
 
+<!-- Right-click selection menu (floats) -->
+<div class="sel-menu" id="selMenu">
+  <button class="sel-item" data-action="chat"><div class="left"><i class="ph ph-chat-circle-dots"></i><span>Chat about this</span></div><span class="sel-kbd">⌘K</span></button>
+  <button class="sel-item" data-action="comment"><div class="left"><i class="ph ph-chat-text"></i><span>Add comment</span></div><span class="sel-kbd">⌘M</span></button>
+  <button class="sel-item" data-action="voice"><div class="left"><i class="ph ph-microphone"></i><span>Voice memo</span></div></button>
+  <button class="sel-item" data-action="edit"><div class="left"><i class="ph ph-pencil-simple"></i><span>Edit with reason</span></div></button>
+</div>
+
 <script>
 (function(){
   const app = document.getElementById('app');
+  const mainEl = document.querySelector('main');
 
-  // --- Audience switcher (Founder · Pilot · Prospect) ---
+  // ---------- Audience switcher ----------
   const audienceTabs = document.querySelectorAll('.audience-tab');
   const audienceViews = document.querySelectorAll('.audience-view');
   const audienceMetaText = document.getElementById('audienceMetaText');
-  const audienceMetaMap = {
-    founder:  'Consumer · Ratifier · 4 surfaces live',
-    pilot:    'Operator · Back-end · Phase F preview',
-    prospect: 'Public · Lead funnel · Phase G preview'
+  const metaMap = {
+    founder:  'Consumer · Ratifier · 5 surfaces live',
+    pilot:    'Operator · Back-end · RSN Authoring',
+    prospect: 'Public · Lead funnel · R1 intake live'
   };
   audienceTabs.forEach(tab => {
     tab.addEventListener('click', () => {
@@ -1599,12 +2710,12 @@ main::-webkit-scrollbar-thumb:hover, .rail-body::-webkit-scrollbar-thumb:hover{
       app.dataset.audience = target;
       audienceViews.forEach(v => v.classList.toggle('active', v.dataset.audience === target));
       if (target !== 'founder') app.dataset.rail = 'closed';
-      if (audienceMetaText) audienceMetaText.textContent = audienceMetaMap[target] || '';
-      document.querySelector('main').scrollTo({ top: 0, behavior: 'instant' });
+      if (audienceMetaText) audienceMetaText.textContent = metaMap[target] || '';
+      mainEl.scrollTo({ top: 0, behavior: 'instant' });
     });
   });
 
-  // --- Surface routing ---
+  // ---------- Surface routing ----------
   const navItems = document.querySelectorAll('.nav-item[data-go]');
   const surfaces = document.querySelectorAll('.surface');
   navItems.forEach(btn => {
@@ -1612,20 +2723,19 @@ main::-webkit-scrollbar-thumb:hover, .rail-body::-webkit-scrollbar-thumb:hover{
       const target = btn.dataset.go;
       navItems.forEach(b => b.classList.toggle('active', b === btn));
       surfaces.forEach(s => s.classList.toggle('active', s.dataset.surface === target));
-      document.querySelector('main').scrollTo({ top: 0, behavior: 'instant' });
+      mainEl.scrollTo({ top: 0, behavior: 'instant' });
     });
   });
 
-  // --- Right rail toggle ---
+  // ---------- Right rail toggle ----------
   const askBtn = document.getElementById('askBtn');
   const railClose = document.getElementById('railClose');
   askBtn.addEventListener('click', () => {
-    const isOpen = app.dataset.rail === 'open';
-    app.dataset.rail = isOpen ? 'closed' : 'open';
+    app.dataset.rail = app.dataset.rail === 'open' ? 'closed' : 'open';
   });
   railClose.addEventListener('click', () => { app.dataset.rail = 'closed'; });
 
-  // --- Identity dropdown ---
+  // ---------- Identity dropdown ----------
   const identityBtn = document.getElementById('identityBtn');
   const identityMenu = document.getElementById('identityMenu');
   identityBtn.addEventListener('click', (e) => {
@@ -1638,33 +2748,28 @@ main::-webkit-scrollbar-thumb:hover, .rail-body::-webkit-scrollbar-thumb:hover{
     }
   });
 
-  // --- Dark mode toggle (shared) ---
+  // ---------- Dark mode ----------
   function setTheme(theme){
     document.documentElement.dataset.theme = theme;
     const on = theme === 'dark';
-    document.querySelectorAll('#darkToggle, #darkToggleSettings').forEach(t => {
-      t.classList.toggle('on', on);
-    });
+    document.querySelectorAll('#darkToggle, #darkToggleSettings').forEach(t => t.classList.toggle('on', on));
     try { localStorage.setItem('kn-theme', theme); } catch(e){}
   }
   let initialTheme = 'dark';
   try {
-    const stored = localStorage.getItem('kn-theme');
-    if (stored === 'light' || stored === 'dark') initialTheme = stored;
+    const s = localStorage.getItem('kn-theme');
+    if (s === 'light' || s === 'dark') initialTheme = s;
   } catch(e){}
   setTheme(initialTheme);
-
   document.getElementById('darkToggleBtn').addEventListener('click', (e) => {
     e.stopPropagation();
-    const current = document.documentElement.dataset.theme || 'dark';
-    setTheme(current === 'dark' ? 'light' : 'dark');
+    setTheme((document.documentElement.dataset.theme || 'dark') === 'dark' ? 'light' : 'dark');
   });
   document.getElementById('darkToggleSettings').addEventListener('click', () => {
-    const current = document.documentElement.dataset.theme || 'dark';
-    setTheme(current === 'dark' ? 'light' : 'dark');
+    setTheme((document.documentElement.dataset.theme || 'dark') === 'dark' ? 'light' : 'dark');
   });
 
-  // --- Chips (visual only) ---
+  // ---------- Chips ----------
   document.querySelectorAll('.chips').forEach(group => {
     group.querySelectorAll('.chip').forEach(chip => {
       chip.addEventListener('click', () => {
@@ -1673,7 +2778,7 @@ main::-webkit-scrollbar-thumb:hover, .rail-body::-webkit-scrollbar-thumb:hover{
     });
   });
 
-  // --- Composer auto-grow ---
+  // ---------- Composer auto-grow ----------
   const composer = document.getElementById('composer');
   if (composer){
     composer.addEventListener('input', () => {
@@ -1681,6 +2786,76 @@ main::-webkit-scrollbar-thumb:hover, .rail-body::-webkit-scrollbar-thumb:hover{
       composer.style.height = Math.min(composer.scrollHeight, 140) + 'px';
     });
   }
+
+  // ---------- Brief card: open editorial (if href) ----------
+  document.querySelectorAll('.brief-card[data-href]').forEach(card => {
+    card.addEventListener('click', (e) => {
+      if (e.target.closest('.icon-btn') || e.target.closest('.sources-expand')) return;
+      window.location.href = card.dataset.href;
+    });
+  });
+
+  // ---------- Sources expand ----------
+  document.querySelectorAll('.sources-expand').forEach(box => {
+    const toggle = box.querySelector('.sources-toggle');
+    toggle.addEventListener('click', (e) => {
+      e.stopPropagation();
+      box.classList.toggle('open');
+    });
+  });
+
+  // ---------- Chat-with-content: per-card chat icon ----------
+  const contextStrip = document.getElementById('contextStrip');
+  const contextTitle = document.getElementById('contextTitle');
+  const closeCtx = document.getElementById('closeCtx');
+  function openChatFor(title){
+    contextTitle.textContent = title || 'this page';
+    contextStrip.style.display = 'flex';
+    app.dataset.rail = 'open';
+  }
+  document.querySelectorAll('.chat-open').forEach(btn => {
+    btn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      const card = btn.closest('[data-context]');
+      openChatFor(card ? card.dataset.context : null);
+    });
+  });
+  closeCtx.addEventListener('click', () => { contextStrip.style.display = 'none'; });
+
+  // ---------- Lanes (collapsible) ----------
+  document.querySelectorAll('.lane-head').forEach(head => {
+    head.addEventListener('click', () => head.parentElement.classList.toggle('open'));
+  });
+
+  // ---------- Pick content (rail) ----------
+  const pickBtn = document.getElementById('pickContent');
+  let pickMode = false;
+  pickBtn.addEventListener('click', () => {
+    pickMode = !pickMode;
+    pickBtn.classList.toggle('active', pickMode);
+    document.body.style.cursor = pickMode ? 'crosshair' : '';
+  });
+
+  // ---------- Selection right-click menu ----------
+  const selMenu = document.getElementById('selMenu');
+  document.addEventListener('contextmenu', (e) => {
+    const sel = window.getSelection();
+    if (!sel || !sel.toString().trim()) { selMenu.classList.remove('open'); return; }
+    e.preventDefault();
+    selMenu.style.left = e.clientX + 'px';
+    selMenu.style.top = e.clientY + 'px';
+    selMenu.classList.add('open');
+  });
+  document.addEventListener('click', (e) => {
+    if (!selMenu.contains(e.target)) selMenu.classList.remove('open');
+  });
+  selMenu.querySelectorAll('.sel-item').forEach(item => {
+    item.addEventListener('click', () => {
+      const action = item.dataset.action;
+      if (action === 'chat') openChatFor('Selected text');
+      selMenu.classList.remove('open');
+    });
+  });
 })();
 </script>
 
