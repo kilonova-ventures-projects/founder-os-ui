@@ -1366,6 +1366,103 @@ aside.rail{
   .history-table{ padding-left: 22px; padding-right: 22px; }
 }
 
+/* ---------- RSN Artifact Structure (RSN filter view) ---------- */
+.rsn-structure{ padding: 18px 36px 40px; }
+.rsn-structure-head{
+  display: flex; align-items: flex-end; justify-content: space-between;
+  padding: 14px 0 22px;
+  border-bottom: 1px solid var(--line);
+  margin-bottom: 8px;
+}
+.rsn-structure-head .left h2{
+  font-family: var(--font-display); font-weight: 600;
+  font-size: 32px; letter-spacing: -0.02em;
+  margin: 0 0 4px; color: var(--ink);
+}
+.rsn-structure-head .left p{
+  font-family: var(--font-body); font-size: 14px;
+  color: var(--ink-2); margin: 0;
+}
+.rsn-structure-head .right{
+  font-family: var(--font-mono); font-size: 10px;
+  letter-spacing: 0.08em; text-transform: uppercase;
+  color: var(--ink-3);
+  display: flex; gap: 14px; align-items: center;
+}
+.rsn-structure-head .right strong{ color: var(--ink-2); font-weight: 600; }
+.rsn-structure-head .right .sep{ color: var(--ink-4); }
+
+.rsn-section{ margin-top: 28px; }
+.rsn-section-label{
+  font-family: var(--font-mono); font-size: 10px;
+  letter-spacing: 0.14em; text-transform: uppercase;
+  color: var(--ink-3);
+  margin: 0 0 12px;
+  padding-bottom: 6px;
+  border-bottom: 1px solid var(--line-soft);
+}
+
+.rsn-art-grid{
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(190px, 1fr));
+  gap: 10px;
+}
+.rsn-art{
+  background: var(--bg-card);
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  padding: 14px 14px 12px;
+  min-height: 132px;
+  display: flex; flex-direction: column;
+  cursor: pointer;
+  transition: border-color var(--t-fast) var(--ease), background var(--t-fast) var(--ease), transform var(--t-fast) var(--ease);
+}
+.rsn-art.ready{ border-color: var(--accent-line); }
+.rsn-art.upcoming{
+  border-style: dashed; border-color: var(--line-strong);
+  cursor: default;
+}
+.rsn-art:hover{ background: var(--bg-card-hover); }
+.rsn-art.ready:hover{ border-color: var(--accent); transform: translateY(-1px); }
+.rsn-art.upcoming:hover{ transform: none; }
+
+.art-head{
+  display: flex; justify-content: space-between; align-items: center;
+  margin-bottom: 14px;
+  font-family: var(--font-mono); font-size: 11px;
+}
+.art-head .code{ color: var(--ink-3); letter-spacing: 0.08em; text-transform: uppercase; }
+.art-head .score{ color: var(--ink-2); }
+.rsn-art.upcoming .art-head .code{ color: var(--ink-4); }
+
+.art-title{
+  font-family: var(--font-body); font-size: 15px; font-weight: 500;
+  color: var(--ink); line-height: 1.25;
+  margin-bottom: auto;
+  display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+.rsn-art.upcoming .art-title{ color: var(--ink-3); }
+
+.art-status{
+  display: inline-block;
+  align-self: flex-start;
+  margin-top: 12px;
+  font-family: var(--font-mono); font-size: 9px;
+  letter-spacing: 0.14em; text-transform: uppercase;
+  padding: 3px 7px;
+  border-radius: 3px;
+  border: 1px solid var(--line);
+  color: var(--ink-3);
+}
+.rsn-art.ready .art-status{ color: var(--accent); border-color: var(--accent-line); }
+.rsn-art.upcoming .art-status{ color: var(--ink-3); border-color: var(--line); }
+
+@media (max-width: 900px){
+  .rsn-structure{ padding-left: 22px; padding-right: 22px; }
+  .rsn-structure-head .right{ display: none; }
+}
+
 /* ---------- Scrollbars ---------- */
 main::-webkit-scrollbar, .rail-body::-webkit-scrollbar, .pipeline-col .col-body::-webkit-scrollbar{ width:8px; }
 main::-webkit-scrollbar-thumb, .rail-body::-webkit-scrollbar-thumb, .pipeline-col .col-body::-webkit-scrollbar-thumb{
@@ -1479,7 +1576,7 @@ main::-webkit-scrollbar-thumb:hover, .rail-body::-webkit-scrollbar-thumb:hover{
       <div class="chips">
         <button class="chip active" data-filter="all">All <span class="count" data-count-for="all">13</span></button>
         <button class="chip" data-filter="decision">Decisions <span class="count" data-count-for="decision">2</span></button>
-        <button class="chip" data-filter="rsn">RSN <span class="count" data-count-for="rsn">6</span></button>
+        <button class="chip" data-filter="rsn">RSN <span class="count" data-count-for="rsn">26</span></button>
         <button class="chip" data-filter="status">Status <span class="count" data-count-for="status">1</span></button>
         <button class="chip" data-filter="pilot">Pilot notes <span class="count" data-count-for="pilot">2</span></button>
         <button class="chip" data-filter="minutes">Meeting minutes <span class="count" data-count-for="minutes">2</span></button>
@@ -1684,47 +1781,69 @@ main::-webkit-scrollbar-thumb:hover, .rail-body::-webkit-scrollbar-thumb:hover{
         </div>
       </div>
 
-      <!-- RSN-only section: upcoming / not built yet -->
-      <div class="section-head" data-section="rsn-upcoming" style="display:none">
-        <h3>Upcoming RSN cycles · not built yet</h3>
-      </div>
-      <div class="brief-grid" data-grid="rsn-upcoming" style="display:none">
-        <div class="brief-card upcoming" data-type="rsn">
-          <div class="brief-meta-row">
-            <span class="type-badge rsn">RSN output</span>
-            <span class="brief-time">in progress</span>
+      <!-- RSN-only view: artifact structure (RSN-X Track) · shown when filter = rsn -->
+      <div class="rsn-structure" data-grid="rsn-structure" style="display:none">
+        <div class="rsn-structure-head">
+          <div class="left">
+            <h2>Kilonova · RSN-X Track</h2>
+            <p>Every artifact slot in the canonical RSN cycle. Ready means produced and graded. Upcoming means specced but not yet built.</p>
           </div>
-          <h2 class="brief-title">RSN · 2026-W22 · authoring now</h2>
-          <p class="brief-synopsis">Pilot is currently in phase R5 · signal triage. 34 of 48 human-in-the-loop gates passed. ETA Friday morning.</p>
-          <div class="brief-foot">
-            <div class="left"><div class="src-stack"><div class="src">N</div><div class="src">P</div></div><span>62% · 14 gates pending</span></div>
-            <div class="read"><i class="ph ph-spinner-gap"></i>Drafting</div>
+          <div class="right">
+            <span><strong>22</strong> ready</span>
+            <span class="sep">·</span>
+            <span><strong>4</strong> upcoming</span>
+            <span class="sep">·</span>
+            <span>Last refresh today 09:14</span>
           </div>
         </div>
 
-        <div class="brief-card upcoming" data-type="rsn">
-          <div class="brief-meta-row">
-            <span class="type-badge rsn">RSN output</span>
-            <span class="brief-time">queued</span>
-          </div>
-          <h2 class="brief-title">RSN · 2026-W23 · scheduled Mon</h2>
-          <p class="brief-synopsis">Auto-queued by cadence engine. Inputs will be pulled from substrate + new signals ingested over the week.</p>
-          <div class="brief-foot">
-            <div class="left"><span>Auto · cadence engine</span></div>
-            <div class="read"><i class="ph ph-calendar-blank"></i>May 26</div>
+        <div class="rsn-section">
+          <div class="rsn-section-label">Research</div>
+          <div class="rsn-art-grid">
+            <div class="rsn-art ready"><div class="art-head"><span class="code">R0</span><span class="score">8.5</span></div><div class="art-title">Overview</div><span class="art-status">Ready</span></div>
+            <div class="rsn-art ready"><div class="art-head"><span class="code">R1</span><span class="score">9.0</span></div><div class="art-title">Sector Immersion</div><span class="art-status">Ready</span></div>
+            <div class="rsn-art ready"><div class="art-head"><span class="code">R2</span><span class="score">8.7</span></div><div class="art-title">Competitive Landscape</div><span class="art-status">Ready</span></div>
+            <div class="rsn-art ready"><div class="art-head"><span class="code">R3</span><span class="score">8.9</span></div><div class="art-title">Opportunity Mapping</div><span class="art-status">Ready</span></div>
+            <div class="rsn-art ready"><div class="art-head"><span class="code">R4</span><span class="score">8.4</span></div><div class="art-title">Opportunity-Solution Tree</div><span class="art-status">Ready</span></div>
+            <div class="rsn-art ready"><div class="art-head"><span class="code">R5</span><span class="score">8.6</span></div><div class="art-title">Research Synthesis</div><span class="art-status">Ready</span></div>
+            <div class="rsn-art ready"><div class="art-head"><span class="code">R6</span><span class="score">9.1</span></div><div class="art-title">Founder OS Deep Dive</div><span class="art-status">Ready</span></div>
           </div>
         </div>
 
-        <div class="brief-card upcoming" data-type="rsn">
-          <div class="brief-meta-row">
-            <span class="type-badge rsn">RSN output</span>
-            <span class="brief-time">recurring</span>
+        <div class="rsn-section">
+          <div class="rsn-section-label">Strategy</div>
+          <div class="rsn-art-grid">
+            <div class="rsn-art ready"><div class="art-head"><span class="code">S1</span><span class="score">8.0</span></div><div class="art-title">Lean Canvas</div><span class="art-status">Ready</span></div>
+            <div class="rsn-art ready"><div class="art-head"><span class="code">S2</span><span class="score">8.3</span></div><div class="art-title">Business Model Canvas</div><span class="art-status">Ready</span></div>
+            <div class="rsn-art ready"><div class="art-head"><span class="code">S3</span><span class="score">8.5</span></div><div class="art-title">Product Overview</div><span class="art-status">Ready</span></div>
+            <div class="rsn-art ready"><div class="art-head"><span class="code">S4</span><span class="score">9.0</span></div><div class="art-title">Tech Architecture</div><span class="art-status">Ready</span></div>
+            <div class="rsn-art ready"><div class="art-head"><span class="code">S5</span><span class="score">8.2</span></div><div class="art-title">Future Ecosystem</div><span class="art-status">Ready</span></div>
+            <div class="rsn-art ready"><div class="art-head"><span class="code">S6</span><span class="score">8.7</span></div><div class="art-title">Value Proposition</div><span class="art-status">Ready</span></div>
+            <div class="rsn-art upcoming"><div class="art-head"><span class="code">S7</span></div><div class="art-title">Journey Map</div><span class="art-status">Upcoming</span></div>
+            <div class="rsn-art upcoming"><div class="art-head"><span class="code">S8</span></div><div class="art-title">Tokenomics</div><span class="art-status">Upcoming</span></div>
           </div>
-          <h2 class="brief-title">RSN cadence · Mondays 09:00</h2>
-          <p class="brief-synopsis">The system generates one RSN per week. Phase R0-R11. Configurable in Configuration · Agent setup workflow.</p>
-          <div class="brief-foot">
-            <div class="left"><span>Recurring cycle</span></div>
-            <div class="read"><i class="ph ph-arrows-clockwise"></i>Weekly</div>
+        </div>
+
+        <div class="rsn-section">
+          <div class="rsn-section-label">Narrative</div>
+          <div class="rsn-art-grid">
+            <div class="rsn-art ready"><div class="art-head"><span class="code">NX1</span><span class="score">8.4</span></div><div class="art-title">Brand Architecture Decision Brief</div><span class="art-status">Ready</span></div>
+            <div class="rsn-art ready"><div class="art-head"><span class="code">N1</span><span class="score">8.6</span></div><div class="art-title">MTP</div><span class="art-status">Ready</span></div>
+            <div class="rsn-art ready"><div class="art-head"><span class="code">N2</span><span class="score">8.3</span></div><div class="art-title">Brand Archetype</div><span class="art-status">Ready</span></div>
+            <div class="rsn-art ready"><div class="art-head"><span class="code">N3</span><span class="score">8.5</span></div><div class="art-title">Brand Platform</div><span class="art-status">Ready</span></div>
+            <div class="rsn-art upcoming"><div class="art-head"><span class="code">N4</span></div><div class="art-title">Messaging House</div><span class="art-status">Upcoming</span></div>
+            <div class="rsn-art upcoming"><div class="art-head"><span class="code">N5</span></div><div class="art-title">Brand Narrative</div><span class="art-status">Upcoming</span></div>
+          </div>
+        </div>
+
+        <div class="rsn-section">
+          <div class="rsn-section-label">Extras</div>
+          <div class="rsn-art-grid">
+            <div class="rsn-art upcoming"><div class="art-head"><span class="code">X1</span></div><div class="art-title">Foresight Scenarios</div><span class="art-status">Upcoming</span></div>
+            <div class="rsn-art ready"><div class="art-head"><span class="code">X2</span><span class="score">8.8</span></div><div class="art-title">First Principles</div><span class="art-status">Ready</span></div>
+            <div class="rsn-art ready"><div class="art-head"><span class="code">X3</span><span class="score">8.5</span></div><div class="art-title">Jobs to be Done</div><span class="art-status">Ready</span></div>
+            <div class="rsn-art ready"><div class="art-head"><span class="code">X4</span><span class="score">8.2</span></div><div class="art-title">Wardley Maps</div><span class="art-status">Ready</span></div>
+            <div class="rsn-art ready"><div class="art-head"><span class="code">X5</span><span class="score">8.4</span></div><div class="art-title">North Star + OKR</div><span class="art-status">Ready</span></div>
           </div>
         </div>
       </div>
@@ -3038,23 +3157,34 @@ main::-webkit-scrollbar-thumb:hover, .rail-body::-webkit-scrollbar-thumb:hover{
 
   // ---------- Chips (filter content) ----------
   function applyFilter(surface, filter){
-    // filter both card-style items (Unread, RSN upcoming) AND table-style items (History)
+    const isRsn = filter === 'rsn';
+
+    // The RSN filter shows the artifact-structure view instead of the regular brief items
+    const rsnStructure = surface.querySelector('[data-grid="rsn-structure"]');
+    if (rsnStructure) rsnStructure.style.display = isRsn ? '' : 'none';
+
+    // Regular grids (Unread + History): hide entirely when RSN filter is on
+    surface.querySelectorAll('[data-grid="unread"], [data-grid="history"]').forEach(g => {
+      g.style.display = isRsn ? 'none' : '';
+    });
+    surface.querySelectorAll('.section-head[data-section="unread"], .section-head[data-section="history"]').forEach(h => {
+      h.style.display = isRsn ? 'none' : '';
+    });
+
+    if (isRsn) return; // RSN view doesn't use card/row filtering
+
+    // Type-based filtering on remaining items
     const items = surface.querySelectorAll('.brief-card[data-type], .history-row[data-type]');
     items.forEach(item => {
       const show = filter === 'all' || item.dataset.type === filter;
       item.style.display = show ? '' : 'none';
     });
-    // RSN-only upcoming section
-    surface.querySelectorAll('[data-grid="rsn-upcoming"], [data-section="rsn-upcoming"]').forEach(el => {
-      el.style.display = filter === 'rsn' ? '' : 'none';
-    });
-    // Hide empty sections + update per-section counts
-    surface.querySelectorAll('[data-grid]').forEach(grid => {
+    // Update per-section counts (Unread, History)
+    surface.querySelectorAll('[data-grid="unread"], [data-grid="history"]').forEach(grid => {
       const visible = [...grid.querySelectorAll('[data-type]')].filter(c => c.style.display !== 'none').length;
       const gridName = grid.dataset.grid;
       const head = surface.querySelector(`.section-head[data-section="${gridName}"]`);
-      const isUpcoming = gridName === 'rsn-upcoming';
-      const shouldShow = isUpcoming ? filter === 'rsn' : visible > 0;
+      const shouldShow = visible > 0;
       grid.style.display = shouldShow ? '' : 'none';
       if (head) head.style.display = shouldShow ? '' : 'none';
       const countEl = head ? head.querySelector('.count-here') : null;
