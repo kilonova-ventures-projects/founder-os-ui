@@ -90,14 +90,86 @@ hr{border:0;border-top:1px solid var(--line);margin:0}
 .app{
   display:grid;
   grid-template-columns: var(--nav-w) 1fr 0;
-  grid-template-rows: var(--header-h) 1fr;
+  grid-template-rows: 38px var(--header-h) 1fr;
   grid-template-areas:
-    "header header header"
-    "nav    main   rail";
+    "audience audience audience"
+    "header   header   header"
+    "nav      main     rail";
   height:100vh;
   transition: grid-template-columns var(--t-base) var(--ease);
 }
 .app[data-rail="open"]{ grid-template-columns: var(--nav-w) 1fr var(--rail-w); }
+.app[data-audience="pilot"],
+.app[data-audience="prospect"]{ grid-template-columns: 0 1fr 0 !important; }
+
+/* ---------- Audience bar (top-most · 3 audiences) ---------- */
+.audience-bar{
+  grid-area: audience;
+  display:flex; align-items: stretch; justify-content: space-between;
+  background: #060606;
+  border-bottom: 1px solid var(--line);
+  padding: 0 22px;
+  z-index: 50;
+}
+html[data-theme="light"] .audience-bar{ background: #f0f0f0; }
+
+.audience-tabs{ display:flex; align-items: stretch; gap: 0; }
+.audience-tab{
+  position: relative;
+  display:flex; align-items: center; gap: 8px;
+  padding: 0 18px;
+  font-family: var(--font-display);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--ink-3);
+  border-bottom: 2px solid transparent;
+  transition: color var(--t-fast) var(--ease), border-color var(--t-fast) var(--ease);
+}
+.audience-tab i{ font-size: 14px; opacity: 0.9; }
+.audience-tab .lock{
+  font-family: var(--font-mono);
+  font-size: 9px;
+  letter-spacing: 0.1em;
+  color: var(--ink-4);
+  margin-left: 4px;
+  padding: 2px 6px;
+  border: 1px solid var(--line);
+  border-radius: 3px;
+  text-transform: uppercase;
+}
+.audience-tab:hover{ color: var(--ink-2); }
+.audience-tab.active{
+  color: var(--accent);
+  border-bottom-color: var(--accent);
+}
+.audience-tab.active .lock{ color: var(--ink-3); border-color: var(--line-strong); }
+
+.audience-meta{
+  display:flex; align-items: center; gap: 8px;
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--ink-3);
+}
+.audience-meta .dot{
+  width: 6px; height: 6px; border-radius: 50%;
+  background: var(--accent);
+  display:inline-block;
+}
+
+/* Hide founder-only chrome when in pilot/prospect */
+.app:not([data-audience="founder"]) nav.left{ display: none; }
+.app:not([data-audience="founder"]) aside.rail{ display: none; }
+.app:not([data-audience="founder"]) #askBtn{ display: none; }
+
+/* Audience-level views (pilot/prospect previews) */
+.audience-view{ display: none; min-height: 100%; }
+.audience-view.active{ display: block; }
+.app:not([data-audience="founder"]) .surface{ display: none !important; }
+.app[data-audience="founder"] .audience-view{ display: none; }
 
 /* ---------- Header ---------- */
 header{
@@ -546,6 +618,154 @@ main{
 .stub-spec li i{ font-size: 16px; color: var(--ink-3); margin-top: 2px; flex-shrink: 0; }
 .stub-spec li strong{ color: var(--ink); font-weight: 600; }
 
+/* ---------- Audience preview (Pilot / Prospect) ---------- */
+.audience-hero{
+  padding: 56px 36px 36px;
+  border-bottom: 1px solid var(--line);
+}
+.audience-hero .phase-tag{
+  display:inline-block;
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--accent);
+  background: var(--accent-glow);
+  border: 1px solid var(--accent-line);
+  padding: 4px 10px;
+  border-radius: 999px;
+  margin-bottom: 20px;
+}
+.audience-hero h1{
+  font-family: var(--font-display);
+  font-weight: 600;
+  letter-spacing: -0.024em;
+  font-size: 44px;
+  line-height: 1.05;
+  margin: 0 0 14px;
+  color: var(--ink);
+  max-width: 760px;
+}
+.audience-hero p{
+  font-family: var(--font-body);
+  font-size: 18px;
+  line-height: 1.55;
+  color: var(--ink-2);
+  margin: 0;
+  max-width: 660px;
+}
+.audience-hero p strong{ color: var(--ink); font-weight: 600; }
+
+.audience-surfaces{
+  padding: 32px 36px 16px;
+}
+.audience-surfaces .row-label{
+  display:flex; align-items: baseline; justify-content: space-between;
+  margin-bottom: 16px;
+}
+.audience-surfaces .row-label h3{
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 13px;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--ink-2);
+  margin: 0;
+}
+.audience-surfaces .row-label .meta{
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--ink-3);
+}
+
+.surface-preview-grid{
+  display:grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: 14px;
+  padding-bottom: 32px;
+}
+.surface-preview{
+  display:flex; flex-direction: column;
+  background: var(--bg-card);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  padding: 20px 20px 18px;
+  min-height: 168px;
+  transition: border-color var(--t-base) var(--ease), background var(--t-base) var(--ease);
+  cursor: not-allowed;
+  opacity: 0.92;
+}
+.surface-preview:hover{ background: var(--bg-card-hover); border-color: var(--line-strong); }
+.surface-preview .head{
+  display:flex; align-items: center; justify-content: space-between;
+  margin-bottom: 12px;
+}
+.surface-preview .verb{
+  font-family: var(--font-mono);
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--ink-3);
+}
+.surface-preview .phase{
+  font-family: var(--font-mono);
+  font-size: 9px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--ink-3);
+  padding: 3px 7px;
+  border: 1px solid var(--line);
+  border-radius: 3px;
+}
+.surface-preview h4{
+  font-family: var(--font-body);
+  font-weight: 500;
+  font-size: 19px;
+  line-height: 1.25;
+  letter-spacing: -0.005em;
+  color: var(--ink);
+  margin: 0 0 8px;
+}
+.surface-preview p{
+  font-family: var(--font-body);
+  font-size: 14px;
+  line-height: 1.5;
+  color: var(--ink-2);
+  margin: 0 0 14px;
+  flex: 1;
+}
+.surface-preview .foot{
+  display:flex; align-items: center; gap: 8px;
+  padding-top: 12px;
+  border-top: 1px solid var(--line-soft);
+  font-family: var(--font-mono);
+  font-size: 10px;
+  color: var(--ink-3);
+}
+.surface-preview .foot i{ font-size: 12px; }
+
+.audience-notice{
+  margin: 20px 36px 56px;
+  padding: 16px 18px;
+  background: var(--bg-card);
+  border: 1px dashed var(--line-strong);
+  border-radius: var(--radius);
+  display: flex; align-items: flex-start; gap: 12px;
+  max-width: 760px;
+}
+.audience-notice i{
+  font-size: 18px; color: var(--accent); margin-top: 2px; flex-shrink: 0;
+}
+.audience-notice p{
+  margin: 0;
+  font-family: var(--font-body);
+  font-size: 14px;
+  line-height: 1.55;
+  color: var(--ink-2);
+}
+.audience-notice p strong{ color: var(--ink); font-weight: 600; }
+
 /* ---------- Settings ---------- */
 .settings-grid{
   display:grid; grid-template-columns: 1fr;
@@ -721,17 +941,46 @@ main::-webkit-scrollbar-thumb:hover, .rail-body::-webkit-scrollbar-thumb:hover{
 /* ---------- Small ---------- */
 @media (max-width: 900px){
   .surface-head{ padding: 18px 22px 14px; }
-  .chips, .section-head, .brief-grid, .stub, .settings-grid, .surface-footnote{ padding-left: 22px; padding-right: 22px; }
+  .chips, .section-head, .brief-grid, .stub, .settings-grid, .surface-footnote, .audience-hero, .audience-surfaces, .surface-preview-grid{ padding-left: 22px; padding-right: 22px; }
+  .audience-notice{ margin-left: 22px; margin-right: 22px; }
   .surface-title{ font-size: 26px; }
   .stub h2{ font-size: 28px; }
+  .audience-hero h1{ font-size: 32px; }
   .app[data-rail="open"]{ grid-template-columns: var(--nav-w) 0 1fr; }
   aside.rail{ grid-area: main / main / rail / rail; }
+  .audience-tab{ padding: 0 12px; font-size: 10px; }
+  .audience-tab i{ font-size: 13px; }
+  .audience-meta{ display: none; }
 }
 </style>
 </head>
 
 <body>
-<div class="app" id="app" data-rail="closed">
+<div class="app" id="app" data-rail="closed" data-audience="founder">
+
+  <!-- ============== AUDIENCE BAR (3 audiences) ============== -->
+  <div class="audience-bar">
+    <div class="audience-tabs">
+      <button class="audience-tab active" data-audience="founder" type="button">
+        <i class="ph ph-user-focus"></i>
+        <span>Founder</span>
+      </button>
+      <button class="audience-tab" data-audience="pilot" type="button">
+        <i class="ph ph-gear-six"></i>
+        <span>Pilot</span>
+        <span class="lock">Preview</span>
+      </button>
+      <button class="audience-tab" data-audience="prospect" type="button">
+        <i class="ph ph-globe-hemisphere-west"></i>
+        <span>Prospect</span>
+        <span class="lock">Preview</span>
+      </button>
+    </div>
+    <div class="audience-meta" id="audienceMeta">
+      <span class="dot"></span>
+      <span id="audienceMetaText">Consumer · Ratifier · 4 surfaces live</span>
+    </div>
+  </div>
 
   <!-- ============== HEADER ============== -->
   <header>
@@ -1164,6 +1413,122 @@ main::-webkit-scrollbar-thumb:hover, .rail-body::-webkit-scrollbar-thumb:hover{
       </div>
     </section>
 
+    <!-- ============ AUDIENCE · PILOT (preview) ============ -->
+    <div class="audience-view" data-audience="pilot">
+      <div class="audience-hero">
+        <div class="phase-tag">Phase F · Specced · not built in v1</div>
+        <h1>Pilot · the operator running Kilonova back-end</h1>
+        <p>This is where the work that <strong>becomes</strong> the founder's briefs gets done. Pilot drafts the reasoning, runs the council sessions, authors RSNs, and tees up the decisions the founder will ratify.</p>
+      </div>
+
+      <div class="audience-surfaces">
+        <div class="row-label">
+          <h3>Surfaces planned</h3>
+          <div class="meta">Per Bruno's roadmap v0.8 · founder ships first</div>
+        </div>
+
+        <div class="surface-preview-grid">
+          <div class="surface-preview">
+            <div class="head">
+              <span class="verb">Produce</span>
+              <span class="phase">Phase 1A</span>
+            </div>
+            <h4>RSN Authoring</h4>
+            <p>Pilot writes the weekly RSN — drafts, citations, council loop, hand-off to founder Reading queue.</p>
+            <div class="foot"><i class="ph ph-clock"></i>~2 weeks build</div>
+          </div>
+
+          <div class="surface-preview">
+            <div class="head">
+              <span class="verb">Decide</span>
+              <span class="phase">Phase F</span>
+            </div>
+            <h4>Decision Drafting</h4>
+            <p>Pilot builds the decision packets that land in the founder's Approval surface. Recommendation + risk + rollback.</p>
+            <div class="foot"><i class="ph ph-clock"></i>After Founder Approval lands</div>
+          </div>
+
+          <div class="surface-preview">
+            <div class="head">
+              <span class="verb">Steer</span>
+              <span class="phase">Phase F</span>
+            </div>
+            <h4>Pilot Cockpit</h4>
+            <p>Real-time view of every engagement Pilot is running. Health, drift, council state, next move.</p>
+            <div class="foot"><i class="ph ph-clock"></i>Parallel with Founder Status</div>
+          </div>
+
+          <div class="surface-preview">
+            <div class="head">
+              <span class="verb">Evaluate</span>
+              <span class="phase">Phase F</span>
+            </div>
+            <h4>Audit Trail</h4>
+            <p>Every edit, every ratification, every council vote — searchable, sourced, reversible.</p>
+            <div class="foot"><i class="ph ph-clock"></i>Cross-cutting · v1.2</div>
+          </div>
+        </div>
+
+        <div class="audience-notice">
+          <i class="ph ph-info"></i>
+          <p><strong>Why Pilot isn't built yet.</strong> Per the v1 founder-first scope, we ship the consumer surface first so the operator surface can be designed against a stable contract. Building Pilot before Founder is settled risks back-and-forth refactors.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- ============ AUDIENCE · PROSPECT (preview) ============ -->
+    <div class="audience-view" data-audience="prospect">
+      <div class="audience-hero">
+        <div class="phase-tag">Phase G · Specced · not built in v1</div>
+        <h1>Prospect · the public lead funnel</h1>
+        <p>The audience that doesn't have an account yet. A reading-first public surface that lets a prospect <strong>understand the product without a demo call</strong>, then book one if they want to go deeper.</p>
+      </div>
+
+      <div class="audience-surfaces">
+        <div class="row-label">
+          <h3>Surfaces planned</h3>
+          <div class="meta">Track runs parallel to in-app work</div>
+        </div>
+
+        <div class="surface-preview-grid">
+          <div class="surface-preview">
+            <div class="head">
+              <span class="verb">Understand</span>
+              <span class="phase">Phase 1B</span>
+            </div>
+            <h4>R1 Founder Product</h4>
+            <p>The public-facing case for Kilonova. One long-scroll page, written like an editorial, with the actual artifacts shown — not promised.</p>
+            <div class="foot"><i class="ph ph-clock"></i>~2 weeks · parallel to RSN</div>
+          </div>
+
+          <div class="surface-preview">
+            <div class="head">
+              <span class="verb">Book</span>
+              <span class="phase">Phase G</span>
+            </div>
+            <h4>Book-a-call</h4>
+            <p>The only conversion action. Real calendar, real slots, no friction.</p>
+            <div class="foot"><i class="ph ph-clock"></i>Inline with R1</div>
+          </div>
+
+          <div class="surface-preview">
+            <div class="head">
+              <span class="verb">Evaluate</span>
+              <span class="phase">Phase G</span>
+            </div>
+            <h4>Diagnostic</h4>
+            <p>A short self-serve diagnostic that returns a real artifact. Lets the prospect feel the system before they book.</p>
+            <div class="foot"><i class="ph ph-clock"></i>v1.3 candidate</div>
+          </div>
+        </div>
+
+        <div class="audience-notice">
+          <i class="ph ph-info"></i>
+          <p><strong>This is a separate track.</strong> Per our pushback on Bruno's spec, Prospect runs as its own deploy (likely <code>kilonova.com</code>), not inside the app shell. The audience tab here is a preview of what gets shipped on that track.</p>
+        </div>
+      </div>
+    </div>
+
   </main>
 
   <!-- ============== RIGHT RAIL · ASK KILONOVA ============== -->
@@ -1217,6 +1582,27 @@ main::-webkit-scrollbar-thumb:hover, .rail-body::-webkit-scrollbar-thumb:hover{
 <script>
 (function(){
   const app = document.getElementById('app');
+
+  // --- Audience switcher (Founder · Pilot · Prospect) ---
+  const audienceTabs = document.querySelectorAll('.audience-tab');
+  const audienceViews = document.querySelectorAll('.audience-view');
+  const audienceMetaText = document.getElementById('audienceMetaText');
+  const audienceMetaMap = {
+    founder:  'Consumer · Ratifier · 4 surfaces live',
+    pilot:    'Operator · Back-end · Phase F preview',
+    prospect: 'Public · Lead funnel · Phase G preview'
+  };
+  audienceTabs.forEach(tab => {
+    tab.addEventListener('click', () => {
+      const target = tab.dataset.audience;
+      audienceTabs.forEach(t => t.classList.toggle('active', t === tab));
+      app.dataset.audience = target;
+      audienceViews.forEach(v => v.classList.toggle('active', v.dataset.audience === target));
+      if (target !== 'founder') app.dataset.rail = 'closed';
+      if (audienceMetaText) audienceMetaText.textContent = audienceMetaMap[target] || '';
+      document.querySelector('main').scrollTo({ top: 0, behavior: 'instant' });
+    });
+  });
 
   // --- Surface routing ---
   const navItems = document.querySelectorAll('.nav-item[data-go]');
