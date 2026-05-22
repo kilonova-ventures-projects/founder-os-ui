@@ -2232,59 +2232,57 @@ main::-webkit-scrollbar-thumb:hover, .rail-body::-webkit-scrollbar-thumb:hover{
     <!-- ============ STATUS ============ -->
     <section class="surface" data-surface="status">
       <div class="surface-head">
-        <div class="surface-eyebrow">SURFACE · STATUS</div>
         <h1 class="surface-title">Where everything stands, right now</h1>
-        <p class="surface-sub">The 30-second glance. Active machines, ETAs, what's blocked, what landed. Pilot can choose the LLM, pause or stop a run. For the founder, this is read-only telemetry.</p>
+        <p class="surface-sub">The 30-second glance. What's running, what's waiting on you, what just landed.</p>
       </div>
 
       <div class="status-strip">
         <div class="status-tile">
-          <div class="label"><i class="ph ph-cpu"></i>Active machines</div>
+          <div class="label"><i class="ph ph-broadcast"></i>Active processing</div>
           <div class="val">4</div>
-          <div class="delta">2 RSN · 1 brief · 1 content</div>
+          <div class="delta">RSN, decision brief, content loop</div>
         </div>
         <div class="status-tile attention">
-          <div class="label"><i class="ph ph-warning"></i>Blocked</div>
-          <div class="val">1</div>
-          <div class="delta">Pricing decision · waiting input</div>
+          <div class="label"><i class="ph ph-hand"></i>Waiting on you</div>
+          <div class="val">3</div>
+          <div class="delta">1 ratify, 2 approvals</div>
         </div>
         <div class="status-tile">
-          <div class="label"><i class="ph ph-coins"></i>Spend today</div>
-          <div class="val">$47.21</div>
-          <div class="delta">68% NICHOLAS · 24% loops · 8% other</div>
+          <div class="label"><i class="ph ph-clock-countdown"></i>Landing in</div>
+          <div class="val">18 min</div>
+          <div class="delta">W22 reasoning brief</div>
         </div>
         <div class="status-tile">
-          <div class="label"><i class="ph ph-stack"></i>Queue depth</div>
+          <div class="label"><i class="ph ph-check-circle"></i>Shipped today</div>
           <div class="val">7</div>
-          <div class="delta">3 reading · 4 approval</div>
+          <div class="delta">3 posts, 2 briefs, 2 commitments</div>
         </div>
       </div>
 
       <div class="section-head">
         <h3>Active processing</h3>
-        <div class="meta">Live · check-back times approximate</div>
       </div>
       <div class="process-list">
         <div class="process-card">
-          <div class="name">RSN W22 · Phase R5 (signal triage)<small>NICHOLAS · 312 raw signals · candidate filtering</small></div>
+          <div class="name">RSN W22 · weekly reasoning<small>Triaging 312 signals from this week's ingest</small></div>
           <div class="progress-bar"><div class="progress-fill" style="width:62%"></div></div>
           <div class="pct">62%</div>
           <div class="eta">ETA 18 min</div>
         </div>
         <div class="process-card">
-          <div class="name">Decision brief · Hopper pricing<small>Premortem agent · 7 HTL gates pending</small></div>
+          <div class="name">Decision brief · Hopper pricing<small>Premortem analysis in progress</small></div>
           <div class="progress-bar"><div class="progress-fill" style="width:34%"></div></div>
           <div class="pct">34%</div>
           <div class="eta">ETA 2h 10m</div>
         </div>
         <div class="process-card">
-          <div class="name">Content loop · 4 LinkedIn posts from approved briefs<small>Content-loop · drafting + visual gen</small></div>
+          <div class="name">Content loop · 4 LinkedIn posts<small>Drafting from your approved briefs</small></div>
           <div class="progress-bar"><div class="progress-fill" style="width:81%"></div></div>
           <div class="pct">81%</div>
           <div class="eta">ETA 6 min</div>
         </div>
         <div class="process-card blocked">
-          <div class="name">RSN W22 · Phase R7 (compose)<small>Waiting on founder ratification of Q3 GTM brief</small></div>
+          <div class="name">RSN W22 · brief compose<small>Waiting on your Q3 GTM ratify before drafting</small></div>
           <div class="progress-bar"><div class="progress-fill crit" style="width:0%"></div></div>
           <div class="pct">·</div>
           <div class="eta">Blocked</div>
@@ -2293,48 +2291,47 @@ main::-webkit-scrollbar-thumb:hover, .rail-body::-webkit-scrollbar-thumb:hover{
 
       <div class="pilot-only">
         <i class="ph ph-gear-six"></i>
-        <div><strong>Pilot capabilities (hidden in founder view).</strong> Pilots can switch the LLM per-run (<code>sonnet-4.7</code> / <code>opus-4.7</code> / <code>haiku-4.7</code>), pause or stop a process, requeue with different inputs, and inspect the full reasoning trace. Switch to the Pilot audience to preview.</div>
+        <div><strong>Operator view lives in Pilot.</strong> Cost per process, LLM model picker (sonnet / opus / haiku), pause, stop, requeue, and the full reasoning trace are in the Pilot Cockpit. Switch to the Pilot audience to preview.</div>
       </div>
 
       <div class="section-head">
-        <h3>Activity history · today</h3>
-        <div class="meta">All times PDT</div>
+        <h3>Activity today</h3>
       </div>
       <div class="activity-log">
         <div class="log-item ok">
           <div class="ts">14:22</div>
           <div class="icon"><i class="ph ph-check"></i></div>
-          <div class="msg"><strong>Council session · architecture review</strong> closed. 3 commitments routed to Commitments surface.<span class="meta">Council · session 0142</span></div>
+          <div class="msg"><strong>Council session closed</strong> · architecture review. 3 commitments added to your ledger.<span class="meta">Council</span></div>
         </div>
         <div class="log-item ok">
           <div class="ts">13:48</div>
           <div class="icon"><i class="ph ph-paper-plane-tilt"></i></div>
-          <div class="msg"><strong>LinkedIn post</strong> published per schedule · "Stack post" reached 412 impressions in 30 min.<span class="meta">Content loop</span></div>
-        </div>
-        <div class="log-item">
-          <div class="ts">13:12</div>
-          <div class="icon"><i class="ph ph-arrow-square-out"></i></div>
-          <div class="msg"><strong>RSN W22 phase R4</strong> handed off to R5 · 312 signals carried forward.<span class="meta">RSN engine · 4 of 7 phases</span></div>
+          <div class="msg"><strong>LinkedIn post published</strong> per schedule. "Stack post" reached 412 impressions in 30 min.<span class="meta">Content loop</span></div>
         </div>
         <div class="log-item warn">
           <div class="ts">11:34</div>
-          <div class="icon"><i class="ph ph-warning"></i></div>
-          <div class="msg"><strong>Hopper pricing decision</strong> hit acceptance gate · awaiting your ratify.<span class="meta">Decision brief · v1</span></div>
+          <div class="icon"><i class="ph ph-hand"></i></div>
+          <div class="msg"><strong>Hopper pricing decision</strong> waiting on your ratify.<span class="meta">Decision brief, v1</span></div>
         </div>
         <div class="log-item ok">
           <div class="ts">10:18</div>
           <div class="icon"><i class="ph ph-chat-circle-text"></i></div>
-          <div class="msg"><strong>You commented</strong> on Q3 GTM brief · §4 recommendation: "Lock it. Operator OS framing."<span class="meta">Reading · Q3 GTM brief</span></div>
+          <div class="msg"><strong>You commented</strong> on Q3 GTM brief, §4: "Lock it. Operator OS framing."<span class="meta">Reading</span></div>
         </div>
         <div class="log-item ok">
           <div class="ts">09:00</div>
           <div class="icon"><i class="ph ph-paper-plane-tilt"></i></div>
-          <div class="msg"><strong>LinkedIn post</strong> published per schedule · "Council cadence · the bi-weekly switch."<span class="meta">Content loop</span></div>
+          <div class="msg"><strong>LinkedIn post published</strong> per schedule. "Council cadence, the bi-weekly switch."<span class="meta">Content loop</span></div>
         </div>
         <div class="log-item">
           <div class="ts">08:42</div>
-          <div class="icon"><i class="ph ph-cpu"></i></div>
-          <div class="msg"><strong>SignalScan</strong> ingested 22 new candidates from 4 sources · 4 routed to brief approvals.<span class="meta">SignalScan · daily</span></div>
+          <div class="icon"><i class="ph ph-tray-arrow-down"></i></div>
+          <div class="msg"><strong>4 new briefs added</strong> to your Reading queue.<span class="meta">SignalScan</span></div>
+        </div>
+        <div class="log-item ok">
+          <div class="ts">08:30</div>
+          <div class="icon"><i class="ph ph-flag"></i></div>
+          <div class="msg"><strong>Acme commitment cadence corrected</strong> by Pilot. No action needed from you.<span class="meta">Pilot loop</span></div>
         </div>
       </div>
     </section>
@@ -2430,18 +2427,103 @@ main::-webkit-scrollbar-thumb:hover, .rail-body::-webkit-scrollbar-thumb:hover{
       </div>
     </section>
 
-    <!-- ============ AUDIENCE · PILOT (RSN Authoring) ============ -->
+    <!-- ============ AUDIENCE · PILOT (Cockpit + RSN Authoring) ============ -->
     <div class="audience-view" data-audience="pilot">
       <div class="rsn-shell">
         <div class="rsn-head">
           <div>
-            <h1>RSN Authoring</h1>
-            <p>The pilot surface. Author every R-phase, drive the human-in-the-loop gates, ship the brief to Reading.</p>
+            <h1>Pilot Cockpit</h1>
+            <p>Operator view. Per-process telemetry, LLM picker, pause / stop / requeue, full reasoning trace.</p>
           </div>
           <div class="right">
             <button class="client-pill"><span>Kilonova · workspace</span><i class="ph ph-caret-down"></i></button>
-            <button class="btn-secondary"><i class="ph ph-cube"></i>opus-4.7</button>
-            <button class="btn-primary"><i class="ph ph-plus"></i>New RSN</button>
+            <button class="btn-secondary"><i class="ph ph-cube"></i>opus-4.7 (default)</button>
+            <button class="btn-primary"><i class="ph ph-plus"></i>New run</button>
+          </div>
+        </div>
+
+        <!-- Pilot KPIs (operator-flavoured) -->
+        <div class="rsn-strip">
+          <div class="commit-tile">
+            <div class="label">Running processes</div>
+            <div class="val">4</div>
+            <div class="delta">3 active, 1 blocked</div>
+          </div>
+          <div class="commit-tile">
+            <div class="label">Spend today</div>
+            <div class="val">$47.21</div>
+            <div class="delta">68% NICHOLAS, 24% loops, 8% other</div>
+          </div>
+          <div class="commit-tile">
+            <div class="label">HITL gates pending</div>
+            <div class="val">14</div>
+            <div class="delta">across W22 cycle</div>
+          </div>
+          <div class="commit-tile">
+            <div class="label">Queue depth</div>
+            <div class="val">7</div>
+            <div class="delta">3 reading, 4 approval</div>
+          </div>
+        </div>
+
+        <!-- Per-process operational control -->
+        <div style="margin: 6px 0 22px;">
+          <div class="section-head" style="padding:0 0 12px;">
+            <h3>Process control · operator only</h3>
+          </div>
+          <div class="process-list" style="padding:0; gap:8px;">
+            <div class="process-card" style="grid-template-columns: 1.6fr 110px 100px 80px 160px;">
+              <div class="name">RSN W22 · Phase R5 signal triage<small>NICHOLAS · 312 raw signals → candidate filtering</small></div>
+              <button class="btn-secondary" style="padding:6px 10px; font-size:11px;"><i class="ph ph-cube"></i>opus-4.7</button>
+              <div class="pct" style="font-family:var(--font-mono); font-size:13px; color:var(--ink-2);">$8.40</div>
+              <div class="eta">62% · 18m</div>
+              <div style="display:flex; gap:6px; justify-content:flex-end;">
+                <button class="btn-secondary" style="padding:5px 9px;"><i class="ph ph-pause"></i></button>
+                <button class="btn-secondary" style="padding:5px 9px;"><i class="ph ph-stop"></i></button>
+                <button class="btn-secondary" style="padding:5px 9px;"><i class="ph ph-arrow-clockwise"></i></button>
+              </div>
+            </div>
+            <div class="process-card" style="grid-template-columns: 1.6fr 110px 100px 80px 160px;">
+              <div class="name">Decision brief · Hopper pricing<small>Premortem agent · 7 HTL gates pending</small></div>
+              <button class="btn-secondary" style="padding:6px 10px; font-size:11px;"><i class="ph ph-cube"></i>sonnet-4.7</button>
+              <div class="pct" style="font-family:var(--font-mono); font-size:13px; color:var(--ink-2);">$2.10</div>
+              <div class="eta">34% · 2h10</div>
+              <div style="display:flex; gap:6px; justify-content:flex-end;">
+                <button class="btn-secondary" style="padding:5px 9px;"><i class="ph ph-pause"></i></button>
+                <button class="btn-secondary" style="padding:5px 9px;"><i class="ph ph-stop"></i></button>
+                <button class="btn-secondary" style="padding:5px 9px;"><i class="ph ph-arrow-clockwise"></i></button>
+              </div>
+            </div>
+            <div class="process-card" style="grid-template-columns: 1.6fr 110px 100px 80px 160px;">
+              <div class="name">Content loop · 4 LinkedIn posts<small>Drafting + visual gen from approved briefs</small></div>
+              <button class="btn-secondary" style="padding:6px 10px; font-size:11px;"><i class="ph ph-cube"></i>haiku-4.7</button>
+              <div class="pct" style="font-family:var(--font-mono); font-size:13px; color:var(--ink-2);">$0.91</div>
+              <div class="eta">81% · 6m</div>
+              <div style="display:flex; gap:6px; justify-content:flex-end;">
+                <button class="btn-secondary" style="padding:5px 9px;"><i class="ph ph-pause"></i></button>
+                <button class="btn-secondary" style="padding:5px 9px;"><i class="ph ph-stop"></i></button>
+                <button class="btn-secondary" style="padding:5px 9px;"><i class="ph ph-arrow-clockwise"></i></button>
+              </div>
+            </div>
+            <div class="process-card blocked" style="grid-template-columns: 1.6fr 110px 100px 80px 160px;">
+              <div class="name">RSN W22 · Phase R7 compose<small>Blocked: founder ratify on Q3 GTM brief</small></div>
+              <button class="btn-secondary" style="padding:6px 10px; font-size:11px;"><i class="ph ph-cube"></i>opus-4.7</button>
+              <div class="pct" style="font-family:var(--font-mono); font-size:13px; color:var(--ink-2);">·</div>
+              <div class="eta">Blocked</div>
+              <div style="display:flex; gap:6px; justify-content:flex-end;">
+                <button class="btn-secondary" style="padding:5px 9px;"><i class="ph ph-x"></i>Drop</button>
+                <button class="btn-secondary" style="padding:5px 9px;"><i class="ph ph-arrow-clockwise"></i>Force</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <hr style="border:0; border-top:1px solid var(--line); margin:8px 0 28px;" />
+
+        <div class="rsn-head" style="margin-bottom:18px;">
+          <div>
+            <h1 style="font-size:24px;">RSN Authoring</h1>
+            <p>Author every R-phase, drive the human-in-the-loop gates, ship the brief to Reading.</p>
           </div>
         </div>
 
