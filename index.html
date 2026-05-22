@@ -112,11 +112,12 @@ header{
 }
 .brand{ display:flex; align-items:center; gap:14px; }
 .brand .logo{
-  height:24px; width:auto; display:block;
+  height:34px; width:auto; display:block;
 }
 html[data-theme="light"] .brand .logo{ filter: invert(1); }
 .brand .sep{ color:var(--ink-4); }
 .brand .meta{ font-family:var(--font-mono); font-size:11px; color:var(--ink-3); letter-spacing:0.04em; text-transform:uppercase; }
+.header-left{ display:flex; align-items:center; gap:14px; }
 .header-right{ display:flex; align-items:center; gap:10px; }
 
 .client-select{
@@ -137,13 +138,16 @@ html[data-theme="light"] .brand .logo{ filter: invert(1); }
 }
 .identity-btn:hover{ border-color:var(--line-strong); }
 .avatar{
-  width:26px; height:26px; border-radius:50%;
+  width:28px; height:28px; border-radius:50%;
   background:linear-gradient(135deg, #2a2a2a, #1a1a1a);
   display:flex; align-items:center; justify-content:center;
   font-family:var(--font-display); font-weight:700; font-size:11px;
   color:var(--ink); letter-spacing:0.02em;
   border:1px solid var(--line-strong);
+  object-fit:cover; overflow:hidden;
+  flex-shrink:0;
 }
+img.avatar{ background:none; }
 .identity-name{ font-family:var(--font-display); font-size:13px; color:var(--ink); }
 .identity-btn i{ font-size:13px; color:var(--ink-3); }
 
@@ -1329,18 +1333,18 @@ main::-webkit-scrollbar-thumb:hover, .rail-body::-webkit-scrollbar-thumb:hover{
 
   <!-- ============== HEADER ============== -->
   <header>
-    <div class="brand">
-      <img class="logo" src="images/logo.svg" alt="Kilonova" />
-      <div class="sep">·</div>
-      <div class="meta">FOUNDER OS · v1.1</div>
-    </div>
-    <div class="header-right">
+    <div class="header-left">
+      <div class="brand">
+        <img class="logo" src="images/logo.svg" alt="Kilonova" />
+      </div>
       <button class="client-select" type="button">
         <span class="dot"></span><span>Kilonova</span><i class="ph ph-caret-down"></i>
       </button>
+    </div>
+    <div class="header-right">
       <div class="identity">
         <button class="identity-btn" type="button" id="identityBtn">
-          <div class="avatar">GB</div>
+          <img class="avatar" src="images/avatar.jpg" alt="Gus Barta" />
           <span class="identity-name">Gus Barta</span>
           <i class="ph ph-caret-down"></i>
         </button>
