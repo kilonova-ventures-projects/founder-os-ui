@@ -111,8 +111,10 @@ header{
   background:var(--bg); z-index:30;
 }
 .brand{ display:flex; align-items:center; gap:14px; }
-.brand .mark{ font-family:var(--font-display); font-weight:700; letter-spacing:-0.02em; font-size:22px; line-height:1; }
-.brand .mark .star{ color:var(--accent); margin-right:2px; }
+.brand .logo{
+  height:24px; width:auto; display:block;
+}
+html[data-theme="light"] .brand .logo{ filter: invert(1); }
 .brand .sep{ color:var(--ink-4); }
 .brand .meta{ font-family:var(--font-mono); font-size:11px; color:var(--ink-3); letter-spacing:0.04em; text-transform:uppercase; }
 .header-right{ display:flex; align-items:center; gap:10px; }
@@ -294,12 +296,19 @@ main{
   background:var(--bg-card-hover); border-color:var(--accent-line); transform:translateY(-1px);
 }
 .brief-card.unread{ border-color:var(--accent-line); }
-.brief-card.unread::before{
-  content:""; position:absolute; top:18px; right:18px;
-  width:6px; height:6px; border-radius:50%; background:var(--accent);
-  box-shadow:0 0 8px var(--accent-glow);
+/* unread indicator now lives inline in the meta row — no absolute overlap */
+.brief-meta-row{
+  display:flex; align-items:center; gap:8px;
+  margin-bottom:12px;
+  padding-right:30px; /* always reserve room for the hover chat icon */
 }
-.brief-meta-row{ display:flex; align-items:center; gap:8px; margin-bottom:12px; }
+.unread-dot{
+  width:6px; height:6px; border-radius:50%;
+  background:var(--accent);
+  box-shadow:0 0 8px var(--accent-glow);
+  margin-left:auto; flex-shrink:0;
+}
+.unread-dot ~ .brief-time{ margin-left:0; }
 .type-badge{
   font-family:var(--font-mono); font-size:9px; font-weight:700;
   letter-spacing:0.12em; text-transform:uppercase;
@@ -350,7 +359,6 @@ main{
   position:absolute; top:14px; right:14px;
   display:flex; gap:4px;
 }
-.brief-card.unread .card-actions{ right:32px; }
 .icon-btn{
   width:26px; height:26px; border-radius:6px;
   display:flex; align-items:center; justify-content:center;
@@ -987,10 +995,9 @@ aside.rail{
 .phase-cell.done{ border-color:rgba(147,197,179,0.3); }
 .phase-cell.active{ border-color:var(--accent-line); }
 .phase-cell.active::after{
-  content:""; position:absolute; top:-1px; right:-1px;
+  content:""; position:absolute; top:10px; right:10px;
   width:6px; height:6px; border-radius:50%; background:var(--accent);
   box-shadow:0 0 8px var(--accent-glow);
-  margin:6px;
 }
 .phase-cell.blocked{ opacity:0.55; }
 .phase-cell .code{
@@ -1323,7 +1330,7 @@ main::-webkit-scrollbar-thumb:hover, .rail-body::-webkit-scrollbar-thumb:hover{
   <!-- ============== HEADER ============== -->
   <header>
     <div class="brand">
-      <div class="mark"><span class="star">✦</span>KILONOVA</div>
+      <img class="logo" src="images/logo.svg" alt="Kilonova" />
       <div class="sep">·</div>
       <div class="meta">FOUNDER OS · v1.1</div>
     </div>
@@ -1398,6 +1405,7 @@ main::-webkit-scrollbar-thumb:hover, .rail-body::-webkit-scrollbar-thumb:hover{
           </div>
           <div class="brief-meta-row">
             <span class="type-badge decision">Decision brief</span>
+            <span class="unread-dot" title="Unread"></span>
             <span class="brief-time">2h ago</span>
           </div>
           <h2 class="brief-title">Q3 GTM positioning · synthesis of 4 candidate angles</h2>
@@ -1430,6 +1438,7 @@ main::-webkit-scrollbar-thumb:hover, .rail-body::-webkit-scrollbar-thumb:hover{
           </div>
           <div class="brief-meta-row">
             <span class="type-badge rsn">RSN output</span>
+            <span class="unread-dot" title="Unread"></span>
             <span class="brief-time">5h ago</span>
           </div>
           <h2 class="brief-title">RSN · 2026-W21 · Weekly reasoning</h2>
@@ -1459,6 +1468,7 @@ main::-webkit-scrollbar-thumb:hover, .rail-body::-webkit-scrollbar-thumb:hover{
           </div>
           <div class="brief-meta-row">
             <span class="type-badge status">Status report</span>
+            <span class="unread-dot" title="Unread"></span>
             <span class="brief-time">Yesterday</span>
           </div>
           <h2 class="brief-title">Pilot · Week 21 health check</h2>
