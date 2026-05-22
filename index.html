@@ -297,7 +297,7 @@ main{
 .brief-card{
   display:flex; flex-direction:column;
   background:var(--bg-card); border:1px solid var(--line); border-radius:var(--radius);
-  padding:18px; position:relative; min-height:196px;
+  padding:16px 16px 14px; position:relative; min-height:160px;
   transition:border-color var(--t-base) var(--ease), background var(--t-base) var(--ease), transform var(--t-base) var(--ease);
   cursor:pointer;
 }
@@ -305,11 +305,18 @@ main{
   background:var(--bg-card-hover); border-color:var(--accent-line); transform:translateY(-1px);
 }
 .brief-card.unread{ border-color:var(--accent-line); }
-/* unread indicator now lives inline in the meta row — no absolute overlap */
+.brief-card.upcoming{
+  border-style:dashed; border-color:var(--line-strong);
+  background:rgba(255,255,255,0.015);
+  cursor:default;
+}
+.brief-card.upcoming:hover{ transform:none; border-color:var(--line-strong); background:rgba(255,255,255,0.025); }
+.brief-card.upcoming .brief-title{ color:var(--ink-2); }
+/* unread indicator lives inline in the meta row — no absolute overlap */
 .brief-meta-row{
   display:flex; align-items:center; gap:8px;
-  margin-bottom:12px;
-  padding-right:30px; /* always reserve room for the hover chat icon */
+  margin-bottom:10px;
+  padding-right:88px; /* room for 3 always-visible action icons */
 }
 .unread-dot{
   width:6px; height:6px; border-radius:50%;
@@ -332,16 +339,21 @@ main{
 .brief-time{ font-family:var(--font-mono); font-size:10px; color:var(--ink-3); margin-left:auto; }
 .brief-title{
   font-family:var(--font-body); font-weight:500;
-  font-size:19px; line-height:1.3; letter-spacing:-0.005em;
-  color:var(--ink); margin:0 0 8px;
+  font-size:17px; line-height:1.25; letter-spacing:-0.005em;
+  color:var(--ink); margin:0 0 6px;
+  display:-webkit-box; -webkit-line-clamp:2; -webkit-box-orient:vertical;
+  overflow:hidden;
 }
 .brief-synopsis{
-  font-family:var(--font-body); font-size:14px; line-height:1.5;
-  color:var(--ink-2); margin:0 0 14px; flex:1;
+  font-family:var(--font-body); font-size:13px; line-height:1.45;
+  color:var(--ink-2); margin:0 0 10px;
+  display:-webkit-box; -webkit-line-clamp:3; -webkit-box-orient:vertical;
+  overflow:hidden;
 }
 .brief-foot{
   display:flex; align-items:center; justify-content:space-between;
-  padding-top:12px; border-top:1px solid var(--line-soft);
+  padding-top:10px; margin-top:auto;
+  border-top:1px solid var(--line-soft);
 }
 .brief-foot .left{
   display:flex; align-items:center; gap:8px;
@@ -363,36 +375,39 @@ main{
 }
 .src-stack .src:first-child{ margin-left:0; }
 
-/* Card chat icon + sources expand */
+/* Card actions: chat + comment + mark-as-read (always visible) */
 .card-actions{
-  position:absolute; top:14px; right:14px;
-  display:flex; gap:4px;
+  position:absolute; top:12px; right:12px;
+  display:flex; gap:2px;
 }
 .icon-btn{
-  width:26px; height:26px; border-radius:6px;
+  width:24px; height:24px; border-radius:5px;
   display:flex; align-items:center; justify-content:center;
-  color:var(--ink-3); opacity:0;
-  transition:opacity var(--t-fast) var(--ease), background var(--t-fast) var(--ease), color var(--t-fast) var(--ease);
+  color:var(--ink-3); background:transparent;
+  transition:background var(--t-fast) var(--ease), color var(--t-fast) var(--ease);
 }
-.brief-card:hover .icon-btn{ opacity:1; }
 .icon-btn:hover{ background:var(--bg-elev); color:var(--ink); }
+.icon-btn.done{ color:var(--ok); }
 .icon-btn i{ font-size:14px; }
 
 .sources-expand{
-  margin-top:10px; padding-top:10px; border-top:1px solid var(--line-soft);
+  margin-top:8px; padding-top:10px; padding-bottom:2px;
+  border-top:1px solid var(--line-soft);
 }
 .sources-toggle{
   display:flex; align-items:center; gap:6px;
-  font-family:var(--font-mono); font-size:10px; color:var(--ink-3);
+  font-family:var(--font-mono); font-size:10px; line-height:1;
+  color:var(--ink-3);
+  padding:2px 0 4px;
   cursor:pointer;
   transition:color var(--t-fast) var(--ease);
 }
 .sources-toggle:hover{ color:var(--ink-2); }
-.sources-toggle i{ font-size:12px; transition:transform var(--t-fast) var(--ease); }
+.sources-toggle i{ font-size:11px; transition:transform var(--t-fast) var(--ease); }
 .sources-expand.open .sources-toggle i{ transform:rotate(90deg); }
 .sources-list{
-  display:none; flex-direction:column; gap:6px;
-  margin-top:10px;
+  display:none; flex-direction:column; gap:4px;
+  margin-top:8px; margin-bottom:4px;
 }
 .sources-expand.open .sources-list{ display:flex; }
 .source-file{
@@ -403,8 +418,8 @@ main{
   transition:background var(--t-fast) var(--ease);
 }
 .source-file:hover{ background:var(--bg-card-hover); }
-.source-file i{ font-size:13px; color:var(--ink-3); }
-.source-file .size{ margin-left:auto; color:var(--ink-3); font-size:9px; }
+.source-file i{ font-size:13px; color:var(--ink-3); flex-shrink:0; }
+.source-file .size{ margin-left:auto; color:var(--ink-3); font-size:9px; flex-shrink:0; }
 
 /* ---------- Stub generic ---------- */
 .stub{ display:flex; flex-direction:column; align-items:flex-start; padding:60px 36px; max-width:760px; }
@@ -1389,30 +1404,30 @@ main::-webkit-scrollbar-thumb:hover, .rail-body::-webkit-scrollbar-thumb:hover{
     <!-- ============ READING ============ -->
     <section class="surface active" data-surface="reading">
       <div class="surface-head">
-        <div class="surface-eyebrow">SURFACE · READING</div>
-        <h1 class="surface-title">What the system wrote for you to absorb</h1>
-        <p class="surface-sub">Opinionated briefs from Kilonova's reasoning kernel. Structural insight at the top, supporting evidence beneath, action prompts at the bottom. Comment, edit-with-reason, or chat with any of them.</p>
+        <h1 class="surface-title">Reading artifacts</h1>
+        <p class="surface-sub">Decision briefs, RSN outputs, status reports, pilot notes and meeting minutes — everything the system produced for you to read. Select text to comment, ask for an edit-with-reason, or open a chat scoped to that document.</p>
       </div>
 
       <div class="chips">
-        <button class="chip active">All <span class="count">8</span></button>
-        <button class="chip">Decisions <span class="count">2</span></button>
-        <button class="chip">RSN <span class="count">1</span></button>
-        <button class="chip">Status <span class="count">1</span></button>
-        <button class="chip">Pilot notes <span class="count">2</span></button>
-        <button class="chip">Meeting minutes <span class="count">2</span></button>
+        <button class="chip active" data-filter="all">All <span class="count" data-count-for="all">11</span></button>
+        <button class="chip" data-filter="decision">Decisions <span class="count" data-count-for="decision">2</span></button>
+        <button class="chip" data-filter="rsn">RSN <span class="count" data-count-for="rsn">5</span></button>
+        <button class="chip" data-filter="status">Status <span class="count" data-count-for="status">1</span></button>
+        <button class="chip" data-filter="pilot">Pilot notes <span class="count" data-count-for="pilot">2</span></button>
+        <button class="chip" data-filter="minutes">Meeting minutes <span class="count" data-count-for="minutes">2</span></button>
       </div>
 
-      <div class="section-head">
-        <h3>To absorb · 3</h3>
-        <div class="meta">Updated 4 min ago</div>
+      <div class="section-head" data-section="unread">
+        <h3>Unread artifacts · <span class="count-here">3</span></h3>
       </div>
 
-      <div class="brief-grid">
+      <div class="brief-grid" data-grid="unread">
 
-        <div class="brief-card unread" data-href="editorial/index.html" data-context="Q3 GTM positioning">
+        <div class="brief-card unread" data-type="decision" data-href="editorial/index.html" data-context="Q3 GTM positioning">
           <div class="card-actions">
             <button class="icon-btn chat-open" title="Chat about this brief"><i class="ph ph-chat-circle-dots"></i></button>
+            <button class="icon-btn comment-add" title="Leave a comment"><i class="ph ph-chat-text"></i></button>
+            <button class="icon-btn mark-read" title="Mark as read"><i class="ph ph-check"></i></button>
           </div>
           <div class="brief-meta-row">
             <span class="type-badge decision">Decision brief</span>
@@ -1443,9 +1458,11 @@ main::-webkit-scrollbar-thumb:hover, .rail-body::-webkit-scrollbar-thumb:hover{
           </div>
         </div>
 
-        <div class="brief-card unread" data-context="RSN W21">
+        <div class="brief-card unread" data-type="rsn" data-context="RSN W21">
           <div class="card-actions">
             <button class="icon-btn chat-open" title="Chat about this brief"><i class="ph ph-chat-circle-dots"></i></button>
+            <button class="icon-btn comment-add" title="Leave a comment"><i class="ph ph-chat-text"></i></button>
+            <button class="icon-btn mark-read" title="Mark as read"><i class="ph ph-check"></i></button>
           </div>
           <div class="brief-meta-row">
             <span class="type-badge rsn">RSN output</span>
@@ -1473,9 +1490,11 @@ main::-webkit-scrollbar-thumb:hover, .rail-body::-webkit-scrollbar-thumb:hover{
           </div>
         </div>
 
-        <div class="brief-card unread" data-context="Week 21 status">
+        <div class="brief-card unread" data-type="status" data-context="Week 21 status">
           <div class="card-actions">
             <button class="icon-btn chat-open" title="Chat about this brief"><i class="ph ph-chat-circle-dots"></i></button>
+            <button class="icon-btn comment-add" title="Leave a comment"><i class="ph ph-chat-text"></i></button>
+            <button class="icon-btn mark-read" title="Mark as read"><i class="ph ph-check"></i></button>
           </div>
           <div class="brief-meta-row">
             <span class="type-badge status">Status report</span>
@@ -1504,14 +1523,17 @@ main::-webkit-scrollbar-thumb:hover, .rail-body::-webkit-scrollbar-thumb:hover{
 
       </div>
 
-      <div class="section-head">
-        <h3>Recently read · 5</h3>
-        <div class="meta">Last 14 days</div>
+      <div class="section-head" data-section="read">
+        <h3>Recently read · <span class="count-here">5</span></h3>
       </div>
 
-      <div class="brief-grid">
-        <div class="brief-card" data-context="Hiring decision">
-          <div class="card-actions"><button class="icon-btn chat-open"><i class="ph ph-chat-circle-dots"></i></button></div>
+      <div class="brief-grid" data-grid="read">
+        <div class="brief-card" data-type="decision" data-context="Hiring decision">
+          <div class="card-actions">
+            <button class="icon-btn chat-open"><i class="ph ph-chat-circle-dots"></i></button>
+            <button class="icon-btn comment-add" title="Leave a comment"><i class="ph ph-chat-text"></i></button>
+            <button class="icon-btn done" title="Already read"><i class="ph ph-check-circle"></i></button>
+          </div>
           <div class="brief-meta-row"><span class="type-badge decision">Decision brief</span><span class="brief-time">3d</span></div>
           <h2 class="brief-title">Hiring · Council weighed 3 senior engineer profiles</h2>
           <p class="brief-synopsis">Recommendation locked: candidate B. Comments from you in §3 sent to pilot to draft offer.</p>
@@ -1520,8 +1542,28 @@ main::-webkit-scrollbar-thumb:hover, .rail-body::-webkit-scrollbar-thumb:hover{
             <div class="read"><i class="ph ph-check"></i>Read</div>
           </div>
         </div>
-        <div class="brief-card" data-context="Investor sync minutes">
-          <div class="card-actions"><button class="icon-btn chat-open"><i class="ph ph-chat-circle-dots"></i></button></div>
+
+        <div class="brief-card" data-type="rsn" data-context="RSN W20">
+          <div class="card-actions">
+            <button class="icon-btn chat-open"><i class="ph ph-chat-circle-dots"></i></button>
+            <button class="icon-btn comment-add" title="Leave a comment"><i class="ph ph-chat-text"></i></button>
+            <button class="icon-btn done" title="Already read"><i class="ph ph-check-circle"></i></button>
+          </div>
+          <div class="brief-meta-row"><span class="type-badge rsn">RSN output</span><span class="brief-time">8d</span></div>
+          <h2 class="brief-title">RSN · 2026-W20 · Weekly reasoning</h2>
+          <p class="brief-synopsis">18 signals, 3 surfaced. Hopper pricing thesis emerged — escalated to a decision brief that landed two days later.</p>
+          <div class="brief-foot">
+            <div class="left"><div class="src-stack"><div class="src">N</div><div class="src">R</div></div><span>RSN engine</span></div>
+            <div class="read"><i class="ph ph-check"></i>Read</div>
+          </div>
+        </div>
+
+        <div class="brief-card" data-type="minutes" data-context="Investor sync minutes">
+          <div class="card-actions">
+            <button class="icon-btn chat-open"><i class="ph ph-chat-circle-dots"></i></button>
+            <button class="icon-btn comment-add" title="Leave a comment"><i class="ph ph-chat-text"></i></button>
+            <button class="icon-btn done" title="Already read"><i class="ph ph-check-circle"></i></button>
+          </div>
           <div class="brief-meta-row"><span class="type-badge minutes">Meeting minutes</span><span class="brief-time">4d</span></div>
           <h2 class="brief-title">Founder call · 2026-05-17 · Investor sync</h2>
           <p class="brief-synopsis">Verbatim + decisions extracted. 3 commitments auto-routed to Commitments surface.</p>
@@ -1530,8 +1572,13 @@ main::-webkit-scrollbar-thumb:hover, .rail-body::-webkit-scrollbar-thumb:hover{
             <div class="read"><i class="ph ph-check"></i>Read</div>
           </div>
         </div>
-        <div class="brief-card" data-context="Acme drift">
-          <div class="card-actions"><button class="icon-btn chat-open"><i class="ph ph-chat-circle-dots"></i></button></div>
+
+        <div class="brief-card" data-type="pilot" data-context="Acme drift">
+          <div class="card-actions">
+            <button class="icon-btn chat-open"><i class="ph ph-chat-circle-dots"></i></button>
+            <button class="icon-btn comment-add" title="Leave a comment"><i class="ph ph-chat-text"></i></button>
+            <button class="icon-btn done" title="Already read"><i class="ph ph-check-circle"></i></button>
+          </div>
           <div class="brief-meta-row"><span class="type-badge pilot">Pilot note</span><span class="brief-time">6d</span></div>
           <h2 class="brief-title">Acme · Onboarding deviation flagged</h2>
           <p class="brief-synopsis">Pilot caught a drift in cadence. Council ratified the correction. No founder action needed.</p>
@@ -1540,8 +1587,13 @@ main::-webkit-scrollbar-thumb:hover, .rail-body::-webkit-scrollbar-thumb:hover{
             <div class="read"><i class="ph ph-check"></i>Read</div>
           </div>
         </div>
-        <div class="brief-card" data-context="Council architecture review">
-          <div class="card-actions"><button class="icon-btn chat-open"><i class="ph ph-chat-circle-dots"></i></button></div>
+
+        <div class="brief-card" data-type="minutes" data-context="Council architecture review">
+          <div class="card-actions">
+            <button class="icon-btn chat-open"><i class="ph ph-chat-circle-dots"></i></button>
+            <button class="icon-btn comment-add" title="Leave a comment"><i class="ph ph-chat-text"></i></button>
+            <button class="icon-btn done" title="Already read"><i class="ph ph-check-circle"></i></button>
+          </div>
           <div class="brief-meta-row"><span class="type-badge minutes">Meeting minutes</span><span class="brief-time">8d</span></div>
           <h2 class="brief-title">Council session · 2026-05-13 · Architecture review</h2>
           <p class="brief-synopsis">Decisions on Heartbeat vs Activity nomenclature locked into voice & tone v0.7.</p>
@@ -1550,8 +1602,28 @@ main::-webkit-scrollbar-thumb:hover, .rail-body::-webkit-scrollbar-thumb:hover{
             <div class="read"><i class="ph ph-check"></i>Read</div>
           </div>
         </div>
-        <div class="brief-card" data-context="Hopper pricing">
-          <div class="card-actions"><button class="icon-btn chat-open"><i class="ph ph-chat-circle-dots"></i></button></div>
+
+        <div class="brief-card" data-type="rsn" data-context="RSN W19">
+          <div class="card-actions">
+            <button class="icon-btn chat-open"><i class="ph ph-chat-circle-dots"></i></button>
+            <button class="icon-btn comment-add" title="Leave a comment"><i class="ph ph-chat-text"></i></button>
+            <button class="icon-btn done" title="Already read"><i class="ph ph-check-circle"></i></button>
+          </div>
+          <div class="brief-meta-row"><span class="type-badge rsn">RSN output</span><span class="brief-time">15d</span></div>
+          <h2 class="brief-title">RSN · 2026-W19 · Weekly reasoning</h2>
+          <p class="brief-synopsis">12 signals, 2 surfaced. Council cadence drift recognized — became the trigger for the bi-weekly shift.</p>
+          <div class="brief-foot">
+            <div class="left"><div class="src-stack"><div class="src">N</div><div class="src">R</div></div><span>RSN engine</span></div>
+            <div class="read"><i class="ph ph-check"></i>Read</div>
+          </div>
+        </div>
+
+        <div class="brief-card" data-type="pilot" data-context="Hopper pricing">
+          <div class="card-actions">
+            <button class="icon-btn chat-open"><i class="ph ph-chat-circle-dots"></i></button>
+            <button class="icon-btn comment-add" title="Leave a comment"><i class="ph ph-chat-text"></i></button>
+            <button class="icon-btn done" title="Already read"><i class="ph ph-check-circle"></i></button>
+          </div>
           <div class="brief-meta-row"><span class="type-badge pilot">Pilot note</span><span class="brief-time">11d</span></div>
           <h2 class="brief-title">Hopper · Pricing signal · 14% headroom</h2>
           <p class="brief-synopsis">Market intel suggests we are under-priced. Pilot drafted a re-price proposal — awaiting your call in Approval.</p>
@@ -1562,8 +1634,53 @@ main::-webkit-scrollbar-thumb:hover, .rail-body::-webkit-scrollbar-thumb:hover{
         </div>
       </div>
 
+      <!-- RSN-only section: upcoming / not built yet -->
+      <div class="section-head" data-section="rsn-upcoming" style="display:none">
+        <h3>Upcoming RSN cycles · not built yet</h3>
+      </div>
+      <div class="brief-grid" data-grid="rsn-upcoming" style="display:none">
+        <div class="brief-card upcoming" data-type="rsn">
+          <div class="brief-meta-row">
+            <span class="type-badge rsn">RSN output</span>
+            <span class="brief-time">in progress</span>
+          </div>
+          <h2 class="brief-title">RSN · 2026-W22 · authoring now</h2>
+          <p class="brief-synopsis">Pilot is currently in phase R5 · signal triage. 34 of 48 human-in-the-loop gates passed. ETA Friday morning.</p>
+          <div class="brief-foot">
+            <div class="left"><div class="src-stack"><div class="src">N</div><div class="src">P</div></div><span>62% · 14 gates pending</span></div>
+            <div class="read"><i class="ph ph-spinner-gap"></i>Drafting</div>
+          </div>
+        </div>
+
+        <div class="brief-card upcoming" data-type="rsn">
+          <div class="brief-meta-row">
+            <span class="type-badge rsn">RSN output</span>
+            <span class="brief-time">queued</span>
+          </div>
+          <h2 class="brief-title">RSN · 2026-W23 · scheduled to start Monday</h2>
+          <p class="brief-synopsis">Auto-queued by cadence engine. Inputs will be pulled from substrate + new signals ingested over the week.</p>
+          <div class="brief-foot">
+            <div class="left"><span>Auto · cadence engine</span></div>
+            <div class="read"><i class="ph ph-calendar-blank"></i>May 26</div>
+          </div>
+        </div>
+
+        <div class="brief-card upcoming" data-type="rsn">
+          <div class="brief-meta-row">
+            <span class="type-badge rsn">RSN output</span>
+            <span class="brief-time">recurring</span>
+          </div>
+          <h2 class="brief-title">RSN cadence · every Monday 09:00 PDT</h2>
+          <p class="brief-synopsis">The system generates one RSN per week. Phase R0-R11. Configurable in Configuration · Agent setup workflow.</p>
+          <div class="brief-foot">
+            <div class="left"><span>Recurring cycle</span></div>
+            <div class="read"><i class="ph ph-arrows-clockwise"></i>Weekly</div>
+          </div>
+        </div>
+      </div>
+
       <div class="surface-footnote">
-        EVERY BRIEF IS A SUBSTRATE · SELECT TEXT TO COMMENT OR CHAT · CLICK CHAT ICON FOR PER-BRIEF CONVERSATION
+        EVERY BRIEF IS A SUBSTRATE · SELECT TEXT TO COMMENT OR CHAT · CLICK ICONS TO ACT
       </div>
     </section>
 
@@ -2790,12 +2907,78 @@ main::-webkit-scrollbar-thumb:hover, .rail-body::-webkit-scrollbar-thumb:hover{
     setTheme((document.documentElement.dataset.theme || 'dark') === 'dark' ? 'light' : 'dark');
   });
 
-  // ---------- Chips ----------
+  // ---------- Chips (filter content) ----------
+  function applyFilter(surface, filter){
+    const cards = surface.querySelectorAll('.brief-card[data-type]');
+    cards.forEach(card => {
+      const show = filter === 'all' || card.dataset.type === filter;
+      card.style.display = show ? '' : 'none';
+    });
+    // RSN-only "upcoming" section
+    surface.querySelectorAll('[data-grid="rsn-upcoming"], [data-section="rsn-upcoming"]').forEach(el => {
+      el.style.display = filter === 'rsn' ? '' : 'none';
+    });
+    // Hide empty sections + update per-section counts
+    surface.querySelectorAll('.brief-grid[data-grid]').forEach(grid => {
+      const visible = [...grid.querySelectorAll('.brief-card[data-type]')].filter(c => c.style.display !== 'none').length;
+      const gridName = grid.dataset.grid;
+      const head = surface.querySelector(`.section-head[data-section="${gridName}"]`);
+      const isUpcoming = gridName === 'rsn-upcoming';
+      const shouldShow = isUpcoming ? filter === 'rsn' : visible > 0;
+      grid.style.display = shouldShow ? '' : 'none';
+      if (head) head.style.display = shouldShow ? '' : 'none';
+      const countEl = head ? head.querySelector('.count-here') : null;
+      if (countEl) countEl.textContent = visible;
+    });
+  }
   document.querySelectorAll('.chips').forEach(group => {
+    const surface = group.closest('[data-surface]');
     group.querySelectorAll('.chip').forEach(chip => {
       chip.addEventListener('click', () => {
         group.querySelectorAll('.chip').forEach(c => c.classList.toggle('active', c === chip));
+        if (surface) applyFilter(surface, chip.dataset.filter || 'all');
       });
+    });
+  });
+
+  // ---------- Mark as read ----------
+  document.querySelectorAll('.mark-read').forEach(btn => {
+    btn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      const card = btn.closest('.brief-card');
+      if (!card) return;
+      card.classList.remove('unread');
+      // remove the inline unread dot
+      const dot = card.querySelector('.unread-dot');
+      if (dot) dot.remove();
+      // swap icon to confirmed-read
+      btn.classList.add('done');
+      btn.title = 'Already read';
+      btn.innerHTML = '<i class="ph ph-check-circle"></i>';
+      // bump unread counter on nav (best-effort)
+      const counter = document.querySelector('.nav-item[data-go="reading"] .nav-counter');
+      if (counter) {
+        const n = Math.max(0, (parseInt(counter.textContent, 10) || 0) - 1);
+        counter.textContent = n;
+        if (n === 0) counter.style.display = 'none';
+      }
+      // refresh visible counts on current filter
+      const surface = card.closest('[data-surface]');
+      const activeChip = surface ? surface.querySelector('.chip.active') : null;
+      if (surface && activeChip) applyFilter(surface, activeChip.dataset.filter || 'all');
+    });
+  });
+
+  // ---------- Comment icon (stub: pulse the card) ----------
+  document.querySelectorAll('.comment-add').forEach(btn => {
+    btn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      // visual stub: flash border accent for feedback
+      const card = btn.closest('.brief-card');
+      if (!card) return;
+      card.style.transition = 'box-shadow .3s';
+      card.style.boxShadow = '0 0 0 2px var(--accent-line)';
+      setTimeout(() => { card.style.boxShadow = ''; }, 320);
     });
   });
 
