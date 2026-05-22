@@ -1402,67 +1402,11 @@ aside.rail{
   border-bottom: 1px solid var(--line-soft);
 }
 
-.rsn-art-grid{
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+/* RSN-filter view: just denser packing of the regular brief-card */
+.rsn-structure .brief-grid{
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
   gap: 12px;
-}
-.rsn-art{
-  background: var(--bg-card);
-  border: 1px solid var(--line);
-  border-radius: var(--radius);
-  padding: 16px 16px 14px;
-  min-height: 140px;
-  display: flex; flex-direction: column;
-  cursor: pointer;
-  transition: border-color var(--t-base) var(--ease), background var(--t-base) var(--ease), transform var(--t-base) var(--ease);
-}
-.rsn-art:hover{
-  background: var(--bg-card-hover);
-  border-color: var(--accent-line);
-  transform: translateY(-1px);
-}
-.rsn-art.upcoming{
-  border-style: dashed; border-color: var(--line-strong);
-  background: rgba(255,255,255,0.015);
-  cursor: default;
-}
-.rsn-art.upcoming:hover{
-  transform: none;
-  border-color: var(--line-strong);
-  background: rgba(255,255,255,0.025);
-}
-
-.art-head{
-  display: flex; align-items: center; gap: 8px;
-  margin-bottom: 12px;
-}
-.art-head .code{
-  font-family: var(--font-mono); font-size: 9px; font-weight: 700;
-  letter-spacing: 0.12em; text-transform: uppercase;
-  padding: 3px 7px; border-radius: 3px;
-  border: 1px solid var(--line-strong); color: var(--ink-2);
-}
-.art-head .score{
-  margin-left: auto;
-  font-family: var(--font-mono); font-size: 10px; color: var(--ink-3);
-}
-
-.art-title{
-  font-family: var(--font-body); font-size: 15px; font-weight: 500;
-  color: var(--ink); line-height: 1.3; letter-spacing: -0.005em;
-  margin: 0 0 auto;
-  display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical;
-  overflow: hidden;
-}
-.rsn-art.upcoming .art-title{ color: var(--ink-2); }
-
-.art-status{
-  align-self: flex-start;
-  margin-top: 14px;
-  font-family: var(--font-mono); font-size: 9px;
-  letter-spacing: 0.12em; text-transform: uppercase;
-  color: var(--ink-3);
+  padding: 0;
 }
 
 @media (max-width: 900px){
@@ -1806,51 +1750,181 @@ main::-webkit-scrollbar-thumb:hover, .rail-body::-webkit-scrollbar-thumb:hover{
 
         <div class="rsn-section">
           <div class="rsn-section-label">Research</div>
-          <div class="rsn-art-grid">
-            <div class="rsn-art ready"><div class="art-head"><span class="code">R0</span><span class="score">8.5</span></div><div class="art-title">Overview</div><span class="art-status">Ready</span></div>
-            <div class="rsn-art ready"><div class="art-head"><span class="code">R1</span><span class="score">9.0</span></div><div class="art-title">Sector Immersion</div><span class="art-status">Ready</span></div>
-            <div class="rsn-art ready"><div class="art-head"><span class="code">R2</span><span class="score">8.7</span></div><div class="art-title">Competitive Landscape</div><span class="art-status">Ready</span></div>
-            <div class="rsn-art ready"><div class="art-head"><span class="code">R3</span><span class="score">8.9</span></div><div class="art-title">Opportunity Mapping</div><span class="art-status">Ready</span></div>
-            <div class="rsn-art ready"><div class="art-head"><span class="code">R4</span><span class="score">8.4</span></div><div class="art-title">Opportunity-Solution Tree</div><span class="art-status">Ready</span></div>
-            <div class="rsn-art ready"><div class="art-head"><span class="code">R5</span><span class="score">8.6</span></div><div class="art-title">Research Synthesis</div><span class="art-status">Ready</span></div>
-            <div class="rsn-art ready"><div class="art-head"><span class="code">R6</span><span class="score">9.1</span></div><div class="art-title">Founder OS Deep Dive</div><span class="art-status">Ready</span></div>
+          <div class="brief-grid">
+            <div class="brief-card" data-context="R0 Overview">
+              <div class="brief-meta-row"><span class="type-badge rsn">R0</span><span class="meta-right"><span class="brief-time">8.5</span><span class="card-actions"><button class="icon-btn chat-open" title="Chat about this artifact"><i class="ph ph-chat-circle-dots"></i></button><button class="icon-btn comment-add" title="Leave a comment"><i class="ph ph-chat-text"></i></button><button class="icon-btn done" title="Ready"><i class="ph ph-check-circle"></i></button></span></span></div>
+              <h2 class="brief-title">Overview</h2>
+              <p class="brief-synopsis">Top-level synthesis of the cycle. Stitches R/S/N/X outputs into one narrative.</p>
+              <div class="brief-foot"><div class="left"><div class="src-stack"><div class="src">N</div></div><span>NICHOLAS · cycle W22</span></div><div class="read"><i class="ph ph-check"></i>Ready</div></div>
+            </div>
+            <div class="brief-card" data-context="R1 Sector Immersion">
+              <div class="brief-meta-row"><span class="type-badge rsn">R1</span><span class="meta-right"><span class="brief-time">9.0</span><span class="card-actions"><button class="icon-btn chat-open" title="Chat about this artifact"><i class="ph ph-chat-circle-dots"></i></button><button class="icon-btn comment-add" title="Leave a comment"><i class="ph ph-chat-text"></i></button><button class="icon-btn done" title="Ready"><i class="ph ph-check-circle"></i></button></span></span></div>
+              <h2 class="brief-title">Sector Immersion</h2>
+              <p class="brief-synopsis">14-section sector deep dive. Sources, visualizations, two-question test at the end.</p>
+              <div class="brief-foot"><div class="left"><div class="src-stack"><div class="src">N</div><div class="src">M</div></div><span>14 sections · sourced</span></div><div class="read"><i class="ph ph-check"></i>Ready</div></div>
+            </div>
+            <div class="brief-card" data-context="R2 Competitive Landscape">
+              <div class="brief-meta-row"><span class="type-badge rsn">R2</span><span class="meta-right"><span class="brief-time">8.7</span><span class="card-actions"><button class="icon-btn chat-open" title="Chat about this artifact"><i class="ph ph-chat-circle-dots"></i></button><button class="icon-btn comment-add" title="Leave a comment"><i class="ph ph-chat-text"></i></button><button class="icon-btn done" title="Ready"><i class="ph ph-check-circle"></i></button></span></span></div>
+              <h2 class="brief-title">Competitive Landscape</h2>
+              <p class="brief-synopsis">Direct, indirect and emerging players mapped with positioning vectors.</p>
+              <div class="brief-foot"><div class="left"><div class="src-stack"><div class="src">N</div><div class="src">I</div></div><span>11 players mapped</span></div><div class="read"><i class="ph ph-check"></i>Ready</div></div>
+            </div>
+            <div class="brief-card" data-context="R3 Opportunity Mapping">
+              <div class="brief-meta-row"><span class="type-badge rsn">R3</span><span class="meta-right"><span class="brief-time">8.9</span><span class="card-actions"><button class="icon-btn chat-open" title="Chat about this artifact"><i class="ph ph-chat-circle-dots"></i></button><button class="icon-btn comment-add" title="Leave a comment"><i class="ph ph-chat-text"></i></button><button class="icon-btn done" title="Ready"><i class="ph ph-check-circle"></i></button></span></span></div>
+              <h2 class="brief-title">Opportunity Mapping</h2>
+              <p class="brief-synopsis">Spaces where supply gaps meet demand signals. Ranked by entry friction.</p>
+              <div class="brief-foot"><div class="left"><div class="src-stack"><div class="src">N</div></div><span>9 opportunities ranked</span></div><div class="read"><i class="ph ph-check"></i>Ready</div></div>
+            </div>
+            <div class="brief-card" data-context="R4 Opportunity-Solution Tree">
+              <div class="brief-meta-row"><span class="type-badge rsn">R4</span><span class="meta-right"><span class="brief-time">8.4</span><span class="card-actions"><button class="icon-btn chat-open" title="Chat about this artifact"><i class="ph ph-chat-circle-dots"></i></button><button class="icon-btn comment-add" title="Leave a comment"><i class="ph ph-chat-text"></i></button><button class="icon-btn done" title="Ready"><i class="ph ph-check-circle"></i></button></span></span></div>
+              <h2 class="brief-title">Opportunity-Solution Tree</h2>
+              <p class="brief-synopsis">Top opportunities decomposed into testable bets with assumption ladders.</p>
+              <div class="brief-foot"><div class="left"><div class="src-stack"><div class="src">N</div></div><span>3 trees · 18 bets</span></div><div class="read"><i class="ph ph-check"></i>Ready</div></div>
+            </div>
+            <div class="brief-card" data-context="R5 Research Synthesis">
+              <div class="brief-meta-row"><span class="type-badge rsn">R5</span><span class="meta-right"><span class="brief-time">8.6</span><span class="card-actions"><button class="icon-btn chat-open" title="Chat about this artifact"><i class="ph ph-chat-circle-dots"></i></button><button class="icon-btn comment-add" title="Leave a comment"><i class="ph ph-chat-text"></i></button><button class="icon-btn done" title="Ready"><i class="ph ph-check-circle"></i></button></span></span></div>
+              <h2 class="brief-title">Research Synthesis</h2>
+              <p class="brief-synopsis">Crosscut of R0-R4 with the five non-obvious insights pulled forward.</p>
+              <div class="brief-foot"><div class="left"><div class="src-stack"><div class="src">N</div></div><span>5 insights · cited</span></div><div class="read"><i class="ph ph-check"></i>Ready</div></div>
+            </div>
+            <div class="brief-card" data-context="R6 Founder OS Deep Dive">
+              <div class="brief-meta-row"><span class="type-badge rsn">R6</span><span class="meta-right"><span class="brief-time">9.1</span><span class="card-actions"><button class="icon-btn chat-open" title="Chat about this artifact"><i class="ph ph-chat-circle-dots"></i></button><button class="icon-btn comment-add" title="Leave a comment"><i class="ph ph-chat-text"></i></button><button class="icon-btn done" title="Ready"><i class="ph ph-check-circle"></i></button></span></span></div>
+              <h2 class="brief-title">Founder OS Deep Dive</h2>
+              <p class="brief-synopsis">Where the founder's operating system interfaces with the territory.</p>
+              <div class="brief-foot"><div class="left"><div class="src-stack"><div class="src">N</div><div class="src">F</div></div><span>founder model · refreshed</span></div><div class="read"><i class="ph ph-check"></i>Ready</div></div>
+            </div>
           </div>
         </div>
 
         <div class="rsn-section">
           <div class="rsn-section-label">Strategy</div>
-          <div class="rsn-art-grid">
-            <div class="rsn-art ready"><div class="art-head"><span class="code">S1</span><span class="score">8.0</span></div><div class="art-title">Lean Canvas</div><span class="art-status">Ready</span></div>
-            <div class="rsn-art ready"><div class="art-head"><span class="code">S2</span><span class="score">8.3</span></div><div class="art-title">Business Model Canvas</div><span class="art-status">Ready</span></div>
-            <div class="rsn-art ready"><div class="art-head"><span class="code">S3</span><span class="score">8.5</span></div><div class="art-title">Product Overview</div><span class="art-status">Ready</span></div>
-            <div class="rsn-art ready"><div class="art-head"><span class="code">S4</span><span class="score">9.0</span></div><div class="art-title">Tech Architecture</div><span class="art-status">Ready</span></div>
-            <div class="rsn-art ready"><div class="art-head"><span class="code">S5</span><span class="score">8.2</span></div><div class="art-title">Future Ecosystem</div><span class="art-status">Ready</span></div>
-            <div class="rsn-art ready"><div class="art-head"><span class="code">S6</span><span class="score">8.7</span></div><div class="art-title">Value Proposition</div><span class="art-status">Ready</span></div>
-            <div class="rsn-art upcoming"><div class="art-head"><span class="code">S7</span></div><div class="art-title">Journey Map</div><span class="art-status">Upcoming</span></div>
-            <div class="rsn-art upcoming"><div class="art-head"><span class="code">S8</span></div><div class="art-title">Tokenomics</div><span class="art-status">Upcoming</span></div>
+          <div class="brief-grid">
+            <div class="brief-card" data-context="S1 Lean Canvas">
+              <div class="brief-meta-row"><span class="type-badge rsn">S1</span><span class="meta-right"><span class="brief-time">8.0</span><span class="card-actions"><button class="icon-btn chat-open" title="Chat about this artifact"><i class="ph ph-chat-circle-dots"></i></button><button class="icon-btn comment-add" title="Leave a comment"><i class="ph ph-chat-text"></i></button><button class="icon-btn done" title="Ready"><i class="ph ph-check-circle"></i></button></span></span></div>
+              <h2 class="brief-title">Lean Canvas</h2>
+              <p class="brief-synopsis">Customer, problem, solution, channels, revenue. The one-page strategic snapshot.</p>
+              <div class="brief-foot"><div class="left"><div class="src-stack"><div class="src">N</div></div><span>v3 · refreshed</span></div><div class="read"><i class="ph ph-check"></i>Ready</div></div>
+            </div>
+            <div class="brief-card" data-context="S2 Business Model Canvas">
+              <div class="brief-meta-row"><span class="type-badge rsn">S2</span><span class="meta-right"><span class="brief-time">8.3</span><span class="card-actions"><button class="icon-btn chat-open" title="Chat about this artifact"><i class="ph ph-chat-circle-dots"></i></button><button class="icon-btn comment-add" title="Leave a comment"><i class="ph ph-chat-text"></i></button><button class="icon-btn done" title="Ready"><i class="ph ph-check-circle"></i></button></span></span></div>
+              <h2 class="brief-title">Business Model Canvas</h2>
+              <p class="brief-synopsis">Activities, resources, partners, value, customers. Where revenue actually lands.</p>
+              <div class="brief-foot"><div class="left"><div class="src-stack"><div class="src">N</div></div><span>9 blocks · sourced</span></div><div class="read"><i class="ph ph-check"></i>Ready</div></div>
+            </div>
+            <div class="brief-card" data-context="S3 Product Overview">
+              <div class="brief-meta-row"><span class="type-badge rsn">S3</span><span class="meta-right"><span class="brief-time">8.5</span><span class="card-actions"><button class="icon-btn chat-open" title="Chat about this artifact"><i class="ph ph-chat-circle-dots"></i></button><button class="icon-btn comment-add" title="Leave a comment"><i class="ph ph-chat-text"></i></button><button class="icon-btn done" title="Ready"><i class="ph ph-check-circle"></i></button></span></span></div>
+              <h2 class="brief-title">Product Overview</h2>
+              <p class="brief-synopsis">Product surfaces, primary user flows, the verb each surface owns.</p>
+              <div class="brief-foot"><div class="left"><div class="src-stack"><div class="src">N</div><div class="src">F</div></div><span>5 surfaces · v1.1</span></div><div class="read"><i class="ph ph-check"></i>Ready</div></div>
+            </div>
+            <div class="brief-card" data-context="S4 Tech Architecture">
+              <div class="brief-meta-row"><span class="type-badge rsn">S4</span><span class="meta-right"><span class="brief-time">9.0</span><span class="card-actions"><button class="icon-btn chat-open" title="Chat about this artifact"><i class="ph ph-chat-circle-dots"></i></button><button class="icon-btn comment-add" title="Leave a comment"><i class="ph ph-chat-text"></i></button><button class="icon-btn done" title="Ready"><i class="ph ph-check-circle"></i></button></span></span></div>
+              <h2 class="brief-title">Tech Architecture</h2>
+              <p class="brief-synopsis">System diagram, integration points, scaling vectors, infra economics.</p>
+              <div class="brief-foot"><div class="left"><div class="src-stack"><div class="src">N</div></div><span>12 components · diagrammed</span></div><div class="read"><i class="ph ph-check"></i>Ready</div></div>
+            </div>
+            <div class="brief-card" data-context="S5 Future Ecosystem">
+              <div class="brief-meta-row"><span class="type-badge rsn">S5</span><span class="meta-right"><span class="brief-time">8.2</span><span class="card-actions"><button class="icon-btn chat-open" title="Chat about this artifact"><i class="ph ph-chat-circle-dots"></i></button><button class="icon-btn comment-add" title="Leave a comment"><i class="ph ph-chat-text"></i></button><button class="icon-btn done" title="Ready"><i class="ph ph-check-circle"></i></button></span></span></div>
+              <h2 class="brief-title">Future Ecosystem</h2>
+              <p class="brief-synopsis">Three-year view of where the product sits in the market it's helping create.</p>
+              <div class="brief-foot"><div class="left"><div class="src-stack"><div class="src">N</div></div><span>3 scenarios</span></div><div class="read"><i class="ph ph-check"></i>Ready</div></div>
+            </div>
+            <div class="brief-card" data-context="S6 Value Proposition">
+              <div class="brief-meta-row"><span class="type-badge rsn">S6</span><span class="meta-right"><span class="brief-time">8.7</span><span class="card-actions"><button class="icon-btn chat-open" title="Chat about this artifact"><i class="ph ph-chat-circle-dots"></i></button><button class="icon-btn comment-add" title="Leave a comment"><i class="ph ph-chat-text"></i></button><button class="icon-btn done" title="Ready"><i class="ph ph-check-circle"></i></button></span></span></div>
+              <h2 class="brief-title">Value Proposition</h2>
+              <p class="brief-synopsis">VP statements per audience. Gain creators, pain relievers, jobs done.</p>
+              <div class="brief-foot"><div class="left"><div class="src-stack"><div class="src">N</div></div><span>3 audiences</span></div><div class="read"><i class="ph ph-check"></i>Ready</div></div>
+            </div>
+            <div class="brief-card upcoming" data-context="S7 Journey Map">
+              <div class="brief-meta-row"><span class="type-badge">S7</span><span class="meta-right"><span class="brief-time">queued</span><span class="card-actions"><button class="icon-btn chat-open" title="Chat about this artifact"><i class="ph ph-chat-circle-dots"></i></button><button class="icon-btn comment-add" title="Leave a comment"><i class="ph ph-chat-text"></i></button><button class="icon-btn" title="Upcoming"><i class="ph ph-clock"></i></button></span></span></div>
+              <h2 class="brief-title">Journey Map</h2>
+              <p class="brief-synopsis">Customer journey across product touchpoints with friction and emotion arcs.</p>
+              <div class="brief-foot"><div class="left"><span>Specced · awaiting trigger</span></div><div class="read"><i class="ph ph-clock"></i>Upcoming</div></div>
+            </div>
+            <div class="brief-card upcoming" data-context="S8 Tokenomics">
+              <div class="brief-meta-row"><span class="type-badge">S8</span><span class="meta-right"><span class="brief-time">queued</span><span class="card-actions"><button class="icon-btn chat-open" title="Chat about this artifact"><i class="ph ph-chat-circle-dots"></i></button><button class="icon-btn comment-add" title="Leave a comment"><i class="ph ph-chat-text"></i></button><button class="icon-btn" title="Upcoming"><i class="ph ph-clock"></i></button></span></span></div>
+              <h2 class="brief-title">Tokenomics</h2>
+              <p class="brief-synopsis">Token design, supply, distribution, and incentive flows. Only if applicable.</p>
+              <div class="brief-foot"><div class="left"><span>Specced · awaiting trigger</span></div><div class="read"><i class="ph ph-clock"></i>Upcoming</div></div>
+            </div>
           </div>
         </div>
 
         <div class="rsn-section">
           <div class="rsn-section-label">Narrative</div>
-          <div class="rsn-art-grid">
-            <div class="rsn-art ready"><div class="art-head"><span class="code">NX1</span><span class="score">8.4</span></div><div class="art-title">Brand Architecture Decision Brief</div><span class="art-status">Ready</span></div>
-            <div class="rsn-art ready"><div class="art-head"><span class="code">N1</span><span class="score">8.6</span></div><div class="art-title">MTP</div><span class="art-status">Ready</span></div>
-            <div class="rsn-art ready"><div class="art-head"><span class="code">N2</span><span class="score">8.3</span></div><div class="art-title">Brand Archetype</div><span class="art-status">Ready</span></div>
-            <div class="rsn-art ready"><div class="art-head"><span class="code">N3</span><span class="score">8.5</span></div><div class="art-title">Brand Platform</div><span class="art-status">Ready</span></div>
-            <div class="rsn-art upcoming"><div class="art-head"><span class="code">N4</span></div><div class="art-title">Messaging House</div><span class="art-status">Upcoming</span></div>
-            <div class="rsn-art upcoming"><div class="art-head"><span class="code">N5</span></div><div class="art-title">Brand Narrative</div><span class="art-status">Upcoming</span></div>
+          <div class="brief-grid">
+            <div class="brief-card" data-context="NX1 Brand Architecture Decision Brief">
+              <div class="brief-meta-row"><span class="type-badge rsn">NX1</span><span class="meta-right"><span class="brief-time">8.4</span><span class="card-actions"><button class="icon-btn chat-open" title="Chat about this artifact"><i class="ph ph-chat-circle-dots"></i></button><button class="icon-btn comment-add" title="Leave a comment"><i class="ph ph-chat-text"></i></button><button class="icon-btn done" title="Ready"><i class="ph ph-check-circle"></i></button></span></span></div>
+              <h2 class="brief-title">Brand Architecture Decision Brief</h2>
+              <p class="brief-synopsis">Decision packet for brand structure. Monolithic, endorsed, branded house.</p>
+              <div class="brief-foot"><div class="left"><div class="src-stack"><div class="src">N</div></div><span>3 paths weighed</span></div><div class="read"><i class="ph ph-check"></i>Ready</div></div>
+            </div>
+            <div class="brief-card" data-context="N1 MTP">
+              <div class="brief-meta-row"><span class="type-badge rsn">N1</span><span class="meta-right"><span class="brief-time">8.6</span><span class="card-actions"><button class="icon-btn chat-open" title="Chat about this artifact"><i class="ph ph-chat-circle-dots"></i></button><button class="icon-btn comment-add" title="Leave a comment"><i class="ph ph-chat-text"></i></button><button class="icon-btn done" title="Ready"><i class="ph ph-check-circle"></i></button></span></span></div>
+              <h2 class="brief-title">MTP</h2>
+              <p class="brief-synopsis">Massive Transformative Purpose. The one sentence the whole company points at.</p>
+              <div class="brief-foot"><div class="left"><div class="src-stack"><div class="src">N</div></div><span>1 sentence · 3 drafts</span></div><div class="read"><i class="ph ph-check"></i>Ready</div></div>
+            </div>
+            <div class="brief-card" data-context="N2 Brand Archetype">
+              <div class="brief-meta-row"><span class="type-badge rsn">N2</span><span class="meta-right"><span class="brief-time">8.3</span><span class="card-actions"><button class="icon-btn chat-open" title="Chat about this artifact"><i class="ph ph-chat-circle-dots"></i></button><button class="icon-btn comment-add" title="Leave a comment"><i class="ph ph-chat-text"></i></button><button class="icon-btn done" title="Ready"><i class="ph ph-check-circle"></i></button></span></span></div>
+              <h2 class="brief-title">Brand Archetype</h2>
+              <p class="brief-synopsis">Twelve-archetype positioning. Primary + supporting archetypes with examples.</p>
+              <div class="brief-foot"><div class="left"><div class="src-stack"><div class="src">N</div></div><span>Sage · Magician</span></div><div class="read"><i class="ph ph-check"></i>Ready</div></div>
+            </div>
+            <div class="brief-card" data-context="N3 Brand Platform">
+              <div class="brief-meta-row"><span class="type-badge rsn">N3</span><span class="meta-right"><span class="brief-time">8.5</span><span class="card-actions"><button class="icon-btn chat-open" title="Chat about this artifact"><i class="ph ph-chat-circle-dots"></i></button><button class="icon-btn comment-add" title="Leave a comment"><i class="ph ph-chat-text"></i></button><button class="icon-btn done" title="Ready"><i class="ph ph-check-circle"></i></button></span></span></div>
+              <h2 class="brief-title">Brand Platform</h2>
+              <p class="brief-synopsis">Voice, visual, identity foundation. Tone rules, typographic palette, color system.</p>
+              <div class="brief-foot"><div class="left"><div class="src-stack"><div class="src">N</div></div><span>v0.7 · canonized</span></div><div class="read"><i class="ph ph-check"></i>Ready</div></div>
+            </div>
+            <div class="brief-card upcoming" data-context="N4 Messaging House">
+              <div class="brief-meta-row"><span class="type-badge">N4</span><span class="meta-right"><span class="brief-time">queued</span><span class="card-actions"><button class="icon-btn chat-open" title="Chat about this artifact"><i class="ph ph-chat-circle-dots"></i></button><button class="icon-btn comment-add" title="Leave a comment"><i class="ph ph-chat-text"></i></button><button class="icon-btn" title="Upcoming"><i class="ph ph-clock"></i></button></span></span></div>
+              <h2 class="brief-title">Messaging House</h2>
+              <p class="brief-synopsis">Pillar messages per audience with proof points and reactive variations.</p>
+              <div class="brief-foot"><div class="left"><span>Specced · awaiting trigger</span></div><div class="read"><i class="ph ph-clock"></i>Upcoming</div></div>
+            </div>
+            <div class="brief-card upcoming" data-context="N5 Brand Narrative">
+              <div class="brief-meta-row"><span class="type-badge">N5</span><span class="meta-right"><span class="brief-time">queued</span><span class="card-actions"><button class="icon-btn chat-open" title="Chat about this artifact"><i class="ph ph-chat-circle-dots"></i></button><button class="icon-btn comment-add" title="Leave a comment"><i class="ph ph-chat-text"></i></button><button class="icon-btn" title="Upcoming"><i class="ph ph-clock"></i></button></span></span></div>
+              <h2 class="brief-title">Brand Narrative</h2>
+              <p class="brief-synopsis">The story arc connecting brand purpose, product reality, and customer transformation.</p>
+              <div class="brief-foot"><div class="left"><span>Specced · awaiting trigger</span></div><div class="read"><i class="ph ph-clock"></i>Upcoming</div></div>
+            </div>
           </div>
         </div>
 
         <div class="rsn-section">
           <div class="rsn-section-label">Extras</div>
-          <div class="rsn-art-grid">
-            <div class="rsn-art upcoming"><div class="art-head"><span class="code">X1</span></div><div class="art-title">Foresight Scenarios</div><span class="art-status">Upcoming</span></div>
-            <div class="rsn-art ready"><div class="art-head"><span class="code">X2</span><span class="score">8.8</span></div><div class="art-title">First Principles</div><span class="art-status">Ready</span></div>
-            <div class="rsn-art ready"><div class="art-head"><span class="code">X3</span><span class="score">8.5</span></div><div class="art-title">Jobs to be Done</div><span class="art-status">Ready</span></div>
-            <div class="rsn-art ready"><div class="art-head"><span class="code">X4</span><span class="score">8.2</span></div><div class="art-title">Wardley Maps</div><span class="art-status">Ready</span></div>
-            <div class="rsn-art ready"><div class="art-head"><span class="code">X5</span><span class="score">8.4</span></div><div class="art-title">North Star + OKR</div><span class="art-status">Ready</span></div>
+          <div class="brief-grid">
+            <div class="brief-card upcoming" data-context="X1 Foresight Scenarios">
+              <div class="brief-meta-row"><span class="type-badge">X1</span><span class="meta-right"><span class="brief-time">queued</span><span class="card-actions"><button class="icon-btn chat-open" title="Chat about this artifact"><i class="ph ph-chat-circle-dots"></i></button><button class="icon-btn comment-add" title="Leave a comment"><i class="ph ph-chat-text"></i></button><button class="icon-btn" title="Upcoming"><i class="ph ph-clock"></i></button></span></span></div>
+              <h2 class="brief-title">Foresight Scenarios</h2>
+              <p class="brief-synopsis">Three-to-five year market scenarios with branching decision points.</p>
+              <div class="brief-foot"><div class="left"><span>Specced · awaiting trigger</span></div><div class="read"><i class="ph ph-clock"></i>Upcoming</div></div>
+            </div>
+            <div class="brief-card" data-context="X2 First Principles">
+              <div class="brief-meta-row"><span class="type-badge rsn">X2</span><span class="meta-right"><span class="brief-time">8.8</span><span class="card-actions"><button class="icon-btn chat-open" title="Chat about this artifact"><i class="ph ph-chat-circle-dots"></i></button><button class="icon-btn comment-add" title="Leave a comment"><i class="ph ph-chat-text"></i></button><button class="icon-btn done" title="Ready"><i class="ph ph-check-circle"></i></button></span></span></div>
+              <h2 class="brief-title">First Principles</h2>
+              <p class="brief-synopsis">The non-negotiable truths the business is built on. Refer back when stuck.</p>
+              <div class="brief-foot"><div class="left"><div class="src-stack"><div class="src">N</div></div><span>7 principles</span></div><div class="read"><i class="ph ph-check"></i>Ready</div></div>
+            </div>
+            <div class="brief-card" data-context="X3 Jobs to be Done">
+              <div class="brief-meta-row"><span class="type-badge rsn">X3</span><span class="meta-right"><span class="brief-time">8.5</span><span class="card-actions"><button class="icon-btn chat-open" title="Chat about this artifact"><i class="ph ph-chat-circle-dots"></i></button><button class="icon-btn comment-add" title="Leave a comment"><i class="ph ph-chat-text"></i></button><button class="icon-btn done" title="Ready"><i class="ph ph-check-circle"></i></button></span></span></div>
+              <h2 class="brief-title">Jobs to be Done</h2>
+              <p class="brief-synopsis">JTBD analysis by audience segment. Functional, emotional, social.</p>
+              <div class="brief-foot"><div class="left"><div class="src-stack"><div class="src">N</div></div><span>3 audiences · 18 jobs</span></div><div class="read"><i class="ph ph-check"></i>Ready</div></div>
+            </div>
+            <div class="brief-card" data-context="X4 Wardley Maps">
+              <div class="brief-meta-row"><span class="type-badge rsn">X4</span><span class="meta-right"><span class="brief-time">8.2</span><span class="card-actions"><button class="icon-btn chat-open" title="Chat about this artifact"><i class="ph ph-chat-circle-dots"></i></button><button class="icon-btn comment-add" title="Leave a comment"><i class="ph ph-chat-text"></i></button><button class="icon-btn done" title="Ready"><i class="ph ph-check-circle"></i></button></span></span></div>
+              <h2 class="brief-title">Wardley Maps</h2>
+              <p class="brief-synopsis">Evolution mapping of value-chain components. Where to invest, where to coast.</p>
+              <div class="brief-foot"><div class="left"><div class="src-stack"><div class="src">N</div></div><span>2 maps · genesis to commodity</span></div><div class="read"><i class="ph ph-check"></i>Ready</div></div>
+            </div>
+            <div class="brief-card" data-context="X5 North Star + OKR">
+              <div class="brief-meta-row"><span class="type-badge rsn">X5</span><span class="meta-right"><span class="brief-time">8.4</span><span class="card-actions"><button class="icon-btn chat-open" title="Chat about this artifact"><i class="ph ph-chat-circle-dots"></i></button><button class="icon-btn comment-add" title="Leave a comment"><i class="ph ph-chat-text"></i></button><button class="icon-btn done" title="Ready"><i class="ph ph-check-circle"></i></button></span></span></div>
+              <h2 class="brief-title">North Star + OKR</h2>
+              <p class="brief-synopsis">North Star metric and the cascading quarterly OKRs that ladder to it.</p>
+              <div class="brief-foot"><div class="left"><div class="src-stack"><div class="src">N</div></div><span>1 NS · 6 OKRs</span></div><div class="read"><i class="ph ph-check"></i>Ready</div></div>
+            </div>
           </div>
         </div>
       </div>
